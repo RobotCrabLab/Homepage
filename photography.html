@@ -1,0 +1,63 @@
+---
+title: Photography
+permalink: /photography/
+layout: default
+---
+<section class="prose-page">
+  <header class="wrap page-head">
+    <h1>Photography</h1>
+    <p class="lede">Birds, mostly raptors. Select a photo to see it full size.</p>
+  </header>
+
+  <div class="wrap wrap-wide">
+  <ul class="gallery">
+    {% for photo in site.data.photos %}
+    {% assign base = photo.file | split: "." | first %}
+    {% assign large = '/assets/images/photography/' | append: photo.file | relative_url %}
+    {% assign small = '/assets/images/photography/' | append: base | append: '-sm.jpg' | relative_url %}
+    <li class="shot{% if photo.wide %} shot-wide{% endif %}">
+      <figure>
+        <a class="shot-link" href="{{ large }}" data-title="{{ photo.title }}" data-note="{{ photo.note }}">
+          <img src="{{ small }}"
+               srcset="{{ small }} 900w, {{ large }} 2000w"
+               sizes="{% if photo.wide %}(min-width: 66rem) 62rem, 100vw{% else %}(min-width: 66rem) 31rem, (min-width: 40rem) 50vw, 100vw{% endif %}"
+               width="{{ photo.width }}" height="{{ photo.height }}"
+               alt="{{ photo.alt | escape }}" loading="{% if forloop.index > 2 %}lazy{% else %}eager{% endif %}">
+        </a>
+        <figcaption>
+          <span class="shot-title">{{ photo.title }}</span>
+          {% if photo.note %}<span class="shot-note">{{ photo.note }}</span>{% endif %}
+        </figcaption>
+      </figure>
+    </li>
+    {% endfor %}
+  </ul>
+  </div>
+</section>
+
+<dialog class="viewer" aria-label="Photo viewer">
+  <form method="dialog"><button class="viewer-close" aria-label="Close">Close</button></form>
+  <img class="viewer-img" alt="">
+  <p class="viewer-caption"></p>
+</dialog>
+
+<script>
+  (function () {
+    var dlg = document.querySelector('.viewer');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    var img = dlg.querySelector('.viewer-img');
+    var cap = dlg.querySelector('.viewer-caption');
+    document.querySelectorAll('.shot-link').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var thumb = a.querySelector('img');
+        img.src = a.href;
+        img.alt = thumb.alt;
+        cap.textContent = a.dataset.title + (a.dataset.note ? ', ' + a.dataset.note.toLowerCase() : '');
+        dlg.showModal();
+      });
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { img.removeAttribute('src'); });
+  })();
+</script>

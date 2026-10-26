@@ -1,0 +1,43 @@
+# Photos shown on the Photography page, in this order.
+#
+# To add a photo:
+#   1. Upload two copies to assets/images/photography/:
+#      a large one (about 2000px wide) and a small one (about 900px wide)
+#      named the same with "-sm" on the end, e.g. great-egret.jpg and great-egret-sm.jpg
+#   2. Copy one of the blocks below and change the details.
+#
+#   file:   the large image's file name
+#   title:  shown under the photo
+#   note:   optional second line (place, date, camera…)
+#   alt:    a short description for people using screen readers
+#   wide:   true for landscape shots that should span the full width
+#   width/height: the large image's size in pixels (keeps the page from jumping while loading)
+
+- file: red-tailed-hawk.jpg
+  title: Red-tailed hawk
+  note: Juvenile
+  alt: Close portrait of a young red-tailed hawk in profile, with pale golden eyes and brown-streaked white chest feathers.
+  width: 2000
+  height: 2500
+
+- file: coopers-hawk.jpg
+  title: Cooper's hawk
+  note: Juvenile
+  alt: A young Cooper's hawk with teardrop-streaked chest and a long banded tail, perched on a wooden post against a blue sky.
+  width: 1600
+  height: 2000
+
+- file: burrowing-owl.jpg
+  title: Burrowing owl
+  alt: A burrowing owl with bright yellow eyes and white-spotted brown feathers, walking across sandy ground.
+  wide: true
+  width: 2000
+  height: 945
+
+- file: northern-harrier.jpg
+  title: Northern harrier
+  note: Female or juvenile, in flight
+  alt: A northern harrier flying with wings spread wide, showing barred flight feathers against a cloudy blue-grey sky.
+  wide: true
+  width: 2000
+  height: 1334

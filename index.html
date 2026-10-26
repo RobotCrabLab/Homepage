@@ -32,9 +32,19 @@ body_class: home
   {% include post-list.html count=4 %}
 </section>
 
-<section class="wrap home-section" aria-labelledby="h-away">
-  <div class="away">
-    <h2 id="h-away">Away from the desk</h2>
-    <p>When I'm not working, I'm usually tide pooling, soldering something questionable, or cooking for too many people. <a href="{{ '/hobbies/' | relative_url }}">More about my hobbies</a>.</p>
+<section class="wrap home-section" aria-labelledby="h-photos">
+  <div class="section-head">
+    <h2 id="h-photos">Photography</h2>
+    <a href="{{ '/photography/' | relative_url }}">All photos</a>
   </div>
+  {% assign feature = site.data.photos | where: "file", "burrowing-owl.jpg" | first %}
+  {% unless feature %}{% assign feature = site.data.photos | first %}{% endunless %}
+  {% assign fbase = feature.file | split: "." | first %}
+  <a class="home-photo" href="{{ '/photography/' | relative_url }}">
+    <img src="{{ '/assets/images/photography/' | append: fbase | append: '-sm.jpg' | relative_url }}"
+         srcset="{{ '/assets/images/photography/' | append: fbase | append: '-sm.jpg' | relative_url }} 900w, {{ '/assets/images/photography/' | append: feature.file | relative_url }} 2000w"
+         sizes="(min-width: 46rem) 42rem, 100vw"
+         width="{{ feature.width }}" height="{{ feature.height }}" alt="{{ feature.alt | escape }}" loading="lazy">
+  </a>
+  <p class="home-photo-caption">{{ feature.title }}. I spend a lot of my free time photographing birds, mostly raptors.</p>
 </section>

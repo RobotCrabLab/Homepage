@@ -5,7 +5,7 @@
       <span>{{ site.title }}</span>
     </a>
     <nav class="site-nav" aria-label="Main">
-      {% assign nav = "Projects:/projects/,Blog:/blog/,Hobbies:/hobbies/,Resume:/resume/" | split: "," %}
+      {% assign nav = "Projects:/projects/,Blog:/blog/,Photography:/photography/,Resume:/resume/" | split: "," %}
       {% for item in nav %}
         {% assign parts = item | split: ":" %}
         {% assign href = parts[1] %}
