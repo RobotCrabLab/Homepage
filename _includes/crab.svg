@@ -14,8 +14,8 @@
     <path class="hose-fill" d="M21 29 Q9 31 9 20"/>
     <path class="hose-ribs" d="M21 29 Q9 31 9 20"/>
     <g class="gripper claw-l">
-      <path class="jaw" d="M6.2 13.6 L1.8 7.4 L3.4 3.2 L6.8 8.6 L8.4 13.4 Z"/>
-      <path class="jaw" d="M11.8 13.6 L16.2 7.4 L14.6 3.2 L11.2 8.6 L9.6 13.4 Z"/>
+      <path class="jaw" d="M6.2 13.6 Q-0.6 8 5.2 2.6 Q3.4 7.6 8.4 13.4 Z"/>
+      <path class="jaw" d="M11.8 13.6 Q18.6 8 12.8 2.6 Q14.6 7.6 9.6 13.4 Z"/>
       <rect class="palm" x="5" y="12.6" width="8" height="3.6" rx="0.8"/>
     </g>
     <rect class="collar" x="5.6" y="16" width="6.8" height="4.2" rx="0.8"/>
@@ -25,8 +25,8 @@
     <path class="hose-fill" d="M21 29 Q9 31 9 20"/>
     <path class="hose-ribs" d="M21 29 Q9 31 9 20"/>
     <g class="gripper claw-r">
-      <path class="jaw" d="M6.2 13.6 L1.8 7.4 L3.4 3.2 L6.8 8.6 L8.4 13.4 Z"/>
-      <path class="jaw" d="M11.8 13.6 L16.2 7.4 L14.6 3.2 L11.2 8.6 L9.6 13.4 Z"/>
+      <path class="jaw" d="M6.2 13.6 Q-0.6 8 5.2 2.6 Q3.4 7.6 8.4 13.4 Z"/>
+      <path class="jaw" d="M11.8 13.6 Q18.6 8 12.8 2.6 Q14.6 7.6 9.6 13.4 Z"/>
       <rect class="palm" x="5" y="12.6" width="8" height="3.6" rx="0.8"/>
     </g>
     <rect class="collar" x="5.6" y="16" width="6.8" height="4.2" rx="0.8"/>
