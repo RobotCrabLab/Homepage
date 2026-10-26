@@ -1,7 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 52">
   <g fill="none" stroke="#14303F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M24 36 l-6 5 l-2 7M31 37 l-3 6 l0 6M41 37 l3 6 l0 6M48 36 l6 5 l2 7M20 27 L11 22M52 27 L61 22M13 14 a6.5 6.5 0 1 0 0 10M59 14 a6.5 6.5 0 1 1 0 10M30 20 L27 10M42 20 L45 10"/>
+    <path d="M24 36 l-6 5 l-2 7M31 37 l-3 6 l0 6M41 37 l3 6 l0 6M48 36 l6 5 l2 7M30 20 L27 10M42 20 L45 10"/>
   </g>
+  <g id="arm" stroke="#14303F" stroke-linejoin="round">
+    <path d="M21 29 Q9 31 9 20" fill="none" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M21 29 Q9 31 9 20" fill="none" stroke="#A9B6BA" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M21 29 Q9 31 9 20" fill="none" stroke-width="3.6" stroke-dasharray="0.7 1.9"/>
+    <path d="M6.2 13.6 L1.8 7.4 L3.4 3.2 L6.8 8.6 L8.4 13.4 Z M11.8 13.6 L16.2 7.4 L14.6 3.2 L11.2 8.6 L9.6 13.4 Z" fill="#A9B6BA" stroke-width="1.6"/>
+    <rect x="5" y="12.6" width="8" height="3.6" rx="0.8" fill="#A9B6BA" stroke-width="1.6"/>
+    <rect x="5.6" y="16" width="6.8" height="4.2" rx="0.8" fill="#4F9D4A" stroke-width="1.6"/>
+  </g>
+  <use href="#arm" transform="translate(72 0) scale(-1 1)"/>
   <rect x="18" y="19" width="36" height="19" rx="7" fill="#E2492F" stroke="#14303F" stroke-width="3"/>
   <circle cx="26.5" cy="8" r="4" fill="#fff" stroke="#14303F" stroke-width="3"/>
   <circle cx="45.5" cy="8" r="4" fill="#fff" stroke="#14303F" stroke-width="3"/>
