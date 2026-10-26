@@ -28,26 +28,40 @@ experience:
     dates: Oct 2016 – Dec 2023
     points:
       - Coordinated and conducted environmental sampling throughout California.
+      - Assessed wetland habitats following standardized protocols.
+      - Led sampling efforts and projects as the expert on water chemistry instrumentation.
+      - Logged over 200 hours of boat operation, and maintained sampling equipment and research vessels.
+      - Managed travel expense forms and chain-of-custody paperwork for environmental samples.
+      - Led the creation of an instructional program covering essential sample collection and processing protocols, in the field and in the lab.
 
   - role: Program Developer
     org: Freelance (volunteer)
     place: San Francisco Bay Area, remote
     dates: Jan 2019 – Jan 2020
     points:
-      - Led the creation and implementation of an interactive training program for new users.
+      - Led the creation and implementation of an interactive training program for new users of an online database, following the ADDIE model.
+      - Used a web-based software simulation so learners could build confidence with the database while getting instant feedback from an animated guide.
+      - Integrated a post-training assessment that evaluated users against established performance standards.
+      - This now-retired project was the first step in building a fully online learning program.
 
   - role: Laboratory Technician
     org: Moss Landing Marine Laboratories
     place: Moss Landing, CA
     dates: Jun 2012 – Oct 2016
     points:
-      - Assisted in the management of an ISO 5 (Class 100) trace-metal clean laboratory.
+      - Assisted in the management of an ISO 5 (Class 100) trace-metal clean laboratory facility.
+      - Managed a database tracking the receipt of up to 6,000 samples annually.
+      - Processed and prepared environmental samples for analysis.
+      - Oversaw workflow for projects and graduate student assistants working in the laboratory.
+      - Maintained equipment and calibration logs, prepared chemical stocks, and managed chemical inventory.
 
   - role: Instructional Student Assistant
     org: San José State University
     place: San José, CA
     dates: Jan 2011 – Jun 2011
-    points: []
+    points:
+      - Graded coursework and assisted in laboratory sections.
+      - Volunteered in a microbiology laboratory, assisting graduate students with techniques such as PCR and microscopy.
 
 education:
   - degree: M.S. Instructional Science and Technology
@@ -63,6 +77,6 @@ skills:
   - group: Electronics
     items: [Electronics manufacturing, Electronics repair, Through-hole and SMD soldering, Reflow and hot air rework, Wire termination and crimping, Test equipment servicing]
   - group: Lab and field
-    items: [Environmental sampling, Trace-metal clean lab practice, Equipment maintenance, Sample custody, Data entry]
+    items: [Environmental sampling, Wetland habitat assessment, Water chemistry instrumentation, Boat operation, Trace-metal clean lab practice, Sample processing, Chain of custody, Equipment maintenance and calibration, Data management]
   - group: Instruction
-    items: [Instructional design, Web content creation]
+    items: [Instructional design (ADDIE), Training program development, Web content creation]
