@@ -2,40 +2,67 @@
 # Add another job by copying a whole "- role:" block.
 
 summary: >-
-  Engineer who likes building things end to end, from the circuit board to the
-  web page that shows what it's doing. Comfortable leading small projects and
-  explaining technical work to people who don't live in it.
+  I work hands-on with the development of advanced scientific instruments
+  tailored for ocean exploration and analysis. From prototyping to field-ready
+  systems, I bring precision, reliability, and curiosity to every project.
+  Passionate about bridging technology and environmental science to support
+  discovery in our oceans.
 
 # Optional: link to a PDF copy. Put the file in assets/ and set the path, or leave empty.
 pdf: ""
 
 experience:
-  - role: Job title
-    org: Company name
-    place: City, State
-    dates: 2024 – present
+  - role: Electronics Technician
+    org: Monterey Bay Aquarium Research Institute (MBARI)
+    place: Moss Landing, CA
+    dates: Dec 2023 – Sep 2024
     points:
-      - What you did, and the result it had. Numbers help.
-      - Another accomplishment you're proud of.
-      - A tool, system or process you owned.
-  - role: Previous job title
-    org: Previous company
-    place: City, State
-    dates: 2021 – 2024
+      - Built a wide variety of electronic circuits from schematics using wiring, connectors, and PCBs.
+      - Low-amperage DC wire termination, crimping, and connectors.
+      - PCB soldering with through-hole and SMD parts, including microscope-assisted hand soldering, reflow oven, and hot air rework.
+      - Serviced and repaired electronic test equipment, and helped manage laboratory inventory and equipment.
+
+  - role: Research Technician
+    org: Moss Landing Marine Laboratories
+    place: Moss Landing, CA
+    dates: Oct 2016 – Dec 2023
     points:
-      - What you did there and why it mattered.
-      - Something you built, improved or led.
+      - Coordinated and conducted environmental sampling throughout California.
+
+  - role: Program Developer
+    org: Freelance (volunteer)
+    place: San Francisco Bay Area, remote
+    dates: Jan 2019 – Jan 2020
+    points:
+      - Led the creation and implementation of an interactive training program for new users.
+
+  - role: Laboratory Technician
+    org: Moss Landing Marine Laboratories
+    place: Moss Landing, CA
+    dates: Jun 2012 – Oct 2016
+    points:
+      - Assisted in the management of an ISO 5 (Class 100) trace-metal clean laboratory.
+
+  - role: Instructional Student Assistant
+    org: San José State University
+    place: San José, CA
+    dates: Jan 2011 – Jun 2011
+    points: []
 
 education:
-  - degree: Degree, major
-    org: School name
-    dates: 2017 – 2021
-    note: Honors, clubs or a relevant project (optional).
+  - degree: M.S. Instructional Science and Technology
+    org: California State University, Monterey Bay
+    dates: 2018 – 2019
+    note: An interdisciplinary program that integrates information technology, instructional design, and education technology.
+  - degree: B.S. Biological Science, concentration in Marine Biology
+    org: San José State University
+    dates: 2006 – 2011
+    note: Minor in Chemistry. Coursework in taxonomy, quantitative methods, scientific communication, molecular biology, ecology and genetics, plus general, analytical, inorganic, organic, and biochemistry with lab components.
 
 skills:
-  - group: Languages
-    items: [Python, JavaScript, C++]
-  - group: Tools
-    items: [Git, Linux, KiCad, Fusion 360]
-  - group: Also good at
-    items: [Technical writing, Soldering, Mentoring]
+  - group: Electronics
+    items: [Electronics manufacturing, Electronics repair, Through-hole and SMD soldering, Reflow and hot air rework, Wire termination and crimping, Test equipment servicing]
+  - group: Lab and field
+    items: [Environmental sampling, Trace-metal clean lab practice, Equipment maintenance, Sample custody, Data entry]
+  - group: Instruction
+    items: [Instructional design, Web content creation]

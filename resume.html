@@ -23,9 +23,11 @@ layout: default
         <div class="what">
           <h3>{{ job.role }}</h3>
           <p class="where">{{ job.org }}{% if job.place %}, {{ job.place }}{% endif %}</p>
+          {% if job.points.size > 0 %}
           <ul>
             {% for point in job.points %}<li>{{ point }}</li>{% endfor %}
           </ul>
+          {% endif %}
         </div>
       </li>
       {% endfor %}
