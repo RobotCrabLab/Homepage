@@ -112,7 +112,21 @@ img { max-width: 100%; height: auto; }
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
   font-variation-settings: "wdth" 82;
 }
-.crab-mark { width: 2.25rem; height: auto; }
+.crab-mark { width: 2.475rem; height: auto; }
+
+/* The header crab keeps pinching its claws. */
+.crab-mark .gripper {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: pinch 1.8s ease-in-out infinite;
+}
+@keyframes pinch {
+  0%, 40%, 100% { transform: scaleX(1); }
+  52%, 62%      { transform: scaleX(0.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crab-mark .gripper { animation: none; }
+}
 
 .site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
 .site-nav a {
@@ -160,25 +174,6 @@ img { max-width: 100%; height: auto; }
 }
 .hero .lede { font-size: clamp(1.25rem, 2.6vw, 1.5rem); margin-top: 1.25rem; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin: 2rem 0 0; }
-
-/* The crab's walk: one entrance on page load, sideways of course. */
-.hero-track { height: 4.5rem; margin-bottom: 1rem; }
-.crab-hero { width: 6rem; height: auto; animation: scuttle 1.6s cubic-bezier(.3,.7,.3,1) both; }
-.crab-hero .leg-a { animation: step-a 0.2s steps(2) 8; transform-origin: 50% 0; transform-box: fill-box; }
-.crab-hero .leg-b { animation: step-b 0.2s steps(2) 8; transform-origin: 50% 0; transform-box: fill-box; }
-.crab-hero .gripper { animation: snap 0.5s ease-in-out 1.7s 2; transform-box: fill-box; transform-origin: 50% 100%; }
-
-@keyframes scuttle {
-  from { transform: translateX(min(60vw, 30rem)); }
-  to   { transform: translateX(0); }
-}
-@keyframes step-a { 50% { transform: rotate(10deg); } }
-@keyframes step-b { 50% { transform: rotate(-10deg); } }
-@keyframes snap   { 50% { transform: scaleX(0.7); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .crab-hero, .crab-hero * { animation: none !important; }
-}
 
 .home-section { margin-top: clamp(2.5rem, 6vw, 4rem); }
 .section-head {
