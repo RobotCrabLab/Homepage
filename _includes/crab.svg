@@ -9,27 +9,11 @@
     <path d="M30 20 L27 10"/>
     <path d="M42 20 L45 10"/>
   </g>
-  <g class="arm">
-    <path class="hose" d="M21 29 Q9 31 9 20"/>
-    <path class="hose-fill" d="M21 29 Q9 31 9 20"/>
-    <path class="hose-ribs" d="M21 29 Q9 31 9 20"/>
-    <g class="gripper claw-l">
-      <path class="jaw" d="M6.2 13.6 Q-0.6 8 5.2 2.6 Q3.4 7.6 8.4 13.4 Z"/>
-      <path class="jaw" d="M11.8 13.6 Q18.6 8 12.8 2.6 Q14.6 7.6 9.6 13.4 Z"/>
-      <rect class="palm" x="5" y="12.6" width="8" height="3.6" rx="0.8"/>
-    </g>
-    <rect class="collar" x="5.6" y="16" width="6.8" height="4.2" rx="0.8"/>
-  </g>
-  <g class="arm arm-r" transform="translate(72 0) scale(-1 1)">
-    <path class="hose" d="M21 29 Q9 31 9 20"/>
-    <path class="hose-fill" d="M21 29 Q9 31 9 20"/>
-    <path class="hose-ribs" d="M21 29 Q9 31 9 20"/>
-    <g class="gripper claw-r">
-      <path class="jaw" d="M6.2 13.6 Q-0.6 8 5.2 2.6 Q3.4 7.6 8.4 13.4 Z"/>
-      <path class="jaw" d="M11.8 13.6 Q18.6 8 12.8 2.6 Q14.6 7.6 9.6 13.4 Z"/>
-      <rect class="palm" x="5" y="12.6" width="8" height="3.6" rx="0.8"/>
-    </g>
-    <rect class="collar" x="5.6" y="16" width="6.8" height="4.2" rx="0.8"/>
+  <g class="arms" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 28 Q11 28 10 20"/>
+    <path d="M52 28 Q61 28 62 20"/>
+    <g class="gripper claw-l"><path d="M10 20 Q3 15 7.5 9"/><path d="M10 20 Q17 15 12.5 9"/></g>
+    <g class="gripper claw-r"><path d="M62 20 Q55 15 59.5 9"/><path d="M62 20 Q69 15 64.5 9"/></g>
   </g>
   <rect class="crab-shell" x="18" y="19" width="36" height="19" rx="7"/>
   <circle class="crab-eye" cx="26.5" cy="8" r="4"/>

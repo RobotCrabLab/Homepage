@@ -9,8 +9,6 @@
   --shell-ink: #FFFFFF;
   --tide: #DCE7E4;         /* pale sea tint for quiet panels */
   --rule: #C3D0CD;
-  --metal: #A9B6BA;        /* the crab's arms */
-  --joint: #4F9D4A;
 
   --display: "Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", sans-serif;
   --body: "Literata", Georgia, "Times New Roman", serif;
@@ -36,8 +34,6 @@
     --shell-ink: #0F2029;
     --tide: #17323E;
     --rule: #2A4653;
-    --metal: #7F949B;
-    --joint: #6FBF63;
     color-scheme: dark;
   }
 }
@@ -101,12 +97,6 @@ img { max-width: 100%; height: auto; }
 .crab-eye { fill: var(--paper); stroke: currentColor; stroke-width: 3; }
 .rivet { fill: currentColor; }
 .grille { fill: none; stroke: currentColor; stroke-width: 2; }
-.arm path, .arm rect { stroke-linejoin: round; }
-.hose { fill: none; stroke: currentColor; stroke-width: 6.5; stroke-linecap: round; }
-.hose-fill { fill: none; stroke: var(--metal); stroke-width: 3.6; stroke-linecap: round; }
-.hose-ribs { fill: none; stroke: currentColor; stroke-width: 3.6; stroke-dasharray: 0.7 1.9; }
-.jaw, .palm { fill: var(--metal); stroke: currentColor; stroke-width: 1.6; }
-.collar { fill: var(--joint); stroke: currentColor; stroke-width: 1.6; }
 
 /* ------------------------------------------------------------
    Header and footer
