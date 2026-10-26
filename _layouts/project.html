@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<article class="wrap prose-page">
+  <header class="page-head">
+    <p class="crumb"><a href="{{ '/projects/' | relative_url }}">Projects</a></p>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+    <dl class="facts">
+      {% if page.year %}<div><dt>Year</dt><dd>{{ page.year }}</dd></div>{% endif %}
+      {% if page.status %}<div><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
+      {% if page.tools %}<div><dt>Built with</dt><dd>{{ page.tools | join: ", " }}</dd></div>{% endif %}
+      {% if page.link %}<div><dt>Link</dt><dd><a href="{{ page.link }}">{{ page.link | remove: "https://" | remove: "http://" }}</a></dd></div>{% endif %}
+    </dl>
+  </header>
+  {% if page.image %}
+  <figure class="hero-figure">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}">
+  </figure>
+  {% endif %}
+  <div class="prose">
+    {{ content }}
+  </div>
+</article>

@@ -1,0 +1,46 @@
+# ---------------------------------------------------------------
+# Site settings — edit these first.
+# ---------------------------------------------------------------
+title: Your Name
+author: Your Name
+tagline: I build small machines, write software, and keep notes on both.
+description: Portfolio, resume, projects and notes from Your Name.
+email: you@example.com
+github_username: RobotCrabLab
+# Optional: delete any line you don't use.
+linkedin_username: ""
+mastodon_url: ""
+
+# The site lives at https://robotcrablab.github.io/Homepage/
+# If you rename the repo to robotcrablab.github.io, set baseurl to "".
+url: "https://robotcrablab.github.io"
+baseurl: "/Homepage"
+
+# ---------------------------------------------------------------
+# Build settings — you shouldn't need to touch these.
+# ---------------------------------------------------------------
+markdown: kramdown
+permalink: /blog/:year/:month/:title/
+timezone: America/Los_Angeles
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: projects }
+    values: { layout: project }
+  - scope: { path: "" }
+    values: { layout: page }
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

@@ -1,0 +1,24 @@
+<svg class="crab {{ include.class }}" viewBox="0 0 72 52" aria-hidden="true" focusable="false">
+  <g class="crab-legs" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path class="leg leg-a" d="M24 36 l-6 5 l-2 7"/>
+    <path class="leg leg-b" d="M31 37 l-3 6 l0 6"/>
+    <path class="leg leg-b" d="M41 37 l3 6 l0 6"/>
+    <path class="leg leg-a" d="M48 36 l6 5 l2 7"/>
+  </g>
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 27 L11 22"/>
+    <path d="M52 27 L61 22"/>
+    <path class="claw claw-l" d="M13 14 a6.5 6.5 0 1 0 0 10"/>
+    <path class="claw claw-r" d="M59 14 a6.5 6.5 0 1 1 0 10"/>
+    <path d="M30 20 L27 10"/>
+    <path d="M42 20 L45 10"/>
+  </g>
+  <rect class="crab-shell" x="18" y="19" width="36" height="19" rx="7"/>
+  <circle class="crab-eye" cx="26.5" cy="8" r="4"/>
+  <circle class="crab-eye" cx="45.5" cy="8" r="4"/>
+  <circle cx="27.5" cy="8" r="1.6" fill="currentColor"/>
+  <circle cx="46.5" cy="8" r="1.6" fill="currentColor"/>
+  <circle class="rivet" cx="25" cy="28.5" r="1.7"/>
+  <circle class="rivet" cx="31" cy="28.5" r="1.7"/>
+  <rect class="grille" x="38" y="25" width="10" height="7" rx="1.5"/>
+</svg>

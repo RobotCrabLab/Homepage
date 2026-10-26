@@ -1,0 +1,19 @@
+{% if include.featured %}
+  {% assign projects = site.projects | where: "featured", true | sort: "order" %}
+{% else %}
+  {% assign projects = site.projects | sort: "order" %}
+{% endif %}
+<ul class="project-list">
+  {% for p in projects %}
+  <li>
+    <a class="project-row" href="{{ p.url | relative_url }}">
+      <span class="p-year">{{ p.year }}</span>
+      <span class="p-body">
+        <span class="p-title">{{ p.title }}</span>
+        <span class="p-summary">{{ p.summary }}</span>
+      </span>
+      {% if p.status %}<span class="p-status">{{ p.status }}</span>{% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>

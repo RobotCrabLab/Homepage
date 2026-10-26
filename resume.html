@@ -1,0 +1,59 @@
+---
+title: Resume
+permalink: /resume/
+layout: default
+---
+{% assign r = site.data.resume %}
+<article class="wrap prose-page resume">
+  <header class="page-head">
+    <h1>Resume</h1>
+    <p class="lede">{{ r.summary }}</p>
+    <p class="resume-actions">
+      {% if r.pdf != "" %}<a class="button" href="{{ r.pdf | relative_url }}">Download PDF</a>{% endif %}
+      <a class="text-link" href="mailto:{{ site.email }}">Email me</a>
+    </p>
+  </header>
+
+  <section aria-labelledby="h-exp">
+    <h2 id="h-exp">Experience</h2>
+    <ol class="timeline">
+      {% for job in r.experience %}
+      <li>
+        <p class="when">{{ job.dates }}</p>
+        <div class="what">
+          <h3>{{ job.role }}</h3>
+          <p class="where">{{ job.org }}{% if job.place %}, {{ job.place }}{% endif %}</p>
+          <ul>
+            {% for point in job.points %}<li>{{ point }}</li>{% endfor %}
+          </ul>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-edu">
+    <h2 id="h-edu">Education</h2>
+    <ol class="timeline">
+      {% for e in r.education %}
+      <li>
+        <p class="when">{{ e.dates }}</p>
+        <div class="what">
+          <h3>{{ e.degree }}</h3>
+          <p class="where">{{ e.org }}</p>
+          {% if e.note %}<p>{{ e.note }}</p>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-skills">
+    <h2 id="h-skills">Skills</h2>
+    <dl class="skills">
+      {% for s in r.skills %}
+      <div><dt>{{ s.group }}</dt><dd>{{ s.items | join: ", " }}</dd></div>
+      {% endfor %}
+    </dl>
+  </section>
+</article>
