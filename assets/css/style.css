@@ -318,7 +318,7 @@ img { max-width: 100%; height: auto; }
 .skills dt { font-family: var(--display); font-weight: 600; }
 .skills dd { margin: 0; }
 .certs dt { white-space: nowrap; }
-.cert-issuer { display: block; font-weight: 400; font-size: var(--step--1); color: var(--muted); }
+.cert-issuer { display: block; white-space: normal; font-weight: 400; font-size: var(--step--1); color: var(--muted); line-height: 1.4; margin-top: 0.2rem; }
 @media (max-width: 34rem) {
   .skills div { grid-template-columns: 1fr; }
 }
