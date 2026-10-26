@@ -12,16 +12,23 @@ summary: >-
 pdf: ""
 
 experience:
+  - role: Electronics Technician II
+    org: Monterey Bay Aquarium Research Institute (MBARI)
+    place: Moss Landing, CA
+    dates: Jan 2026 – present
+    points:
+      - Build a wide variety of electronic circuits from schematics using wiring, connectors, and PCBs.
+      - Low-amperage DC wire termination, crimping, and connectors.
+      - PCB soldering with through-hole and SMD parts, including microscope-assisted hand soldering, reflow oven, and hot air rework.
+      - Service and repair electronic test equipment, and help manage laboratory inventory and equipment.
+
   - role: Electronics Technician
     org: Monterey Bay Aquarium Research Institute (MBARI)
     place: Moss Landing, CA
-    dates: Dec 2023 – Sep 2024
+    dates: Dec 2023 – Dec 2025
     points:
-      - Built a wide variety of electronic circuits from schematics using wiring, connectors, and PCBs.
-      - Low-amperage DC wire termination, crimping, and connectors.
-      - PCB soldering with through-hole and SMD parts, including microscope-assisted hand soldering, reflow oven, and hot air rework.
-      - Serviced and repaired electronic test equipment, and helped manage laboratory inventory and equipment.
-      - Certified IPC Specialist (CIS) in IPC-7711/7721 (rework and repair of electronic assemblies) and IPC/WHMA-A-620 (cable and wire harness assemblies).
+      - Earned Certified IPC Specialist (CIS) status in IPC-7711/7721 (rework and repair of electronic assemblies) and IPC/WHMA-A-620 (cable and wire harness assemblies) in 2025.
+      - Promoted to Electronics Technician II in January 2026.
 
   - role: Research Technician
     org: Moss Landing Marine Laboratories
