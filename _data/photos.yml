@@ -1,4 +1,5 @@
 # Photos shown on the Photography page, in this order.
+# Photos that aren't wide sit side by side in pairs, so keep pairs with a similar shape together.
 #
 # To add a photo:
 #   1. Upload two copies to assets/images/photography/:
@@ -34,10 +35,55 @@
   width: 2000
   height: 945
 
+- file: red-shouldered-hawk.jpg
+  title: Red-shouldered hawk
+  alt: A red-shouldered hawk with rufous, checkered chest feathers perched on a mossy branch, looking down toward the camera.
+  width: 2000
+  height: 1500
+
+- file: black-crowned-night-heron.jpg
+  title: Black-crowned night heron
+  alt: A black-crowned night heron with a red eye and dark blue crown, tucked into a shrub full of red berries.
+  width: 2000
+  height: 1500
+
 - file: northern-harrier.jpg
   title: Northern harrier
-  note: Female or juvenile, in flight
-  alt: A northern harrier flying with wings spread wide, showing barred flight feathers against a cloudy blue-grey sky.
-  wide: true
+  note: Female or juvenile
+  alt: A brown northern harrier flying with wings spread wide, showing barred flight feathers against a cloudy blue-grey sky.
   width: 2000
   height: 1334
+
+- file: northern-harrier-male.jpg
+  title: Northern harrier
+  note: Adult male
+  alt: A pale grey adult male northern harrier with black wingtips soaring against a clear blue sky.
+  width: 2000
+  height: 1333
+
+- file: belted-kingfisher.jpg
+  title: Belted kingfisher
+  alt: A small blue-and-white belted kingfisher with a shaggy crest perched at the end of a bare branch, against a soft green and brown background.
+  wide: true
+  width: 2000
+  height: 1333
+
+- file: belted-kingfisher-close.jpg
+  title: Belted kingfisher
+  note: Closer in
+  alt: A belted kingfisher with a spiky blue crest and white collar leaning forward on a thin branch.
+  width: 2000
+  height: 1500
+
+- file: sleeping-dog.jpg
+  title: Off duty
+  alt: A tan dog fast asleep with its chin resting on the edge of a fluffy grey bed.
+  width: 2000
+  height: 1500
+
+- file: outboard-motors.jpg
+  title: Out on the water
+  alt: Two outboard motors on the back of a boat moving fast across choppy water, with a blurred shoreline behind.
+  wide: true
+  width: 2000
+  height: 1250
