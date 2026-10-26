@@ -21,6 +21,7 @@ experience:
       - Low-amperage DC wire termination, crimping, and connectors.
       - PCB soldering with through-hole and SMD parts, including microscope-assisted hand soldering, reflow oven, and hot air rework.
       - Serviced and repaired electronic test equipment, and helped manage laboratory inventory and equipment.
+      - Certified in IPC-7711/7721 (rework and repair of electronic assemblies) and IPC/WHMA-A-620 (cable and wire harness assemblies).
 
   - role: Research Technician
     org: Moss Landing Marine Laboratories
@@ -80,3 +81,11 @@ skills:
     items: [Environmental sampling, Wetland habitat assessment, Water chemistry instrumentation, Boat operation, Trace-metal clean lab practice, Sample processing, Chain of custody, Equipment maintenance and calibration, Data management]
   - group: Instruction
     items: [Instructional design (ADDIE), Training program development, Web content creation]
+
+certifications:
+  - name: IPC-7711/7721
+    issuer: IPC
+    description: Industry standard for reworking, modifying, and repairing printed circuit boards and electronic assemblies, from removing and replacing components to repairing damaged pads, traces, and laminate.
+  - name: IPC/WHMA-A-620
+    issuer: IPC
+    description: Industry standard for building and inspecting cable and wire harness assemblies, covering wire prep, crimping, soldered terminations, connectors, and workmanship acceptance criteria.

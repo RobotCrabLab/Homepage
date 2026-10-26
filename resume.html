@@ -58,4 +58,15 @@ layout: default
       {% endfor %}
     </dl>
   </section>
+
+  {% if r.certifications %}
+  <section aria-labelledby="h-certs">
+    <h2 id="h-certs">Certifications</h2>
+    <dl class="skills certs">
+      {% for c in r.certifications %}
+      <div><dt>{{ c.name }}{% if c.issuer %}<span class="cert-issuer">{{ c.issuer }}</span>{% endif %}</dt><dd>{{ c.description }}</dd></div>
+      {% endfor %}
+    </dl>
+  </section>
+  {% endif %}
 </article>
