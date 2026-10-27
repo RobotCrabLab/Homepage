@@ -9,7 +9,13 @@ I've since branched out to other cyber-focused podcasts like *Hacked* and *Risky
 
 ## Start here
 
-- **[Ep 36: Jeremy from Marketing](https://darknetdiaries.com/episode/36/)**, *Darknet Diaries*. The new guy at the office isn't quite who he seems.
+<a class="episode-card" href="https://darknetdiaries.com/episode/36/">
+  <img src="{{ '/assets/images/blog/darknet-diaries-ep36.jpg' | relative_url }}" alt="Darknet Diaries episode 36 artwork: a red-haired cartoon man peeking over the top of a black screen" width="120" height="120" loading="lazy">
+  <span class="episode-text">
+    <span class="episode-title">Ep 36: Jeremy from Marketing</span>
+    <span class="episode-note"><em>Darknet Diaries</em>. The new guy at the office isn't quite who he seems.</span>
+  </span>
+</a>
 
 ## Stay up to date
 
