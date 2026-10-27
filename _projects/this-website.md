@@ -1,6 +1,6 @@
 ---
 title: This website
-summary: My personal site, built with Jekyll and hosted for free on GitHub Pages.
+summary: My personal site, built with Jekyll.
 year: 2026
 status: Always changing
 tools: [Jekyll, HTML, CSS]
