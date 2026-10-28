@@ -339,11 +339,16 @@ img { max-width: 100%; height: auto; }
 .section-head h2 { font-size: var(--step-2); margin: 0; }
 .section-head a { font-family: var(--display); font-weight: 600; font-size: var(--step--1); color: var(--ink); white-space: nowrap; }
 
-.photo-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-@media (min-width: 40rem) { .photo-tiles { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; } }
-.photo-tiles a { display: block; aspect-ratio: 1; border-radius: 0.6rem; overflow: hidden; background: var(--tide); }
+.photo-tiles { display: grid; gap: 0.75rem; }
+.tile-row { display: flex; gap: 0.75rem; }
+.tile-row a {
+  flex: var(--shape) 1 0; aspect-ratio: var(--shape); min-width: 0;
+  display: block; border-radius: 0.6rem; overflow: hidden; background: var(--tide);
+}
 .photo-tiles img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .photo-tiles a:hover img, .photo-tiles a:focus-visible img { transform: scale(1.04); }
+.photo-tiles .actions { margin-top: 1.5rem; }
+@media (max-width: 40rem) { .photo-tiles, .tile-row { gap: 0.5rem; } }
 @media (prefers-reduced-motion: reduce) { .photo-tiles img { transition: none; } }
 
 /* ------------------------------------------------------------

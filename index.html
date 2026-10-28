@@ -6,21 +6,28 @@ body_class: home
   <div class="wrap">
     <h1>Hi, I'm {{ site.author }}.</h1>
     <p class="lede">{{ site.tagline }} I also like to take pictures of birds (see below).</p>
-    <p class="actions">
-      <a class="button" href="{{ '/projects/' | relative_url }}">See my projects</a>
-    </p>
   </div>
 </section>
 
 <section class="wrap photo-tiles" aria-label="A few of my bird photos">
-  {% assign picks = "red-tailed-hawk.jpg,burrowing-owl.jpg,red-shouldered-hawk.jpg,belted-kingfisher-close.jpg" | split: "," %}
-  {% for pick in picks %}
-    {% assign photo = site.data.photos | where: "file", pick | first %}
-    {% if photo %}
-      {% assign base = photo.file | split: "." | first %}
-      <a href="{{ '/photography/' | relative_url }}#{{ base }}" aria-label="{{ photo.title | escape }}, see it on the Photography page">
-        <img src="{{ '/assets/images/photography/' | append: base | append: '-sm.jpg' | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
-      </a>
-    {% endif %}
+  {% comment %} Two rows of photos. Each entry is file:shape (width / height). Tiles in a row share a height, so their widths follow their shapes. {% endcomment %}
+  {% assign rows = "red-tailed-hawk.jpg:0.8,burrowing-owl.jpg:2.1|belted-kingfisher-close.jpg:1.6,red-shouldered-hawk.jpg:1" | split: "|" %}
+  {% for row in rows %}
+  <div class="tile-row">
+    {% assign picks = row | split: "," %}
+    {% for pick in picks %}
+      {% assign parts = pick | split: ":" %}
+      {% assign photo = site.data.photos | where: "file", parts[0] | first %}
+      {% if photo %}
+        {% assign base = photo.file | split: "." | first %}
+        <a href="{{ '/photography/' | relative_url }}#{{ base }}" style="--shape: {{ parts[1] }}" aria-label="{{ photo.title | escape }}, see it on the Photography page">
+          <img src="{{ '/assets/images/photography/' | append: base | append: '-sm.jpg' | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
   {% endfor %}
+  <p class="actions">
+    <a class="button" href="{{ '/projects/' | relative_url }}">See my projects</a>
+  </p>
 </section>
