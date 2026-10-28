@@ -5,7 +5,7 @@ tags: [cybersecurity, podcasts]
 
 Several years ago a friend recommended a podcast called *Darknet Diaries* and I've been hooked ever since. *Darknet* tells some unbelievable stories with equally interesting characters all based around the cybersecurity landscape. From historical hacking to modern supply chain attacks *Darknet* covers it all. I appreciate a good true crime show and *Darknet* regularly delivers quality crime to my ears. I've since branched out to other cyber-focused podcasts like *Hacked* and *Risky Biz*. Focused more on current cyber-related events, trends and new technology (AI), *Risky Biz* is a weekly podcast.
 
-I've stumbled into this world at exactly the right time to watch AI break into the world's software stack. It has been fascinating to watch AI-assisted research find new vulnerabilities in longstanding and widespread software. It's taken me years to understand hacker lingo like on-prem, zero-days, and RCE (and sometimes it feels like I've only got those right 50% of the time), but I wouldn't trade the timing for anything.
+I've stumbled into this world at exactly the right time to watch AI break into the world's software stack. It has been fascinating to watch AI-assisted research find new vulnerabilities in longstanding and widespread software. It's taken me years to understand hacker lingo like on-prem, zero-days, and RCE (I still don't understand half the words) but I'm up to speed enough to know it's a serendipitous time to discover this field.
 
 If you're at all intrigued, here's an episode of *Darknet Diaries* that I found fascinating, plus links to the other podcasts to stay up to date with the rapidly changing, AI-fueled cybersecurity landscape.
 
