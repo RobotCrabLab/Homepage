@@ -19,7 +19,7 @@ body_class: home
     {% assign photo = site.data.photos | where: "file", pick | first %}
     {% if photo %}
       {% assign base = photo.file | split: "." | first %}
-      <a href="{{ '/photography/' | relative_url }}" aria-label="{{ photo.title | escape }}, see all photos">
+      <a href="{{ '/photography/' | relative_url }}#{{ base }}" aria-label="{{ photo.title | escape }}, see it on the Photography page">
         <img src="{{ '/assets/images/photography/' | append: base | append: '-sm.jpg' | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
       </a>
     {% endif %}

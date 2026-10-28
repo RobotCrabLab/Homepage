@@ -503,6 +503,14 @@ img { max-width: 100%; height: auto; }
   .shot-wide { grid-column: 1 / -1; }
 }
 .shot figure { margin: 0; }
+.shot { scroll-margin-block: 6rem; }
+/* The photo you came to see gets a short glowing ring when you land on it */
+.shot:target .shot-link { animation: shot-focus 2.2s ease-out 0.4s both; }
+@keyframes shot-focus {
+  0%   { box-shadow: 0 0 0 0 var(--shell); }
+  20%  { box-shadow: 0 0 0 5px var(--shell); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
 .shot-link { display: block; border-radius: 0.75rem; overflow: hidden; background: var(--tide); }
 .shot-link img { display: block; width: 100%; height: auto; transition: transform 0.4s ease; }
 .shot-link:hover img { transform: scale(1.015); }
@@ -527,6 +535,7 @@ img { max-width: 100%; height: auto; }
 @keyframes viewer-in { from { opacity: 0; transform: scale(0.97); } }
 @media (prefers-reduced-motion: reduce) {
   .viewer[open] .viewer-img, .shot-link img { animation: none; transition: none; }
+  .shot:target .shot-link { animation: none; outline: 3px solid var(--shell); outline-offset: 3px; }
 }
 
 /* ------------------------------------------------------------
