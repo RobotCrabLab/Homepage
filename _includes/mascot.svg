@@ -26,7 +26,8 @@
   <circle class="mascot-pupil" cx="42.9" cy="12" r="1.05"/>
   <path class="mascot-mouth" d="M33.6 15.6 q2.4 2 4.8 0"/>
   <g class="jelly-tentacles">
-    <path class="tentacle" d="M24 23.4 Q22.5 25 22.5 27.5 q-3 5 0 10 t0 9.5"/>
+    <path class="tentacle-wire-edge" d="M24 23.4 Q22.5 25 22.5 27.5 q-3 5 0 10 t0 9.5"/>
+    <path class="tentacle-wire" d="M24 23.4 Q22.5 25 22.5 27.5 q-3 5 0 10 t0 9.5"/>
     <path class="tentacle tentacle-a" d="M30.5 27 q3 5 0 10 t0 10"/>
     <path class="tentacle" d="M40 23.4 Q41 25 41 27.5 q-3 5 0 10 t0 9.5"/>
     <path class="tentacle tentacle-b" d="M49 27 q3 5 0 10 t0 10"/>
