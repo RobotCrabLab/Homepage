@@ -47,10 +47,4 @@
   <circle class="crab-eye" cx="45.5" cy="8" r="4"/>
   <circle class="crab-pupil" cx="27.5" cy="8" r="1.6"/>
   <circle class="crab-pupil" cx="46.5" cy="8" r="1.6"/>
-  <g class="crab-bubbles">
-    <g class="crab-bubble bubble-1"><circle cx="34" cy="3" r="3.4"/><path d="M32.4 2 a1.8 1.8 0 0 1 1.6 -1.3"/></g>
-    <g class="crab-bubble bubble-2"><circle cx="21" cy="5" r="2.4"/></g>
-    <g class="crab-bubble bubble-3"><circle cx="50" cy="1" r="4.2"/><path d="M48.1 -0.4 a2.2 2.2 0 0 1 1.9 -1.5"/></g>
-    <g class="crab-bubble bubble-4"><circle cx="40" cy="-1" r="2"/></g>
-  </g>
 </svg>

@@ -57,9 +57,42 @@
     void crab.offsetWidth;
     crab.classList.add('crab-ready');
     var inView = false;
+    // A handful of bubbles appear over the crab while it walks in. Each one is
+    // dropped on the track at the crab's current spot, so it rises straight up
+    // instead of travelling sideways with the crab.
+    var timers = [];
+    var NS = 'http://www.w3.org/2000/svg';
+    function bubble(size) {
+      var c = crab.getBoundingClientRect();
+      var t = track.getBoundingClientRect();
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'crab-bubble');
+      svg.setAttribute('viewBox', '0 0 12 12');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.style.width = svg.style.height = size + 'px';
+      svg.style.left = (c.left - t.left + c.width * (0.25 + Math.random() * 0.5) - size / 2) + 'px';
+      svg.style.top = (c.top - t.top - size) + 'px';
+      var ring = document.createElementNS(NS, 'circle');
+      ring.setAttribute('cx', '6'); ring.setAttribute('cy', '6'); ring.setAttribute('r', '5');
+      svg.appendChild(ring);
+      if (size > 10) {
+        var shine = document.createElementNS(NS, 'path');
+        shine.setAttribute('d', 'M3.6 4.8 a2.6 2.6 0 0 1 2.2 -1.8');
+        svg.appendChild(shine);
+      }
+      svg.addEventListener('animationend', function () { svg.remove(); });
+      track.appendChild(svg);
+    }
+    function bubbles() {
+      [[350, 9], [900, 13], [1400, 8], [1950, 12], [2550, 9], [3150, 14]].forEach(function (b) {
+        timers.push(setTimeout(function () { bubble(b[1]); }, b[0]));
+      });
+    }
     function walk(toIn) {
       if (toIn === inView) return;
       inView = toIn;
+      timers.forEach(clearTimeout); timers = [];
+      if (toIn) bubbles();
       crab.classList.remove('crab-arrived');
       crab.classList.add('crab-moving');
       crab.classList.toggle('crab-out', !toIn);
