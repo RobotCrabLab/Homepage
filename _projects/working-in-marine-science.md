@@ -5,7 +5,7 @@ status: Ongoing
 featured: true
 order: 1
 image: /assets/images/projects/working-in-marine-science.jpg
-image_alt: A research vessel's deck with a CTD rosette ready to deploy over the side, a gear staging room with survival suits, and the ship's main lab.
+image_alt: Three square fisheye photos from a research vessel. The deck with a CTD rosette ready to deploy over the side, a gear staging room with survival suits, and the ship's main lab.
 ---
 
 Before I moved into building instruments, I spent more than eleven years at Moss Landing Marine Laboratories collecting and processing the samples those instruments are built for. I coordinated environmental sampling throughout California, assessed wetland habitats, and led sampling efforts as the go-to person for water chemistry instrumentation. Along the way I logged more than 200 hours running boats and kept the sampling gear and research vessels in working order.
