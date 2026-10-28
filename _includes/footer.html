@@ -61,15 +61,16 @@
     // dropped on the track at the crab's current spot, so it rises straight up
     // instead of travelling sideways with the crab.
     var NS = 'http://www.w3.org/2000/svg';
-    function bubble(size) {
+    function bubble(size, at) {
       var c = crab.getBoundingClientRect();
       var t = track.getBoundingClientRect();
+      var left = at != null ? at : c.left - t.left + c.width * (0.3 + Math.random() * 0.4);
       var svg = document.createElementNS(NS, 'svg');
       svg.setAttribute('class', 'crab-bubble');
       svg.setAttribute('viewBox', '0 0 12 12');
       svg.setAttribute('aria-hidden', 'true');
       svg.style.width = svg.style.height = size + 'px';
-      svg.style.left = (c.left - t.left + c.width * (0.25 + Math.random() * 0.5) - size / 2) + 'px';
+      svg.style.left = (left - size / 2) + 'px';
       svg.style.top = (c.top - t.top - size) + 'px';
       var ring = document.createElementNS(NS, 'circle');
       ring.setAttribute('cx', '6'); ring.setAttribute('cy', '6'); ring.setAttribute('r', '5');
@@ -81,12 +82,14 @@
       }
       svg.addEventListener('animationend', function () { svg.remove(); });
       track.appendChild(svg);
+      return left;
     }
-    // Bubbles are tied to where the crab is on screen, not to a clock: two
-    // just after it walks on, then three more before it reaches the middle.
+    // Bubbles are tied to where the crab is on screen, not to a clock: a quick
+    // double "blub" just after it walks on (the second follows the first from
+    // nearly the same spot), then three more before it reaches the middle.
     // Each entry is [crab centre as a fraction of screen width, bubble size].
-    var spots = [[0.93, 10], [0.85, 13], [0.74, 8], [0.64, 12], [0.55, 9]];
-    var frame = 0;
+    var spots = [[0.93, 10], [0.74, 8], [0.64, 12], [0.55, 9]];
+    var frame = 0, follow = 0;
     function bubbles() {
       var next = 0;
       cancelAnimationFrame(frame);
@@ -94,14 +97,17 @@
         if (!inView || next >= spots.length) return;
         var c = crab.getBoundingClientRect();
         var x = (c.left + c.width / 2) / window.innerWidth;
-        while (next < spots.length && x <= spots[next][0]) bubble(spots[next++][1]);
+        while (next < spots.length && x <= spots[next][0]) {
+          var at = bubble(spots[next][1]);
+          if (next++ === 0) follow = setTimeout(function () { if (inView) bubble(13, at + 6); }, 180);
+        }
         frame = requestAnimationFrame(tick);
       })();
     }
     function walk(toIn) {
       if (toIn === inView) return;
       inView = toIn;
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(frame); clearTimeout(follow);
       if (toIn) bubbles();
       crab.classList.remove('crab-arrived');
       crab.classList.add('crab-moving');
