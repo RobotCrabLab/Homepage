@@ -247,6 +247,19 @@ img { max-width: 100%; height: auto; }
 @keyframes crab-step-a { 50% { transform: rotate(12deg); } }
 @keyframes crab-step-b { 50% { transform: rotate(-12deg); } }
 @keyframes crab-pinch { 50% { transform: scaleX(0.55); } }
+/* Bubbles drift up off the crab while it walks in */
+.crab-bubble { fill: none; stroke: var(--crab-limb); stroke-width: 1.8; stroke-linecap: round; opacity: 0; }
+.crab-moving:not(.crab-out) .crab-bubble { animation: bubble-rise 1.7s ease-out infinite; }
+.crab-moving:not(.crab-out) .bubble-2 { animation-duration: 1.4s; animation-delay: 0.45s; }
+.crab-moving:not(.crab-out) .bubble-3 { animation-duration: 2s; animation-delay: 0.9s; }
+.crab-moving:not(.crab-out) .bubble-4 { animation-duration: 1.5s; animation-delay: 1.3s; }
+@keyframes bubble-rise {
+  0%   { opacity: 0; transform: translate(0, 0); }
+  20%  { opacity: 1; }
+  50%  { transform: translate(5px, -16px); }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(9px, -34px); }
+}
 .footer-inner {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem;
   font-size: var(--step--1); color: var(--muted);
