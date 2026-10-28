@@ -2,13 +2,14 @@
    Tokens
    ------------------------------------------------------------ */
 :root {
-  --paper: #F2F4F1;
+  --paper: #E5E7E9;        /* light grey page background */
   --ink: #14303F;
-  --muted: #566A73;
-  --shell: #D9442B;        /* mascot red: links, the fish, one button */
+  --muted: #4E6169;
+  --shell: #D9442B;        /* mascot red: the fish and accents */
+  --link: #B83B25;         /* deeper red for text links and the button, readable on grey */
   --shell-ink: #FFFFFF;
-  --tide: #DCE7E4;         /* pale sea tint for quiet panels */
-  --rule: #C3D0CD;
+  --tide: #D5DBDE;         /* quiet panels, a step darker than the page */
+  --rule: #C3CBCF;
 
   --display: "Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", sans-serif;
   --body: "Literata", Georgia, "Times New Roman", serif;
@@ -31,6 +32,7 @@
     --ink: #E3ECEA;
     --muted: #93A7AE;
     --shell: #FF6E52;
+    --link: #FF6E52;
     --shell-ink: #0F2029;
     --tide: #17323E;
     --rule: #2A4653;
@@ -69,7 +71,7 @@ h1, h2, h3 {
   text-wrap: balance;
 }
 
-a { color: var(--shell); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible { outline: 3px solid var(--shell); outline-offset: 3px; border-radius: 2px; }
@@ -155,7 +157,7 @@ img { max-width: 100%; height: auto; }
    ------------------------------------------------------------ */
 .button {
   display: inline-block;
-  background: var(--shell); color: var(--shell-ink);
+  background: var(--link); color: var(--shell-ink);
   font-family: var(--display); font-weight: 600; font-size: var(--step-0);
   text-decoration: none; padding: 0.65rem 1.15rem; border-radius: 999px;
 }
@@ -211,7 +213,7 @@ img { max-width: 100%; height: auto; }
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
   font-variation-settings: "wdth" 82; line-height: 1.2;
 }
-.project-row:hover .p-title { color: var(--shell); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
+.project-row:hover .p-title { color: var(--link); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
 .p-summary { color: var(--muted); line-height: 1.55; }
 .p-status {
   font-family: var(--display); font-size: var(--step--1); font-weight: 500; white-space: nowrap;
@@ -229,7 +231,7 @@ img { max-width: 100%; height: auto; }
 }
 .post-list time { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
 .post-list a { font-family: var(--display); font-weight: 600; font-size: var(--step-1); font-variation-settings: "wdth" 82; color: var(--ink); text-decoration: none; line-height: 1.25; }
-.post-list a:hover { color: var(--shell); text-decoration: underline; }
+.post-list a:hover { color: var(--link); text-decoration: underline; }
 @media (max-width: 34rem) {
   .post-list li { grid-template-columns: 1fr; }
 }
@@ -293,7 +295,7 @@ img { max-width: 100%; height: auto; }
 }
 .episode-card img { width: 72px; height: 72px; border-radius: 0.5rem; flex: none; }
 .episode-card:hover { border-color: var(--shell); }
-.episode-card:hover .episode-title { color: var(--shell); }
+.episode-card:hover .episode-title { color: var(--link); }
 .episode-text { display: flex; flex-direction: column; gap: 0.15rem; }
 .episode-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "wdth" 82; line-height: 1.2; }
 .episode-note { color: var(--muted); font-size: var(--step--1); line-height: 1.5; }
