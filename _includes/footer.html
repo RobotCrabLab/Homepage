@@ -84,14 +84,19 @@
       track.appendChild(svg);
       return left;
     }
-    // Bubbles are tied to where the crab is on screen, not to a clock: a quick
-    // double "blub" just after it walks on (the second follows the first from
-    // nearly the same spot), then three more before it reaches the middle.
+    // Bubbles are tied to where the crab is on screen, not to a clock: a
+    // double "blub" just after it walks on (the second rises from nearly the
+    // same spot half a second later), then three more before it reaches the middle.
     // Each entry is [crab centre as a fraction of screen width, bubble size].
-    var spots = [[0.93, 10], [0.74, 8], [0.64, 12], [0.55, 9]];
+    // The last three land somewhere new on every walk, so it never looks canned.
     var frame = 0, follow = 0;
+    function jitter(mid, spread) { return mid + (Math.random() * 2 - 1) * spread; }
     function bubbles() {
       var next = 0;
+      var spots = [[0.93, 10],
+        [jitter(0.775, 0.045), jitter(9, 2)],
+        [jitter(0.665, 0.045), jitter(11, 2)],
+        [jitter(0.555, 0.04), jitter(9, 2)]];
       cancelAnimationFrame(frame);
       (function tick() {
         if (!inView || next >= spots.length) return;
@@ -99,7 +104,7 @@
         var x = (c.left + c.width / 2) / window.innerWidth;
         while (next < spots.length && x <= spots[next][0]) {
           var at = bubble(spots[next][1]);
-          if (next++ === 0) follow = setTimeout(function () { if (inView) bubble(13, at + 6); }, 180);
+          if (next++ === 0) follow = setTimeout(function () { if (inView) bubble(13, at + jitter(10, 4)); }, 500);
         }
         frame = requestAnimationFrame(tick);
       })();
