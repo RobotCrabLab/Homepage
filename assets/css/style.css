@@ -5,7 +5,7 @@
   --paper: #E5E7E9;        /* light grey page background */
   --ink: #14303F;
   --muted: #4E6169;
-  --shell: #D9442B;        /* mascot red: the fish and accents */
+  --shell: #D9442B;        /* mascot red: the jelly and accents */
   --link: #B83B25;         /* deeper red for text links and the button, readable on grey */
   --shell-ink: #FFFFFF;
   --tide: #D5DBDE;         /* quiet panels, a step darker than the page */
@@ -92,16 +92,16 @@ img { max-width: 100%; height: auto; }
 .skip:focus { left: 0.5rem; }
 
 /* ------------------------------------------------------------
-   The mascot: a breadboard fish
+   The mascot: a deep-sea breadboard jelly
    ------------------------------------------------------------ */
 .mascot { color: var(--ink); overflow: visible; }
 .mascot-fill { fill: var(--shell); stroke: currentColor; stroke-width: 3; stroke-linejoin: round; }
-.mascot-line { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
-.board-divider { stroke: currentColor; stroke-width: 1.2; opacity: 0.45; }
-.board-holes, .jumper-end, .mascot-pupil { fill: currentColor; }
-.jumper { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
-.mascot-eye { fill: var(--paper); stroke: currentColor; stroke-width: 2.5; }
-.mascot-mouth { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.tentacle { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.tentacle-wire-edge { fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; }
+.tentacle-wire { fill: none; stroke: #FFFFFF; stroke-width: 2; stroke-linecap: round; }
+.board-holes, .mascot-pupil { fill: currentColor; }
+.mascot-eye { fill: #FFFFFF; stroke: currentColor; stroke-width: 2; }
+.mascot-mouth { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
 
 /* ------------------------------------------------------------
    Header and footer
@@ -117,21 +117,29 @@ img { max-width: 100%; height: auto; }
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
   font-variation-settings: "wdth" 82;
 }
-.mascot-mark { width: 3.7rem; height: auto; }
-
-/* The header fish keeps swishing its tail. */
-.mascot-mark .fish-tail {
-  transform-box: fill-box;
-  transform-origin: 0% 50%;
-  animation: swish 1.8s ease-in-out infinite;
+.mascot-mark { width: 7rem; height: auto; }
+@media (max-width: 40rem) {
+  .mascot-mark { width: 4.75rem; }
 }
-@keyframes swish {
-  0%, 100% { transform: rotate(0deg); }
-  25%      { transform: rotate(14deg); }
-  75%      { transform: rotate(-14deg); }
+
+/* The header jelly drifts and its tentacles sway. */
+.mascot-mark { animation: drift 3.2s ease-in-out infinite; }
+.mascot-mark .jelly-tentacles {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: sway 3.2s ease-in-out infinite;
+}
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+@keyframes sway {
+  0%, 100% { transform: skewX(0deg); }
+  25%      { transform: skewX(7deg); }
+  75%      { transform: skewX(-7deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mascot-mark .fish-tail { animation: none; }
+  .mascot-mark, .mascot-mark .jelly-tentacles { animation: none; }
 }
 
 .site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
