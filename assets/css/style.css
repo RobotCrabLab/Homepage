@@ -169,11 +169,11 @@ img { max-width: 100%; height: auto; }
 }
 
 /* The header jelly drifts and its tentacles sway. */
-.mascot-mark { animation: drift 3.2s ease-in-out infinite; }
+.mascot-mark { animation: drift 6.4s ease-in-out infinite; }
 .mascot-mark .jelly-tentacles {
   transform-box: fill-box;
   transform-origin: 50% 0%;
-  animation: sway 3.2s ease-in-out infinite;
+  animation: sway 6.4s ease-in-out infinite;
 }
 @keyframes drift {
   0%, 100% { transform: translateY(0); }
@@ -190,8 +190,8 @@ img { max-width: 100%; height: auto; }
   transform-box: fill-box;
   transform-origin: 50% 0%;
 }
-.mascot-mark .tentacle-a { animation: wiggle 2.1s ease-in-out infinite; }
-.mascot-mark .tentacle-b { animation: wiggle 4.3s ease-in-out -1.4s infinite reverse; }
+.mascot-mark .tentacle-a { animation: wiggle 6.3s ease-in-out infinite; }
+.mascot-mark .tentacle-b { animation: wiggle 12.9s ease-in-out -4.2s infinite reverse; }
 @keyframes wiggle {
   0%, 100% { transform: rotate(0deg) skewX(0deg); }
   30%      { transform: rotate(6deg) skewX(-6deg); }
@@ -233,8 +233,8 @@ img { max-width: 100%; height: auto; }
     border-bottom: 1px solid var(--rule);
   }
   .js .site-nav.is-open a[aria-current="page"] { color: var(--link); border-bottom-color: var(--rule); }
-  .menu-toggle[aria-expanded="true"] .mascot-mark { animation-duration: 1.2s; }
-  .menu-toggle[aria-expanded="true"] .jelly-tentacles { animation-duration: 1.2s; }
+  .menu-toggle[aria-expanded="true"] .mascot-mark { animation-duration: 2.4s; }
+  .menu-toggle[aria-expanded="true"] .jelly-tentacles { animation-duration: 2.4s; }
 }
 
 

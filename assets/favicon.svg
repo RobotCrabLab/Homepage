@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="13 2 46 50">
   <path d="M36 22 V27 q-2.5 6 1 11 t-1 11" fill="none" stroke="#14303F" stroke-width="4" stroke-linecap="round"/>
   <path d="M36 22 V27 q-2.5 6 1 11 t-1 11" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-  <g fill="none" stroke="#14303F" stroke-width="3" stroke-linecap="round"><path d="M30.5 22 V27 q3 5 0 10 t0 10"/><path d="M51.5 22 V27 q3 5 0 10 t0 10"/></g>
+  <g fill="none" stroke="#14303F" stroke-width="3" stroke-linecap="round"><path d="M30.5 22 V27 q3 5 0 10 t0 10"/><path d="M50 22 V27 q3 5 0 10 t0 10"/></g>
   <path d="M18 27 C18 12 26.5 5 36 5 C45.5 5 54 12 54 27 Z" fill="#E2492F" stroke="#14303F" stroke-width="3.5" stroke-linejoin="round"/>
   <circle cx="24" cy="20" r="1.2" fill="#14303F"/><circle cx="28" cy="20" r="1.2" fill="#14303F"/><circle cx="32" cy="20" r="1.2" fill="#14303F"/><circle cx="36" cy="20" r="1.2" fill="#14303F"/><circle cx="40" cy="20" r="1.2" fill="#14303F"/><circle cx="44" cy="20" r="1.2" fill="#14303F"/><circle cx="48" cy="20" r="1.2" fill="#14303F"/><circle cx="24" cy="23.4" r="1.2" fill="#14303F"/><circle cx="28" cy="23.4" r="1.2" fill="#14303F"/><circle cx="32" cy="23.4" r="1.2" fill="#14303F"/><circle cx="36" cy="23.4" r="1.2" fill="#14303F"/><circle cx="40" cy="23.4" r="1.2" fill="#14303F"/><circle cx="44" cy="23.4" r="1.2" fill="#14303F"/><circle cx="48" cy="23.4" r="1.2" fill="#14303F"/>
   <circle cx="29.5" cy="12" r="2.8" fill="#fff" stroke="#14303F" stroke-width="2"/><circle cx="29.9" cy="12" r="1.1" fill="#14303F"/>
