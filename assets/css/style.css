@@ -80,14 +80,14 @@ main { flex: 1; }
 /* A single kelp plant fixed behind the page, rising from the bottom right */
 .kelp-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .kelp {
-  position: absolute; bottom: 0; right: -2rem;
-  height: min(94vh, 62rem); width: auto; aspect-ratio: 334 / 772;
-  transform-origin: 54% 100%; animation: kelp-sway 11s ease-in-out infinite alternate;
+  position: absolute; bottom: 0; right: 0.5rem;
+  height: min(94vh, 62rem); width: auto; aspect-ratio: 288 / 718;
+  transform-origin: 47% 100%; animation: kelp-sway 11s ease-in-out infinite alternate;
 }
 .kelp-plant { fill: var(--kelp); }
 @keyframes kelp-sway { from { transform: rotate(-1.2deg); } to { transform: rotate(1.2deg); } }
 @media (max-width: 40rem) {
-  .kelp { height: 72vh; right: -5rem; opacity: 0.8; }
+  .kelp { height: 72vh; right: -3.5rem; opacity: 0.8; }
 }
 @media (prefers-reduced-motion: reduce) { .kelp { animation: none; } }
 
