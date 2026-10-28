@@ -5,7 +5,7 @@ body_class: home
 <section class="hero">
   <div class="wrap">
     <h1>Hi, I'm {{ site.author }}.</h1>
-    <p class="lede">{{ site.tagline }}</p>
+    <p class="lede">{{ site.tagline }} I also like to take pictures of birds (see below).</p>
     <p class="actions">
       <a class="button" href="{{ '/projects/' | relative_url }}">See my projects</a>
       <a class="text-link" href="{{ '/resume/' | relative_url }}">Read my resume</a>
@@ -13,35 +13,15 @@ body_class: home
   </div>
 </section>
 
-<section class="wrap home-section" aria-labelledby="h-projects">
-  <div class="section-head">
-    <h2 id="h-projects">Selected projects</h2>
-    <a href="{{ '/projects/' | relative_url }}">All projects</a>
-  </div>
-  {% include project-list.html featured=true %}
-</section>
-
-<section class="wrap home-section" aria-labelledby="h-writing">
-  <div class="section-head">
-    <h2 id="h-writing">Recent writing</h2>
-    <a href="{{ '/blog/' | relative_url }}">All posts</a>
-  </div>
-  {% include post-list.html count=4 %}
-</section>
-
-<section class="wrap home-section" aria-labelledby="h-photos">
-  <div class="section-head">
-    <h2 id="h-photos">Photography</h2>
-    <a href="{{ '/photography/' | relative_url }}">All photos</a>
-  </div>
-  {% assign feature = site.data.photos | where: "file", "burrowing-owl.jpg" | first %}
-  {% unless feature %}{% assign feature = site.data.photos | first %}{% endunless %}
-  {% assign fbase = feature.file | split: "." | first %}
-  <a class="home-photo" href="{{ '/photography/' | relative_url }}">
-    <img src="{{ '/assets/images/photography/' | append: fbase | append: '-sm.jpg' | relative_url }}"
-         srcset="{{ '/assets/images/photography/' | append: fbase | append: '-sm.jpg' | relative_url }} 900w, {{ '/assets/images/photography/' | append: feature.file | relative_url }} 2000w"
-         sizes="(min-width: 46rem) 42rem, 100vw"
-         width="{{ feature.width }}" height="{{ feature.height }}" alt="{{ feature.alt | escape }}" loading="lazy">
-  </a>
-  <p class="home-photo-caption">{{ feature.title }}. I spend a lot of my free time photographing birds.</p>
+<section class="wrap photo-tiles" aria-label="A few of my bird photos">
+  {% assign picks = "red-tailed-hawk.jpg,burrowing-owl.jpg,red-shouldered-hawk.jpg,belted-kingfisher-close.jpg" | split: "," %}
+  {% for pick in picks %}
+    {% assign photo = site.data.photos | where: "file", pick | first %}
+    {% if photo %}
+      {% assign base = photo.file | split: "." | first %}
+      <a href="{{ '/photography/' | relative_url }}" aria-label="{{ photo.title | escape }}, see all photos">
+        <img src="{{ '/assets/images/photography/' | append: base | append: '-sm.jpg' | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
+      </a>
+    {% endif %}
+  {% endfor %}
 </section>
