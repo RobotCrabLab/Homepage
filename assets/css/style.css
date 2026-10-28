@@ -10,6 +10,8 @@
   --shell-ink: #FFFFFF;
   --tide: #D5DBDE;         /* quiet panels, a step darker than the page */
   --rule: #C3CBCF;
+  --kelp-back: #DCE1E3;    /* background kelp, barely there against the page */
+  --kelp-front: #D1D8DB;
 
   --display: "Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", sans-serif;
   --body: "Literata", Georgia, "Times New Roman", serif;
@@ -37,6 +39,8 @@
     --shell-ink: #0F2029;
     --tide: #17323E;
     --rule: #2A4653;
+    --kelp-back: #122733;
+    --kelp-front: #16303C;
     color-scheme: dark;
   }
 }
@@ -49,6 +53,8 @@
   --shell-ink: #0F2029;
   --tide: #17323E;
   --rule: #2A4653;
+  --kelp-back: #122733;
+  --kelp-front: #16303C;
   color-scheme: dark;
 }
 
@@ -73,6 +79,25 @@ body {
 }
 
 main { flex: 1; }
+
+/* A quiet kelp forest fixed behind the page, rising from the bottom corners */
+.kelp-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.kelp { position: absolute; bottom: 0; height: min(92vh, 60rem); width: auto; aspect-ratio: 220 / 800; }
+.kelp-left { left: -1.5rem; }
+.kelp-right { right: -1.5rem; }
+.kelp-stem { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.kelp-back .kelp-stem { stroke: var(--kelp-back); }
+.kelp-back .kelp-blade { fill: var(--kelp-back); }
+.kelp-front .kelp-stem { stroke: var(--kelp-front); }
+.kelp-front .kelp-blade { fill: var(--kelp-front); }
+.kelp-stalk { transform-box: view-box; animation: kelp-sway 10s ease-in-out infinite alternate; }
+@keyframes kelp-sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+@media (max-width: 40rem) {
+  .kelp { height: 62vh; opacity: 0.75; }
+  .kelp-left { left: -3rem; }
+  .kelp-right { right: -3rem; }
+}
+@media (prefers-reduced-motion: reduce) { .kelp-stalk { animation: none; } }
 
 h1, h2, h3 {
   font-family: var(--display);
@@ -523,5 +548,6 @@ img { max-width: 100%; height: auto; }
 @media print {
   .site-header, .site-footer, .resume-actions, .skip { display: none; }
   body { background: #fff; color: #000; font-size: 11pt; }
+  .kelp-bg { display: none; }
   a { color: inherit; }
 }
