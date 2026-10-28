@@ -117,7 +117,7 @@ img { max-width: 100%; height: auto; }
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
   font-variation-settings: "wdth" 82;
 }
-.mascot-mark { width: 2.475rem; height: auto; }
+.mascot-mark { width: 3.7rem; height: auto; }
 
 /* The header fish keeps swishing its tail. */
 .mascot-mark .fish-tail {
