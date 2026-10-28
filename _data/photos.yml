@@ -95,3 +95,11 @@
   wide: true
   width: 2000
   height: 1250
+
+- file: research-vessel.jpg
+  title: Life on a research vessel
+  note: Deck, passage and main lab
+  alt: Three square fisheye photos from a research vessel. The deck with a CTD rosette ready to go over the side, a passage lined with survival suits and gear, and the ship's main lab.
+  wide: true
+  width: 2000
+  height: 660
