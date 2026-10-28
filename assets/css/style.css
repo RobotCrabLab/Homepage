@@ -26,8 +26,9 @@
   color-scheme: light;
 }
 
+/* Dark theme: follows the device setting unless the footer switch picks one */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper: #0F2029;
     --ink: #E3ECEA;
     --muted: #93A7AE;
@@ -38,6 +39,17 @@
     --rule: #2A4653;
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --paper: #0F2029;
+  --ink: #E3ECEA;
+  --muted: #93A7AE;
+  --shell: #FF6E52;
+  --link: #FF6E52;
+  --shell-ink: #0F2029;
+  --tide: #17323E;
+  --rule: #2A4653;
+  color-scheme: dark;
 }
 
 /* ------------------------------------------------------------
@@ -104,8 +116,9 @@ img { max-width: 100%; height: auto; }
   overflow: visible;
 }
 @media (prefers-color-scheme: dark) {
-  .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
+  :root:not([data-theme="light"]) .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
 }
+:root[data-theme="dark"] .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
 .mascot-fill { fill: var(--jelly-red); stroke: var(--jelly-line); stroke-width: 3; stroke-linejoin: round; }
 .board-holes, .mascot-pupil { fill: var(--jelly-line); }
 .mascot-eye { fill: #FFFFFF; stroke: var(--jelly-line); stroke-width: 2; }
@@ -199,6 +212,16 @@ img { max-width: 100%; height: auto; }
 .footer-inner p { margin: 0; }
 .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
 .links a { color: var(--ink); }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font: inherit; color: var(--ink); background: none; cursor: pointer;
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.15rem 0.7rem;
+}
+.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle svg { width: 1rem; height: 1rem; }
+.theme-toggle .icon-sun { display: none; }
+.is-dark .theme-toggle .icon-sun { display: block; }
+.is-dark .theme-toggle .icon-moon { display: none; }
 
 /* ------------------------------------------------------------
    Buttons and small pieces
