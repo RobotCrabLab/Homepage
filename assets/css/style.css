@@ -5,7 +5,7 @@
   --paper: #F2F4F1;
   --ink: #14303F;
   --muted: #566A73;
-  --shell: #D9442B;        /* crab red: links, the crab, one button */
+  --shell: #D9442B;        /* mascot red: links, the fish, one button */
   --shell-ink: #FFFFFF;
   --tide: #DCE7E4;         /* pale sea tint for quiet panels */
   --rule: #C3D0CD;
@@ -90,13 +90,16 @@ img { max-width: 100%; height: auto; }
 .skip:focus { left: 0.5rem; }
 
 /* ------------------------------------------------------------
-   The crab
+   The mascot: a breadboard fish
    ------------------------------------------------------------ */
-.crab { color: var(--ink); overflow: visible; }
-.crab-shell { fill: var(--shell); stroke: currentColor; stroke-width: 3; }
-.crab-eye { fill: var(--paper); stroke: currentColor; stroke-width: 3; }
-.rivet { fill: currentColor; }
-.grille { fill: none; stroke: currentColor; stroke-width: 2; }
+.mascot { color: var(--ink); overflow: visible; }
+.mascot-fill { fill: var(--shell); stroke: currentColor; stroke-width: 3; stroke-linejoin: round; }
+.mascot-line { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+.board-divider { stroke: currentColor; stroke-width: 1.2; opacity: 0.45; }
+.board-holes, .jumper-end, .mascot-pupil { fill: currentColor; }
+.jumper { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.mascot-eye { fill: var(--paper); stroke: currentColor; stroke-width: 2.5; }
+.mascot-mouth { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
 /* ------------------------------------------------------------
    Header and footer
@@ -112,20 +115,21 @@ img { max-width: 100%; height: auto; }
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
   font-variation-settings: "wdth" 82;
 }
-.crab-mark { width: 2.475rem; height: auto; }
+.mascot-mark { width: 2.475rem; height: auto; }
 
-/* The header crab keeps pinching its claws. */
-.crab-mark .gripper {
+/* The header fish keeps swishing its tail. */
+.mascot-mark .fish-tail {
   transform-box: fill-box;
-  transform-origin: 50% 100%;
-  animation: pinch 1.8s ease-in-out infinite;
+  transform-origin: 0% 50%;
+  animation: swish 1.8s ease-in-out infinite;
 }
-@keyframes pinch {
-  0%, 40%, 100% { transform: scaleX(1); }
-  52%, 62%      { transform: scaleX(0.45); }
+@keyframes swish {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(14deg); }
+  75%      { transform: rotate(-14deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .crab-mark .gripper { animation: none; }
+  .mascot-mark .fish-tail { animation: none; }
 }
 
 .site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
@@ -374,7 +378,7 @@ img { max-width: 100%; height: auto; }
    404
    ------------------------------------------------------------ */
 .not-found { padding-top: clamp(3rem, 10vw, 6rem); }
-.crab-lost { width: 5rem; height: auto; transform: rotate(180deg); margin-bottom: 1rem; }
+.mascot-lost { width: 5.5rem; height: auto; transform: rotate(-12deg); margin-bottom: 1rem; }
 .not-found h1 { font-size: var(--step-3); margin: 0; }
 .not-found .lede + p { margin-top: 1.75rem; }
 

@@ -1,0 +1,41 @@
+<svg class="mascot {{ include.class }}" viewBox="0 0 72 52" aria-hidden="true" focusable="false">
+  <path class="fish-tail mascot-fill" d="M52 26 L64 16 L62 26 L64 36 Z"/>
+  <g class="mascot-line">
+    <path d="M28 14 Q34 6 42 13"/>
+    <path d="M30 38 Q34 44 40 39"/>
+  </g>
+  <rect class="mascot-fill" x="10" y="13" width="44" height="26" rx="13"/>
+  <line class="board-divider" x1="26" y1="26" x2="50" y2="26"/>
+  <g class="board-holes">
+    <circle cx="28" cy="19.5" r="1.1"/>
+    <circle cx="28" cy="22.3" r="1.1"/>
+    <circle cx="32" cy="19.5" r="1.1"/>
+    <circle cx="32" cy="22.3" r="1.1"/>
+    <circle cx="36" cy="19.5" r="1.1"/>
+    <circle cx="36" cy="22.3" r="1.1"/>
+    <circle cx="40" cy="19.5" r="1.1"/>
+    <circle cx="40" cy="22.3" r="1.1"/>
+    <circle cx="44" cy="19.5" r="1.1"/>
+    <circle cx="44" cy="22.3" r="1.1"/>
+    <circle cx="48" cy="19.5" r="1.1"/>
+    <circle cx="48" cy="22.3" r="1.1"/>
+    <circle cx="28" cy="29.7" r="1.1"/>
+    <circle cx="28" cy="32.5" r="1.1"/>
+    <circle cx="32" cy="29.7" r="1.1"/>
+    <circle cx="32" cy="32.5" r="1.1"/>
+    <circle cx="36" cy="29.7" r="1.1"/>
+    <circle cx="36" cy="32.5" r="1.1"/>
+    <circle cx="40" cy="29.7" r="1.1"/>
+    <circle cx="40" cy="32.5" r="1.1"/>
+    <circle cx="44" cy="29.7" r="1.1"/>
+    <circle cx="44" cy="32.5" r="1.1"/>
+    <circle cx="48" cy="29.7" r="1.1"/>
+    <circle cx="48" cy="32.5" r="1.1"/>
+  </g>
+  <path class="jumper" d="M28 29.7 C34 27.4 42.5 28 44 31.2 C45.2 34.4 38 36.6 32 32.5"/>
+  <circle class="jumper-end" cx="28" cy="29.7" r="1.4"/>
+  <circle class="jumper-end" cx="32" cy="32.5" r="1.4"/>
+  <circle class="mascot-eye" cx="18" cy="23" r="4"/>
+  <circle class="mascot-pupil" cx="17.2" cy="23" r="1.6"/>
+  <path class="mascot-mouth" d="M13 31 q2.5 2 5 0"/>
+</svg>

@@ -1,6 +1,6 @@
 # Homepage
 
-My personal site: portfolio, resume, photography and blog. It's built with Jekyll and published by GitHub Pages at **https://robotcrablab.github.io/Homepage/**.
+Breadboard Bay: my personal site, with portfolio, resume, photography and blog. It's built with Jekyll and published by GitHub Pages at **https://robotcrablab.github.io/Homepage/**.
 
 Every change committed to `main` rebuilds the site automatically within a minute or two. You can watch the build in the **Actions** tab.
 
