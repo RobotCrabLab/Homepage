@@ -143,8 +143,8 @@ img { max-width: 100%; height: auto; }
 .board-holes, .mascot-pupil { fill: var(--jelly-line); }
 .mascot-eye { fill: #FFFFFF; stroke: var(--jelly-line); stroke-width: 2; }
 .mascot-mouth { fill: none; stroke: var(--jelly-line); stroke-width: 1.6; stroke-linecap: round; }
-.tentacle { fill: none; stroke: var(--tentacle-color); stroke-width: 2.4; stroke-linecap: round; }
-.tentacle-end { fill: var(--tentacle-color); }
+.tentacle { fill: none; stroke: var(--tentacle-color); stroke-width: 2; stroke-linecap: round; }
+.tentacle-outline { fill: none; stroke: var(--tentacle-wire); stroke-width: 3.4; stroke-linecap: round; }
 .tentacle-wire-edge { fill: none; stroke: var(--tentacle-color); stroke-width: 3.4; stroke-linecap: round; }
 .tentacle-wire { fill: none; stroke: var(--tentacle-wire); stroke-width: 2; stroke-linecap: round; }
 
