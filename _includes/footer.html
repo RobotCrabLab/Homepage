@@ -52,15 +52,29 @@
     var track = document.querySelector('.crab-track');
     if (!crab || !track || !('IntersectionObserver' in window)) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    crab.classList.add('crab-waiting');
+    // Start off the right edge, then turn on the walking transition.
+    crab.classList.add('crab-out');
+    void crab.offsetWidth;
+    crab.classList.add('crab-ready');
+    var inView = false;
+    function walk(toIn) {
+      if (toIn === inView) return;
+      inView = toIn;
+      crab.classList.remove('crab-arrived');
+      crab.classList.add('crab-moving');
+      crab.classList.toggle('crab-out', !toIn);
+    }
+    crab.addEventListener('transitionend', function (e) {
+      if (e.target !== crab || e.propertyName !== 'transform') return;
+      crab.classList.remove('crab-moving');
+      if (inView) crab.classList.add('crab-arrived');
+    });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        crab.classList.remove('crab-waiting');
-        crab.classList.add('crab-walking');
-        io.disconnect();
+        if (e.intersectionRatio >= 0.6) walk(true);
+        else if (e.intersectionRatio < 0.35) walk(false);
       });
-    }, { threshold: 0.6 });
+    }, { threshold: [0, 0.35, 0.6, 1] });
     io.observe(track);
   })();
 </script>
