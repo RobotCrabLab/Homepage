@@ -237,12 +237,12 @@ img { max-width: 100%; height: auto; }
 .crab-holes, .crab-pupil { fill: var(--crab-line); }
 .crab-eye { fill: #FFFFFF; stroke: var(--crab-line); stroke-width: 3; }
 
-.crab-walker.crab-ready { transition: transform 6.5s cubic-bezier(.3,.55,.35,1); }
+.crab-walker.crab-ready { transition: transform 4s cubic-bezier(.25,.6,.3,1); }
 .crab-walker.crab-out { transform: translateX(110vw); }
-.crab-walker.crab-ready.crab-out { transition-duration: 4s; transition-timing-function: cubic-bezier(.5,0,.75,.6); }
+.crab-walker.crab-ready.crab-out { transition-duration: 3.3s; transition-timing-function: cubic-bezier(.5,0,.75,.6); }
 .crab-moving .crab-leg { transform-box: fill-box; transform-origin: 50% 0%; }
-.crab-moving .leg-a { animation: crab-step-a 0.3s steps(2) infinite; }
-.crab-moving .leg-b { animation: crab-step-b 0.3s steps(2) infinite; }
+.crab-moving .leg-a { animation: crab-step-a 0.22s steps(2) infinite; }
+.crab-moving .leg-b { animation: crab-step-b 0.22s steps(2) infinite; }
 .crab-arrived .crab-pincer { transform-box: fill-box; transform-origin: 50% 100%; animation: crab-pinch 0.5s ease-in-out 2; }
 @keyframes crab-step-a { 50% { transform: rotate(12deg); } }
 @keyframes crab-step-b { 50% { transform: rotate(-12deg); } }
