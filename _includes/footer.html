@@ -93,18 +93,28 @@
     function jitter(mid, spread) { return mid + (Math.random() * 2 - 1) * spread; }
     function bubbles() {
       var next = 0;
-      var spots = [[0.93, 10],
+      var spots = [[0.93, 10, true],
         [jitter(0.775, 0.045), jitter(9, 2)],
         [jitter(0.665, 0.045), jitter(11, 2)],
         [jitter(0.555, 0.04), jitter(9, 2)]];
+      // If the crab turns back before it has walked all the way off the right
+      // side, only keep the bubbles still ahead of it, so they don't all pop at
+      // once. If none are left, it lets out a single bubble after a moment.
+      var c0 = crab.getBoundingClientRect();
+      var x0 = (c0.left + c0.width / 2) / window.innerWidth;
+      spots = spots.filter(function (s) { return s[0] <= x0 - 0.05; });
       cancelAnimationFrame(frame);
+      if (!spots.length) {
+        follow = setTimeout(function () { if (inView) bubble(10); }, 300);
+        return;
+      }
       (function tick() {
         if (!inView || next >= spots.length) return;
         var c = crab.getBoundingClientRect();
         var x = (c.left + c.width / 2) / window.innerWidth;
         while (next < spots.length && x <= spots[next][0]) {
           var at = bubble(spots[next][1]);
-          if (next++ === 0) follow = setTimeout(function () { if (inView) bubble(13, at + jitter(10, 4)); }, 500);
+          if (spots[next++][2]) follow = setTimeout(function () { if (inView) bubble(13, at + jitter(10, 4)); }, 500);
         }
         frame = requestAnimationFrame(tick);
       })();
