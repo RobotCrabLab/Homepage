@@ -1,0 +1,50 @@
+<svg class="crab-walker" viewBox="0 0 72 52" aria-hidden="true" focusable="false">
+  <g class="crab-limbs">
+    <path class="crab-leg leg-a" d="M24 36 l-6 5 l-2 7"/>
+    <path class="crab-leg leg-b" d="M31 37 l-3 6 l0 6"/>
+    <path class="crab-leg leg-b" d="M41 37 l3 6 l0 6"/>
+    <path class="crab-leg leg-a" d="M48 36 l6 5 l2 7"/>
+    <path d="M30 20 L27 10"/>
+    <path d="M42 20 L45 10"/>
+    <path d="M20 28 Q11 28 10 20"/>
+    <path d="M52 28 Q61 28 62 20"/>
+    <g class="crab-pincer"><path d="M10 20 Q3 15 7.5 9"/><path d="M10 20 Q17 15 12.5 9"/></g>
+    <g class="crab-pincer"><path d="M62 20 Q55 15 59.5 9"/><path d="M62 20 Q69 15 64.5 9"/></g>
+  </g>
+  <rect class="crab-board" x="18" y="19" width="36" height="19" rx="7"/>
+  <line class="crab-divider" x1="21" y1="28.5" x2="51" y2="28.5"/>
+  <g class="crab-holes">
+    <circle cx="24.5" cy="23.5" r="1.1"/>
+    <circle cx="24.5" cy="26.1" r="1.1"/>
+    <circle cx="28.5" cy="23.5" r="1.1"/>
+    <circle cx="28.5" cy="26.1" r="1.1"/>
+    <circle cx="32.5" cy="23.5" r="1.1"/>
+    <circle cx="32.5" cy="26.1" r="1.1"/>
+    <circle cx="36.5" cy="23.5" r="1.1"/>
+    <circle cx="36.5" cy="26.1" r="1.1"/>
+    <circle cx="40.5" cy="23.5" r="1.1"/>
+    <circle cx="40.5" cy="26.1" r="1.1"/>
+    <circle cx="44.5" cy="23.5" r="1.1"/>
+    <circle cx="44.5" cy="26.1" r="1.1"/>
+    <circle cx="48.5" cy="23.5" r="1.1"/>
+    <circle cx="48.5" cy="26.1" r="1.1"/>
+    <circle cx="24.5" cy="31" r="1.1"/>
+    <circle cx="24.5" cy="33.6" r="1.1"/>
+    <circle cx="28.5" cy="31" r="1.1"/>
+    <circle cx="28.5" cy="33.6" r="1.1"/>
+    <circle cx="32.5" cy="31" r="1.1"/>
+    <circle cx="32.5" cy="33.6" r="1.1"/>
+    <circle cx="36.5" cy="31" r="1.1"/>
+    <circle cx="36.5" cy="33.6" r="1.1"/>
+    <circle cx="40.5" cy="31" r="1.1"/>
+    <circle cx="40.5" cy="33.6" r="1.1"/>
+    <circle cx="44.5" cy="31" r="1.1"/>
+    <circle cx="44.5" cy="33.6" r="1.1"/>
+    <circle cx="48.5" cy="31" r="1.1"/>
+    <circle cx="48.5" cy="33.6" r="1.1"/>
+  </g>
+  <circle class="crab-eye" cx="26.5" cy="8" r="4"/>
+  <circle class="crab-eye" cx="45.5" cy="8" r="4"/>
+  <circle class="crab-pupil" cx="27.5" cy="8" r="1.6"/>
+  <circle class="crab-pupil" cx="46.5" cy="8" r="1.6"/>
+</svg>

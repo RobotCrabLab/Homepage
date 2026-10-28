@@ -16,6 +16,9 @@
       </li>
     </ul>
   </div>
+  <div class="wrap crab-track">
+    {% include crab-walker.svg %}
+  </div>
 </footer>
 <script>
   (function () {
@@ -41,5 +44,23 @@
     });
     if (media.addEventListener) media.addEventListener('change', paint);
     paint();
+  })();
+</script>
+<script>
+  (function () {
+    var crab = document.querySelector('.crab-walker');
+    var track = document.querySelector('.crab-track');
+    if (!crab || !track || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    crab.classList.add('crab-waiting');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        crab.classList.remove('crab-waiting');
+        crab.classList.add('crab-walking');
+        io.disconnect();
+      });
+    }, { threshold: 0.6 });
+    io.observe(track);
   })();
 </script>
