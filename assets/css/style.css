@@ -184,7 +184,8 @@ img { max-width: 100%; height: auto; }
   25%      { transform: skewX(7deg); }
   75%      { transform: skewX(-7deg); }
 }
-/* Two tentacles also wiggle on their own, each at its own pace */
+/* Two tentacles also wiggle on their own, each at its own pace:
+   the free one second from the left (a) and the dark plugged wire (b) */
 .mascot-mark .tentacle-a,
 .mascot-mark .tentacle-b {
   transform-box: fill-box;
