@@ -1,10 +1,13 @@
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="wordmark" href="{{ '/' | relative_url }}">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
       {% include mascot.svg class="mascot-mark" %}
+    </button>
+    <a class="wordmark" href="{{ '/' | relative_url }}">
+      <span class="wordmark-mascot">{% include mascot.svg class="mascot-mark" %}</span>
       <span>{{ site.title }}</span>
     </a>
-    <nav class="site-nav" aria-label="Main">
+    <nav class="site-nav" id="site-nav" aria-label="Main">
       {% assign nav = "Projects:/projects/,Blog:/blog/,Photography:/photography/,Resume:/resume/" | split: "," %}
       {% for item in nav %}
         {% assign parts = item | split: ":" %}
@@ -14,3 +17,18 @@
     </nav>
   </div>
 </header>
+<script>
+  (function () {
+    var btn = document.querySelector('.menu-toggle');
+    var nav = document.getElementById('site-nav');
+    if (!btn || !nav) return;
+    function setOpen(open) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      nav.classList.toggle('is-open', open);
+    }
+    btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  })();
+</script>

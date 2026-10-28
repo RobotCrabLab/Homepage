@@ -93,15 +93,27 @@ img { max-width: 100%; height: auto; }
 
 /* ------------------------------------------------------------
    The mascot: a deep-sea breadboard jelly
+   Same colors in light and dark mode; only the tentacles invert.
    ------------------------------------------------------------ */
-.mascot { color: var(--ink); overflow: visible; }
-.mascot-fill { fill: var(--shell); stroke: currentColor; stroke-width: 3; stroke-linejoin: round; }
-.tentacle { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
-.tentacle-wire-edge { fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; }
-.tentacle-wire { fill: none; stroke: #FFFFFF; stroke-width: 2; stroke-linecap: round; }
-.board-holes, .mascot-pupil { fill: currentColor; }
-.mascot-eye { fill: #FFFFFF; stroke: currentColor; stroke-width: 2; }
-.mascot-mouth { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.mascot {
+  --jelly-line: #14303F;
+  --jelly-red: #D9442B;
+  --tentacle-color: #14303F;
+  --tentacle-wire: #FFFFFF;
+  color: var(--jelly-line);
+  overflow: visible;
+}
+@media (prefers-color-scheme: dark) {
+  .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
+}
+.mascot-fill { fill: var(--jelly-red); stroke: var(--jelly-line); stroke-width: 3; stroke-linejoin: round; }
+.board-holes, .mascot-pupil { fill: var(--jelly-line); }
+.mascot-eye { fill: #FFFFFF; stroke: var(--jelly-line); stroke-width: 2; }
+.mascot-mouth { fill: none; stroke: var(--jelly-line); stroke-width: 1.6; stroke-linecap: round; }
+.tentacle { fill: none; stroke: var(--tentacle-color); stroke-width: 2.4; stroke-linecap: round; }
+.tentacle-end { fill: var(--tentacle-color); }
+.tentacle-wire-edge { fill: none; stroke: var(--tentacle-color); stroke-width: 3.4; stroke-linecap: round; }
+.tentacle-wire { fill: none; stroke: var(--tentacle-wire); stroke-width: 2; stroke-linecap: round; }
 
 /* ------------------------------------------------------------
    Header and footer
@@ -117,7 +129,8 @@ img { max-width: 100%; height: auto; }
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
   font-variation-settings: "wdth" 82;
 }
-.mascot-mark { width: 7rem; height: auto; }
+.mascot-mark { width: 7rem; height: auto; display: block; }
+.wordmark-mascot { display: block; }
 @media (max-width: 40rem) {
   .mascot-mark { width: 4.75rem; }
 }
@@ -150,6 +163,33 @@ img { max-width: 100%; height: auto; }
 }
 .site-nav a:hover { border-bottom-color: var(--rule); }
 .site-nav a[aria-current="page"] { border-bottom-color: var(--shell); }
+
+/* Phones: the jelly becomes the menu button */
+.menu-toggle {
+  display: none;
+  background: none; border: 0; padding: 0; margin: 0;
+  color: inherit; cursor: pointer; border-radius: 0.75rem;
+}
+@media (max-width: 40rem) {
+  .header-inner { justify-content: flex-start; align-items: center; column-gap: 0.75rem; }
+  .menu-toggle { display: block; }
+  .wordmark-mascot { display: none; }
+  .no-js .menu-toggle { display: none; }
+  .no-js .wordmark-mascot { display: block; }
+  .js .site-nav { display: none; }
+  .js .site-nav.is-open {
+    display: flex; flex-direction: column; gap: 0; width: 100%;
+    margin-top: 0.5rem; border-top: 2px solid var(--ink);
+  }
+  .js .site-nav.is-open a {
+    font-size: var(--step-1); padding-block: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .js .site-nav.is-open a[aria-current="page"] { color: var(--link); border-bottom-color: var(--rule); }
+  .menu-toggle[aria-expanded="true"] .mascot-mark { animation-duration: 1.2s; }
+  .menu-toggle[aria-expanded="true"] .jelly-tentacles { animation-duration: 1.2s; }
+}
+
 
 .site-footer { margin-top: 5rem; padding-block: 2rem 2.5rem; border-top: 1px solid var(--rule); }
 .footer-inner {
