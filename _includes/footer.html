@@ -89,7 +89,7 @@
     // same spot half a second later), then three more before it reaches the middle.
     // Each entry is [crab centre as a fraction of screen width, bubble size].
     // The last three land somewhere new on every walk, so it never looks canned.
-    var frame = 0, follow = 0;
+    var frame = 0, follow = 0, settle = [];
     function jitter(mid, spread) { return mid + (Math.random() * 2 - 1) * spread; }
     function bubbles() {
       var next = 0;
@@ -123,6 +123,7 @@
       if (toIn === inView) return;
       inView = toIn;
       cancelAnimationFrame(frame); clearTimeout(follow);
+      settle.forEach(clearTimeout); settle = [];
       if (toIn) bubbles();
       crab.classList.remove('crab-arrived');
       crab.classList.add('crab-moving');
@@ -131,7 +132,12 @@
     crab.addEventListener('transitionend', function (e) {
       if (e.target !== crab || e.propertyName !== 'transform') return;
       crab.classList.remove('crab-moving');
-      if (inView) crab.classList.add('crab-arrived');
+      if (!inView) return;
+      crab.classList.add('crab-arrived');
+      // A little burst of bubbles once it settles at the end of its run
+      [[150, 9], [450, 12], [700, 8], [1050, 11]].forEach(function (b) {
+        settle.push(setTimeout(function () { if (inView) bubble(jitter(b[1], 1.5)); }, b[0] + jitter(0, 80)));
+      });
     });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
