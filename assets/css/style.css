@@ -333,7 +333,7 @@ img { max-width: 100%; height: auto; }
 /* A little cartoon of Chris stands to the right of the greeting, centered in the
    space between the end of the heading and the right margin */
 .hero-head { display: flex; align-items: flex-start; }  /* tops line up: the heading's letters with the top of his head */
-.hero-me { width: clamp(4rem, 11vw, 7rem); height: auto; flex: none; margin: 0 auto; }
+.hero-me { width: clamp(5.6rem, 15.4vw, 9.8rem); height: auto; flex: none; margin: -0.15rem auto 0; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin: 2rem 0 0; }
 
 .home-section { margin-top: clamp(2.5rem, 6vw, 4rem); }
