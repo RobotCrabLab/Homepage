@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 26 68 90" class="scientist">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="15 26 70 90" class="scientist">
   <style>
     .sc-line { stroke: #14303F; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
   </style>
   <!-- Body: a brown canvas work shirt with a collar, button placket and two chest pockets -->
-  <path class="sc-line" d="M24 113 C24 88 34 77 50 77 C66 77 76 88 76 113 Z" fill="#B57E40"/>
+  <path class="sc-line" d="M23 113 V91 Q23 80 34 79 L66 79 Q77 80 77 91 V113 Z" fill="#B57E40"/>
   <rect class="sc-line" x="43" y="68" width="14" height="14" rx="3" fill="#F3C9A4"/>
   <path class="sc-line" d="M38.5 78.2 L49.6 80.4 L44.8 88.6 Z" fill="#B57E40" stroke-width="2.2"/>
   <path class="sc-line" d="M61.5 78.2 L50.4 80.4 L55.2 88.6 Z" fill="#B57E40" stroke-width="2.2"/>
