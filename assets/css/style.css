@@ -12,8 +12,8 @@
   --rule: #C3CBCF;
   --kelp: #D6DCDF;         /* background kelp, barely there against the page */
 
-  --display: "Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", sans-serif;
-  --body: "Literata", Georgia, "Times New Roman", serif;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Work Sans", "Helvetica Neue", Arial, sans-serif;
 
   --measure: 42rem;
   --gutter: clamp(1rem, 4vw, 2rem);
@@ -96,7 +96,7 @@ main { flex: 1; }
 
 h1, h2, h3 {
   font-family: var(--display);
-  font-variation-settings: "wdth" 82;
+  font-variation-settings: "SOFT" 50;
   line-height: 1.1;
   letter-spacing: -0.015em;
   font-weight: 700;
@@ -160,7 +160,7 @@ img { max-width: 100%; height: auto; }
   display: inline-flex; align-items: center; gap: 0.6rem;
   color: var(--ink); text-decoration: none;
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
-  font-variation-settings: "wdth" 82;
+  font-variation-settings: "SOFT" 50;
 }
 .mascot-mark { width: 7rem; height: auto; display: block; }
 .wordmark-mascot { display: block; }
@@ -323,10 +323,10 @@ img { max-width: 100%; height: auto; }
 .hero { overflow-x: clip; padding-block: clamp(2.5rem, 8vw, 5.5rem) clamp(2rem, 5vw, 3.5rem); }
 .hero h1 {
   font-size: var(--step-4);
-  font-variation-settings: "wdth" 75;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
   margin: 0;
 }
 .hero .lede { font-size: clamp(1.25rem, 2.6vw, 1.5rem); margin-top: 1.25rem; }
@@ -374,7 +374,7 @@ img { max-width: 100%; height: auto; }
 .p-body { display: flex; flex-direction: column; gap: 0.2rem; }
 .p-title {
   font-family: var(--display); font-weight: 700; font-size: var(--step-1);
-  font-variation-settings: "wdth" 82; line-height: 1.2;
+  font-variation-settings: "SOFT" 50; line-height: 1.2;
 }
 .project-row:hover .p-title { color: var(--link); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
 .p-summary { color: var(--muted); line-height: 1.55; }
@@ -393,7 +393,7 @@ img { max-width: 100%; height: auto; }
   padding-block: 0.85rem; border-bottom: 1px solid var(--rule);
 }
 .post-list time { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
-.post-list a { font-family: var(--display); font-weight: 600; font-size: var(--step-1); font-variation-settings: "wdth" 82; color: var(--ink); text-decoration: none; line-height: 1.25; }
+.post-list a { font-family: var(--display); font-weight: 600; font-size: var(--step-1); font-variation-settings: "SOFT" 50; color: var(--ink); text-decoration: none; line-height: 1.25; }
 .post-list a:hover { color: var(--link); text-decoration: underline; }
 @media (max-width: 34rem) {
   .post-list li { grid-template-columns: 1fr; }
@@ -460,7 +460,7 @@ img { max-width: 100%; height: auto; }
 .episode-card:hover { border-color: var(--shell); }
 .episode-card:hover .episode-title { color: var(--link); }
 .episode-text { display: flex; flex-direction: column; gap: 0.15rem; }
-.episode-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "wdth" 82; line-height: 1.2; }
+.episode-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "SOFT" 50; line-height: 1.2; }
 .episode-note { color: var(--muted); font-size: var(--step--1); line-height: 1.5; }
 
 /* ------------------------------------------------------------
@@ -525,7 +525,7 @@ img { max-width: 100%; height: auto; }
 .shot-link img { display: block; width: 100%; height: auto; transition: transform 0.4s ease; }
 .shot-link:hover img { transform: scale(1.015); }
 .shot figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.75rem; margin-top: 0.7rem; }
-.shot-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "wdth" 82; }
+.shot-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "SOFT" 50; }
 .shot-note { color: var(--muted); font-size: var(--step--1); }
 
 .viewer {
