@@ -26,7 +26,7 @@
   <!-- Short hair with a little swoop at the front -->
   <path class="sc-line" d="M30.8 47 C30 36 38.5 31 50 31.2 C61.5 31 70 36 69.2 47 C67 41.5 62.5 39.5 57.5 40 C53.5 42 46.5 42.4 42 40.4 C37 40.8 33 43 30.8 47 Z" fill="#5A3B2C"/>
   <!-- Beard: a squared-off chin, with a gap for the smile -->
-  <path class="sc-line" d="M30.9 56 C31 67.5 39 74.6 50 74.6 C61 74.6 69 67.5 69.1 56 C65 61 59 63 50 62.6 C41 63 35 61 30.9 56 Z" fill="#5A3B2C"/>
+  <path class="sc-line" d="M30.9 56 L31.1 64.5 Q31.6 74.4 41.5 74.6 L58.5 74.6 Q68.4 74.4 68.9 64.5 L69.1 56 C65 61 59 63 50 62.6 C41 63 35 61 30.9 56 Z" fill="#5A3B2C"/>
   <path d="M45.8 67.4 q4.2 3.2 8.4 0" fill="none" stroke="#F3C9A4" stroke-width="2.2" stroke-linecap="round"/>
   <!-- Eyes and nose -->
   <circle cx="43" cy="51.5" r="2.3" fill="#14303F"/>
