@@ -59,6 +59,20 @@ layout: default
     </dl>
   </section>
 
+  {% if r.publications %}
+  <section aria-labelledby="h-pubs">
+    <h2 id="h-pubs">Publications</h2>
+    <ol class="pubs">
+      {% for p in r.publications %}
+      <li>
+        <p class="pub-cite">{{ p.authors | replace: "C. Beebe", "<strong>C. Beebe</strong>" }}. {{ p.year }}. {% if p.url %}<a href="{{ p.url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}. <em>{{ p.journal }}</em>{% if p.volume %} {{ p.volume }}{% endif %}.</p>
+        {% if p.note %}<p class="pub-note">{{ p.note }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
+
   {% if r.certifications %}
   <section aria-labelledby="h-certs">
     <h2 id="h-certs">Certifications</h2>

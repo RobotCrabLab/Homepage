@@ -497,6 +497,11 @@ img { max-width: 100%; height: auto; }
 .skills dt { font-family: var(--display); font-weight: 600; }
 .skills dd { margin: 0; }
 .certs dt { white-space: nowrap; }
+.pubs { list-style: none; margin: 1rem 0 0; padding: 0; }
+.pubs li + li { margin-top: 1.25rem; }
+.pub-cite { margin: 0; }
+.pub-cite strong { font-weight: 600; color: var(--ink); }
+.pub-note { margin: 0.4rem 0 0; color: var(--muted); font-size: var(--step--1); }
 .cert-issuer { display: block; white-space: normal; font-weight: 400; font-size: var(--step--1); color: var(--muted); line-height: 1.4; margin-top: 0.2rem; }
 @media (max-width: 34rem) {
   .skills div { grid-template-columns: 1fr; }

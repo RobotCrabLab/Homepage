@@ -16,6 +16,10 @@ On deck, a CTD rosette waits to go over the side. The sensors at its base measur
 
 Just inside, a staging room holds survival suits, foul-weather gear, and the hoses and fittings that keep the deck running. Past that is the main lab, where samples get processed, logged, and stored before the ship comes back to port.
 
+## Following mercury through the California Current
+
+Some of my favorite time at sea went into a study of how mercury moves through the California Current and whether coastal fog carries it onto land. Over four summer cruises spanning two years, I helped collect water samples in vertical profiles at 60 stations, lowering bottles through the water column to capture how mercury and its different chemical forms change with depth. Every sample had to stay trace-metal clean from the moment it left the ocean, which meant careful handling on deck and processing back in the clean lab. The results were published in 2018 in *Deep Sea Research Part II* ([Coale et al., "The distribution and speciation of mercury in the California current"](https://doi.org/10.1016/j.dsr2.2018.05.012)), and I'm proud to be one of the co-authors.
+
 ## From the field to the lab
 
 Back on land, I helped manage an ISO 5 (Class 100) trace-metal clean laboratory, where even a speck of dust can throw off a measurement. I tracked the receipt of up to 6,000 samples a year, prepared them for analysis, and maintained the equipment and calibration logs. I also built an instructional program covering the essential sample collection and processing protocols, so new team members could learn them the same way in the field and in the lab.
