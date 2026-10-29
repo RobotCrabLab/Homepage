@@ -320,7 +320,7 @@ img { max-width: 100%; height: auto; }
 /* ------------------------------------------------------------
    Home
    ------------------------------------------------------------ */
-.hero { overflow-x: clip; padding-block: clamp(2.5rem, 8vw, 5.5rem) clamp(2rem, 5vw, 3.5rem); }
+.hero { overflow-x: clip; padding-block: clamp(0.75rem, 2.5vw, 1.75rem) clamp(2rem, 5vw, 3rem); }
 .hero h1 {
   font-size: var(--step-4);
   font-variation-settings: "SOFT" 100, "WONK" 1;
