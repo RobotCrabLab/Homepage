@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 14 252 216">
-  <path d="M119 26 Q119 20 125 20 L135 20 Q141 20 141 26 L141 224 L119 224 Z" fill="#B98249" stroke="#14303F" stroke-width="3.5" stroke-linejoin="round"/>
-  <path d="M126 32 q-2 6 1 12 M134 166 q2 8 -1 16 M127 196 q-2 7 1 14" fill="none" stroke="#9C6A35" stroke-width="2" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="15.4 43.5 234.2 113.7">
   <g transform="rotate(-3 130 74)">
     <path d="M20 54 L224 52 L246 74 L224 96 L22 97 Q17 75 20 54 Z" fill="#C9935B" stroke="#14303F" stroke-width="3.5" stroke-linejoin="round"/>
     <path d="M32 62 q24 -4 46 0 t44 -1 M162 89 q20 3 38 -1 M210 63 q8 2 14 0 M30 90 q14 2 28 -1" fill="none" stroke="#9C6A35" stroke-width="2" stroke-linecap="round"/>

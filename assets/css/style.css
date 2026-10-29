@@ -165,8 +165,8 @@ img { max-width: 100%; height: auto; }
 .mascot-mark { width: 7rem; height: auto; display: block; }
 .wordmark-mascot { display: block; }
 /* The Breadboard Bay signpost stands in for the site name */
-.wordmark-sign { display: block; height: 8.5rem; width: auto; }
-@media (max-width: 40rem) { .wordmark-sign { height: 6rem; } }
+.wordmark-sign { display: block; height: 5rem; width: auto; }
+@media (max-width: 40rem) { .wordmark-sign { height: 3.6rem; } }
 @media (max-width: 40rem) {
   .mascot-mark { width: 4.75rem; }
 }
