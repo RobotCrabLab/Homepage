@@ -163,13 +163,15 @@ img { max-width: 100%; height: auto; }
   font-variation-settings: "SOFT" 50;
 }
 .mascot-mark { width: 7rem; height: auto; display: block; }
-.wordmark-mascot { display: block; }
-/* The Breadboard Bay signpost stands in for the site name */
-.wordmark-sign { display: block; height: 5rem; width: auto; }
-@media (max-width: 40rem) { .wordmark-sign { height: 3.6rem; } }
-@media (max-width: 40rem) {
-  .mascot-mark { width: 4.75rem; }
-}
+/* The logo: the Breadboard Bay sign, with a small jelly in front of its
+   lower-right corner, its bell just overlapping the bottom of the sign.
+   --logo scales the whole thing (smaller on phones). */
+.logo { --logo: 1; position: relative; display: block; padding-right: calc(0.25rem * var(--logo)); }
+.logo-sign { display: block; height: calc(5rem * var(--logo)); width: auto; }
+.logo-jelly { position: absolute; left: calc(100% - 2.95rem * var(--logo)); bottom: calc(0.35rem * var(--logo)); z-index: 1; }
+.logo .mascot-mark { width: calc(2.9rem * var(--logo)); }
+.nav-home { display: none; }
+@media (max-width: 40rem) { .logo { --logo: 0.78; } }
 
 /* The header jelly drifts and its tentacles sway. */
 .mascot-mark { animation: drift 6.4s ease-in-out infinite; }
@@ -215,7 +217,7 @@ img { max-width: 100%; height: auto; }
 .site-nav a:hover { border-bottom-color: var(--rule); }
 .site-nav a[aria-current="page"] { border-bottom-color: var(--shell); }
 
-/* Phones: the jelly becomes the menu button */
+/* Phones: the logo becomes the menu button, and Home moves into the menu */
 .menu-toggle {
   display: none;
   background: none; border: 0; padding: 0; margin: 0;
@@ -224,9 +226,9 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 40rem) {
   .header-inner { justify-content: flex-start; align-items: center; column-gap: 0.75rem; }
   .menu-toggle { display: block; }
-  .wordmark-mascot { display: none; }
+  .js .wordmark { display: none; }
   .no-js .menu-toggle { display: none; }
-  .no-js .wordmark-mascot { display: block; }
+  .js .site-nav.is-open .nav-home { display: block; }
   .js .site-nav { display: none; }
   .js .site-nav.is-open {
     display: flex; flex-direction: column; gap: 0; width: 100%;

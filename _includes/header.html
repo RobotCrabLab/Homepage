@@ -1,13 +1,21 @@
 <header class="site-header">
   <div class="wrap header-inner">
+    <!-- The logo: the Breadboard Bay sign with the little jelly in front of its corner.
+         On computers it links home; on phones the same logo opens the menu. -->
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      {% include mascot.svg class="mascot-mark" %}
+      <span class="logo">
+        <img class="logo-sign" src="{{ '/assets/images/breadboard-bay-sign.svg' | relative_url }}" alt="" width="234" height="114">
+        <span class="logo-jelly">{% include mascot.svg class="mascot-mark" %}</span>
+      </span>
     </button>
     <a class="wordmark" href="{{ '/' | relative_url }}">
-      <span class="wordmark-mascot">{% include mascot.svg class="mascot-mark" %}</span>
-      <img class="wordmark-sign" src="{{ '/assets/images/breadboard-bay-sign.svg' | relative_url }}" alt="{{ site.title }}" width="234" height="114">
+      <span class="logo">
+        <img class="logo-sign" src="{{ '/assets/images/breadboard-bay-sign.svg' | relative_url }}" alt="{{ site.title }}" width="234" height="114">
+        <span class="logo-jelly">{% include mascot.svg class="mascot-mark" %}</span>
+      </span>
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a class="nav-home" href="{{ '/' | relative_url }}"{% if page.url == "/" %} aria-current="page"{% endif %}>Home</a>
       {% assign nav = "Projects:/projects/,Blog:/blog/,Photography:/photography/,Resume:/resume/" | split: "," %}
       {% for item in nav %}
         {% assign parts = item | split: ":" %}
