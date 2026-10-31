@@ -13,7 +13,7 @@ body_class: home
     <figure class="portrait-card" aria-hidden="true">
       <div class="portrait-wash"></div>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
-      <span class="card-fish card-auv" data-top="25" data-straight><img class="auv-body" src="{{ '/assets/images/breadboard-auv.svg' | relative_url }}" alt="" width="198" height="72"></span>
+      <span class="card-fish card-auv" data-top="25" data-jitter="5" data-straight><img class="auv-body" src="{{ '/assets/images/breadboard-auv.svg' | relative_url }}" alt="" width="198" height="72"></span>
       <span class="card-fish card-fish-2" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
@@ -23,7 +23,7 @@ body_class: home
 <script>
   // Fish swim right to left through the portrait frame. Each time a fish
   // starts a new lap (just off the right edge), it picks a new height within
-  // 10% of the card above or below its usual spot. Now and then one fish at
+  // 10% of the card above or below its usual spot (5% for the AUV). Now and then one fish at
   // a time swims in on a gentle 5-10 degree slant, up or down. The AUV
   // always cruises straight across.
   (function () {
@@ -31,6 +31,7 @@ body_class: home
     var slanted = null;
     document.querySelectorAll('.card-fish').forEach(function (fish) {
       var base = parseFloat(fish.dataset.top);
+      var jitter = parseFloat(fish.dataset.jitter || 10);
       function lap() {
         var card = fish.parentNode;
         var widthPct = fish.offsetWidth / card.offsetWidth * 100;
@@ -48,7 +49,7 @@ body_class: home
         fish.style.setProperty('--tilt', (-angle).toFixed(1) + 'deg');  // nose follows the path
         // keep the whole path inside the frame
         var lo = Math.max(2, -riseH), hi = Math.min(100 - heightPct, 100 - heightPct - riseH);
-        var top = base + (Math.random() * 20 - 10);
+        var top = base + (Math.random() * 2 - 1) * jitter;
         fish.style.top = Math.max(lo, Math.min(hi, top)) + '%';
       }
       lap();

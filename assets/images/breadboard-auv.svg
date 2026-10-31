@@ -35,5 +35,5 @@
     <circle cx="100" cy="49" r="1.6"/><circle cx="118" cy="49" r="1.6"/>
   </g>
   <!-- Side fin, swept back -->
-  <path d="M146 44 L170 52 Q173 54 169 56 L146 55 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M144 38.5 L160 38.5 L174 51 L161 51 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
 </svg>
