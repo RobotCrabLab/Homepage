@@ -13,12 +13,37 @@ body_class: home
     <figure class="portrait-card" aria-hidden="true">
       <div class="portrait-wash"></div>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
-      {% include breadboard-fish.svg class="card-fish card-fish-1" %}
-      {% include breadboard-fish.svg class="card-fish card-fish-2" %}
-      {% include breadboard-fish.svg class="card-fish card-fish-3" %}
+      <span class="card-fish card-fish-1" data-top="6">{% include breadboard-fish.svg class="fish-body" %}</span>
+      <span class="card-fish card-fish-2" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
+      <span class="card-fish card-fish-3" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
   </div>
 </section>
+
+<script>
+  // Fish swim right to left through the portrait frame. Each time a fish
+  // starts a new lap (just off the right edge), it picks a new height
+  // within 10% of the card above or below its usual spot.
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.card-fish').forEach(function (fish) {
+      var base = parseFloat(fish.dataset.top);
+      function place() {
+        var card = fish.parentNode;
+        var max = 100 - (fish.offsetHeight / card.offsetHeight) * 100;
+        var top = base + (Math.random() * 20 - 10);
+        fish.style.top = Math.max(0, Math.min(max, top)) + '%';
+      }
+      place();
+      // start each fish somewhere along its lap so they don't arrive together
+      var lap = parseFloat(getComputedStyle(fish).animationDuration) || 15;
+      fish.style.animationDelay = (-Math.random() * lap).toFixed(2) + 's';
+      fish.addEventListener('animationiteration', function (e) {
+        if (e.target === fish) place();
+      });
+    });
+  })();
+</script>
 
 <section class="wrap photo-tiles" aria-label="A few of my bird photos">
   {% comment %} Two rows of photos. Each entry is file:shape (width / height). Tiles in a row share a height, so their widths follow their shapes. {% endcomment %}

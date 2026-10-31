@@ -360,20 +360,32 @@ img { max-width: 100%; height: auto; }
 .bb-fish-eye { fill: #FFFFFF; stroke: #14303F; stroke-width: 2.5; }
 .bb-fish-mouth { fill: none; stroke: #14303F; stroke-width: 2; stroke-linecap: round; }
 
-/* Three fish swimming left, placed like the sketch */
-.card-fish { position: absolute; height: auto; overflow: visible; z-index: 1; }
-.card-fish-1 { left: 4%;  top: 6%;   width: 24%; }   /* small, upper left */
-.card-fish-2 { left: -2%; top: 64%;  width: 44%; }   /* big, passing in front of his chest */
-.card-fish-3 { left: 76%; top: 80%;  width: 34%; }   /* swimming in from past the right edge */
-.card-fish { animation: fish-swim 6s ease-in-out infinite; }
-.card-fish-2 { animation-duration: 7.5s; animation-delay: -2s; }
-.card-fish-3 { animation-duration: 5.2s; animation-delay: -3.5s; }
-.card-fish .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 1.6s ease-in-out infinite; }
-.card-fish-2 .bb-fish-tail { animation-duration: 2.1s; }
-.card-fish-3 .bb-fish-tail { animation-duration: 1.3s; }
-@keyframes fish-swim { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-7px, -4px); } }
-@keyframes fish-wag { 0%, 100% { transform: scaleX(1) skewY(0); } 50% { transform: scaleX(0.82) skewY(-8deg); } }
-@media (prefers-reduced-motion: reduce) { .card-fish, .card-fish .bb-fish-tail { animation: none; } }
+/* Three fish, placed like the sketch. The top and bottom fish swim behind
+   the character; the middle one swims in front of him. */
+.portrait-card { container-type: inline-size; }
+.portrait-me { z-index: 1; }
+.card-fish { position: absolute; display: block; z-index: 0; }
+.card-fish-2 { z-index: 2; }
+.fish-body { display: block; width: 100%; height: auto; overflow: visible; }
+.card-fish-1 { left: 4%;  top: 6%;  width: 24%; }
+.card-fish-2 { left: -2%; top: 64%; width: 44%; }
+.card-fish-3 { left: 76%; top: 80%; width: 34%; }
+
+/* Swimming: each fish starts just off the right edge and crosses to just
+   past the left edge, wiggling and wagging its tail as it goes. The nearer
+   (bigger) fish moves a little faster. */
+@media (prefers-reduced-motion: no-preference) {
+  .card-fish { left: 100%; animation: fish-cross linear infinite; }
+  .card-fish-1 { animation-duration: 17s; }
+  .card-fish-2 { animation-duration: 12s; }
+  .card-fish-3 { animation-duration: 15s; }
+  .fish-body { animation: fish-wiggle 0.9s ease-in-out infinite alternate; transform-origin: 40% 50%; }
+  .card-fish-2 .fish-body { animation-duration: 0.75s; }
+  .fish-body .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 0.45s ease-in-out infinite alternate; }
+}
+@keyframes fish-cross { from { transform: translateX(0); } to { transform: translateX(calc(-100cqw - 100%)); } }
+@keyframes fish-wiggle { from { transform: rotate(-3deg) translateY(-3%); } to { transform: rotate(3deg) translateY(3%); } }
+@keyframes fish-wag { from { transform: scaleX(1) skewY(6deg); } to { transform: scaleX(0.8) skewY(-6deg); } }
 
 /* Phones: stack the text above the card */
 @media (max-width: 40rem) {
