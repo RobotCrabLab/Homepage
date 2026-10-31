@@ -5,7 +5,10 @@ body_class: home
 <section class="hero">
   <div class="wrap">
     <div class="hero-head">
-      <h1>I'm {{ site.author }}.</h1>
+      <div class="hero-title">
+        <h1>I'm {{ site.author }}.</h1>
+        {% include breadboard-fish.svg class="hero-fish" %}
+      </div>
       <img class="hero-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
     </div>
     <p class="lede">{{ site.tagline }} I also like to take pictures of birds (see below).</p>
