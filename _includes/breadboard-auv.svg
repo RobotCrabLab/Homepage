@@ -1,0 +1,53 @@
+<svg class="auv-body" viewBox="4 4 198 72" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="auv-beam-fade" gradientUnits="userSpaceOnUse" x1="16" y1="0" x2="-120" y2="0">
+      <stop offset="0" stop-color="#FFF3C4" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFF3C4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="auv-beam-soft" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+    <radialGradient id="auv-glow-fade">
+      <stop offset="0" stop-color="#FFF3C4" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#FFF3C4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Dark mode only: a headlight beam ahead of the nose, and a soft glow around it -->
+  <path class="auv-beam" d="M18 34 L-120 8 L-120 72 L18 46 Z" fill="url(#auv-beam-fade)" filter="url(#auv-beam-soft)"/>
+  <ellipse class="auv-beam" cx="22" cy="40" rx="22" ry="26" fill="url(#auv-glow-fade)"/>
+  <!-- Swept tail fins, top and bottom -->
+  <path d="M150 23 L164 8 L172 8 L168 23 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M150 57 L164 72 L172 72 L168 57 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Ducted thruster -->
+  <path d="M181 29 L195 22 Q197 21.5 197 24 L197 56 Q197 58.5 195 58 L181 51 Z" fill="#FFFFFF" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M189 30 V50" stroke="#14303F" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- Hull: one long breadboard, rounded at the nose and tapered at the stern -->
+  <path d="M34 22 L162 22 Q172 22 184 30 L184 50 Q172 58 162 58 L34 58 Q14 58 14 40 Q14 22 34 22 Z" fill="#D9442B" stroke="#14303F" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- White nose cone -->
+  <path class="auv-nose" d="M34 22 Q14 22 14 40 Q14 58 34 58 L38 58 L38 22 Z" fill="#FFFFFF" stroke="#14303F" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- A thin light line along the spine -->
+  <path d="M44 26.5 H128" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+  <!-- Breadboard: holes in the hull, with the center channel running stem to stern -->
+  <path d="M54 40 H140" stroke="#14303F" stroke-width="1.3" stroke-opacity=".45"/>
+  <g fill="#14303F"><circle cx="58" cy="31" r="1.2"/><circle cx="58" cy="35" r="1.2"/><circle cx="58" cy="45" r="1.2"/><circle cx="58" cy="49" r="1.2"/><circle cx="64" cy="31" r="1.2"/><circle cx="64" cy="35" r="1.2"/><circle cx="64" cy="45" r="1.2"/><circle cx="64" cy="49" r="1.2"/><circle cx="70" cy="31" r="1.2"/><circle cx="70" cy="35" r="1.2"/><circle cx="70" cy="45" r="1.2"/><circle cx="70" cy="49" r="1.2"/><circle cx="76" cy="31" r="1.2"/><circle cx="76" cy="35" r="1.2"/><circle cx="76" cy="45" r="1.2"/><circle cx="76" cy="49" r="1.2"/><circle cx="82" cy="31" r="1.2"/><circle cx="82" cy="35" r="1.2"/><circle cx="82" cy="45" r="1.2"/><circle cx="82" cy="49" r="1.2"/><circle cx="88" cy="31" r="1.2"/><circle cx="88" cy="35" r="1.2"/><circle cx="88" cy="45" r="1.2"/><circle cx="88" cy="49" r="1.2"/><circle cx="94" cy="31" r="1.2"/><circle cx="94" cy="35" r="1.2"/><circle cx="94" cy="45" r="1.2"/><circle cx="94" cy="49" r="1.2"/><circle cx="100" cy="31" r="1.2"/><circle cx="100" cy="35" r="1.2"/><circle cx="100" cy="45" r="1.2"/><circle cx="100" cy="49" r="1.2"/><circle cx="106" cy="31" r="1.2"/><circle cx="106" cy="35" r="1.2"/><circle cx="106" cy="45" r="1.2"/><circle cx="106" cy="49" r="1.2"/><circle cx="112" cy="31" r="1.2"/><circle cx="112" cy="35" r="1.2"/><circle cx="112" cy="45" r="1.2"/><circle cx="112" cy="49" r="1.2"/><circle cx="118" cy="31" r="1.2"/><circle cx="118" cy="35" r="1.2"/><circle cx="118" cy="45" r="1.2"/><circle cx="118" cy="49" r="1.2"/><circle cx="124" cy="31" r="1.2"/><circle cx="124" cy="35" r="1.2"/><circle cx="124" cy="45" r="1.2"/><circle cx="124" cy="49" r="1.2"/><circle cx="130" cy="31" r="1.2"/><circle cx="130" cy="35" r="1.2"/><circle cx="130" cy="45" r="1.2"/><circle cx="130" cy="49" r="1.2"/><circle cx="136" cy="31" r="1.2"/><circle cx="136" cy="35" r="1.2"/><circle cx="136" cy="45" r="1.2"/><circle cx="136" cy="49" r="1.2"/></g>
+  <!-- Parts, each straddling the center channel with legs in the rows beside it -->
+  <!-- small dark chip, columns 2-3 -->
+  <rect x="60.6" y="33.2" width="12.8" height="13.6" rx="1.2" fill="#14303F"/>
+  <circle cx="62.8" cy="35.6" r="0.9" fill="#FFFFFF"/>
+  <!-- white part (like a capacitor), column 6 -->
+  <rect x="85.3" y="33.4" width="5.4" height="13.2" rx="2.2" fill="#FFFFFF" stroke="#14303F" stroke-width="1.6"/>
+  <!-- white chip, columns 9-12, with its pin-1 notch -->
+  <rect x="102.6" y="33.2" width="24.8" height="13.6" rx="1.2" fill="#FFFFFF" stroke="#14303F" stroke-width="1.6"/>
+  <path d="M102.6 37.6 a2.4 2.4 0 0 1 0 4.8" fill="none" stroke="#14303F" stroke-width="1.3"/>
+  <!-- Jumper wires lying along the outer rows. Each one's ends sit in different column strips. -->
+  <g fill="none" stroke="#14303F" stroke-width="1.9" stroke-linecap="round">
+    <path d="M94 31 C98 28.6 102 28.6 106 31"/>
+    <path d="M70 49 C75 51.4 83 51.4 88 49"/>
+    <path d="M100 49 C105 51.4 113 51.4 118 49"/>
+  </g>
+  <g fill="#14303F">
+    <circle cx="94" cy="31" r="1.6"/><circle cx="106" cy="31" r="1.6"/>
+    <circle cx="70" cy="49" r="1.6"/><circle cx="88" cy="49" r="1.6"/>
+    <circle cx="100" cy="49" r="1.6"/><circle cx="118" cy="49" r="1.6"/>
+  </g>
+  <!-- Side fin, swept back -->
+  <path d="M150 38.5 L168 38.5 L172 44.5 L164 44.5 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
+</svg>

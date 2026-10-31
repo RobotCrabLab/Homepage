@@ -368,7 +368,15 @@ img { max-width: 100%; height: auto; }
 .card-fish-2 { z-index: 2; }
 .fish-body { display: block; width: 100%; height: auto; overflow: visible; }
 .card-auv    { left: 4%;  top: 25%; width: 90%; }   /* the breadboard AUV, cruising behind him */
-.auv-body { display: block; width: 100%; height: auto; }
+.auv-body { display: block; width: 100%; height: auto; overflow: visible; }
+/* In dark mode the AUV's nose becomes a headlight, lighting the water ahead of it */
+.auv-beam { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .auv-beam { display: inline; }
+  :root:not([data-theme="light"]) .auv-nose { fill: #FFF3C4; }
+}
+:root[data-theme="dark"] .auv-beam { display: inline; }
+:root[data-theme="dark"] .auv-nose { fill: #FFF3C4; }
 /* Light/dark switch in the card's top-right corner, in front of the swimmers.
    It's the same pill as the footer switch; only its position differs. */
 .card-theme { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 5; font-family: var(--body); font-size: var(--step--1); }
