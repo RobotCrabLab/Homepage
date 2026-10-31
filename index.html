@@ -13,7 +13,7 @@ body_class: home
     <figure class="portrait-card" aria-hidden="true">
       <div class="portrait-wash"></div>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
-      <span class="card-fish card-fish-1" data-top="6">{% include breadboard-fish.svg class="fish-body" %}</span>
+      <span class="card-fish card-auv" data-top="11" data-straight><img class="auv-body" src="{{ '/assets/images/breadboard-auv.svg' | relative_url }}" alt="" width="198" height="72"></span>
       <span class="card-fish card-fish-2" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
@@ -24,7 +24,8 @@ body_class: home
   // Fish swim right to left through the portrait frame. Each time a fish
   // starts a new lap (just off the right edge), it picks a new height within
   // 10% of the card above or below its usual spot. Now and then one fish at
-  // a time swims in on a gentle 5-10 degree slant, up or down.
+  // a time swims in on a gentle 5-10 degree slant, up or down. The AUV
+  // always cruises straight across.
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var slanted = null;
@@ -36,7 +37,7 @@ body_class: home
         var heightPct = fish.offsetHeight / card.offsetHeight * 100;
         if (slanted === fish) slanted = null;
         var angle = 0;
-        if (!slanted && Math.random() < 0.5) {
+        if (!slanted && !('straight' in fish.dataset) && Math.random() < 0.5) {
           slanted = fish;
           angle = (5 + Math.random() * 5) * (Math.random() < 0.5 ? -1 : 1);  // negative = swimming upward
         }
@@ -46,7 +47,7 @@ body_class: home
         fish.style.setProperty('--rise', riseW.toFixed(2) + 'cqw');
         fish.style.setProperty('--tilt', (-angle).toFixed(1) + 'deg');  // nose follows the path
         // keep the whole path inside the frame
-        var lo = Math.max(0, -riseH), hi = Math.min(100 - heightPct, 100 - heightPct - riseH);
+        var lo = Math.max(2, -riseH), hi = Math.min(100 - heightPct, 100 - heightPct - riseH);
         var top = base + (Math.random() * 20 - 10);
         fish.style.top = Math.max(lo, Math.min(hi, top)) + '%';
       }

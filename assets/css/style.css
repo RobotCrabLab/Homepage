@@ -360,14 +360,15 @@ img { max-width: 100%; height: auto; }
 .bb-fish-eye { fill: #FFFFFF; stroke: #14303F; stroke-width: 2.5; }
 .bb-fish-mouth { fill: none; stroke: #14303F; stroke-width: 2; stroke-linecap: round; }
 
-/* Three fish, placed like the sketch. The top and bottom fish swim behind
-   the character; the middle one swims in front of him. */
+/* Two fish and an AUV. The AUV (top) and the bottom fish swim behind the
+   character; the middle fish swims in front of him. */
 .portrait-card { container-type: inline-size; }
 .portrait-me { z-index: 1; }
 .card-fish { position: absolute; display: block; z-index: 0; }
 .card-fish-2 { z-index: 2; }
 .fish-body { display: block; width: 100%; height: auto; overflow: visible; }
-.card-fish-1 { left: 4%;  top: 6%;  width: 24%; }
+.card-auv    { left: 4%;  top: 11%; width: 40%; }   /* the breadboard AUV, cruising behind him */
+.auv-body { display: block; width: 100%; height: auto; }
 .card-fish-2 { left: -2%; top: 64%; width: 44%; }
 .card-fish-3 { left: 76%; top: 80%; width: 34%; }
 
@@ -376,7 +377,7 @@ img { max-width: 100%; height: auto; }
    (bigger) fish moves a little faster. */
 @media (prefers-reduced-motion: no-preference) {
   .card-fish { left: 100%; animation: fish-cross linear infinite; }
-  .card-fish-1 { animation-duration: 14.8s; }
+  .card-auv { animation-duration: 14.8s; }
   .card-fish-2 { animation-duration: 10.4s; }
   .card-fish-3 { animation-duration: 13s; }
   .fish-body { animation: fish-wiggle 0.9s ease-in-out infinite alternate; transform-origin: 40% 50%; }
