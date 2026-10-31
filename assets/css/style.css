@@ -369,14 +369,14 @@ img { max-width: 100%; height: auto; }
 .fish-body { display: block; width: 100%; height: auto; overflow: visible; }
 .card-auv    { left: 4%;  top: 25%; width: 90%; }   /* the breadboard AUV, cruising behind him */
 .auv-body { display: block; width: 100%; height: auto; }
-/* Light/dark switch in the card's top-right corner, in front of the swimmers */
-.card-theme {
-  position: absolute; top: 0.75rem; right: 0.75rem; z-index: 5;
-  width: 2.5rem; height: 2.5rem; padding: 0; justify-content: center;
-  color: #14303F; background: #FFFFFF; border: 3px solid #14303F; border-radius: 50%;
+/* Light/dark switch in the card's top-right corner, in front of the swimmers.
+   It's the same pill as the footer switch; only its position differs. */
+.card-theme { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 5; font-family: var(--body); font-size: var(--step--1); }
+/* In dark mode the card's watercolor turns deep blue to match the theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
 }
-.card-theme:hover { background: #EAF4F8; border-color: #14303F; }
-.card-theme svg { width: 1.15rem; height: 1.15rem; }
+:root[data-theme="dark"] .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
 .card-fish-2 { left: -2%; top: 64%; width: 44%; }
 .card-fish-3 { left: 76%; top: 80%; width: 34%; }
 

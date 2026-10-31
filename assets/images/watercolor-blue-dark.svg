@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice">
+  <!-- A smooth deep-blue watercolor gradient (dark theme): soft overlapping washes with
+       gently uneven edges and a faint paper grain -->
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1C3B48"/>
+      <stop offset="0.55" stop-color="#163240"/>
+      <stop offset="1" stop-color="#0F2531"/>
+    </linearGradient>
+    <radialGradient id="wash" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2A5566" stop-opacity="0.75"/>
+      <stop offset="0.7" stop-color="#2A5566" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#2A5566" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="light" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2E5A6A" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#2E5A6A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="5" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="45" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="18"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11"/>
+      <feColorMatrix values="0 0 0 0 0.9  0 0 0 0 0.95  0 0 0 0 0.95  0 0 0 0.04 0"/>
+    </filter>
+  </defs>
+  <rect width="500" height="700" fill="url(#base)"/>
+  <g filter="url(#soft)">
+    <ellipse cx="420" cy="260" rx="230" ry="260" fill="url(#wash)"/>
+    <ellipse cx="90" cy="560" rx="260" ry="210" fill="url(#wash)"/>
+    <ellipse cx="380" cy="690" rx="220" ry="150" fill="url(#wash)"/>
+    <ellipse cx="130" cy="140" rx="230" ry="170" fill="url(#light)"/>
+    <ellipse cx="300" cy="430" rx="160" ry="110" fill="url(#light)" opacity="0.6"/>
+  </g>
+  <rect width="500" height="700" filter="url(#grain)"/>
+</svg>
