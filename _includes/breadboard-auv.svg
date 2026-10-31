@@ -1,18 +1,18 @@
 <svg class="auv-body" viewBox="4 4 198 72" aria-hidden="true" focusable="false">
   <defs>
-    <linearGradient id="auv-beam-fade" gradientUnits="userSpaceOnUse" x1="16" y1="0" x2="-120" y2="0">
-      <stop offset="0" stop-color="#FFF3C4" stop-opacity="0.55"/>
+    <linearGradient id="auv-beam-fade" gradientUnits="userSpaceOnUse" x1="16" y1="0" x2="-26" y2="0">
+      <stop offset="0" stop-color="#FFF3C4" stop-opacity="0.6"/>
       <stop offset="1" stop-color="#FFF3C4" stop-opacity="0"/>
     </linearGradient>
-    <filter id="auv-beam-soft" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="auv-beam-soft" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="1.8"/></filter>
     <radialGradient id="auv-glow-fade">
       <stop offset="0" stop-color="#FFF3C4" stop-opacity="0.8"/>
       <stop offset="1" stop-color="#FFF3C4" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <!-- Dark mode only: a headlight beam ahead of the nose, and a soft glow around it -->
-  <path class="auv-beam" d="M18 34 L-120 8 L-120 72 L18 46 Z" fill="url(#auv-beam-fade)" filter="url(#auv-beam-soft)"/>
-  <ellipse class="auv-beam" cx="22" cy="40" rx="22" ry="26" fill="url(#auv-glow-fade)"/>
+  <!-- Dark mode only: a short cone of light just ahead of the nose, about as tall as the nose, and a soft glow -->
+  <path class="auv-beam" d="M18 26 L-26 19 L-26 61 L18 54 Z" fill="url(#auv-beam-fade)" filter="url(#auv-beam-soft)"/>
+  <ellipse class="auv-beam" cx="20" cy="40" rx="12" ry="20" fill="url(#auv-glow-fade)"/>
   <!-- Swept tail fins, top and bottom -->
   <path d="M150 23 L164 8 L172 8 L168 23 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
   <path d="M150 57 L164 72 L172 72 L168 57 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
