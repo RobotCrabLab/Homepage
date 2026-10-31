@@ -393,8 +393,9 @@ img { max-width: 100%; height: auto; }
    past the left edge, wiggling and wagging its tail as it goes. The nearer
    (bigger) fish moves a little faster. */
 @media (prefers-reduced-motion: no-preference) {
-  .card-fish { left: 100%; animation: fish-cross linear infinite; }
-  .card-auv { animation-duration: 14.8s; }
+  .card-fish { left: calc(100% + var(--lead)); animation: fish-cross linear infinite; }
+  /* The AUV starts and ends further out so its headlight beam slides in and out with it */
+  .card-fish.card-auv { --lead: 16cqw; animation-duration: 16s; }
   .card-fish-2 { animation-duration: 10.4s; }
   .card-fish-3 { animation-duration: 13s; }
   .fish-body { animation: fish-wiggle 0.9s ease-in-out infinite alternate; transform-origin: 40% 50%; }
@@ -402,10 +403,10 @@ img { max-width: 100%; height: auto; }
   .fish-body .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 0.45s ease-in-out infinite alternate; }
 }
 /* --rise and --tilt are 0 for a level swim; the script sets them when a fish swims in at an angle */
-.card-fish { --rise: 0cqw; --tilt: 0deg; }
+.card-fish { --rise: 0cqw; --tilt: 0deg; --lead: 0cqw; }
 @keyframes fish-cross {
   from { transform: translate(0, 0) rotate(var(--tilt)); }
-  to   { transform: translate(calc(-100cqw - 100%), var(--rise)) rotate(var(--tilt)); }
+  to   { transform: translate(calc(-100cqw - 100% - var(--lead)), var(--rise)) rotate(var(--tilt)); }
 }
 @keyframes fish-wiggle { from { transform: rotate(-3deg) translateY(-3%); } to { transform: rotate(3deg) translateY(3%); } }
 @keyframes fish-wag { from { transform: scaleX(1) skewY(6deg); } to { transform: scaleX(0.8) skewY(-6deg); } }
