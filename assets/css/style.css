@@ -367,7 +367,7 @@ img { max-width: 100%; height: auto; }
 .card-fish { position: absolute; display: block; z-index: 0; }
 .card-fish-2 { z-index: 2; }
 .fish-body { display: block; width: 100%; height: auto; overflow: visible; }
-.card-auv    { left: 4%;  top: 11%; width: 40%; }   /* the breadboard AUV, cruising behind him */
+.card-auv    { left: 4%;  top: 25%; width: 60%; }   /* the breadboard AUV, cruising behind him */
 .auv-body { display: block; width: 100%; height: auto; }
 .card-fish-2 { left: -2%; top: 64%; width: 44%; }
 .card-fish-3 { left: 76%; top: 80%; width: 34%; }
