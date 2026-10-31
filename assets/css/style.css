@@ -396,7 +396,7 @@ img { max-width: 100%; height: auto; }
 /* Phones: stack the text above the card */
 @media (max-width: 40rem) {
   .hero-grid { grid-template-columns: 1fr; }
-  .portrait-card { width: min(84%, 21rem); margin-top: 0.5rem; }
+  .portrait-card { width: 100%; margin-top: 0.5rem; }
 }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin: 2rem 0 0; }
 
