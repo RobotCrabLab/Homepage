@@ -11,7 +11,7 @@
     </radialGradient>
   </defs>
   <!-- Dark mode only: a short cone of light just ahead of the nose, about as tall as the nose, and a soft glow -->
-  <path class="auv-beam" d="M18 26 L-26 19 L-26 61 L18 54 Z" fill="url(#auv-beam-fade)" filter="url(#auv-beam-soft)"/>
+  <path class="auv-beam" d="M18 24 L-26 10 L-26 70 L18 56 Z" fill="url(#auv-beam-fade)" filter="url(#auv-beam-soft)"/>
   <ellipse class="auv-beam" cx="20" cy="40" rx="12" ry="20" fill="url(#auv-glow-fade)"/>
   <!-- Swept tail fins, top and bottom -->
   <path d="M150 23 L164 8 L172 8 L168 23 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round"/>
