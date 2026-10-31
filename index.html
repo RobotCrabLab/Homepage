@@ -3,15 +3,20 @@ layout: default
 body_class: home
 ---
 <section class="hero">
-  <div class="wrap">
-    <div class="hero-head">
-      <div class="hero-title">
-        <h1>I'm {{ site.author }}.</h1>
-        {% include breadboard-fish.svg class="hero-fish" %}
-      </div>
-      <img class="hero-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1>I'm {{ site.author }}.</h1>
+      <p class="lede">{{ site.tagline }} I also like to take pictures of birds (see below).</p>
     </div>
-    <p class="lede">{{ site.tagline }} I also like to take pictures of birds (see below).</p>
+    <!-- A framed portrait card: the cartoon scientist on a watercolor wash,
+         with breadboard fish swimming left through (and out of) the frame -->
+    <figure class="portrait-card" aria-hidden="true">
+      <div class="portrait-wash"></div>
+      <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
+      {% include breadboard-fish.svg class="card-fish card-fish-1" %}
+      {% include breadboard-fish.svg class="card-fish card-fish-2" %}
+      {% include breadboard-fish.svg class="card-fish card-fish-3" %}
+    </figure>
   </div>
 </section>
 

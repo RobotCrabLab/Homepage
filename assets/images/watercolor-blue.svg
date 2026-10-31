@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice">
+  <!-- A soft, light-blue watercolor wash: blurred blobs with ragged edges, plus a little paper grain -->
+  <defs>
+    <filter id="bleed" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="9"/>
+    </filter>
+    <filter id="edge" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="40" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/>
+      <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.19  0 0 0 0 0.25  0 0 0 0.09 0"/>
+    </filter>
+  </defs>
+  <rect width="500" height="700" fill="#EAF4F8"/>
+  <g filter="url(#bleed)" opacity="0.9">
+    <ellipse cx="140" cy="150" rx="210" ry="170" fill="#C9E3EE"/>
+    <ellipse cx="390" cy="300" rx="190" ry="230" fill="#B7DAE9"/>
+    <ellipse cx="160" cy="520" rx="240" ry="190" fill="#C2E0EC"/>
+    <ellipse cx="420" cy="640" rx="170" ry="130" fill="#A9D2E4"/>
+  </g>
+  <g filter="url(#edge)" fill="none" stroke-linecap="round">
+    <path d="M30 230 C130 180 250 260 360 210 S 480 190 520 230" stroke="#9FCBE0" stroke-width="34" opacity="0.45"/>
+    <path d="M-20 470 C90 430 210 500 330 455 S 470 430 520 470" stroke="#A7D0E3" stroke-width="44" opacity="0.4"/>
+    <ellipse cx="300" cy="120" rx="80" ry="55" fill="#B3D8E8" opacity="0.5"/>
+    <ellipse cx="80" cy="640" rx="90" ry="60" fill="#B0D6E7" opacity="0.5"/>
+  </g>
+  <rect width="500" height="700" filter="url(#grain)"/>
+</svg>

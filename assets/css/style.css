@@ -335,12 +335,24 @@ img { max-width: 100%; height: auto; }
   margin: 0;
 }
 .hero .lede { font-size: clamp(1.25rem, 2.6vw, 1.5rem); margin-top: 1.25rem; }
-/* A little cartoon of Chris stands to the right of the greeting, centered in the
-   space between the end of the heading and the right margin */
-.hero-head { display: flex; align-items: flex-start; }  /* tops line up: the heading's letters with the top of his head */
-.hero-me { width: clamp(5.6rem, 15.4vw, 9.8rem); height: auto; flex: none; margin: -0.15rem auto 0; }
-/* The breadboard fish swims along under the greeting. It keeps the same colors in both themes, like the jelly. */
-.hero-fish { display: block; width: clamp(4.5rem, 12vw, 7rem); height: auto; margin-top: 1rem; overflow: visible; }
+/* The home page is a wider landing page: the intro text takes one half,
+   and a framed portrait card takes the other. */
+.home .wrap { max-width: calc(64rem + 2 * var(--gutter)); }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
+.hero-text .lede { margin-bottom: 0; }
+
+.portrait-card {
+  position: relative; margin: 0; width: min(100%, 24rem); justify-self: center;
+  aspect-ratio: 5 / 7;
+}
+/* The frame and its watercolor wash; the fish can swim past its edges */
+.portrait-wash {
+  position: absolute; inset: 0; border: 4px solid #14303F; border-radius: 1.5rem;
+  background: #EAF4F8 url("../images/watercolor-blue.svg") center / cover no-repeat;
+}
+.portrait-me { position: absolute; left: 22%; bottom: 7%; width: 60%; height: auto; }
+
+/* Breadboard fish: same colors in both themes, like the jelly */
 .bb-fish-fill { fill: #D9442B; stroke: #14303F; stroke-width: 3; stroke-linejoin: round; }
 .bb-fish-line { fill: none; stroke: #14303F; stroke-width: 3; stroke-linecap: round; }
 .bb-fish-divider { stroke: #14303F; stroke-width: 1.2; opacity: 0.45; }
@@ -348,11 +360,27 @@ img { max-width: 100%; height: auto; }
 .bb-fish-wire { fill: none; stroke: #14303F; stroke-width: 1.9; stroke-linecap: round; }
 .bb-fish-eye { fill: #FFFFFF; stroke: #14303F; stroke-width: 2.5; }
 .bb-fish-mouth { fill: none; stroke: #14303F; stroke-width: 2; stroke-linecap: round; }
-.hero-fish { animation: fish-bob 5s ease-in-out infinite; }
-.hero-fish .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 1.6s ease-in-out infinite; }
-@keyframes fish-bob { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(4px, -3px); } }
+
+/* Three fish swimming left, placed like the sketch */
+.card-fish { position: absolute; height: auto; overflow: visible; z-index: 1; }
+.card-fish-1 { left: 3%;  top: 6%;   width: 24%; }   /* small, upper left */
+.card-fish-2 { left: 6%;  top: 63%;  width: 44%; }   /* big, passing in front of his chest */
+.card-fish-3 { left: 77%; top: 76%;  width: 34%; }   /* breaking out past the right edge */
+.card-fish { animation: fish-swim 6s ease-in-out infinite; }
+.card-fish-2 { animation-duration: 7.5s; animation-delay: -2s; }
+.card-fish-3 { animation-duration: 5.2s; animation-delay: -3.5s; }
+.card-fish .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 1.6s ease-in-out infinite; }
+.card-fish-2 .bb-fish-tail { animation-duration: 2.1s; }
+.card-fish-3 .bb-fish-tail { animation-duration: 1.3s; }
+@keyframes fish-swim { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-7px, -4px); } }
 @keyframes fish-wag { 0%, 100% { transform: scaleX(1) skewY(0); } 50% { transform: scaleX(0.82) skewY(-8deg); } }
-@media (prefers-reduced-motion: reduce) { .hero-fish, .hero-fish .bb-fish-tail { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .card-fish, .card-fish .bb-fish-tail { animation: none; } }
+
+/* Phones: stack the text above the card */
+@media (max-width: 40rem) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .portrait-card { width: min(78%, 20rem); margin-top: 0.5rem; }
+}
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin: 2rem 0 0; }
 
 .home-section { margin-top: clamp(2.5rem, 6vw, 4rem); }
