@@ -304,9 +304,10 @@ img { max-width: 100%; height: auto; }
 }
 .theme-toggle:hover { border-color: var(--ink); }
 .theme-toggle svg { width: 1rem; height: 1rem; }
-.theme-toggle .icon-sun { display: none; }
-.is-dark .theme-toggle .icon-sun { display: block; }
-.is-dark .theme-toggle .icon-moon { display: none; }
+/* The switch shows the current mode: a sun with "Light mode", a moon with "Dark mode" */
+.theme-toggle .icon-moon { display: none; }
+.is-dark .theme-toggle .icon-moon { display: block; }
+.is-dark .theme-toggle .icon-sun { display: none; }
 
 /* ------------------------------------------------------------
    Buttons and small pieces
