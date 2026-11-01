@@ -15,10 +15,10 @@
   <rect x="46.4" y="76" width="7.2" height="29.200000000000003" fill="#A7B2B8" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
   <rect x="27" y="104.2" width="46" height="8" rx="2.5" fill="#A7B2B8" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
   <path class="scope-beam" d="M42 81.2 L58 81.2 L66 103.7 L34 103.7 Z" fill="url(#scope-beam)" filter="url(#scope-beam-soft)"/>
-  <rect x="39.6" y="48" width="6.8" height="18" rx="1.4" fill="#D3D9DC" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
-  <rect x="53.6" y="48" width="6.8" height="18" rx="1.4" fill="#D3D9DC" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
-  <rect x="40.8" y="49.4" width="4.4" height="2.2" rx=".8" fill="#9FD0E2"/>
-  <rect x="54.8" y="49.4" width="4.4" height="2.2" rx=".8" fill="#9FD0E2"/>
+  <rect x="39.6" y="50.3" width="6.8" height="15.7" rx="1.4" fill="#D3D9DC" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="53.6" y="50.3" width="6.8" height="15.7" rx="1.4" fill="#D3D9DC" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="40.8" y="51.7" width="4.4" height="2.2" rx=".8" fill="#9FD0E2"/>
+  <rect x="54.8" y="51.7" width="4.4" height="2.2" rx=".8" fill="#9FD0E2"/>
   <rect x="38.6" y="64" width="22.8" height="14" rx="2.2" fill="#A7B2B8" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
   <line x1="40" y1="71" x2="60" y2="71" stroke="#14303F" stroke-width="1.4"/>
   <rect x="40.2" y="77.6" width="19.6" height="4.2" rx="1.6" fill="#FFFFFF" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
