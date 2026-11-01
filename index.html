@@ -7,6 +7,14 @@ body_class: home
     <div class="hero-text">
       <h1>I'm {{ site.author }}.</h1>
       <p class="lede">{{ site.tagline }} I also like to take pictures of birds.</p>
+      <!-- Skill switches: each one slides its tool into the portrait card. Add more by
+           copying a button and giving it a new data-skill (and a matching drawing in the card). -->
+      <div class="skill-switches" aria-label="Skills">
+        <button class="skill-switch" type="button" role="switch" aria-checked="false" data-skill="microscopy">
+          <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
+          <span class="switch-label">Microscopy</span>
+        </button>
+      </div>
     </div>
     <!-- A framed portrait card: the cartoon scientist on a watercolor wash,
          with breadboard fish swimming left through (and out of) the frame -->
@@ -18,6 +26,7 @@ body_class: home
         <span class="theme-label">Light mode</span>
       </button>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
+      {% include microscope.svg %}
       <span class="card-fish card-auv" aria-hidden="true" data-top="25" data-jitter="5" data-straight>{% include breadboard-auv.svg %}</span>
       <span class="card-fish card-fish-2" aria-hidden="true" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" aria-hidden="true" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
@@ -25,6 +34,19 @@ body_class: home
   </div>
 </section>
 
+<script>
+  // Skill switches slide their tool in and out of the portrait card
+  (function () {
+    var card = document.querySelector('.portrait-card');
+    document.querySelectorAll('.skill-switch').forEach(function (sw) {
+      sw.addEventListener('click', function () {
+        var on = sw.getAttribute('aria-checked') !== 'true';
+        sw.setAttribute('aria-checked', on ? 'true' : 'false');
+        if (card) card.classList.toggle('show-' + sw.dataset.skill, on);
+      });
+    });
+  })();
+</script>
 <script>
   // Fish swim right to left through the portrait frame. Each time a fish
   // starts a new lap (just off the right edge), it picks a new height within
