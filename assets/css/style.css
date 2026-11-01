@@ -381,8 +381,8 @@ img { max-width: 100%; height: auto; }
 /* Light/dark switch in the card's top-right corner, in front of the swimmers.
    It's the same pill as the footer switch; only its position differs. */
 .card-theme { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 5; font-family: var(--body); font-size: var(--step--1); }
-/* Its outline matches the character's line weight, which scales with the card */
-.card-theme, .card-theme:hover { border-width: 2.84cqw; border-color: var(--ink); }
+/* Its outline is the same thickness as the card's frame */
+.card-theme { border-width: 4px; }
 /* In dark mode the card's watercolor turns deep blue to match the theme */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
