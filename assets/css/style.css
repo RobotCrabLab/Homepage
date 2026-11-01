@@ -354,7 +354,7 @@ img { max-width: 100%; height: auto; }
 
 /* Breadboard fish: same colors in both themes, like the jelly */
 .bb-fish-fill { fill: #D9442B; stroke: #14303F; stroke-width: 3; stroke-linejoin: round; }
-.bb-fish-line { fill: none; stroke: #14303F; stroke-width: 3; stroke-linecap: round; }
+.bb-fish-line { fill: #14303F; stroke: #14303F; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }  /* solid fins */
 .bb-fish-divider { stroke: #14303F; stroke-width: 1.2; opacity: 0.45; }
 .bb-fish-ink { fill: #14303F; }
 .bb-fish-wire { fill: none; stroke: #14303F; stroke-width: 1.9; stroke-linecap: round; }
