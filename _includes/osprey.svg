@@ -1,0 +1,63 @@
+<svg class="osprey-art" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
+  <style>
+    .osprey-head-turn { transform-box: view-box; transform-origin: 66px 45px; animation: osprey-look 5s ease-in-out infinite; }
+    @keyframes osprey-look {
+      0%, 18%   { transform: rotate(0deg); }
+      32%, 50%  { transform: rotate(-7deg); }
+      66%, 82%  { transform: rotate(5deg); }
+      100%      { transform: rotate(0deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { .osprey-head-turn { animation: none; } }
+  </style>
+  <g class="osprey-body" transform="translate(0 -2)">
+  <path d="M52 96 L40 132 L54 130 L62 100 Z" fill="#6B4A35" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M58 46 C44 54 42 74 46 92 C50 104 62 108 72 104 C84 98 88 80 85 60 C83 50 76 46 70 46 Z" fill="#E3ECEA" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="66" y1="58" x2="66" y2="94" stroke="#14303F" stroke-width="1.2" opacity=".45"/>
+  <circle cx="54" cy="62" r="1.1" fill="#14303F"/><circle cx="54" cy="66" r="1.1" fill="#14303F"/><circle cx="54" cy="70" r="1.1" fill="#14303F"/><circle cx="54" cy="74" r="1.1" fill="#14303F"/><circle cx="54" cy="78" r="1.1" fill="#14303F"/><circle cx="54" cy="82" r="1.1" fill="#14303F"/><circle cx="54" cy="86" r="1.1" fill="#14303F"/><circle cx="54" cy="90" r="1.1" fill="#14303F"/><circle cx="54" cy="94" r="1.1" fill="#14303F"/><circle cx="58" cy="58" r="1.1" fill="#14303F"/><circle cx="58" cy="62" r="1.1" fill="#14303F"/><circle cx="58" cy="66" r="1.1" fill="#14303F"/><circle cx="58" cy="70" r="1.1" fill="#14303F"/><circle cx="58" cy="74" r="1.1" fill="#14303F"/><circle cx="58" cy="78" r="1.1" fill="#14303F"/><circle cx="58" cy="82" r="1.1" fill="#14303F"/><circle cx="58" cy="86" r="1.1" fill="#14303F"/><circle cx="58" cy="90" r="1.1" fill="#14303F"/><circle cx="58" cy="94" r="1.1" fill="#14303F"/><circle cx="62" cy="58" r="1.1" fill="#14303F"/><circle cx="62" cy="62" r="1.1" fill="#14303F"/><circle cx="62" cy="66" r="1.1" fill="#14303F"/><circle cx="62" cy="70" r="1.1" fill="#14303F"/><circle cx="62" cy="74" r="1.1" fill="#14303F"/><circle cx="62" cy="78" r="1.1" fill="#14303F"/><circle cx="62" cy="82" r="1.1" fill="#14303F"/><circle cx="62" cy="86" r="1.1" fill="#14303F"/><circle cx="62" cy="90" r="1.1" fill="#14303F"/><circle cx="62" cy="94" r="1.1" fill="#14303F"/><circle cx="70" cy="58" r="1.1" fill="#14303F"/><circle cx="70" cy="62" r="1.1" fill="#14303F"/><circle cx="70" cy="66" r="1.1" fill="#14303F"/><circle cx="70" cy="70" r="1.1" fill="#14303F"/><circle cx="70" cy="74" r="1.1" fill="#14303F"/><circle cx="70" cy="78" r="1.1" fill="#14303F"/><circle cx="70" cy="82" r="1.1" fill="#14303F"/><circle cx="70" cy="86" r="1.1" fill="#14303F"/><circle cx="70" cy="90" r="1.1" fill="#14303F"/><circle cx="74" cy="58" r="1.1" fill="#14303F"/><circle cx="74" cy="62" r="1.1" fill="#14303F"/><circle cx="74" cy="66" r="1.1" fill="#14303F"/><circle cx="74" cy="70" r="1.1" fill="#14303F"/><circle cx="74" cy="74" r="1.1" fill="#14303F"/><circle cx="74" cy="78" r="1.1" fill="#14303F"/><circle cx="74" cy="82" r="1.1" fill="#14303F"/><circle cx="74" cy="86" r="1.1" fill="#14303F"/><circle cx="74" cy="90" r="1.1" fill="#14303F"/><circle cx="78" cy="58" r="1.1" fill="#14303F"/><circle cx="78" cy="62" r="1.1" fill="#14303F"/><circle cx="78" cy="66" r="1.1" fill="#14303F"/><circle cx="78" cy="70" r="1.1" fill="#14303F"/><circle cx="78" cy="74" r="1.1" fill="#14303F"/><circle cx="78" cy="78" r="1.1" fill="#14303F"/><circle cx="78" cy="82" r="1.1" fill="#14303F"/><circle cx="78" cy="86" r="1.1" fill="#14303F"/><circle cx="78" cy="90" r="1.1" fill="#14303F"/>
+  <path d="M54 50 C40 60 38 84 46 106 L54 122 C62 106 64 84 63 64 C62 55 59 51 54 50 Z" fill="#6B4A35" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M50 72 q5 3 10 0 M49 84 q6 3 12 0 M50 96 q5 3 10 0" fill="none" stroke="#14303F" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+  </g>
+  <!-- A weathered, dead branch: in front of the tail and wing, behind the fish. Its top
+       lines up with the top of the fish, so the osprey stands on it gripping the fish. -->
+  <g class="perch" transform="translate(0 -14.75)">
+    <path d="M98 132 C102 123 107 117 112.6 111.2 L118.6 115 C114 120 110.6 125.6 109.6 132 Z" fill="#A89A8C" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M18 136.6 C15.4 131.6 13 128.4 8.4 125 L12.2 120.6 C17.4 124.2 21.6 128.6 26 134.6 Z" fill="#A89A8C" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M-6 135.6 C24 133.4 58 133.2 90 131 C104 130 115 127.8 125 124.2 L129 132.6 C116 135.8 104 138.4 90 139.6 C58 142.2 26 145 -6 148.4 Z" fill="#A89A8C" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M4 141.4 C32 139.4 60 137.8 86 136 M100 134.8 C110 133.2 118 131.2 124 128.6" fill="none" stroke="#7E6F62" stroke-width="1.5" stroke-linecap="round"/>
+    <ellipse cx="46" cy="139.2" rx="3.4" ry="1.7" fill="none" stroke="#7E6F62" stroke-width="1.5"/>
+    <path d="M105 128.6 C107 123.4 110 119 113.6 115.4" fill="none" stroke="#7E6F62" stroke-width="1.3" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(66 124) scale(1 1)">
+      <path d="M18 0 L26 -7 L25 0 L26 7 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <rect x="-12" y="-9" width="32" height="18" rx="9" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="17" y2="0" stroke="#14303F" stroke-width="1" opacity=".45"/><circle cx="2" cy="-4" r="1.1" fill="#14303F"/><circle cx="2" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="2" cy="1.5" r="1.1" fill="#14303F"/><circle cx="2" cy="4" r="1.1" fill="#14303F"/><circle cx="6" cy="-4" r="1.1" fill="#14303F"/><circle cx="6" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="6" cy="1.5" r="1.1" fill="#14303F"/><circle cx="6" cy="4" r="1.1" fill="#14303F"/><circle cx="10" cy="-4" r="1.1" fill="#14303F"/><circle cx="10" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="10" cy="1.5" r="1.1" fill="#14303F"/><circle cx="10" cy="4" r="1.1" fill="#14303F"/><circle cx="14" cy="-4" r="1.1" fill="#14303F"/><circle cx="14" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="14" cy="1.5" r="1.1" fill="#14303F"/><circle cx="14" cy="4" r="1.1" fill="#14303F"/>
+      <circle cx="-5" cy="-1" r="3" fill="#FFFFFF" stroke="#14303F" stroke-width="2"/><circle cx="-5.6" cy="-1" r="1.2" fill="#14303F"/>
+    </g>
+  <!-- Legs and talons in front of the fish, drawn as one piece: all the outlines first,
+       then all the gray on top. The legs stop just above where the talons fork, so
+       there's no bump in the fork. The right leg comes out from behind the body.
+       Each foot has a back talon in the fish's top row of holes and a front talon one
+       row lower, all in different columns (68, 72, 76, 80). -->
+  <mask id="behind-body" maskUnits="userSpaceOnUse" x="0" y="0" width="140" height="160">
+    <rect x="0" y="0" width="140" height="160" fill="#fff"/>
+    <path transform="translate(0 -2)" d="M58 46 C44 54 42 74 46 92 C50 104 62 108 72 104 C84 98 88 80 85 60 C83 50 76 46 70 46 Z" fill="#000" stroke="#000" stroke-width="3"/>
+  </mask>
+  <path d="M66 102 L69.1 113" fill="none" stroke="#14303F" stroke-width="5.2" stroke-linecap="round"/>
+  <path d="M75.2 94 L77.6 113" fill="none" stroke="#14303F" stroke-width="5.2" stroke-linecap="round" mask="url(#behind-body)"/>
+  <path d="M69.1 113 C66.6 114.4 66.4 117.6 68 120 M69.1 113 C72.6 114.4 73.6 119.4 72 122.5 M77.6 113 C75.2 114.4 74.8 117.6 76 120 M77.6 113 C81 114.4 82 119.4 80 122.5" fill="none" stroke="#14303F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M66 102 L69.1 113" fill="none" stroke="#A7B2B8" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M75.2 94 L77.6 113" fill="none" stroke="#A7B2B8" stroke-width="2.6" stroke-linecap="round" mask="url(#behind-body)"/>
+  <path d="M69.1 113 C66.6 114.4 66.4 117.6 68 120 M69.1 113 C72.6 114.4 73.6 119.4 72 122.5 M77.6 113 C75.2 114.4 74.8 117.6 76 120 M77.6 113 C81 114.4 82 119.4 80 122.5" fill="none" stroke="#A7B2B8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#14303F"><circle cx="68" cy="120" r="1.1"/><circle cx="72" cy="122.5" r="1.1"/><circle cx="76" cy="120" r="1.1"/><circle cx="80" cy="122.5" r="1.1"/></g>
+  <g class="osprey-head" transform="translate(0 -2)">
+  <g class="osprey-head-turn">
+  <circle cx="74" cy="34" r="15" fill="#FFFFFF" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M61.23 32.20 A12.9 12.9 0 0 1 74.45 21.11" fill="none" stroke="#6B4A35" stroke-width="4.2" stroke-linecap="round"/>
+  <!-- Eye stripe, run past the back of the head and clipped to it, so it meets the outline cleanly -->
+  <clipPath id="osprey-head"><circle cx="74" cy="34" r="15"/></clipPath>
+  <path d="M92 29.2 C78 31 64 33.6 52 39 L54 47 C64 41 78 37.8 92 36.4 Z" fill="#14303F" clip-path="url(#osprey-head)"/>
+  <circle cx="74" cy="34" r="15" fill="none" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="82" cy="31.6" r="2.9" fill="#F2B33D" stroke="#14303F" stroke-width="1.6"/><circle cx="82.6" cy="31.6" r="1.2" fill="#14303F"/>
+  <path d="M88 29 Q101 30 99 42 Q96 37 88 38 Z" fill="#14303F" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>  </g>
+  </g>

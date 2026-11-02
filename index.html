@@ -4,7 +4,7 @@ body_class: home
 ---
 <!-- A short scroll story: the stage (intro text + portrait card) stays pinned while
      the page scrolls through the scenes below it, and the card changes with each one. -->
-<section class="hero scenes">
+<section class="hero scenes" data-scene="1">
   <div class="scene-stage">
   <div class="wrap hero-grid">
     <h1>I'm {{ site.author }}.</h1>
@@ -14,13 +14,14 @@ body_class: home
       <!-- Phones: the title and caption are drawn inside the card, behind the jelly -->
       <div class="card-title" aria-hidden="true">
         <p class="card-title-name">I'm {{ site.author }}.</p>
-        <p class="scene-caption"><span class="scene-1">Marine scientist</span><span class="scene-2">Electronics technician</span></p>
+        <p class="scene-caption"><span class="scene-1">Bird photographer</span><span class="scene-2">Electronics technician</span><span class="scene-3">Marine scientist</span></p>
       </div>
       <button class="theme-toggle card-theme" type="button" aria-label="Switch to dark mode">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <span class="theme-label">Light mode</span>
       </button>
+      <span class="card-osprey" aria-hidden="true">{% include osprey.svg %}</span>
       <span class="card-jelly" aria-hidden="true">{% include mascot.svg class="mascot-mark" %}</span>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
       {% include microscope.svg %}
@@ -30,8 +31,9 @@ body_class: home
     </figure>
     <!-- One caption per scene; they cross-fade as the scenes change -->
     <p class="scene-caption">
-      <span class="scene-1">Marine scientist</span>
+      <span class="scene-1">Bird photographer</span>
       <span class="scene-2">Electronics technician</span>
+      <span class="scene-3">Marine scientist</span>
     </p>
     </div>
   </div>
@@ -41,7 +43,9 @@ body_class: home
 
 <script>
   // Scroll scenes, step by step: a small scroll moves to the next scene, and the
-  // CSS animates the change. Scrolling back to the top returns to scene 1.
+  // CSS animates the change: scene 1 the osprey (bird photographer), scene 2 the
+  // AUV and microscope (electronics technician), scene 3 the fish and jelly (marine
+  // scientist). Scrolling back to the top returns to scene 1.
   // On phones the page doesn't scroll at all: a swipe or scroll just switches scenes.
   (function () {
     var section = document.querySelector('.scenes');
@@ -49,7 +53,16 @@ body_class: home
     if (!stage) return;
     var phone = window.matchMedia('(max-width: 40rem)');
     var frame = 0, touchY = null;
-    function setScene(n) { section.classList.toggle('is-scene-2', n === 2); }
+    var scene = 1, lastStep = 0;
+    function setScene(n) {
+      scene = Math.max(1, Math.min(3, n));
+      section.setAttribute('data-scene', scene);
+    }
+    function step(dir) {              // phones: one swipe or scroll = one scene
+      var now = Date.now();
+      if (now - lastStep < 700) return;
+      lastStep = now; setScene(scene + dir);
+    }
     function size() {
       // Pin the stage near the top; if it's taller than the screen, pin it so the card stays in view
       stage.style.top = phone.matches ? '' : Math.min(16, window.innerHeight - stage.offsetHeight - 16) + 'px';
@@ -57,25 +70,28 @@ body_class: home
     }
     function update() {
       frame = 0;
-      if (!phone.matches) setScene(window.scrollY > 24 ? 2 : 1);
+      if (phone.matches) return;
+      // computers: a small scroll moves to scene 2, a bit more to scene 3
+      var y = window.scrollY, h = window.innerHeight;
+      setScene(y < 24 ? 1 : y < h * 0.45 ? 2 : 3);
     }
     window.addEventListener('scroll', function () { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
     window.addEventListener('resize', size);
     // Phone gestures
     window.addEventListener('wheel', function (e) {
       if (!phone.matches || Math.abs(e.deltaY) < 8) return;
-      setScene(e.deltaY > 0 ? 2 : 1);
+      step(e.deltaY > 0 ? 1 : -1);
     }, { passive: true });
     window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
     window.addEventListener('touchmove', function (e) {
       if (!phone.matches || touchY === null) return;
       var dy = touchY - e.touches[0].clientY;
-      if (Math.abs(dy) > 30) { setScene(dy > 0 ? 2 : 1); touchY = null; }
+      if (Math.abs(dy) > 30) { step(dy > 0 ? 1 : -1); touchY = null; }
     }, { passive: true });
     window.addEventListener('keydown', function (e) {
       if (!phone.matches) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') setScene(2);
-      if (e.key === 'ArrowUp' || e.key === 'PageUp') setScene(1);
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') setScene(scene + 1);
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') setScene(scene - 1);
     });
     size();
   })();

@@ -353,34 +353,42 @@ img { max-width: 100%; height: auto; }
 .portrait-me { position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; }
 
 /* Scroll scenes on the home page: "I'm Chris." with the portrait card right under it.
-   A small scroll adds .is-scene-2, and the card animates to the next scene. */
+   Scrolling steps through the scenes, and the card animates to each one. */
 .scene-stage { position: sticky; top: 0; padding-block: 0.5rem 1rem; }
-.scene-runway { height: 70vh; }      /* keeps the stage pinned for a while before the page moves on */
+.scene-runway { height: 120vh; }      /* keeps the stage pinned for a while before the page moves on */
 .scenes .hero-grid { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 0; }
 .scenes h1 { text-align: center; margin-bottom: 1.25rem; }
 .portrait { display: grid; justify-items: center; width: 100%; }
 /* the card shrinks on short screens so the heading, card and caption all fit */
 .portrait .portrait-card { width: min(100%, 27rem, calc((100svh - 23rem) * 0.75)); }
 
-/* Scene 1: the fish. Scene 2: the AUV, and the microscope slides in from the right. */
-.card-fish-2, .card-fish-3 { opacity: 1; transition: opacity 0.6s ease; }
+/* Scene 1: the osprey. Scene 2: the AUV, with the microscope sliding in from the
+   right. Scene 3: the fish and the jelly. data-scene on the section picks one. */
+.card-osprey, .card-fish-2, .card-fish-3, .card-jelly { opacity: 0; transition: opacity 0.6s ease; }
 .card-auv { opacity: 0; transition: opacity 0.8s ease 0.2s; }
 .card-scope {
   position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; z-index: 3; overflow: visible;
   transform: translateX(118%); transition: transform 0.9s cubic-bezier(.3, .8, .3, 1);
 }
-.is-scene-2 .card-fish-2, .is-scene-2 .card-fish-3 { opacity: 0; }
-.is-scene-2 .card-auv { opacity: 1; }
-.is-scene-2 .card-scope { transform: translateX(0); }
+[data-scene="1"] .card-osprey { opacity: 1; }
+[data-scene="2"] .card-auv { opacity: 1; }
+[data-scene="2"] .card-scope { transform: translateX(0); }
+[data-scene="3"] .card-fish-2, [data-scene="3"] .card-fish-3, [data-scene="3"] .card-jelly { opacity: 1; }
+
+/* The osprey perches in the background of scene 1, behind the character, facing him
+   from the right with its branch running off the card's right edge */
+.card-osprey { position: absolute; z-index: 0; right: -7%; bottom: 74cqw; width: 48%; transform: scaleX(-1); }
+.card-osprey svg { display: block; width: 100%; height: auto; }
 
 /* Caption under the card, swapping between scenes */
 .scene-caption {
   display: grid; margin: 0.9rem 0 0; text-align: center;
   font-family: var(--display); font-weight: 700; font-size: var(--step-1); color: var(--ink);
 }
-.scene-caption > span { grid-area: 1 / 1; transition: opacity 0.4s ease; }
-.scene-caption .scene-2, .is-scene-2 .scene-caption .scene-1 { opacity: 0; }
-.is-scene-2 .scene-caption .scene-2 { opacity: 1; }
+.scene-caption > span { grid-area: 1 / 1; opacity: 0; transition: opacity 0.4s ease; }
+[data-scene="1"] .scene-caption .scene-1,
+[data-scene="2"] .scene-caption .scene-2,
+[data-scene="3"] .scene-caption .scene-3 { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
@@ -419,10 +427,9 @@ img { max-width: 100%; height: auto; }
 .card-jelly {
   --dx: 0px; --dy: 0px; --tilt: 0deg;
   position: absolute; z-index: 0; left: -22%; top: 70%; width: 22%;
-  transform: rotate(var(--tilt)); opacity: 1; transition: opacity 0.6s ease;
+  transform: rotate(var(--tilt));
 }
 .card-jelly .mascot-mark { width: 100%; animation: jelly-squeeze 2.75s ease-in-out infinite; transform-origin: 50% 30%; }
-.is-scene-2 .card-jelly { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .card-jelly { animation: jelly-rise 22s linear infinite; }
 }
