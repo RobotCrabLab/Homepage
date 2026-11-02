@@ -377,7 +377,7 @@ img { max-width: 100%; height: auto; }
 
 /* The osprey perches in the background of scene 1, behind the character, facing him
    from the right with its branch running off the card's right edge */
-.card-osprey { position: absolute; z-index: 0; right: -9%; bottom: 72cqw; width: 52%; transform: scaleX(-1); }
+.card-osprey { position: absolute; z-index: 0; right: -13%; bottom: 79cqw; width: 44%; transform: scaleX(-1); }
 .card-osprey svg { display: block; width: 100%; height: auto; }
 
 /* Caption under the card, swapping between scenes */
@@ -385,10 +385,21 @@ img { max-width: 100%; height: auto; }
   display: grid; margin: 0.9rem 0 0; text-align: center;
   font-family: var(--display); font-weight: 700; font-size: var(--step-1); color: var(--ink);
 }
-/* The old caption slips out first, then the new one rises in, so the two never overlap */
-.scene-caption > span { grid-area: 1 / 1; opacity: 0; transform: translateY(0.35em); transition: opacity 0.2s ease, transform 0.2s ease; }
-[data-scene="2"] .scene-caption .scene-2,
-[data-scene="3"] .scene-caption .scene-3 { opacity: 1; transform: none; transition: opacity 0.35s ease 0.25s, transform 0.35s ease 0.25s; }
+/* Captions roll like a ticker: going forward, the old one slides up and out while the
+   new one rises in from below; going back, the reverse. The caption clips its own
+   box, so the two never sit on top of each other. The script sets the classes. */
+.scene-caption { overflow: hidden; }
+.scene-caption > span { grid-area: 1 / 1; opacity: 0; }
+.scene-caption > span.is-on { opacity: 1; }
+.scene-caption > .cap-out-up   { animation: cap-out-up 0.35s ease-in both; }
+.scene-caption > .cap-out-down { animation: cap-out-down 0.35s ease-in both; }
+.scene-caption > .cap-in-up    { animation: cap-in-up 0.4s ease-out 0.1s both; }
+.scene-caption > .cap-in-down  { animation: cap-in-down 0.4s ease-out 0.1s both; }
+@keyframes cap-out-up   { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-100%); } }
+@keyframes cap-out-down { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(100%); } }
+@keyframes cap-in-up    { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
+@keyframes cap-in-down  { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .scene-caption > span { animation: none !important; } }
 
 @media (prefers-reduced-motion: reduce) {
   .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
@@ -419,7 +430,7 @@ img { max-width: 100%; height: auto; }
   .home .portrait > .scene-caption { display: none; }
   .home .card-title { display: block; }
   /* the full-screen card has room above the head for a bigger bird */
-  .home .card-osprey { right: -12%; bottom: 84cqw; width: 64%; }
+  .home .card-osprey { right: -12%; bottom: 95cqw; width: 64%; }
 }
 
 /* The jelly swims through the back of scene 1, behind everything else. Each trip it

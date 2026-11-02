@@ -29,7 +29,7 @@ body_class: home
       <span class="card-fish card-fish-2" aria-hidden="true" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" aria-hidden="true" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
-    <!-- One caption per scene (none for scene 1); the old one leaves before the new one arrives -->
+    <!-- One caption per scene (none for scene 1); they roll up or down as the scenes change -->
     <p class="scene-caption">
       
       <span class="scene-2">Electronics technician</span>
@@ -54,9 +54,21 @@ body_class: home
     var phone = window.matchMedia('(max-width: 40rem)');
     var frame = 0, touchY = null;
     var scene = 1, lastStep = 0;
+    var captions = section.querySelectorAll('.scene-caption > span');
     function setScene(n) {
+      var prev = scene;
       scene = Math.max(1, Math.min(3, n));
+      if (scene === prev) return;
       section.setAttribute('data-scene', scene);
+      // Roll the captions: up when moving forward, down when going back
+      var dir = scene > prev ? 'up' : 'down';
+      captions.forEach(function (sp) {
+        var wasOn = sp.classList.contains('is-on');
+        sp.classList.remove('is-on', 'cap-in-up', 'cap-in-down', 'cap-out-up', 'cap-out-down');
+        void sp.offsetWidth;   // restart the animation
+        if (sp.classList.contains('scene-' + scene)) sp.classList.add('is-on', 'cap-in-' + dir);
+        else if (wasOn) sp.classList.add('cap-out-' + dir);
+      });
     }
     function step(dir) {              // phones: one swipe or scroll = one scene
       var now = Date.now();
