@@ -11,6 +11,11 @@ body_class: home
     <div class="portrait">
     <figure class="portrait-card">
       <div class="portrait-wash" aria-hidden="true"></div>
+      <!-- Phones: the title and caption are drawn inside the card, behind the jelly -->
+      <div class="card-title" aria-hidden="true">
+        <p class="card-title-name">I'm {{ site.author }}.</p>
+        <p class="scene-caption"><span class="scene-1">Marine scientist</span><span class="scene-2">Electronics technician</span></p>
+      </div>
       <button class="theme-toggle card-theme" type="button" aria-label="Switch to dark mode">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -19,7 +24,7 @@ body_class: home
       <span class="card-jelly" aria-hidden="true">{% include mascot.svg class="mascot-mark" %}</span>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
       {% include microscope.svg %}
-      <span class="card-fish card-auv" aria-hidden="true" data-top="25" data-jitter="5" data-straight>{% include breadboard-auv.svg %}</span>
+      <span class="card-fish card-auv" aria-hidden="true" data-fixed data-straight>{% include breadboard-auv.svg %}</span>
       <span class="card-fish card-fish-2" aria-hidden="true" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" aria-hidden="true" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
@@ -131,7 +136,7 @@ body_class: home
         // keep the whole path inside the frame
         var lo = Math.max(2, -riseH), hi = Math.min(100 - heightPct, 100 - heightPct - riseH);
         var top = base + (Math.random() * 2 - 1) * jitter;
-        fish.style.top = Math.max(lo, Math.min(hi, top)) + '%';
+        if (!('fixed' in fish.dataset)) fish.style.top = Math.max(lo, Math.min(hi, top)) + '%';
       }
       lap();
       // start each fish somewhere along its lap so they don't arrive together
