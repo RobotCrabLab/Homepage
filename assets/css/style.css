@@ -377,7 +377,7 @@ img { max-width: 100%; height: auto; }
 
 /* The osprey perches in the background of scene 1, behind the character, facing him
    from the right with its branch running off the card's right edge */
-.card-osprey { position: absolute; z-index: 0; right: -7%; bottom: 74cqw; width: 48%; transform: scaleX(-1); }
+.card-osprey { position: absolute; z-index: 0; right: -9%; bottom: 72cqw; width: 52%; transform: scaleX(-1); }
 .card-osprey svg { display: block; width: 100%; height: auto; }
 
 /* Caption under the card, swapping between scenes */
@@ -385,10 +385,10 @@ img { max-width: 100%; height: auto; }
   display: grid; margin: 0.9rem 0 0; text-align: center;
   font-family: var(--display); font-weight: 700; font-size: var(--step-1); color: var(--ink);
 }
-.scene-caption > span { grid-area: 1 / 1; opacity: 0; transition: opacity 0.4s ease; }
-[data-scene="1"] .scene-caption .scene-1,
+/* The old caption slips out first, then the new one rises in, so the two never overlap */
+.scene-caption > span { grid-area: 1 / 1; opacity: 0; transform: translateY(0.35em); transition: opacity 0.2s ease, transform 0.2s ease; }
 [data-scene="2"] .scene-caption .scene-2,
-[data-scene="3"] .scene-caption .scene-3 { opacity: 1; }
+[data-scene="3"] .scene-caption .scene-3 { opacity: 1; transform: none; transition: opacity 0.35s ease 0.25s, transform 0.35s ease 0.25s; }
 
 @media (prefers-reduced-motion: reduce) {
   .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
@@ -418,6 +418,8 @@ img { max-width: 100%; height: auto; }
   .home .scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
   .home .portrait > .scene-caption { display: none; }
   .home .card-title { display: block; }
+  /* the full-screen card has room above the head for a bigger bird */
+  .home .card-osprey { right: -12%; bottom: 84cqw; width: 64%; }
 }
 
 /* The jelly swims through the back of scene 1, behind everything else. Each trip it

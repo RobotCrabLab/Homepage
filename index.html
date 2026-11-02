@@ -14,7 +14,7 @@ body_class: home
       <!-- Phones: the title and caption are drawn inside the card, behind the jelly -->
       <div class="card-title" aria-hidden="true">
         <p class="card-title-name">I'm {{ site.author }}.</p>
-        <p class="scene-caption"><span class="scene-1">Bird photographer</span><span class="scene-2">Electronics technician</span><span class="scene-3">Marine scientist</span></p>
+        <p class="scene-caption"><span class="scene-2">Electronics technician</span><span class="scene-3">Marine scientist</span></p>
       </div>
       <button class="theme-toggle card-theme" type="button" aria-label="Switch to dark mode">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -29,9 +29,9 @@ body_class: home
       <span class="card-fish card-fish-2" aria-hidden="true" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" aria-hidden="true" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
-    <!-- One caption per scene; they cross-fade as the scenes change -->
+    <!-- One caption per scene (none for scene 1); the old one leaves before the new one arrives -->
     <p class="scene-caption">
-      <span class="scene-1">Bird photographer</span>
+      
       <span class="scene-2">Electronics technician</span>
       <span class="scene-3">Marine scientist</span>
     </p>
