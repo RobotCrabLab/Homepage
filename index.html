@@ -77,13 +77,26 @@ body_class: home
   })();
 </script>
 <script>
-  // The jelly starts each trip up through the card 5-10% left or right of center
+  // Each trip, the jelly enters from a random side about 25% up from the bottom
+  // (give or take 5%) and swims up and across at about 40 degrees, bell first.
   (function () {
     var jelly = document.querySelector('.card-jelly');
     if (!jelly) return;
+    var ANGLE = 40 * Math.PI / 180;   // lean from straight up
     function place() {
-      var off = (5 + Math.random() * 5) * (Math.random() < 0.5 ? -1 : 1);
-      jelly.style.left = (50 + off) + '%';
+      var card = jelly.parentNode;
+      var W = card.clientWidth, H = card.clientHeight;
+      var w = jelly.offsetWidth, h = jelly.offsetHeight;
+      var fromLeft = Math.random() < 0.5;
+      var startTop = H * (0.75 + (Math.random() * 0.1 - 0.05)) - h / 2;   // centered ~25% up from the bottom
+      var startLeft = fromLeft ? -w : W;                                   // just outside the edge
+      var dy = -(startTop + h * 1.6);                                      // until it's well past the top
+      var dx = Math.abs(dy) * Math.tan(ANGLE) * (fromLeft ? 1 : -1);
+      jelly.style.left = startLeft + 'px';
+      jelly.style.top = startTop + 'px';
+      jelly.style.setProperty('--dx', dx.toFixed(1) + 'px');
+      jelly.style.setProperty('--dy', dy.toFixed(1) + 'px');
+      jelly.style.setProperty('--tilt', (fromLeft ? 40 : -40) + 'deg');
     }
     place();
     jelly.addEventListener('animationiteration', function (e) { if (e.target === jelly) place(); });

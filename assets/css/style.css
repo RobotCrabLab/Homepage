@@ -417,29 +417,31 @@ img { max-width: 100%; height: auto; }
   .home .scroll-hint { top: calc(6.4rem + var(--step-4) + 2.6rem); }
 }
 
-/* The jelly drifts up through the back of scene 1: it pulses upward from below the
-   frame to above it, behind everything else, and fades out in scene 2. The script
-   picks a new starting spot 5-10% left or right of center for each trip. */
+/* The jelly swims through the back of scene 1, behind everything else. Each trip it
+   enters from the left or right edge about 25% up from the bottom and pulses upward
+   at about 40 degrees across the card; the script picks the side, the exact start
+   height and the path (--dx, --dy, --tilt). It fades out in scene 2. */
 .card-jelly {
-  position: absolute; z-index: 0; top: 100%; left: 50%; width: 22%;
-  transform: translateX(-50%); opacity: 1; transition: opacity 0.6s ease;
+  --dx: 0px; --dy: 0px; --tilt: 0deg;
+  position: absolute; z-index: 0; left: -22%; top: 70%; width: 22%;
+  transform: rotate(var(--tilt)); opacity: 1; transition: opacity 0.6s ease;
 }
-.card-jelly .mascot-mark { width: 100%; animation: jelly-squeeze 3s ease-in-out infinite; transform-origin: 50% 30%; }
+.card-jelly .mascot-mark { width: 100%; animation: jelly-squeeze 2.75s ease-in-out infinite; transform-origin: 50% 30%; }
 .is-scene-2 .card-jelly { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .card-jelly { animation: jelly-rise 24s linear infinite; }
+  .card-jelly { animation: jelly-rise 22s linear infinite; }
 }
-@media (prefers-reduced-motion: reduce) { .card-jelly { top: 38%; } .card-jelly .mascot-mark { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .card-jelly { left: 8%; top: 30%; } .card-jelly .mascot-mark { animation: none; } }
 @keyframes jelly-rise {
-  0.00% { top: 100.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  12.50% { top: 83.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  25.00% { top: 67.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  37.50% { top: 50.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  50.00% { top: 34.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  62.50% { top: 17.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  75.00% { top: 1.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  87.50% { top: -15.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  100.00% { top: -32.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  0.00% { transform: translate(calc(var(--dx) * 0.000), calc(var(--dy) * 0.000)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  12.50% { transform: translate(calc(var(--dx) * 0.125), calc(var(--dy) * 0.125)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  25.00% { transform: translate(calc(var(--dx) * 0.250), calc(var(--dy) * 0.250)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  37.50% { transform: translate(calc(var(--dx) * 0.375), calc(var(--dy) * 0.375)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  50.00% { transform: translate(calc(var(--dx) * 0.500), calc(var(--dy) * 0.500)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  62.50% { transform: translate(calc(var(--dx) * 0.625), calc(var(--dy) * 0.625)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  75.00% { transform: translate(calc(var(--dx) * 0.750), calc(var(--dy) * 0.750)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  87.50% { transform: translate(calc(var(--dx) * 0.875), calc(var(--dy) * 0.875)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  100.00% { transform: translate(calc(var(--dx) * 1.000), calc(var(--dy) * 1.000)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
 }
 @keyframes jelly-squeeze {
   0%, 100% { transform: scale(1, 1); }
