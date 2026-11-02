@@ -352,39 +352,36 @@ img { max-width: 100%; height: auto; }
 /* A big portrait bust: he fills most of the frame, cropped at the bottom edge */
 .portrait-me { position: absolute; left: 12%; bottom: -3%; width: 78%; height: auto; }
 
-/* Skill tools (like the microscope) are drawn in the character's coordinates and
-   wait just off the card's left edge until their switch is turned on */
-.card-skill {
-  position: absolute; left: 12%; bottom: -3%; width: 78%; height: auto; z-index: 3; overflow: visible;
-  transform: translateX(-118%); transition: transform 0.9s cubic-bezier(.3, .8, .3, 1);
-}
-.portrait-card.show-microscopy .card-scope { transform: translateX(0); }
-@media (prefers-reduced-motion: reduce) { .card-skill { transition: none; } }
+/* Scroll scenes on the home page. --scene goes from 0 (scene 1) to 1 (scene 2). */
+.scenes { --scene: 0; --started: 0; }
+.scene-stage { position: sticky; top: 0; padding-block: 0.5rem 1rem; }
+.scene-runway { height: 130vh; }       /* how far you scroll to go from scene 1 to scene 2 */
+.portrait { display: grid; justify-items: center; }
+.portrait .portrait-card { width: min(100%, 27rem); }
 
-/* Cartoon toggle switches styled like a strip of breadboard */
-.skill-switches { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.75rem; }
-.skill-switch {
-  display: inline-flex; align-items: center; gap: 0.7rem; padding: 0; border: 0; background: none;
-  font-family: var(--display); font-weight: 600; font-size: var(--step-1); color: var(--ink); cursor: pointer;
+/* Scene 1: the fish. Scene 2: the AUV and the microscope. */
+.card-fish-2, .card-fish-3 { opacity: calc(1 - var(--scene)); }
+.card-auv, .card-scope { opacity: var(--scene); }
+.card-scope { position: absolute; left: 12%; bottom: -3%; width: 78%; height: auto; z-index: 3; overflow: visible; }
+
+/* Caption under the card, cross-fading between scenes */
+.scene-caption {
+  display: grid; margin: 0.9rem 0 0; text-align: center;
+  font-family: var(--display); font-weight: 700; font-size: var(--step-1); color: var(--ink);
 }
-.switch-track {
-  position: relative; flex: none; width: 4.4rem; height: 2.2rem; border-radius: 999px;
-  border: 4px solid #14303F; box-sizing: border-box;
-  background-color: #E3ECEA;
-  background-image: radial-gradient(circle, #14303F 1.6px, transparent 2.1px);
-  background-size: 0.62rem 0.62rem; background-position: 0.2rem center; background-repeat: repeat-x;
-  transition: background-color 0.3s ease;
+.scene-caption > span { grid-area: 1 / 1; }
+.scene-caption .scene-1 { opacity: clamp(0, 1 - var(--scene) * 2, 1); }
+.scene-caption .scene-2 { opacity: clamp(0, var(--scene) * 2 - 1, 1); }
+
+/* "Scroll for more" fades away once you start scrolling */
+.scroll-hint {
+  margin: 1.75rem 0 0; font-family: var(--display); font-weight: 600; font-size: var(--step-0);
+  color: var(--muted); opacity: calc(1 - var(--started));
 }
-.switch-knob {
-  position: absolute; top: 50%; left: 0.12rem; width: 1.55rem; height: 1.55rem; border-radius: 50%;
-  background: #FFFFFF; border: 4px solid #14303F; box-sizing: border-box;
-  transform: translateY(-50%); transition: left 0.35s cubic-bezier(.3, 1.4, .5, 1), background-color 0.3s ease;
-}
-.skill-switch[aria-checked="true"] .switch-track { background-color: #F6C7BC; }
-.skill-switch[aria-checked="true"] .switch-knob { left: calc(100% - 1.67rem); background: #D9442B; }
-.skill-switch:focus-visible { outline: none; }
-.skill-switch:focus-visible .switch-track { outline: 3px solid var(--shell); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { .switch-track, .switch-knob { transition: none; } }
+.scroll-hint-arrow { display: inline-block; margin-left: 0.3rem; animation: hint-bob 1.6s ease-in-out infinite; }
+@keyframes hint-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+.no-js .scroll-hint { display: none; }
+@media (prefers-reduced-motion: reduce) { .scroll-hint-arrow { animation: none; } }
 
 /* Breadboard fish: same colors in both themes, like the jelly */
 .bb-fish-fill { fill: #D9442B; stroke: #14303F; stroke-width: 3; stroke-linejoin: round; }

@@ -2,22 +2,17 @@
 layout: default
 body_class: home
 ---
-<section class="hero">
+<!-- A short scroll story: the stage (intro text + portrait card) stays pinned while
+     the page scrolls through the scenes below it, and the card changes with each one. -->
+<section class="hero scenes">
+  <div class="scene-stage">
   <div class="wrap hero-grid">
     <div class="hero-text">
       <h1>I'm {{ site.author }}.</h1>
       <p class="lede">{{ site.tagline }} I also like to take pictures of birds.</p>
-      <!-- Skill switches: each one slides its tool into the portrait card. Add more by
-           copying a button and giving it a new data-skill (and a matching drawing in the card). -->
-      <div class="skill-switches" aria-label="Skills">
-        <button class="skill-switch" type="button" role="switch" aria-checked="false" data-skill="microscopy">
-          <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
-          <span class="switch-label">Microscopy</span>
-        </button>
-      </div>
+      <p class="scroll-hint" aria-hidden="true">Scroll for more <span class="scroll-hint-arrow">&darr;</span></p>
     </div>
-    <!-- A framed portrait card: the cartoon scientist on a watercolor wash,
-         with breadboard fish swimming left through (and out of) the frame -->
+    <div class="portrait">
     <figure class="portrait-card">
       <div class="portrait-wash" aria-hidden="true"></div>
       <button class="theme-toggle card-theme" type="button" aria-label="Switch to dark mode">
@@ -31,20 +26,47 @@ body_class: home
       <span class="card-fish card-fish-2" aria-hidden="true" data-top="64">{% include breadboard-fish.svg class="fish-body" %}</span>
       <span class="card-fish card-fish-3" aria-hidden="true" data-top="80">{% include breadboard-fish.svg class="fish-body" %}</span>
     </figure>
+    <!-- One caption per scene; they cross-fade as the scenes change -->
+    <p class="scene-caption">
+      <span class="scene-1">Marine scientist</span>
+      <span class="scene-2">Electronics technician</span>
+    </p>
+    </div>
   </div>
+  </div>
+  <div class="scene-runway" aria-hidden="true"></div>
 </section>
 
 <script>
-  // Skill switches slide their tool in and out of the portrait card
+  // Scroll scenes. While the stage is pinned, scrolling sets --scene on the card
+  // from 0 (scene 1: the fish) to 1 (scene 2: the AUV and microscope), and the
+  // CSS fades each element by that amount.
   (function () {
-    var card = document.querySelector('.portrait-card');
-    document.querySelectorAll('.skill-switch').forEach(function (sw) {
-      sw.addEventListener('click', function () {
-        var on = sw.getAttribute('aria-checked') !== 'true';
-        sw.setAttribute('aria-checked', on ? 'true' : 'false');
-        if (card) card.classList.toggle('show-' + sw.dataset.skill, on);
-      });
-    });
+    var section = document.querySelector('.scenes');
+    var stage = section && section.querySelector('.scene-stage');
+    if (!stage) return;
+    var root = section;
+    var stickTop = 0, frame = 0;
+    function size() {
+      // Pin the stage at the top of the screen; if it's taller than the screen
+      // (phones), pin it so its bottom (the card and caption) stays in view.
+      stickTop = Math.min(16, window.innerHeight - stage.offsetHeight - 16);
+      stage.style.top = stickTop + 'px';
+      update();
+    }
+    function update() {
+      frame = 0;
+      var travel = section.offsetHeight - stage.offsetHeight;
+      var p = travel > 0 ? (stickTop - section.getBoundingClientRect().top) / travel : 0;
+      p = Math.max(0, Math.min(1, p));
+      // the change happens over the middle of the scroll, with a calm start and end
+      var t = Math.max(0, Math.min(1, (p - 0.15) / 0.7));
+      root.style.setProperty('--scene', t.toFixed(3));
+      root.style.setProperty('--started', Math.min(1, p * 8).toFixed(3));
+    }
+    window.addEventListener('scroll', function () { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener('resize', size);
+    size();
   })();
 </script>
 <script>
