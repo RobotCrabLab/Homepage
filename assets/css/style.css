@@ -168,8 +168,6 @@ img { max-width: 100%; height: auto; }
    --logo scales the whole thing (smaller on phones). */
 .logo { --logo: 1; position: relative; display: block; padding-right: calc(0.25rem * var(--logo)); }
 .logo-sign { display: block; height: calc(5rem * var(--logo)); width: auto; }
-.logo-jelly { position: absolute; left: calc(100% - 2.95rem * var(--logo)); bottom: calc(0.35rem * var(--logo)); z-index: 1; }
-.logo .mascot-mark { width: calc(2.9rem * var(--logo)); }
 .nav-home { display: none; }
 @media (max-width: 40rem) { .logo { --logo: 0.78; } }
 
@@ -417,6 +415,36 @@ img { max-width: 100%; height: auto; }
   .home .scenes h1 { top: 6.4rem; }
   .home .scene-caption { top: calc(6.4rem + var(--step-4) + 0.6rem); }
   .home .scroll-hint { top: calc(6.4rem + var(--step-4) + 2.6rem); }
+}
+
+/* The jelly drifts up through the back of scene 1: it pulses upward from below the
+   frame to above it, behind everything else, and fades out in scene 2. The script
+   picks a new starting spot 5-10% left or right of center for each trip. */
+.card-jelly {
+  position: absolute; z-index: 0; top: 100%; left: 50%; width: 22%;
+  transform: translateX(-50%); opacity: 1; transition: opacity 0.6s ease;
+}
+.card-jelly .mascot-mark { width: 100%; animation: jelly-squeeze 3s ease-in-out infinite; transform-origin: 50% 30%; }
+.is-scene-2 .card-jelly { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .card-jelly { animation: jelly-rise 24s linear infinite; }
+}
+@media (prefers-reduced-motion: reduce) { .card-jelly { top: 38%; } .card-jelly .mascot-mark { animation: none; } }
+@keyframes jelly-rise {
+  0.00% { top: 100.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  12.50% { top: 83.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  25.00% { top: 67.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  37.50% { top: 50.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  50.00% { top: 34.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  62.50% { top: 17.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  75.00% { top: 1.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  87.50% { top: -15.5%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+  100.00% { top: -32.0%; animation-timing-function: cubic-bezier(.2,.7,.4,1); }
+}
+@keyframes jelly-squeeze {
+  0%, 100% { transform: scale(1, 1); }
+  12%      { transform: scale(0.9, 1.08); }
+  45%      { transform: scale(1.04, 0.96); }
 }
 
 /* Breadboard fish: same colors in both themes, like the jelly */

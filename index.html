@@ -16,6 +16,7 @@ body_class: home
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <span class="theme-label">Light mode</span>
       </button>
+      <span class="card-jelly" aria-hidden="true">{% include mascot.svg class="mascot-mark" %}</span>
       <img class="portrait-me" src="{{ '/assets/images/scientist.svg' | relative_url }}" alt="" width="70" height="90">
       {% include microscope.svg %}
       <span class="card-fish card-auv" aria-hidden="true" data-top="25" data-jitter="5" data-straight>{% include breadboard-auv.svg %}</span>
@@ -73,6 +74,19 @@ body_class: home
       if (e.key === 'ArrowUp' || e.key === 'PageUp') setScene(1);
     });
     size();
+  })();
+</script>
+<script>
+  // The jelly starts each trip up through the card 5-10% left or right of center
+  (function () {
+    var jelly = document.querySelector('.card-jelly');
+    if (!jelly) return;
+    function place() {
+      var off = (5 + Math.random() * 5) * (Math.random() < 0.5 ? -1 : 1);
+      jelly.style.left = (50 + off) + '%';
+    }
+    place();
+    jelly.addEventListener('animationiteration', function (e) { if (e.target === jelly) place(); });
   })();
 </script>
 <script>
