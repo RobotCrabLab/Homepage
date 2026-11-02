@@ -37,22 +37,41 @@ body_class: home
 <script>
   // Scroll scenes, step by step: a small scroll moves to the next scene, and the
   // CSS animates the change. Scrolling back to the top returns to scene 1.
+  // On phones the page doesn't scroll at all: a swipe or scroll just switches scenes.
   (function () {
     var section = document.querySelector('.scenes');
     var stage = section && section.querySelector('.scene-stage');
     if (!stage) return;
-    var frame = 0;
+    var phone = window.matchMedia('(max-width: 40rem)');
+    var frame = 0, touchY = null;
+    function setScene(n) { section.classList.toggle('is-scene-2', n === 2); }
     function size() {
       // Pin the stage near the top; if it's taller than the screen, pin it so the card stays in view
-      stage.style.top = Math.min(16, window.innerHeight - stage.offsetHeight - 16) + 'px';
+      stage.style.top = phone.matches ? '' : Math.min(16, window.innerHeight - stage.offsetHeight - 16) + 'px';
       update();
     }
     function update() {
       frame = 0;
-      section.classList.toggle('is-scene-2', window.scrollY > 24);
+      if (!phone.matches) setScene(window.scrollY > 24 ? 2 : 1);
     }
     window.addEventListener('scroll', function () { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
     window.addEventListener('resize', size);
+    // Phone gestures
+    window.addEventListener('wheel', function (e) {
+      if (!phone.matches || Math.abs(e.deltaY) < 8) return;
+      setScene(e.deltaY > 0 ? 2 : 1);
+    }, { passive: true });
+    window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('touchmove', function (e) {
+      if (!phone.matches || touchY === null) return;
+      var dy = touchY - e.touches[0].clientY;
+      if (Math.abs(dy) > 30) { setScene(dy > 0 ? 2 : 1); touchY = null; }
+    }, { passive: true });
+    window.addEventListener('keydown', function (e) {
+      if (!phone.matches) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') setScene(2);
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') setScene(1);
+    });
     size();
   })();
 </script>

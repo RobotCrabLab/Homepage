@@ -350,7 +350,7 @@ img { max-width: 100%; height: auto; }
 }
 .portrait-wash { position: absolute; inset: 0; background: #EAF4F8 url("../images/watercolor-blue.svg") center / cover no-repeat; }
 /* A big portrait bust: he fills most of the frame, cropped at the bottom edge */
-.portrait-me { position: absolute; left: 12%; bottom: -3%; width: 78%; height: auto; }
+.portrait-me { position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; }
 
 /* Scroll scenes on the home page: "I'm Chris." with the portrait card right under it.
    A small scroll adds .is-scene-2, and the card animates to the next scene. */
@@ -366,7 +366,7 @@ img { max-width: 100%; height: auto; }
 .card-fish-2, .card-fish-3 { opacity: 1; transition: opacity 0.6s ease; }
 .card-auv { opacity: 0; transition: opacity 0.8s ease 0.2s; }
 .card-scope {
-  position: absolute; left: 12%; bottom: -3%; width: 78%; height: auto; z-index: 3; overflow: visible;
+  position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; z-index: 3; overflow: visible;
   transform: translateX(118%); transition: transform 0.9s cubic-bezier(.3, .8, .3, 1);
 }
 .is-scene-2 .card-fish-2, .is-scene-2 .card-fish-3 { opacity: 0; }
@@ -394,6 +394,29 @@ img { max-width: 100%; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-hint-arrow { animation: none; }
   .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
+}
+
+/* Phones: the home page is one full-screen card that doesn't scroll. Swipes and
+   scrolls switch scenes instead (see the script on the home page). The logo/menu
+   button and the theme switch sit inside the card's top edge, the title and caption
+   float in the open water at the top, and the footer is hidden. */
+@media (max-width: 40rem) {
+  body.home { position: fixed; inset: 0; overflow: hidden; }
+  .home .site-footer, .home .scene-runway { display: none; }
+  .home .scene-stage { position: static; padding: 0; }
+  .home .portrait .portrait-card {
+    position: fixed; inset: 0.6rem; width: auto; aspect-ratio: auto; margin: 0; z-index: 1;
+    justify-self: stretch; align-self: stretch;
+  }
+  .home .site-header { position: fixed; top: 0.6rem; left: 0.6rem; right: 0.6rem; z-index: 10; padding: 0.85rem 0.9rem 0; }
+  .home .site-header .header-inner { padding-inline: 0; }
+  .home .js .site-nav.is-open, .js .home .site-nav.is-open {
+    background: var(--paper); border: 4px solid #14303F; border-radius: 1rem; padding: 0.25rem 1rem; margin-top: 0.75rem;
+  }
+  .home .scenes h1, .home .scene-caption, .home .scroll-hint { position: fixed; left: 1rem; right: 1rem; z-index: 6; text-align: center; margin: 0; }
+  .home .scenes h1 { top: 6.4rem; }
+  .home .scene-caption { top: calc(6.4rem + var(--step-4) + 0.6rem); }
+  .home .scroll-hint { top: calc(6.4rem + var(--step-4) + 2.6rem); }
 }
 
 /* Breadboard fish: same colors in both themes, like the jelly */
