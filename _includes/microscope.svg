@@ -14,6 +14,41 @@
   </defs>
   <rect x="46.4" y="76" width="7.2" height="29.200000000000003" fill="#A7B2B8" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
   <rect x="27" y="104.2" width="46" height="8" rx="2.5" fill="#A7B2B8" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- A green circuit board standing on its edge in a little holder, under the ring light -->
+  <g class="scope-pcb">
+    <rect x="34" y="84.6" width="32" height="18.4" rx="1.6" fill="#3E9A5E" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round"/>
+    <g fill="none" stroke="#2C7447" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M38.5 88.5 H44 V93"/>
+      <path d="M38.5 99.5 H43 L45 97"/>
+      <path d="M56.5 91 V96 H62"/>
+      <path d="M49 99.5 H60"/>
+    </g>
+    <g fill="#F2B33D">
+      <circle cx="38.5" cy="88.5" r="0.9"/><circle cx="38.5" cy="99.5" r="0.9"/>
+      <circle cx="62" cy="96" r="0.9"/><circle cx="60" cy="99.5" r="0.9"/>
+    </g>
+    <!-- chip -->
+    <rect x="44.6" y="89.4" width="8.6" height="7" rx="0.8" fill="#14303F"/>
+    <g stroke="#C9D1D5" stroke-width="0.8" stroke-linecap="round">
+      <path d="M45.8 88.4 V89.4 M47.8 88.4 V89.4 M49.8 88.4 V89.4 M51.8 88.4 V89.4"/>
+      <path d="M45.8 96.4 V97.4 M47.8 96.4 V97.4 M49.8 96.4 V97.4 M51.8 96.4 V97.4"/>
+    </g>
+    <circle cx="45.8" cy="90.6" r="0.55" fill="#5B7280"/>
+    <!-- capacitor -->
+    <circle cx="58.8" cy="88.8" r="2.3" fill="#FFFFFF" stroke="#14303F" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M57.5 88.8 H60.1" stroke="#14303F" stroke-width="0.7"/>
+    <!-- resistor -->
+    <rect x="38" y="92.4" width="5" height="2.2" rx="1.1" fill="#FFFFFF" stroke="#14303F" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M39.6 92.6 V94.4 M41.2 92.6 V94.4" stroke="#F2B33D" stroke-width="0.7"/>
+    <!-- header connector along the bottom -->
+    <rect x="47.6" y="100" width="8.2" height="2.4" rx="0.5" fill="#14303F"/>
+    <g fill="#F2B33D"><rect x="48.4" y="100.7" width="1" height="1"/><rect x="50.4" y="100.7" width="1" height="1"/><rect x="52.4" y="100.7" width="1" height="1"/><rect x="54.4" y="100.7" width="1" height="1"/></g>
+    <!-- side connector -->
+    <rect x="62.2" y="86.4" width="3.2" height="3.8" rx="0.4" fill="#FFFFFF" stroke="#14303F" stroke-width="1.6" stroke-linejoin="round"/>
+    <!-- holder clips on the base -->
+    <rect x="35.2" y="101.6" width="4.4" height="3.2" rx="0.6" fill="#A7B2B8" stroke="#14303F" stroke-width="1.8"/>
+    <rect x="60.4" y="101.6" width="4.4" height="3.2" rx="0.6" fill="#A7B2B8" stroke="#14303F" stroke-width="1.8"/>
+  </g>
   <path class="scope-beam" d="M42 81.2 L58 81.2 L66 103.7 L34 103.7 Z" fill="url(#scope-beam)" filter="url(#scope-beam-soft)"/>
   <rect x="39.6" y="50.3" width="6.8" height="15.7" rx="1.4" fill="#D3D9DC" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
   <rect x="53.6" y="50.3" width="6.8" height="15.7" rx="1.4" fill="#D3D9DC" stroke="#14303F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
