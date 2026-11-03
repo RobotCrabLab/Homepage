@@ -109,6 +109,50 @@ body_class: home
   })();
 </script>
 <script>
+  // The osprey perches in the open water between the bottom of "I'm Chris." (on
+  // computers, the theme switch, since the title sits above the card) and the top
+  // of the character's head, scaled down to fit that gap. Its branch runs off the
+  // card's right edge.
+  (function () {
+    var bird = document.querySelector('.card-osprey');
+    if (!bird) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      bird.querySelectorAll('animateTransform').forEach(function (a) { a.remove(); });
+    }
+    var card = bird.parentNode;
+    var name = card.querySelector('.card-title-name');
+    var toggle = card.querySelector('.card-theme');
+    var me = card.querySelector('.portrait-me');
+    // In the osprey's drawing (viewBox 126 units tall), the art runs from 1.5 to 121.5
+    var VB_W = 136, VB_H = 126, ART_TOP = 1.5, ART_H = 120;
+    // The top of the hair sits 4.3% of the way down the character's image
+    var HEAD_TOP = 0.043;
+    function place() {
+      var c = card.getBoundingClientRect();
+      var top = 0;
+      [name, toggle].forEach(function (el) {
+        if (el && el.offsetParent) top = Math.max(top, el.getBoundingClientRect().bottom - c.top);
+      });
+      var m = me.getBoundingClientRect();
+      var bottom = m.top - c.top + m.height * HEAD_TOP;
+      var gap = bottom - top;
+      if (gap <= 0) return;
+      var pad = gap * 0.07;
+      var scale = Math.min((gap - 2 * pad) / ART_H, c.width * 0.64 / VB_W);   // px per unit, capped at 64% of the card's width
+      var w = VB_W * scale;
+      var artTop = top + (gap - ART_H * scale) / 2;                            // centered in the gap
+      bird.style.width = w.toFixed(1) + 'px';
+      bird.style.top = (artTop - ART_TOP * scale).toFixed(1) + 'px';
+      bird.style.bottom = 'auto';
+      bird.style.right = (-0.2 * w).toFixed(1) + 'px';
+    }
+    place();
+    window.addEventListener('resize', place);
+    window.addEventListener('load', place);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+  })();
+</script>
+<script>
   // Each trip, the jelly enters from a random side about 25% up from the bottom
   // (give or take 5%) and swims up and across at about 40 degrees, bell first.
   (function () {

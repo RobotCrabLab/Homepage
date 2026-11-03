@@ -375,8 +375,9 @@ img { max-width: 100%; height: auto; }
 [data-scene="2"] .card-scope { transform: translateX(0); }
 [data-scene="3"] .card-fish-2, [data-scene="3"] .card-fish-3, [data-scene="3"] .card-jelly { opacity: 1; }
 
-/* The osprey perches in the background of scene 1, behind the character, facing him
-   from the right with its branch running off the card's right edge */
+/* The osprey perches in the background of scene 1, facing the character from the
+   right with its branch running off the card's right edge. The home page script
+   sizes it to fit between the title and the top of the head; these are fallbacks. */
 .card-osprey { position: absolute; z-index: 0; right: -13%; bottom: 79cqw; width: 44%; transform: scaleX(-1); }
 .card-osprey svg { display: block; width: 100%; height: auto; }
 
