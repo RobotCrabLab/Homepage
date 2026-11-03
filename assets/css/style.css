@@ -349,6 +349,11 @@ img { max-width: 100%; height: auto; }
   border: 4px solid #14303F; border-radius: 1.5rem; isolation: isolate;
 }
 .portrait-wash { position: absolute; inset: 0; background: #EAF4F8 url("../images/watercolor-blue.svg") center / cover no-repeat; }
+/* Safari redraws the watercolor (an SVG with blur and grain filters) slightly
+   differently when it repaints just a patch of it, which showed up as a box around
+   the osprey's nodding head. Giving the wash and the osprey their own layers means
+   the head's movement never makes Safari repaint the wash underneath. */
+.portrait-wash, .card-osprey { will-change: transform; }
 /* A big portrait bust: he fills most of the frame, cropped at the bottom edge */
 .portrait-me { position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; }
 
