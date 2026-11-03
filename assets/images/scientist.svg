@@ -5,6 +5,13 @@
   <!-- Body: a brown canvas work shirt with a collar, button placket and two chest pockets -->
   <path class="sc-line" d="M23 113 V91 Q23 80 34 79 L66 79 Q77 80 77 91 V113 Z" fill="#B57E40"/>
   <rect class="sc-line" x="43" y="68" width="14" height="14" rx="3" fill="#F3C9A4"/>
+  <!-- Arms: sleeves that blend into the shoulders, with a seam down each one -->
+  <path d="M33 79 Q19.9 80 19.9 98 V118 H28.3 V84 Z" fill="#B57E40"/>
+  <path class="sc-line" d="M33 79 Q19.9 80 19.9 98 V118" fill="none"/>
+  <path class="sc-line" d="M28.3 91 V118" fill="none"/>
+  <path d="M67 79 Q80.1 80 80.1 98 V118 H71.7 V84 Z" fill="#B57E40"/>
+  <path class="sc-line" d="M67 79 Q80.1 80 80.1 98 V118" fill="none"/>
+  <path class="sc-line" d="M71.7 91 V118" fill="none"/>
   <!-- A classic white breadboard, tucked down inside the pocket and under the collar -->
   <g transform="translate(0.2 1.2) rotate(-10 37.5 93)">
     <rect class="sc-line" x="32" y="82.4" width="11" height="12.6" rx="1.2" fill="#FFFFFF"/>
