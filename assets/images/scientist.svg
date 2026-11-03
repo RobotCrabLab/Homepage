@@ -5,6 +5,13 @@
   <!-- Body: a brown canvas work shirt with a collar, button placket and two chest pockets -->
   <path class="sc-line" d="M23 113 V91 Q23 80 34 79 L66 79 Q77 80 77 91 V113 Z" fill="#B57E40"/>
   <rect class="sc-line" x="43" y="68" width="14" height="14" rx="3" fill="#F3C9A4"/>
+  <!-- A classic white breadboard, as wide as the pocket it is tucked into, under the collar -->
+  <g transform="rotate(-10 37.5 93)">
+    <rect class="sc-line" x="31" y="83" width="12.4" height="10.5" rx="1.2" fill="#FFFFFF"/>
+    <path d="M37.1 84.4 V93" stroke="#D9442B" stroke-width="0.7"/>
+    <path d="M37.9 84.4 V93" stroke="#2F6FB5" stroke-width="0.7"/>
+    <circle cx="33.7" cy="85.4" r="0.4" fill="#14303F"/><circle cx="34.9" cy="85.4" r="0.4" fill="#14303F"/><circle cx="36.1" cy="85.4" r="0.4" fill="#14303F"/><circle cx="38.9" cy="85.4" r="0.4" fill="#14303F"/><circle cx="40.1" cy="85.4" r="0.4" fill="#14303F"/><circle cx="41.3" cy="85.4" r="0.4" fill="#14303F"/><circle cx="33.7" cy="86.6" r="0.4" fill="#14303F"/><circle cx="34.9" cy="86.6" r="0.4" fill="#14303F"/><circle cx="36.1" cy="86.6" r="0.4" fill="#14303F"/><circle cx="38.9" cy="86.6" r="0.4" fill="#14303F"/><circle cx="40.1" cy="86.6" r="0.4" fill="#14303F"/><circle cx="41.3" cy="86.6" r="0.4" fill="#14303F"/><circle cx="33.7" cy="87.8" r="0.4" fill="#14303F"/><circle cx="34.9" cy="87.8" r="0.4" fill="#14303F"/><circle cx="36.1" cy="87.8" r="0.4" fill="#14303F"/><circle cx="38.9" cy="87.8" r="0.4" fill="#14303F"/><circle cx="40.1" cy="87.8" r="0.4" fill="#14303F"/><circle cx="41.3" cy="87.8" r="0.4" fill="#14303F"/><circle cx="33.7" cy="89.0" r="0.4" fill="#14303F"/><circle cx="34.9" cy="89.0" r="0.4" fill="#14303F"/><circle cx="36.1" cy="89.0" r="0.4" fill="#14303F"/><circle cx="38.9" cy="89.0" r="0.4" fill="#14303F"/><circle cx="40.1" cy="89.0" r="0.4" fill="#14303F"/><circle cx="41.3" cy="89.0" r="0.4" fill="#14303F"/><circle cx="33.7" cy="90.2" r="0.4" fill="#14303F"/><circle cx="34.9" cy="90.2" r="0.4" fill="#14303F"/><circle cx="36.1" cy="90.2" r="0.4" fill="#14303F"/><circle cx="38.9" cy="90.2" r="0.4" fill="#14303F"/><circle cx="40.1" cy="90.2" r="0.4" fill="#14303F"/><circle cx="41.3" cy="90.2" r="0.4" fill="#14303F"/>
+  </g>
   <path class="sc-line" d="M38.5 78.2 L49.6 80.4 L44.8 88.6 Z" fill="#B57E40" stroke-width="2.2"/>
   <path class="sc-line" d="M61.5 78.2 L50.4 80.4 L55.2 88.6 Z" fill="#B57E40" stroke-width="2.2"/>
   <path d="M50 81 V112" stroke="#14303F" stroke-width="1.8" stroke-linecap="round"/>
@@ -12,7 +19,6 @@
   <circle cx="50" cy="104" r="1.2" fill="#14303F"/>
   <!-- Left pocket -->
   <rect class="sc-line" x="31" y="93" width="13" height="11" rx="1.6" fill="#B57E40" stroke-width="2"/>
-  <path class="sc-line" d="M31 93 H44 V96.5 L37.5 98.5 L31 96.5 Z" fill="#9C6A32" stroke-width="2"/>
   <!-- Right pocket: a screwdriver for the engineering, a sample bottle for the science -->
   <rect class="sc-line" x="57.5" y="86" width="4.2" height="10" rx="1.8" fill="#F2B33D" stroke-width="1.8"/>
   <rect class="sc-line" x="62.8" y="87" width="6.6" height="10.5" rx="1.8" fill="#FFFFFF" stroke-width="1.8"/>
