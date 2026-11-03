@@ -46,7 +46,7 @@ body_class: home
         <button class="scene-button" type="button" data-go="1" aria-pressed="true">Project lead</button>
       </nav>
       <dl class="dive-fields">
-        <div><dt>Boater no.</dt><dd>BB-2N2222</dd></div>
+        <div><dt>Resume</dt><dd><a href="{{ '/resume/' | relative_url }}">Click Here</a></dd></div>
         {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt>Projects</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
         <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
         {% assign latest = site.posts | first %}{% if latest %}<div><dt>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
