@@ -393,7 +393,7 @@ img { max-width: 100%; height: auto; }
 /* Computers: the photo and scene buttons are drawn as a Breadboard Bay boater ID, a
    white breadboard with holes and red and blue rails. The card keeps its own colors
    in both light and dark mode. Phones and narrow windows don't get any of this. */
-.dive-head, .dive-label, .dive-fields, .dive-sign, .dive-note, .dive-rail { display: none; }
+.dive-head, .dive-label, .dive-name, .dive-fields, .dive-note, .dive-rail { display: none; }
 .dive-info { display: contents; }
 @media (max-width: 40rem) { .dive-info { display: none; } }
 @media (min-width: 60rem) {
@@ -425,7 +425,8 @@ img { max-width: 100%; height: auto; }
     display: block; margin: 0; color: var(--card-soft);
     font-weight: 600; font-size: 0.75rem; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0.55rem; margin: 0.45rem 0 0; }
+  .dive-name { display: block; margin: 0; font-family: var(--display); font-weight: 700; font-size: var(--step-2); line-height: 1.2; }
+  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0.55rem; margin: 0.6rem 0 0; }
   .scene-button {
     display: flex; align-items: center; gap: 0.7rem; width: 100%; padding: 0.5rem 0.9rem;
     border: 3px solid var(--card-ink); border-radius: 0.8rem; background: var(--card-bg); color: var(--card-ink);
@@ -457,12 +458,7 @@ img { max-width: 100%; height: auto; }
   .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
   /* The card's Hobbies line links to Photography, so the home page header doesn't need to */
   .home .site-nav a[href$="/photography/"] { display: none; }
-  .dive-sign {
-    display: block; margin: auto 0 0; padding-top: 0.5rem; border-bottom: 2px solid var(--card-ink);
-    font-family: var(--display); font-style: italic; font-weight: 500; font-size: var(--step-2); line-height: 1.3;
-  }
-  .dive-sign span { display: inline-block; transform: rotate(-3deg); transform-origin: left bottom; }
-  .dive-note { display: block; margin: 0.3rem 0 0; color: var(--card-soft); font-size: 0.75rem; line-height: 1.3; }
+  .dive-note { display: block; margin: auto 0 0; color: var(--card-soft); font-size: 0.75rem; line-height: 1.3; }
   /* The bottom edge: a strip of breadboard holes */
   .dive-rail {
     grid-area: rail; display: block; height: 0.6rem; margin-top: 0.7rem;
@@ -479,7 +475,6 @@ img { max-width: 100%; height: auto; }
 @media (min-width: 60rem) and (max-height: 720px) {
   .dive-note { display: none; }
   .dive-fields { margin-top: 0.7rem; gap: 0.35rem 1rem; }
-  .dive-sign { font-size: var(--step-1); padding-top: 0.2rem; }
 }
 
 /* Scene 1: the osprey. Scene 2: the AUV, with the microscope sliding in from the

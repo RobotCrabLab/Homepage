@@ -38,7 +38,8 @@ body_class: home
     </p>
     <!-- Computers: one button per scene (phones swipe instead) -->
     <div class="dive-info">
-      <p class="dive-label" aria-hidden="true">Certified as</p>
+      <p class="dive-label" aria-hidden="true">Boater name</p>
+      <p class="dive-name" aria-hidden="true">{{ site.author }}</p>
       <nav class="scene-nav" aria-label="Scenes">
         <button class="scene-button" type="button" data-go="2" aria-pressed="false">PCB rework/wiring</button>
         <button class="scene-button" type="button" data-go="3" aria-pressed="false">Water science</button>
@@ -50,7 +51,6 @@ body_class: home
         <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
         {% assign latest = site.posts | first %}{% if latest %}<div><dt>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
       </dl>
-      <p class="dive-sign" aria-hidden="true"><span>{{ site.author }}</span></p>
       <p class="dive-note" aria-hidden="true">Not valid for actual boating.</p>
     </div>
     <div class="dive-rail" aria-hidden="true"></div>
