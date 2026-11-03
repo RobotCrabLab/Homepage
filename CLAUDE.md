@@ -66,7 +66,8 @@ one.
   rework/wiring: scene 2; Water science: scene 3; Project lead: scene 1). The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   The card's Hobbies line links to Photography, replacing that header link on this page,
-  and its Blog line always links to the newest post:
+  its Blog line always links to the newest post, and its Projects line links to the
+  project listed first on the Projects page (lowest `order`):
   1. Osprey on its branch in the background (no caption).
   2. "Electronics technician": the microscope slides in, the AUV cruises across.
   3. "Marine scientist": the fish and the jellyfish.
