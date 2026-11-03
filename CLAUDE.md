@@ -62,7 +62,7 @@ one.
 
 ## Home page (`index.html`)
 - One portrait card with three scenes (`data-scene` 1–3). On computers (60rem and wider) it
-  sits on a white breadboard "diving card", and buttons on the card switch the scenes (Hi,
+  sits on a white breadboard "boater ID" card, and buttons on the card switch the scenes (Hi,
   I'm Chris; Electronics technician; Marine scientist). The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling:
   1. Osprey on its branch in the background (no caption).

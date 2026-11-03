@@ -390,7 +390,7 @@ img { max-width: 100%; height: auto; }
 @media (min-width: 40.01rem) and (max-width: 59.99rem) {
   .portrait .portrait-card { width: min(100%, 27rem, calc((100svh - 27rem) * 0.75)); }
 }
-/* Computers: the photo and scene buttons are drawn as a Breadboard Bay diving card, a
+/* Computers: the photo and scene buttons are drawn as a Breadboard Bay boater ID, a
    white breadboard with holes and red and blue rails. The card keeps its own colors
    in both light and dark mode. Phones and narrow windows don't get any of this. */
 .dive-head, .dive-label, .dive-fields, .dive-sign, .dive-note, .dive-rail { display: none; }
