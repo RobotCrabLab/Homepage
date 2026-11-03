@@ -450,6 +450,11 @@ img { max-width: 100%; height: auto; }
   .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
   .dive-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 1rem; margin: 1.1rem 0 0; }
   .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: var(--step-0); line-height: 1.35; }
+  .dive-fields a { color: var(--card-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+  .dive-fields a:hover { color: var(--card-pick); }
+  .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
+  /* The card's Hobbies line links to Photography, so the home page header doesn't need to */
+  .home .site-nav a[href$="/photography/"] { display: none; }
   .dive-sign {
     display: block; margin: auto 0 0; padding-top: 0.5rem; border-bottom: 2px solid var(--card-ink);
     font-family: var(--display); font-style: italic; font-weight: 500; font-size: var(--step-2); line-height: 1.3;
