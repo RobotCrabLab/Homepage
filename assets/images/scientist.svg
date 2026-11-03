@@ -6,11 +6,11 @@
   <path class="sc-line" d="M23 113 V91 Q23 80 34 79 L66 79 Q77 80 77 91 V113 Z" fill="#B57E40"/>
   <rect class="sc-line" x="43" y="68" width="14" height="14" rx="3" fill="#F3C9A4"/>
   <!-- Arms: sleeves that blend into the shoulders, with a seam down each one -->
-  <path d="M33 79 Q19.9 80 19.9 98 V118 H28.3 V84 Z" fill="#B57E40"/>
-  <path class="sc-line" d="M33 79 Q19.9 80 19.9 98 V118" fill="none"/>
+  <path d="M36 79 H26.5 Q19.9 79 19.9 85.5 V118 H28.3 V86 L36 81 Z" fill="#B57E40"/>
+  <path class="sc-line" d="M36 79 H26.5 Q19.9 79 19.9 85.5 V118" fill="none"/>
   <path class="sc-line" d="M28.3 91 V118" fill="none"/>
-  <path d="M67 79 Q80.1 80 80.1 98 V118 H71.7 V84 Z" fill="#B57E40"/>
-  <path class="sc-line" d="M67 79 Q80.1 80 80.1 98 V118" fill="none"/>
+  <path d="M64 79 H73.5 Q80.1 79 80.1 85.5 V118 H71.7 V86 L64 81 Z" fill="#B57E40"/>
+  <path class="sc-line" d="M64 79 H73.5 Q80.1 79 80.1 85.5 V118" fill="none"/>
   <path class="sc-line" d="M71.7 91 V118" fill="none"/>
   <!-- A classic white breadboard, tucked down inside the pocket and under the collar -->
   <g transform="translate(0.2 1.2) rotate(-10 37.5 93)">
