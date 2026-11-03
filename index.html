@@ -2,13 +2,14 @@
 layout: default
 body_class: home
 ---
-<!-- A short scroll story: the stage (intro text + portrait card) stays pinned while
-     the page scrolls through the scenes below it, and the card changes with each one. -->
+<!-- Three scenes in one portrait card: buttons switch them on computers, swipes on phones. -->
 <section class="hero scenes" data-scene="1">
   <div class="scene-stage">
   <div class="wrap hero-grid">
     <h1>I'm {{ site.author }}.</h1>
     <div class="portrait">
+    <!-- Computers: the whole block is drawn as a Breadboard Bay diving card -->
+    <div class="dive-head" aria-hidden="true"><span class="dive-org">Breadboard Bay</span><span class="dive-kind">Diving Card</span></div>
     <figure class="portrait-card">
       <div class="portrait-wash" aria-hidden="true"></div>
       <!-- Phones: the title and caption are drawn inside the card, behind the jelly -->
@@ -35,31 +36,48 @@ body_class: home
       <span class="scene-2">Electronics technician</span>
       <span class="scene-3">Marine scientist</span>
     </p>
+    <!-- Computers: one button per scene (phones swipe instead) -->
+    <div class="dive-info">
+      <p class="dive-label" aria-hidden="true">Certified as</p>
+      <nav class="scene-nav" aria-label="Scenes">
+        <button class="scene-button" type="button" data-go="1" aria-pressed="true">Hi, I'm {{ site.author }}</button>
+        <button class="scene-button" type="button" data-go="2" aria-pressed="false">Electronics technician</button>
+        <button class="scene-button" type="button" data-go="3" aria-pressed="false">Marine scientist</button>
+      </nav>
+      <dl class="dive-fields" aria-hidden="true">
+        <div><dt>Diver no.</dt><dd>BB-2N2222</dd></div>
+        <div><dt>Instructor</dt><dd>A. Jellyfish</dd></div>
+        <div><dt>Max depth</dt><dd>2.54 mm</dd></div>
+        <div><dt>Valid</dt><dd>All tides</dd></div>
+      </dl>
+      <p class="dive-sign" aria-hidden="true"><span>{{ site.author }}</span></p>
+      <p class="dive-note" aria-hidden="true">Not valid for actual diving.</p>
+    </div>
+    <div class="dive-rail" aria-hidden="true"></div>
     </div>
   </div>
   </div>
-  <div class="scene-runway" aria-hidden="true"></div>
 </section>
 
 <script>
-  // Scroll scenes, step by step: a small scroll moves to the next scene, and the
-  // CSS animates the change: scene 1 the osprey (bird photographer), scene 2 the
+  // The CSS animates each scene: scene 1 the osprey (bird photographer), scene 2 the
   // AUV and microscope (electronics technician), scene 3 the fish and jelly (marine
-  // scientist). Scrolling back to the top returns to scene 1.
-  // On phones the page doesn't scroll at all: a swipe or scroll just switches scenes.
+  // scientist). On computers the buttons switch scenes. On phones the page doesn't
+  // scroll at all: a swipe or scroll just switches scenes.
   (function () {
     var section = document.querySelector('.scenes');
-    var stage = section && section.querySelector('.scene-stage');
-    if (!stage) return;
+    if (!section) return;
     var phone = window.matchMedia('(max-width: 40rem)');
-    var frame = 0, touchY = null;
+    var touchY = null;
     var scene = 1, lastStep = 0;
     var captions = section.querySelectorAll('.scene-caption > span');
+    var buttons = section.querySelectorAll('.scene-button');
     function setScene(n) {
       var prev = scene;
       scene = Math.max(1, Math.min(3, n));
       if (scene === prev) return;
       section.setAttribute('data-scene', scene);
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(Number(b.dataset.go) === scene)); });
       // Roll the captions: up when moving forward, down when going back
       var dir = scene > prev ? 'up' : 'down';
       captions.forEach(function (sp) {
@@ -75,20 +93,9 @@ body_class: home
       if (now - lastStep < 700) return;
       lastStep = now; setScene(scene + dir);
     }
-    function size() {
-      // Pin the stage near the top; if it's taller than the screen, pin it so the card stays in view
-      stage.style.top = phone.matches ? '' : Math.min(16, window.innerHeight - stage.offsetHeight - 16) + 'px';
-      update();
-    }
-    function update() {
-      frame = 0;
-      if (phone.matches) return;
-      // computers: a small scroll moves to scene 2, a bit more to scene 3
-      var y = window.scrollY, h = window.innerHeight;
-      setScene(y < 24 ? 1 : y < h * 0.45 ? 2 : 3);
-    }
-    window.addEventListener('scroll', function () { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
-    window.addEventListener('resize', size);
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { setScene(Number(b.dataset.go)); });
+    });
     // Phone gestures
     window.addEventListener('wheel', function (e) {
       if (!phone.matches || Math.abs(e.deltaY) < 8) return;
@@ -105,7 +112,6 @@ body_class: home
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') setScene(scene + 1);
       if (e.key === 'ArrowUp' || e.key === 'PageUp') setScene(scene - 1);
     });
-    size();
   })();
 </script>
 <script>
