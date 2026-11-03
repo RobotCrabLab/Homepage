@@ -48,7 +48,7 @@ body_class: home
         <div><dt>Boater no.</dt><dd>BB-2N2222</dd></div>
         <div><dt>Instructor</dt><dd>A. Jellyfish</dd></div>
         <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
-        <div><dt>Valid</dt><dd>All tides</dd></div>
+        {% assign latest = site.posts | first %}{% if latest %}<div><dt>Blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
       </dl>
       <p class="dive-sign" aria-hidden="true"><span>{{ site.author }}</span></p>
       <p class="dive-note" aria-hidden="true">Not valid for actual boating.</p>
