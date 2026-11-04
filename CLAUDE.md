@@ -68,7 +68,8 @@ one.
   scale with it, sized in `--u`), and buttons on the card switch the scenes (PCB
   rework/wiring: scene 2; Water science: scene 3; Project lead: scene 1). Only the card, "Built by Chris" and the crab
   show on this page at those widths (no header, kelp or footer links), over a pastel bay
-  (cream sky, wavy water line 15% down the page, water deepening to the bottom) with the pier. The page heading is hidden on
+  (cream sky, a filled wave drifting back and forth 15% down the page, water deepening to
+  the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   The card's Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
   its Blog line always links to the newest post, and its Projects line links to the

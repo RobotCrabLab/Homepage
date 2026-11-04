@@ -378,7 +378,8 @@ img { max-width: 100%; height: auto; }
 .scene-button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 @media (max-width: 40rem) { .scene-nav { display: none; } }
 /* The pier only shows beside the boater ID */
-.home-dock { display: none; }
+.home-dock, .home-water { display: none; }
+@keyframes water-drift { from { transform: translateX(-24px); } to { transform: translateX(24px); } }
 /* Computers: the first button says hello, so the heading is kept for screen readers only */
 @media (min-width: 40.01rem) {
   .home .scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
@@ -393,18 +394,30 @@ img { max-width: 100%; height: auto; }
     --sea-sky: #FBF3E4; --sea-top: #D6EBE6; --sea-bottom: #9CC3CF;
     --card-w: min(100vw - 2 * var(--gutter), 60rem, (85svh - 11rem) * 1.6);
     --dock-w: min(100vw - 2 * var(--gutter), 64rem, var(--card-w) * 1.087);
+    --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%23D6EBE6'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%235E8FA0' stroke-width='2.5'/%3E%3C/svg%3E");
     background:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='10'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5' fill='none' stroke='%235E8FA0' stroke-width='2.5'/%3E%3C/svg%3E") 0 calc(15svh - 5px) / 48px 10px repeat-x,
-      linear-gradient(to bottom, var(--sea-sky) 0 15svh, var(--sea-top) 15svh, var(--sea-bottom) 100svh) no-repeat,
+      linear-gradient(to bottom, var(--sea-sky) 0 calc(15svh + 10px), var(--sea-top) calc(15svh + 10px), var(--sea-bottom) 100svh) no-repeat,
       var(--sea-bottom);
   }
+  /* The water's surface: a filled wave drifting slowly back and forth, half a wave each way.
+     It covers the ends of the pier's columns; the ladder stands in front of it. */
+  .home-water {
+    display: block; position: absolute; z-index: 1; left: 0; right: 0; top: calc(15svh - 5px);
+    height: 16px; overflow: hidden; pointer-events: none;
+  }
+  .home-water::before {
+    content: ""; position: absolute; inset: 0 -48px; background: var(--sea-wave) 0 0 / 48px 16px repeat-x;
+    will-change: transform; animation: water-drift 5s ease-in-out infinite alternate;
+  }
+  @media (prefers-reduced-motion: reduce) { .home-water::before { animation: none; } }
+  .home-dock.home-dock-front { z-index: 2; }
   .home-dock {
     display: block; position: absolute; z-index: 0; left: calc(50% - var(--dock-w) / 2);
     top: calc(15svh - var(--dock-w) * 135 / 1024); width: var(--dock-w); height: auto; overflow: visible;
   }
-  .home .scenes { position: relative; z-index: 1; padding-top: 0; }
+  .home .scenes { position: relative; z-index: 3; padding-top: 0; }
   .home .scene-stage { padding-top: 0; }
-  .home .site-footer { position: relative; z-index: 1; }
+  .home .site-footer { position: relative; z-index: 3; }
   .home .site-footer p { color: var(--ink); }
   .home main { display: flex; flex-direction: column; padding-top: calc(15svh + 1rem); }
   /* The card, caption and footer fit on one screen, with no spare space to scroll through */
@@ -508,10 +521,10 @@ img { max-width: 100%; height: auto; }
 
 /* The pastel bay at dusk, so the pier's navy outlines still show */
 @media (min-width: 40.01rem) and (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .home { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; }
+  :root:not([data-theme="light"]) .home { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E"); }
 }
 @media (min-width: 40.01rem) {
-  :root[data-theme="dark"] .home { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; }
+  :root[data-theme="dark"] .home { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E"); }
 }
 
 /* Scene 1: the osprey. Scene 2: the AUV, with the microscope sliding in from the
