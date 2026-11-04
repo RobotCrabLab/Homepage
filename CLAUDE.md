@@ -43,6 +43,8 @@ one.
 - `osprey.svg`: an osprey with a breadboard chest, gripping a breadboard fish on a dead
   branch. Its head nods.
 - `crab-walker.svg`: a breadboard crab that walks into the footer, blowing bubbles.
+- `dock.svg`: a wooden working pier with rope, a cleat, a tire and a ladder, at the water
+  line behind the boater ID (computers only).
 - `microscope.svg`: a gray rework microscope with a ring light over a green circuit
   board in a holder.
 - `assets/images/scientist.svg`: Chris's character (brown hair and beard, brown work
@@ -65,7 +67,8 @@ one.
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
   scale with it, sized in `--u`), and buttons on the card switch the scenes (PCB
   rework/wiring: scene 2; Water science: scene 3; Project lead: scene 1). Only the card, "Built by Chris" and the crab
-  show on this page at those widths (no header, kelp or footer links). The page heading is hidden on
+  show on this page at those widths (no header, kelp or footer links), over a pastel bay
+  (cream sky, wavy water line 15% down the page, water deepening to the bottom) with the pier. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   The card's Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
   its Blog line always links to the newest post, and its Projects line links to the

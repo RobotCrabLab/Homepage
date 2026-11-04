@@ -377,6 +377,8 @@ img { max-width: 100%; height: auto; }
 .scene-button:hover { background: var(--shell); border-color: var(--shell); color: #FFFFFF; }
 .scene-button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 @media (max-width: 40rem) { .scene-nav { display: none; } }
+/* The pier only shows beside the boater ID */
+.home-dock { display: none; }
 /* Computers: the first button says hello, so the heading is kept for screen readers only */
 @media (min-width: 40.01rem) {
   .home .scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
@@ -384,7 +386,27 @@ img { max-width: 100%; height: auto; }
      The card's links replace the menu; other pages keep their header and footer. */
   .home .site-header, .home .kelp, .home .site-footer .links, .portrait-card .card-theme { display: none; }
   .home .site-footer { border-top: 0; }
-  .home main { display: flex; flex-direction: column; justify-content: center; }
+  /* A pastel bay: a cream sky, a soft wave at the water line 15% down the page, and water
+     that deepens toward the bottom. The card sits just under the water line, in front of
+     the pier's pilings; the pier is as wide as the footer's column when the window allows. */
+  .home {
+    --sea-sky: #FBF3E4; --sea-top: #D6EBE6; --sea-bottom: #9CC3CF;
+    --card-w: min(100vw - 2 * var(--gutter), 60rem, (85svh - 11rem) * 1.6);
+    --dock-w: min(100vw - 2 * var(--gutter), 64rem, var(--card-w) * 1.087);
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='10'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5' fill='none' stroke='%235E8FA0' stroke-width='2.5'/%3E%3C/svg%3E") 0 calc(15svh - 5px) / 48px 10px repeat-x,
+      linear-gradient(to bottom, var(--sea-sky) 0 15svh, var(--sea-top) 15svh, var(--sea-bottom) 100svh) no-repeat,
+      var(--sea-bottom);
+  }
+  .home-dock {
+    display: block; position: absolute; z-index: 0; left: calc(50% - var(--dock-w) / 2);
+    top: calc(15svh - var(--dock-w) * 135 / 1024); width: var(--dock-w); height: auto; overflow: visible;
+  }
+  .home .scenes { position: relative; z-index: 1; padding-top: 0; }
+  .home .scene-stage { padding-top: 0; }
+  .home .site-footer { position: relative; z-index: 1; }
+  .home .site-footer p { color: var(--ink); }
+  .home main { display: flex; flex-direction: column; padding-top: calc(15svh + 1rem); }
   /* The card, caption and footer fit on one screen, with no spare space to scroll through */
   .home .scenes, .home .scene-stage { padding-bottom: 0; }
   .home .site-footer { margin-top: 0; }
@@ -401,7 +423,6 @@ img { max-width: 100%; height: auto; }
      the contents scale with the card like a picture does. */
   .portrait {
     --card-bg: #FFFFFF; --card-ink: #14303F; --card-soft: #4E6169; --card-pick: #D9442B;
-    --card-w: min(100vw - 2 * var(--gutter), 60rem, (100svh - 14rem) * 1.6);
     --u: calc(var(--card-w) / 60);
     --photo: calc(var(--u) * 21);
     grid-template-columns: var(--photo) minmax(0, 1fr);
@@ -483,6 +504,14 @@ img { max-width: 100%; height: auto; }
     grid-area: rail; display: block; height: calc(var(--u) * 0.6); margin-top: calc(var(--u) * 0.7);
     background: radial-gradient(circle, #14303F 0 calc(var(--u) * 0.14), transparent calc(var(--u) * 0.16)) left center / calc(var(--u) * 0.75) calc(var(--u) * 0.6) repeat-x;
   }
+}
+
+/* The pastel bay at dusk, so the pier's navy outlines still show */
+@media (min-width: 40.01rem) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .home { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; }
+}
+@media (min-width: 40.01rem) {
+  :root[data-theme="dark"] .home { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; }
 }
 
 /* Scene 1: the osprey. Scene 2: the AUV, with the microscope sliding in from the
