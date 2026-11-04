@@ -62,7 +62,8 @@ one.
 
 ## Home page (`index.html`)
 - One portrait card with three scenes (`data-scene` 1–3). On anything wider than phones (over 40rem) it
-  sits on a white breadboard "boater ID" card, and buttons on the card switch the scenes (PCB
+  sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
+  scale with it, sized in `--u`), and buttons on the card switch the scenes (PCB
   rework/wiring: scene 2; Water science: scene 3; Project lead: scene 1). Only the card, "Built by Chris" and the crab
   show on this page at those widths (no header, kelp or footer links). The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.

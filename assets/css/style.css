@@ -396,94 +396,93 @@ img { max-width: 100%; height: auto; }
 .dive-info { display: contents; }
 @media (max-width: 40rem) { .dive-info { display: none; } }
 @media (min-width: 40.01rem) {
+  /* A true ID card: always 1.6 times as wide as it is tall. --card-w is the largest width
+     that fits the window, and everything inside is sized in --u (1/60 of that width), so
+     the contents scale with the card like a picture does. */
   .portrait {
     --card-bg: #FFFFFF; --card-ink: #14303F; --card-soft: #4E6169; --card-pick: #D9442B;
-    --info-room: 21rem;   /* width kept clear beside the photo for the card's text */
-    --photo: min(27rem, calc((100svh - 30.5rem) * 0.75), calc(100vw - 2 * var(--gutter) - var(--info-room)));
-    grid-template-columns: var(--photo) minmax(0, 24rem);
+    --card-w: min(100vw - 2 * var(--gutter), 60rem, (100svh - 14rem) * 1.6);
+    --u: calc(var(--card-w) / 60);
+    --photo: calc(var(--u) * 21);
+    grid-template-columns: var(--photo) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
     grid-template-areas: "head head" "photo info" "cap info" "rail rail";
-    column-gap: 2rem; justify-items: stretch;
-    width: min(100%, calc(var(--photo) + 24rem + 5.5rem));
-    padding: 0.9rem 1.5rem 1rem; box-sizing: border-box;
+    column-gap: calc(var(--u) * 2); justify-items: stretch;
+    width: var(--card-w); aspect-ratio: 1.6;
+    padding: calc(var(--u) * 0.9) calc(var(--u) * 1.5) calc(var(--u) * 1);
+    box-sizing: border-box;
     background: var(--card-bg); color: var(--card-ink);
-    border: 4px solid #14303F; border-radius: 1.5rem;
+    border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
   }
-  .portrait .portrait-card { grid-area: photo; width: var(--photo); }
-  .portrait > .scene-caption { grid-area: cap; margin-top: 0.4rem; color: var(--card-ink); font-size: var(--step-0); }
+  .portrait .portrait-card {
+    grid-area: photo; width: var(--photo);
+    border-width: calc(var(--u) * 0.25); border-radius: calc(var(--u) * 1.5);
+  }
+  .portrait > .scene-caption { grid-area: cap; margin-top: calc(var(--u) * 0.4); color: var(--card-ink); font-size: calc(var(--u) * 1.0625); }
   /* Header, with the rails running under it like the edge of a real board */
   .dive-head {
     grid-area: head; display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 0.8rem; padding-bottom: 0.55rem; border-bottom: 3px solid #D9442B;
-    box-shadow: 0 3px 0 var(--card-bg), 0 6px 0 #2F6FB5;
+    margin-bottom: calc(var(--u) * 0.8); padding-bottom: calc(var(--u) * 0.55);
+    border-bottom: calc(var(--u) * 0.19) solid #D9442B;
+    box-shadow: 0 calc(var(--u) * 0.19) 0 var(--card-bg), 0 calc(var(--u) * 0.38) 0 #2F6FB5;
     font-family: var(--display); font-weight: 700;
   }
-  .dive-org { font-size: var(--step-2); line-height: 1.1; }
-  .dive-kind { font-family: var(--body); font-weight: 600; font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; }
+  .dive-org { font-size: calc(var(--u) * 1.75); line-height: 1.1; }
+  .dive-kind { font-family: var(--body); font-weight: 600; font-size: calc(var(--u) * 0.875); letter-spacing: 0.14em; text-transform: uppercase; }
   /* Information side: the scene buttons are chunky keys printed on the card */
-  .dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; padding-block: 0.25rem; }
+  .dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
   .dive-label, .dive-fields dt {
     display: block; margin: 0; color: var(--card-soft);
-    font-weight: 600; font-size: 0.75rem; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .dive-name { display: block; margin: 0; padding-bottom: 0.45rem; border-bottom: 2px solid var(--card-ink); font-family: var(--display); font-weight: 700; font-size: var(--step-3); line-height: 1.1; }
-  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0.55rem; margin: 0.7rem 0 0; }
+  .dive-name {
+    display: block; margin: 0; padding-bottom: calc(var(--u) * 0.45);
+    border-bottom: calc(var(--u) * 0.125) solid var(--card-ink);
+    font-family: var(--display); font-weight: 700; font-size: calc(var(--u) * 3); line-height: 1.1;
+  }
+  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 0.7) 0 0; }
   .scene-button {
-    display: flex; align-items: center; gap: 0.7rem; width: 100%; padding: 0.5rem 0.9rem;
-    border: 3px solid var(--card-ink); border-radius: 0.8rem; background: var(--card-bg); color: var(--card-ink);
-    box-shadow: 0 4px 0 var(--card-ink); text-align: left;
-    font-size: var(--step-0); font-weight: 600;
+    display: flex; align-items: center; gap: calc(var(--u) * 0.7); width: 100%;
+    padding: calc(var(--u) * 0.5) calc(var(--u) * 0.9);
+    border: calc(var(--u) * 0.19) solid var(--card-ink); border-radius: calc(var(--u) * 0.8);
+    background: var(--card-bg); color: var(--card-ink);
+    box-shadow: 0 calc(var(--u) * 0.25) 0 var(--card-ink); text-align: left;
+    font-size: calc(var(--u) * 1.0625); font-weight: 600;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   }
   /* Each button starts with a breadboard hole and ends with an arrow; the current
      scene's button is pressed in and filled, with a red wire in its hole */
   .scene-button::before {
-    content: ""; flex: none; width: 0.8rem; height: 0.8rem; border-radius: 50%;
-    background: var(--card-bg); border: 3px solid var(--card-ink); box-sizing: border-box;
+    content: ""; flex: none; width: calc(var(--u) * 0.8); height: calc(var(--u) * 0.8); border-radius: 50%;
+    background: var(--card-bg); border: calc(var(--u) * 0.19) solid var(--card-ink); box-sizing: border-box;
   }
   .scene-button::after { content: "\203A"; margin-left: auto; font-size: 1.4em; line-height: 1; }
-  .scene-button:hover { background: var(--card-pick); border-color: var(--card-ink); color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 6px 0 var(--card-ink); }
+  .scene-button:hover {
+    background: var(--card-pick); border-color: var(--card-ink); color: #FFFFFF;
+    transform: translateY(calc(var(--u) * -0.125)); box-shadow: 0 calc(var(--u) * 0.375) 0 var(--card-ink);
+  }
   .scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover {
     background: var(--card-ink); border-color: var(--card-ink); color: var(--card-bg);
-    box-shadow: none; transform: translateY(4px); cursor: default;
+    box-shadow: none; transform: translateY(calc(var(--u) * 0.25)); cursor: default;
   }
   .scene-button[aria-pressed="true"]::before { background: var(--card-pick); border-color: var(--card-bg); }
   .scene-button[aria-pressed="true"]::after { content: none; }
   .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
-  .dive-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 1rem; margin: 1.1rem 0 0; }
-  .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: var(--step-0); line-height: 1.35; }
-  .dive-fields a { color: var(--card-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+  .dive-fields { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 0.7) calc(var(--u) * 1); margin: calc(var(--u) * 1.1) 0 0; }
+  .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35; }
+  .dive-fields a { color: var(--card-ink); text-decoration: underline; text-decoration-thickness: calc(var(--u) * 0.125); text-underline-offset: 0.15em; }
   .dive-fields a:hover { color: var(--card-pick); }
   /* The newest post's title can be any length, so it stops at two lines */
   .dive-fields dd { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
   .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
   /* The card's Hobbies line links to Photography, so the home page header doesn't need to */
   .home .site-nav a[href$="/photography/"] { display: none; }
-  .dive-note { display: block; margin: auto 0 0; color: var(--card-soft); font-size: 0.75rem; line-height: 1.3; }
+  .dive-note { display: block; margin: auto 0 0; color: var(--card-soft); font-size: calc(var(--u) * 0.75); line-height: 1.3; }
   /* The bottom edge: a strip of breadboard holes */
   .dive-rail {
-    grid-area: rail; display: block; height: 0.6rem; margin-top: 0.7rem;
-    background: radial-gradient(circle, #14303F 0 2.2px, transparent 2.6px) left center / 0.75rem 0.6rem repeat-x;
+    grid-area: rail; display: block; height: calc(var(--u) * 0.6); margin-top: calc(var(--u) * 0.7);
+    background: radial-gradient(circle, #14303F 0 calc(var(--u) * 0.14), transparent calc(var(--u) * 0.16)) left center / calc(var(--u) * 0.75) calc(var(--u) * 0.6) repeat-x;
   }
-}
-
-/* The narrowest card: a smaller photo and text, so post titles still fit on two lines */
-@media (min-width: 40.01rem) and (max-width: 48rem) {
-  .portrait { --info-room: 24.5rem; column-gap: 1.25rem; }
-  .dive-fields dd { font-size: 0.95rem; }
-  .dive-fields { column-gap: 0.75rem; }
-}
-
-/* Short computer screens: a smaller photo, so the page still fits without scrolling */
-@media (min-width: 40.01rem) and (max-height: 820px) {
-  .portrait { --photo: min(27rem, calc((100svh - 26rem) * 0.75), calc(100vw - 2 * var(--gutter) - var(--info-room))); }
-  .dive-fields { margin-top: 0.7rem; gap: 0.35rem 1rem; }
-}
-@media (min-width: 40.01rem) and (max-height: 720px) {
-  .dive-note { display: none; }
-  .dive-fields { margin-top: 0.7rem; gap: 0.35rem 1rem; }
-  .dive-name { font-size: var(--step-2); padding-bottom: 0.3rem; }
-  .scene-nav { margin-top: 0.5rem; gap: 0.45rem; }
-  .scene-button { padding-block: 0.3rem; }
 }
 
 /* Scene 1: the osprey. Scene 2: the AUV, with the microscope sliding in from the
