@@ -428,7 +428,7 @@ img { max-width: 100%; height: auto; }
    white breadboard with holes and red and blue rails. The card keeps its own colors
    in both light and dark mode. Phones don't get any of this. */
 .perch-short { display: none; }
-.dive-head, .dive-label, .dive-name, .dive-summary, .dive-fields, .dive-note, .dive-rail { display: none; }
+.dive-head, .dive-label, .dive-name, .dive-summary, .dive-fields, .dive-rail { display: none; }
 .dive-info { display: contents; }
 @media (max-width: 40rem) { .dive-info { display: none; } }
 @media (min-width: 40.01rem) {
@@ -471,7 +471,7 @@ img { max-width: 100%; height: auto; }
   .dive-kind { font-family: var(--body); font-weight: 600; font-size: calc(var(--u) * 0.875); letter-spacing: 0.14em; text-transform: uppercase; }
   /* Information side: the scene buttons are chunky keys printed on the card */
   .dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
-  .dive-label {
+  .dive-label, .dive-fields dt {
     display: block; margin: 0; color: var(--card-soft);
     font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
   }
@@ -513,12 +513,14 @@ img { max-width: 100%; height: auto; }
   .dive-summary { display: grid; margin-top: calc(var(--u) * 1); }
   .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
   [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
-  /* The links run across the bottom of the card */
-  .dive-fields { grid-area: links; display: flex; justify-content: space-between; margin: calc(var(--u) * 0.8) calc(var(--u) * 2) 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.25); line-height: 1.35; }
+  /* The links run across the bottom of the card, each on one line */
+  .dive-fields { grid-area: links; display: grid; grid-template-columns: auto auto minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 1.5); margin: calc(var(--u) * 0.8) 0 0; }
+  .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35; }
   .dive-fields a { color: var(--card-ink); text-decoration: underline; text-decoration-thickness: calc(var(--u) * 0.125); text-underline-offset: 0.15em; }
   .dive-fields a:hover { color: var(--card-pick); }
+  /* The newest post's title can be any length, so a long one is cut off with dots */
+  .dive-fields dd { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
   .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
-  .dive-note { display: block; margin: auto 0 0; color: var(--card-soft); font-size: calc(var(--u) * 0.75); line-height: 1.3; }
   /* The bottom edge: a strip of breadboard holes */
   .dive-rail {
     grid-area: rail; display: block; height: calc(var(--u) * 0.6); margin-top: calc(var(--u) * 0.7);

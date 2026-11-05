@@ -50,14 +50,13 @@ body_class: home
         <p class="summary-3">Sampled water and habitats across California for Moss Landing Marine Laboratories as the expert on water chemistry instruments, with 200+ hours running research boats and years in a trace-metal clean lab.</p>
         <p class="summary-1">California Team Lead for the US EPA's National Lakes and National Rivers and Streams Assessments, directing field teams of 2&ndash;4 scientists and partnering with state, local and non-profit agencies.</p>
       </div>
-      <p class="dive-note" aria-hidden="true">Not valid for actual boating.</p>
     </div>
-    <nav class="dive-fields" aria-label="Pages">
-      <a href="{{ '/resume/' | relative_url }}">Resume</a>
-      <a href="{{ '/photography/' | relative_url }}">Photography</a>
-      <a href="{{ '/projects/' | relative_url }}">Projects</a>
-      <a href="{{ '/blog/' | relative_url }}">Blog</a>
-    </nav>
+    <dl class="dive-fields">
+      <div><dt>Resume</dt><dd><a href="{{ '/resume/' | relative_url }}">Click Here</a></dd></div>
+      <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
+      {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt>Projects</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
+      {% assign latest = site.posts | first %}{% if latest %}<div><dt>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
+    </dl>
     <div class="dive-rail" aria-hidden="true"></div>
     </div>
   </div>
