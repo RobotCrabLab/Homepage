@@ -83,6 +83,7 @@
       old.replaceWith(s);
     });
     window.scrollTo(0, 0);
+    snapPictures();
     var s = sheet(), target = s || main;
     target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });
@@ -135,8 +136,28 @@
     go(location.href, false, e.state && e.state.y);
   });
 
+  // Pictures come in any height, so round each one's box up to whole ruled lines (30px),
+  // which keeps the words after it sitting on the rules.
+  function snapPictures() {
+    if (!wide.matches) return;
+    document.querySelectorAll('.sheet:not(.sheet-album) .sheet-body :is(img, svg)').forEach(function (pic) {
+      var box = pic.closest('a.episode-card, figure, p') || pic;
+      var side = box === pic ? 'marginBottom' : 'paddingBottom';   // a bare picture can't take padding
+      box.style[side] = '';
+      // Layout height, not the on-screen box, which an animated mascot's tilt would change
+      var h = box === pic ? parseFloat(getComputedStyle(pic).height) : box.getBoundingClientRect().height;
+      var extra = (30 - h % 30) % 30;
+      box.style[side] = parseFloat(getComputedStyle(box)[side]) + extra + 'px';
+    });
+  }
+  addListener.call(window, 'resize', snapPictures);
+  document.addEventListener('load', function (e) {
+    if (e.target.tagName === 'IMG') snapPictures();
+  }, true);
+
   // With no scrollbar to click, the arrow keys need the sheet in focus from the start
   document.addEventListener('DOMContentLoaded', function () {
+    snapPictures();
     var s = wide.matches && sheet();
     if (!s) return;
     s.setAttribute('tabindex', '-1');
