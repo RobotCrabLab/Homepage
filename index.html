@@ -2,7 +2,7 @@
 layout: default
 body_class: home
 ---
-<!-- Three scenes in one portrait card: buttons switch them on computers, swipes on phones. -->
+<!-- Three scenes in one portrait card: buttons switch them. -->
 <section class="hero scenes" data-scene="1">
   <div class="scene-stage">
   <div class="wrap hero-grid">
@@ -36,7 +36,7 @@ body_class: home
       <span class="scene-2">Electronics technician</span>
       <span class="scene-3">Marine scientist</span>
     </p>
-    <!-- Computers: one button per scene (phones swipe instead) -->
+    <!-- One button per scene -->
     <div class="dive-info">
       <p class="dive-label" aria-hidden="true">Boater name</p>
       <p class="dive-name" aria-hidden="true">{{ site.author }}</p>
@@ -66,14 +66,11 @@ body_class: home
 <script>
   // The CSS animates each scene: scene 1 the osprey (bird photographer), scene 2 the
   // AUV and microscope (electronics technician), scene 3 the fish and jelly (marine
-  // scientist). On computers the buttons switch scenes. On phones the page doesn't
-  // scroll at all: a swipe or scroll just switches scenes.
+  // scientist). The buttons switch scenes.
   (function () {
     var section = document.querySelector('.scenes');
     if (!section) return;
-    var phone = window.matchMedia('(max-width: 40rem)');
-    var touchY = null;
-    var scene = 1, lastStep = 0;
+    var scene = 1;
     var captions = section.querySelectorAll('.scene-caption > span');
     var buttons = section.querySelectorAll('.scene-button');
     function setScene(n) {
@@ -92,29 +89,8 @@ body_class: home
         else if (wasOn) sp.classList.add('cap-out-' + dir);
       });
     }
-    function step(dir) {              // phones: one swipe or scroll = one scene
-      var now = Date.now();
-      if (now - lastStep < 700) return;
-      lastStep = now; setScene(scene + dir);
-    }
     buttons.forEach(function (b) {
       b.addEventListener('click', function () { setScene(Number(b.dataset.go)); });
-    });
-    // Phone gestures
-    window.addEventListener('wheel', function (e) {
-      if (!phone.matches || Math.abs(e.deltaY) < 8) return;
-      step(e.deltaY > 0 ? 1 : -1);
-    }, { passive: true });
-    window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
-    window.addEventListener('touchmove', function (e) {
-      if (!phone.matches || touchY === null) return;
-      var dy = touchY - e.touches[0].clientY;
-      if (Math.abs(dy) > 30) { step(dy > 0 ? 1 : -1); touchY = null; }
-    }, { passive: true });
-    window.addEventListener('keydown', function (e) {
-      if (!phone.matches) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') setScene(scene + 1);
-      if (e.key === 'ArrowUp' || e.key === 'PageUp') setScene(scene - 1);
     });
   })();
 </script>

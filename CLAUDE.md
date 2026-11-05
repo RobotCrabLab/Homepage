@@ -82,8 +82,8 @@ one.
 - Captions roll like a ticker: up when moving forward, down when going back.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
-  the screen: photo at the left with the skill summary beside it, then the buttons, then the links. Swipes
-  and scrolls also step through the scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+  the screen: photo at the left with the skill summary beside it, then the buttons, then the links. Only
+  the buttons switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - A script sizes the osprey to fit between "I'm Chris." and the top of the head.
 - **Safari (Chris uses an iPhone):** the watercolor wash is an SVG with filters, and
   Safari redraws patches of it with a visible box. Animate with CSS transforms or SVG
