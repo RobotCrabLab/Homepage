@@ -593,6 +593,8 @@ img { max-width: 100%; height: auto; }
     -webkit-mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
     mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
   }
+  .sheet-album { scrollbar-width: none; }   /* still scrolls; the bar is just hidden */
+  .sheet-album::-webkit-scrollbar { display: none; }
   .sheet-album .sheet-paper { padding: 0 0.75rem; }
   .sheet-album .sheet-paper::before, .sheet-album .sheet-paper::after, .sheet-album .sheet-org, .sheet-album .sheet-kind { display: none; }
   .sheet-album .sheet-head { z-index: 2; align-self: flex-start; padding: 0.65rem 0 0; border: 0; background: none; }

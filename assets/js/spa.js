@@ -135,6 +135,14 @@
     go(location.href, false, e.state && e.state.y);
   });
 
+  // With no scrollbar to click, the arrow keys need the album in focus from the start
+  document.addEventListener('DOMContentLoaded', function () {
+    var album = wide.matches && document.querySelector('.sheet-album');
+    if (!album) return;
+    album.setAttribute('tabindex', '-1');
+    album.focus({ preventScroll: true });
+  });
+
   // Crossing into the phone layout after a swap: start fresh, so its menu and buttons work
   if (wide.addEventListener) wide.addEventListener('change', function () {
     if (swapped) location.reload();
