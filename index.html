@@ -45,14 +45,19 @@ body_class: home
         <button class="scene-button" type="button" data-go="3" aria-pressed="false">Water science</button>
         <button class="scene-button" type="button" data-go="1" aria-pressed="true">Project lead</button>
       </nav>
-      <dl class="dive-fields">
-        <div><dt>Resume</dt><dd><a href="{{ '/resume/' | relative_url }}">Click Here</a></dd></div>
-        {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt>Projects</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
-        <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
-        {% assign latest = site.posts | first %}{% if latest %}<div><dt>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
-      </dl>
+      <div class="dive-summary">
+        <p class="summary-2">Builds and repairs circuits at MBARI, from microscope-assisted SMD soldering and hot air rework to crimped wire terminations. Certified IPC Specialist in IPC-7711/7721 and IPC/WHMA-A-620.</p>
+        <p class="summary-3">Sampled water and habitats across California for Moss Landing Marine Laboratories as the expert on water chemistry instruments, with 200+ hours running research boats and years in a trace-metal clean lab.</p>
+        <p class="summary-1">California Team Lead for the US EPA's National Lakes and National Rivers and Streams Assessments, directing field teams of 2&ndash;4 scientists and partnering with state, local and non-profit agencies.</p>
+      </div>
       <p class="dive-note" aria-hidden="true">Not valid for actual boating.</p>
     </div>
+    <dl class="dive-fields">
+      <div><dt>Resume</dt><dd><a href="{{ '/resume/' | relative_url }}">Click Here</a></dd></div>
+      <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
+      {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt>Projects</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
+      {% assign latest = site.posts | first %}{% if latest %}<div><dt>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
+    </dl>
     <div class="dive-rail" aria-hidden="true"></div>
     </div>
   </div>
@@ -150,7 +155,9 @@ body_class: home
       bird.style.width = w.toFixed(1) + 'px';
       bird.style.top = (artTop - ART_TOP * scale).toFixed(1) + 'px';
       bird.style.bottom = 'auto';
-      bird.style.right = (-0.2 * w).toFixed(1) + 'px';
+      // Computers show more of the branch, so its broken stub sits just inside the frame
+      var past = window.matchMedia('(min-width: 40.01rem)').matches ? 0.07 : 0.2;
+      bird.style.right = (-past * w).toFixed(1) + 'px';
     }
     place();
     window.addEventListener('resize', place);

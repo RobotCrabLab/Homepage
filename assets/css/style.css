@@ -427,7 +427,8 @@ img { max-width: 100%; height: auto; }
 /* Computers: the photo and scene buttons are drawn as a Breadboard Bay boater ID, a
    white breadboard with holes and red and blue rails. The card keeps its own colors
    in both light and dark mode. Phones don't get any of this. */
-.dive-head, .dive-label, .dive-name, .dive-fields, .dive-note, .dive-rail { display: none; }
+.perch-short { display: none; }
+.dive-head, .dive-label, .dive-name, .dive-summary, .dive-fields, .dive-note, .dive-rail { display: none; }
 .dive-info { display: contents; }
 @media (max-width: 40rem) { .dive-info { display: none; } }
 @media (min-width: 40.01rem) {
@@ -439,8 +440,8 @@ img { max-width: 100%; height: auto; }
     --u: calc(var(--card-w) / 60);
     --photo: calc(var(--u) * 21);
     grid-template-columns: var(--photo) minmax(0, 1fr);
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
-    grid-template-areas: "head head" "photo info" "cap info" "rail rail";
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "head head" "photo info" "cap info" "links links" "rail rail";
     column-gap: calc(var(--u) * 2); justify-items: stretch;
     width: var(--card-w); aspect-ratio: 1.6;
     padding: calc(var(--u) * 0.9) calc(var(--u) * 1.5) calc(var(--u) * 1);
@@ -449,10 +450,15 @@ img { max-width: 100%; height: auto; }
     border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
   }
   .portrait .portrait-card {
-    grid-area: photo; width: var(--photo);
+    grid-area: photo; width: var(--photo); aspect-ratio: 21 / 25.4;
     border-width: calc(var(--u) * 0.25); border-radius: calc(var(--u) * 1.5);
   }
-  .portrait > .scene-caption { grid-area: cap; margin-top: calc(var(--u) * 0.4); color: var(--card-ink); font-size: calc(var(--u) * 1.0625); }
+  /* The photo is cut shorter from the bottom, so he and the microscope sit lower in it */
+  .portrait .portrait-me, .portrait .card-scope { bottom: -14cqw; }
+  .portrait .card-fish.card-auv { bottom: 66.5cqw; }
+  .perch-long { display: none; }
+  .perch-short { display: inline; }
+  .portrait > .scene-caption { grid-area: cap; margin-top: calc(var(--u) * 0.3); color: var(--card-ink); font-size: calc(var(--u) * 1.0625); line-height: 1.3; }
   /* Header, with the rails running under it like the edge of a real board */
   .dive-head {
     grid-area: head; display: flex; justify-content: space-between; align-items: baseline;
@@ -502,12 +508,18 @@ img { max-width: 100%; height: auto; }
   .scene-button[aria-pressed="true"]::before { background: var(--card-pick); border-color: var(--card-bg); }
   .scene-button[aria-pressed="true"]::after { content: none; }
   .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
-  .dive-fields { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 0.7) calc(var(--u) * 1); margin: calc(var(--u) * 1.1) 0 0; }
+  /* A short summary of the chosen skill, from the resume. All three share one spot, so
+     the card doesn't shift when the scene changes. */
+  .dive-summary { display: grid; margin-top: calc(var(--u) * 1); }
+  .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
+  [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
+  /* The links run across the bottom of the card, each on one line */
+  .dive-fields { grid-area: links; display: grid; grid-template-columns: auto auto minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 1.5); margin: calc(var(--u) * 0.8) 0 0; }
   .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35; }
   .dive-fields a { color: var(--card-ink); text-decoration: underline; text-decoration-thickness: calc(var(--u) * 0.125); text-underline-offset: 0.15em; }
   .dive-fields a:hover { color: var(--card-pick); }
-  /* The newest post's title can be any length, so it stops at two lines */
-  .dive-fields dd { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  /* The newest post's title can be any length, so a long one is cut off with dots */
+  .dive-fields dd { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
   .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
   .dive-note { display: block; margin: auto 0 0; color: var(--card-soft); font-size: calc(var(--u) * 0.75); line-height: 1.3; }
   /* The bottom edge: a strip of breadboard holes */
