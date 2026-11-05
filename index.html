@@ -154,9 +154,7 @@ body_class: home
       bird.style.width = w.toFixed(1) + 'px';
       bird.style.top = (artTop - ART_TOP * scale).toFixed(1) + 'px';
       bird.style.bottom = 'auto';
-      // Computers show more of the branch, so its broken stub sits just inside the frame
-      var past = window.matchMedia('(min-width: 40.01rem)').matches ? 0.07 : 0.2;
-      bird.style.right = (-past * w).toFixed(1) + 'px';
+      bird.style.right = (-0.07 * w).toFixed(1) + 'px';   // its broken stub sits just inside the frame
     }
     place();
     window.addEventListener('resize', place);

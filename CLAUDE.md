@@ -63,7 +63,7 @@ one.
 - **For new art, show a mockup (or a few options) before building the final version.**
 
 ## Home page (`index.html`)
-- One portrait card with three scenes (`data-scene` 1–3). On anything wider than phones (over 40rem) it
+- One portrait card with three scenes (`data-scene` 1–3). On computers it
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
   scale with it, sized in `--u`), and buttons on the card switch the scenes (PCB
   rework/wiring: scene 2; Water science: scene 3; Project lead: scene 1). Only the card, "Built by Chris" and the crab
@@ -72,7 +72,7 @@ one.
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
-  The photo is shorter on computers and the osprey's branch is snapped off there (`.perch-short`; phones keep `.perch-long`).
+  The photo is shorter on computers and the osprey's branch is snapped off there.
   A row across the card's bottom holds the links: its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
   its Blog line always links to the newest post, and its Projects line links to the
   project listed first on the Projects page (lowest `order`):
@@ -80,10 +80,11 @@ one.
   2. "Electronics technician": the microscope slides in, the AUV cruises across.
   3. "Marine scientist": the fish and the jellyfish.
 - Captions roll like a ticker: up when moving forward, down when going back.
-- **Phones:** the home page is a fixed full-screen card with no footer and no page
-  scroll; swipes/scrolls step through the scenes. The logo opens the menu. A better
-  phone nav menu is still to do. Backup of this finished layout: branch
-  `backup/mobile-layout-2026-11-02`.
+- **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
+  with no pier, waves or sky, and the card at the top of the screen. The boater ID stands upright (still
+  1.6): photo at the left with the skill summary beside it, then the buttons, then the links. Swipes
+  and scrolls also step through the scenes. Titles shrink so "An interesting" fits on one line. Short
+  phones (under 740px tall) drop the crab's row. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - A script sizes the osprey to fit between "I'm Chris." and the top of the head.
 - **Safari (Chris uses an iPhone):** the watercolor wash is an SVG with filters, and
   Safari redraws patches of it with a visible box. Animate with CSS transforms or SVG
@@ -97,13 +98,13 @@ one.
 - Keep edits minimal; change only what he asked. "N px" means pixels on the preview
   image he's looking at.
 - Never mention GitHub Pages anywhere on the site.
-- **Single page app (computers):** `assets/js/spa.js` swaps the content of `<main>` instead of
-  loading pages, so the bay never reloads. Scripts inside `<main>` re-run on each swap, so they
+- **Single page app:** `assets/js/spa.js` swaps the content of `<main>` instead of
+  loading pages, so the bay never reloads, on phones too. Scripts inside `<main>` re-run on each swap, so they
   must find their elements fresh. Between pages the old one rises and fades out just under the
-  water, then the new one slides up from the bottom. Phones load pages normally.
+  water, then the new one slides up from the bottom.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper scrolls inside its edges, with holes, margin and rules scrolling along and 2.5 holes
-  in view. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. Its wrappers are `display: contents` on phones and in print.
+  in view. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. Its wrappers are `display: contents` in print.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
 - Open ideas, **not approved yet**: merging Blog + Projects into "Posts", replacing the

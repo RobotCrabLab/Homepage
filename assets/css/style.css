@@ -376,12 +376,11 @@ img { max-width: 100%; height: auto; }
 }
 .scene-button:hover { background: var(--shell); border-color: var(--shell); color: #FFFFFF; }
 .scene-button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-@media (max-width: 40rem) { .scene-nav { display: none; } }
 /* The pier only shows beside the boater ID */
 .home-dock, .home-water { display: none; }
 @keyframes water-drift { from { transform: translateX(-24px); } to { transform: translateX(24px); } }
 /* Computers: the first button says hello, so the heading is kept for screen readers only */
-@media screen and (min-width: 40.01rem) {
+@media screen {
   .home .scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
   /* Every page stands alone in the bay: only its card or sheet, "Built by Chris" and the
      crab show. These are for screens only, so printed pages stay plain. */
@@ -427,11 +426,9 @@ img { max-width: 100%; height: auto; }
 /* Computers: the photo and scene buttons are drawn as a Breadboard Bay boater ID, a
    white breadboard with holes and red and blue rails. The card keeps its own colors
    in both light and dark mode. Phones don't get any of this. */
-.perch-short { display: none; }
 .dive-head, .dive-label, .dive-name, .dive-summary, .dive-fields, .dive-rail { display: none; }
 .dive-info { display: contents; }
-@media (max-width: 40rem) { .dive-info { display: none; } }
-@media (min-width: 40.01rem) {
+@media all {
   /* A true ID card: always 1.6 times as wide as it is tall. --card-w is the largest width
      that fits the window, and everything inside is sized in --u (1/60 of that width), so
      the contents scale with the card like a picture does. */
@@ -456,8 +453,6 @@ img { max-width: 100%; height: auto; }
   /* The photo is cut shorter from the bottom, so he and the microscope sit lower in it */
   .portrait .portrait-me, .portrait .card-scope { bottom: -14cqw; }
   .portrait .card-fish.card-auv { bottom: 66.5cqw; }
-  .perch-long { display: none; }
-  .perch-short { display: inline; }
   .portrait > .scene-caption { grid-area: cap; margin-top: calc(var(--u) * 0.3); color: var(--card-ink); font-size: calc(var(--u) * 1.0625); line-height: 1.3; }
   /* Header, with the rails running under it like the edge of a real board */
   .dive-head {
@@ -529,16 +524,16 @@ img { max-width: 100%; height: auto; }
 }
 
 /* The pastel bay at dusk, so the pier's navy outlines still show */
-@media screen and (min-width: 40.01rem) and (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) body { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E"); }
 }
-@media screen and (min-width: 40.01rem) {
+@media screen {
   :root[data-theme="dark"] body { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E"); }
 }
 
 /* While pages change (see spa.js), nothing shows above the water's surface and the window
    can't scroll. The new page rises behind "Built by Chris" and the crab. */
-@media screen and (min-width: 40.01rem) {
+@media screen {
   .page-moving { overflow: hidden; }
   .page-moving main { position: relative; z-index: 3; clip-path: inset(calc(15svh + 6px) -100vw -100vh -100vw); }
 }
@@ -549,7 +544,7 @@ img { max-width: 100%; height: auto; }
    show at a time. On phones and in print the sheet's wrappers do nothing at all. */
 .sheet, .sheet-paper, .sheet-body { display: contents; }
 .sheet-head { display: none; }
-@media screen and (min-width: 40.01rem) {
+@media screen {
   body {
     --sheet-h: calc(85svh - 11rem);
     --hole-gap: calc((var(--sheet-h) - 8px) / 2.5);
@@ -635,17 +630,17 @@ img { max-width: 100%; height: auto; }
   .sheet-album .shot-title { font-size: var(--step-1); line-height: 1.2; }
   .sheet-album .shot-note { color: #4E6169; line-height: 1.3; }
 }
-@media screen and (min-width: 40.01rem) and (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .sheet-album { --ink: #E3ECEA; --muted: #C9DADE; }
 }
-@media screen and (min-width: 40.01rem) {
+@media screen {
   :root[data-theme="dark"] .sheet-album { --ink: #E3ECEA; --muted: #C9DADE; }
 }
 @media (prefers-reduced-motion: reduce) { .sheet-album .shot { transition: none; } }
 /* Words sit on the paper's ruled lines. Everything on a sheet shares one 30px line and every
    gap is a whole number of lines, so the rhythm never drifts; each text size then gets a small
    nudge so its baseline lands just above the rule. The rules take over from thin dividers. */
-@media screen and (min-width: 40.01rem) {
+@media screen {
   .sheet:not(.sheet-album) .sheet-body {
     --line: 30px; padding: var(--line) 1.75rem calc(var(--line) * 2) 0;
     background: repeating-linear-gradient(transparent 0 23px, #D7E4E8 23px 24.5px, transparent 24.5px var(--line));
@@ -675,10 +670,10 @@ img { max-width: 100%; height: auto; }
   .sheet:not(.sheet-album) .sheet-body section > h2 { background: linear-gradient(#14303F, #14303F) 0 26.5px / 100% 2px no-repeat; }
 }
 
-@media screen and (min-width: 40.01rem) and (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) body { --hole: #3F7183; }
 }
-@media screen and (min-width: 40.01rem) {
+@media screen {
   :root[data-theme="dark"] body { --hole: #3F7183; }
 }
 
@@ -724,34 +719,6 @@ img { max-width: 100%; height: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
-}
-
-/* Phones: the home page is one full-screen card that doesn't scroll. Swipes and
-   scrolls switch scenes instead (see the script on the home page). The logo/menu
-   button and the theme switch sit inside the card's top edge, the title and caption
-   float in the open water at the top, and the footer is hidden. */
-@media (max-width: 40rem) {
-  body.home { position: fixed; inset: 0; overflow: hidden; }
-  .home .site-footer { display: none; }
-  .home .scene-stage { position: static; padding: 0; }
-  .home .portrait .portrait-card {
-    position: fixed; inset: 0.6rem; width: auto; aspect-ratio: auto; margin: 0; z-index: 1;
-    justify-self: stretch; align-self: stretch;
-  }
-  .home .site-header { position: fixed; top: 0.6rem; left: 0.6rem; right: 0.6rem; z-index: 10; padding: 0.85rem 0.9rem 0; }
-  /* the header strip lies over the card's top edge: let taps through its empty space to the theme switch */
-  .home .site-header, .home .site-header .header-inner { pointer-events: none; }
-  .home .site-header .menu-toggle, .home .site-header .wordmark, .home .site-header .site-nav { pointer-events: auto; }
-  .home .site-header .header-inner { padding-inline: 0; }
-  .home .js .site-nav.is-open, .js .home .site-nav.is-open {
-    background: var(--paper); border: 4px solid #14303F; border-radius: 1rem; padding: 0.25rem 1rem; margin-top: 0.75rem;
-  }
-  /* the page title stays for screen readers; the visible copy is inside the card */
-  .home .scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
-  .home .portrait > .scene-caption { display: none; }
-  .home .card-title { display: block; }
-  /* the full-screen card has room above the head for a bigger bird */
-  .home .card-osprey { right: -12%; bottom: 95cqw; width: 64%; }
 }
 
 /* The jelly swims through the back of scene 1, behind everything else. Each trip it
@@ -1098,4 +1065,62 @@ img { max-width: 100%; height: auto; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .kelp-bg { display: none; }
   a { color: inherit; }
+}
+
+/* Phones use the same bay, card, sheets and page swaps as computers, with these changes:
+   all water with no pier, the card at the top of the screen, and the boater ID stood
+   upright (still 1.6) with the photo at the left. Swipes step through the scenes too. */
+@media screen and (max-width: 40rem) {
+  body {
+    --sheet-h: calc(100svh - 11.5rem);
+    background: linear-gradient(to bottom, var(--sea-top), var(--sea-bottom)) no-repeat, var(--sea-bottom);
+  }
+  html { min-height: 100svh; }   /* the water still fills the screen when the page itself can't scroll */
+  body.home { position: fixed; inset: 0; overflow: hidden; }
+  .home-dock, .home-water { display: none; }
+  body main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
+  .page-moving main { clip-path: none; }
+
+  .portrait {
+    --card-w: min(100vw - 2 * var(--gutter), (100svh - 11.5rem) / 1.6); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
+    aspect-ratio: 1 / 1.6; column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
+    grid-template-rows: none;
+    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "cap summary" "nav nav" "l1 l2" "l3 l3" "l4 l4" "rail rail";
+  }
+  .dive-info, .dive-fields { display: contents; }
+  .dive-label { grid-area: label; }
+  .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
+  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
+  .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
+  .scene-nav { grid-area: nav; margin-top: calc(var(--u) * 0.6); gap: calc(var(--u) * 0.45); }
+  .scene-button { font-size: calc(var(--u) * 0.98); padding: calc(var(--u) * 0.32) calc(var(--u) * 0.7); gap: calc(var(--u) * 0.5); }
+  .scene-button::after { content: none; }
+  .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.45); }
+  .dive-fields > div:nth-child(1) { grid-area: l1; }
+  .dive-fields > div:nth-child(2) { grid-area: l2; }
+  .dive-fields > div:nth-child(3) { grid-area: l3; }
+  .dive-fields > div:nth-child(4) { grid-area: l4; }
+  .dive-rail { margin-top: calc(var(--u) * 0.3); }
+  .portrait .portrait-card { aspect-ratio: 21 / 25.8; min-height: calc(var(--photo) * 25.8 / 21); }
+  .portrait .portrait-me, .portrait .card-scope { bottom: -13cqw; }
+  .portrait > .scene-caption { margin-top: calc(var(--u) * 0.15); font-size: calc(var(--u) * 0.9); }
+
+  .sheet-paper { padding-left: 2.6rem; }
+  .sheet-paper::before { left: 0.4rem; width: 1.2rem; background-size: 1.2rem var(--hole-gap); }
+  .sheet-paper::after { left: 2.05rem; }
+  .sheet-org { display: none; }
+  .sheet-head { padding-right: 0.9rem; }
+  .sheet:not(.sheet-album) .sheet-body { padding-right: 0.9rem; }
+  .sheet-album .sheet-head { padding-top: 0.4rem; }
+  .sheet-album .sheet-body { margin-top: 0; }
+  /* Titles are small enough that "An interesting" fits on one line */
+  .sheet:not(.sheet-album) .sheet-body h1, .sheet-album h1 { font-size: min(9.6vw, 3rem); }
+  .sheet:not(.sheet-album) .sheet-body h1 { top: calc(21px - 0.33em); }   /* keeps a smaller title on its rule */
+}
+/* Short phones: no room for the crab's row */
+@media screen and (max-width: 40rem) and (max-height: 740px) {
+  body { --sheet-h: calc(100svh - 6.5rem); }
+  .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 5.5rem) / 1.6); }
+  .crab-track { display: none; }
+  body .site-footer { padding-block: 0.75rem; }
 }

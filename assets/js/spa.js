@@ -1,11 +1,10 @@
-// Computers: moving between pages swaps the content inside <main> instead of loading a
+// Moving between pages swaps the content inside <main> instead of loading a
 // new page, so the bay, pier and crab carry on undisturbed. Every page is still a real
-// page at a real address. Phones, and anything unexpected, just load pages normally.
+// page at a real address. Anything unexpected just loads the page normally.
 (function () {
   var base = new URL('../../', document.currentScript.src).pathname;
-  var wide = window.matchMedia('(min-width: 40.01rem)');
   var path = location.pathname;
-  var swapped = false, latest = 0;
+  var latest = 0;
 
   // Scripts inside <main> restart after each swap, so remember the window listeners they
   // add and remove them when their page goes away. Header and footer scripts stay.
@@ -91,7 +90,6 @@
     if (spot) spot.scrollIntoView({ block: 'center' });
     else if (s) s.scrollTop = y || 0;
     path = location.pathname;
-    swapped = true;
   }
 
   function go(url, push, y) {
@@ -119,7 +117,7 @@
   }
 
   document.addEventListener('click', function (e) {
-    if (!wide.matches || e.defaultPrevented || e.button !== 0) return;
+    if (e.defaultPrevented || e.button !== 0) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a || a.target || a.hasAttribute('download')) return;
@@ -139,7 +137,6 @@
   // Pictures come in any height, so round each one's box up to whole ruled lines (30px),
   // which keeps the words after it sitting on the rules.
   function snapPictures() {
-    if (!wide.matches) return;
     document.querySelectorAll('.sheet:not(.sheet-album) .sheet-body :is(img, svg)').forEach(function (pic) {
       var box = pic.closest('a.episode-card, figure, p') || pic;
       var side = box === pic ? 'marginBottom' : 'paddingBottom';   // a bare picture can't take padding
@@ -158,14 +155,10 @@
   // With no scrollbar to click, the arrow keys need the sheet in focus from the start
   document.addEventListener('DOMContentLoaded', function () {
     snapPictures();
-    var s = wide.matches && sheet();
+    var s = sheet();
     if (!s) return;
     s.setAttribute('tabindex', '-1');
     s.focus({ preventScroll: true });
   });
 
-  // Crossing into the phone layout after a swap: start fresh, so its menu and buttons work
-  if (wide.addEventListener) wide.addEventListener('change', function () {
-    if (swapped) location.reload();
-  });
 })();
