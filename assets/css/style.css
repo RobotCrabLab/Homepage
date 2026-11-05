@@ -1072,17 +1072,17 @@ img { max-width: 100%; height: auto; }
    upright (still 1.6) with the photo at the left. Swipes step through the scenes too. */
 @media screen and (max-width: 40rem) {
   body {
-    --sheet-h: calc(100svh - 11.5rem);
+    --sheet-h: calc(100svh - 1.5rem);
     background: linear-gradient(to bottom, var(--sea-top), var(--sea-bottom)) no-repeat, var(--sea-bottom);
   }
   html { min-height: 100svh; }   /* the water still fills the screen when the page itself can't scroll */
   body.home { position: fixed; inset: 0; overflow: hidden; }
-  .home-dock, .home-water { display: none; }
+  .home-dock, .home-water, .site-footer { display: none; }
   body main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
   .portrait {
-    --card-w: min(100vw - 2 * var(--gutter), (100svh - 11.5rem) / 1.6); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
+    --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.6); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
     aspect-ratio: 1 / 1.6; column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
     grid-template-rows: none;
     grid-template-areas: "head head" "photo label" "photo name" "photo summary" "cap summary" "nav nav" "l1 l2" "l3 l3" "l4 l4" "rail rail";
@@ -1116,11 +1116,4 @@ img { max-width: 100%; height: auto; }
   /* Titles are small enough that "An interesting" fits on one line */
   .sheet:not(.sheet-album) .sheet-body h1, .sheet-album h1 { font-size: min(9.6vw, 3rem); }
   .sheet:not(.sheet-album) .sheet-body h1 { top: calc(21px - 0.33em); }   /* keeps a smaller title on its rule */
-}
-/* Short phones: no room for the crab's row */
-@media screen and (max-width: 40rem) and (max-height: 740px) {
-  body { --sheet-h: calc(100svh - 6.5rem); }
-  .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 5.5rem) / 1.6); }
-  .crab-track { display: none; }
-  body .site-footer { padding-block: 0.75rem; }
 }
