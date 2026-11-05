@@ -97,7 +97,8 @@ one.
 - Never mention GitHub Pages anywhere on the site.
 - **Single page app (computers):** `assets/js/spa.js` swaps the content of `<main>` instead of
   loading pages, so the bay never reloads. Scripts inside `<main>` re-run on each swap, so they
-  must find their elements fresh. Phones load pages normally.
+  must find their elements fresh. Between pages the old one rises and fades out just under the
+  water, then the new one slides up from the bottom. Phones load pages normally.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper scrolls inside its edges, with holes, margin and rules scrolling along and 2.5 holes
   in view. Its wrappers are `display: contents` on phones and in print.

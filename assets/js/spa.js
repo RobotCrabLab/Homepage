@@ -16,6 +16,44 @@
     return addListener.call(window, type, fn, opts);
   };
 
+  // Between pages, the old one rises and fades out just under the water's surface, then
+  // the new one slides up from the bottom of the screen. The styles for .page-moving keep
+  // the page below the surface and stop the window scrolling while this happens.
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement;
+  var leaving = null, arriving = null;
+
+  function page() { return document.querySelector('main').firstElementChild; }
+  function leave() {
+    if (leaving) return leaving;
+    if (arriving) arriving.finish();
+    var el = page();
+    if (calm.matches || !el || !el.animate) return Promise.resolve();
+    root.classList.add('page-moving');
+    var anim = el.animate([
+      { transform: 'none', opacity: 1 },
+      { transform: 'translateY(' + (-0.18 * window.innerHeight) + 'px)', opacity: 0 }
+    ], { duration: 380, easing: 'ease-in', fill: 'forwards' });
+    leaving = anim.finished.catch(function () {});
+    return leaving;
+  }
+  function arrive() {
+    leaving = null;
+    var el = page();
+    if (calm.matches || !el || !el.animate) { root.classList.remove('page-moving'); return; }
+    root.classList.add('page-moving');
+    var anim = el.animate([
+      { transform: 'translateY(' + (window.innerHeight - el.getBoundingClientRect().top) + 'px)' },
+      { transform: 'none' }
+    ], { duration: 560, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' });
+    arriving = anim;
+    anim.finished.catch(function () {}).then(function () {
+      if (arriving !== anim) return;
+      arriving = null;
+      root.classList.remove('page-moving');
+    });
+  }
+
   function sheet() { return document.querySelector('.sheet'); }
   function saveScroll() {
     var s = sheet();
@@ -57,19 +95,23 @@
 
   function go(url, push, y) {
     var mine = ++latest;
+    if (push) saveScroll();   // before the old page goes
+    var gone = leave();
     fetch(url).then(function (res) {
       var type = res.headers.get('content-type') || '';
       if (!res.ok || type.indexOf('text/html') === -1) throw new Error('not a page');
       return res.text().then(function (html) { return { html: html, url: res.url }; });
     }).then(function (got) {
+      return gone.then(function () { return got; });
+    }).then(function (got) {
       if (mine !== latest) return;
       var doc = new DOMParser().parseFromString(got.html, 'text/html');
       if (!doc.querySelector('main') || doc.querySelector('meta[http-equiv="refresh" i]')) throw new Error('not a page');
       if (push) {
-        saveScroll();
         history.pushState({ y: 0 }, '', got.url + new URL(url, location.href).hash);
       }
       show(doc, y);
+      arrive();
     }).catch(function () {
       if (mine === latest) location.href = url;   // anything odd: load it the normal way
     });
