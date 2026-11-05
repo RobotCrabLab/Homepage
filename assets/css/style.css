@@ -1084,8 +1084,9 @@ img { max-width: 100%; height: auto; }
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
     aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
-    grid-template-rows: auto auto auto minmax(0, 1fr) auto auto auto auto auto auto;
-    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "cap summary" "nav nav" "l1 l2" "l3 l3" "l4 l4" "rail rail";
+    /* Spare height goes into the gaps around the buttons, so the card still fills the screen */
+    grid-template-rows: auto auto auto auto minmax(0, 1fr) auto minmax(0, 1fr) auto auto auto minmax(0, 0.5fr) auto;
+    grid-template-areas: "head head" "photo label" "photo name" "photo summary" ". ." "nav nav" ". ." "l1 l2" "l3 l3" "l4 l4" ". ." "rail rail";
   }
   .dive-info, .dive-fields { display: contents; }
   .dive-label { grid-area: label; }
@@ -1102,9 +1103,10 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(3) { grid-area: l3; }
   .dive-fields > div:nth-child(4) { grid-area: l4; }
   .dive-rail { margin-top: calc(var(--u) * 0.7); }
-  .portrait .portrait-card { aspect-ratio: auto; min-height: calc(var(--photo) * 25.8 / 21); }
+  /* The photo is about as tall as the summary text beside it */
+  .portrait .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; }
   .portrait .portrait-me, .portrait .card-scope { bottom: -13cqw; }
-  .portrait > .scene-caption { margin-top: calc(var(--u) * 0.15); font-size: calc(var(--u) * 0.9); }
+  .portrait > .scene-caption { display: none; }
 
   .sheet-paper { padding-left: 2.6rem; }
   .sheet-paper::before { left: 0.4rem; width: 1.2rem; background-size: 1.2rem var(--hole-gap); }
@@ -1122,6 +1124,7 @@ img { max-width: 100%; height: auto; }
 @media screen and (max-width: 40rem) and (max-height: 740px) {
   .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.75); }
   .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
+  .portrait .portrait-card { height: calc(var(--u) * 15.9); }
   .scene-nav { margin-top: calc(var(--u) * 0.5); gap: calc(var(--u) * 0.45); }
   .scene-button { font-size: calc(var(--u) * 0.98); padding-block: calc(var(--u) * 0.32); }
   .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
