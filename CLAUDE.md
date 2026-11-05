@@ -73,9 +73,8 @@ one.
   computers, except for screen readers, and the page fits one screen with no scrolling.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
   The photo is shorter on computers and the osprey's branch is snapped off there (`.perch-short`; phones keep `.perch-long`).
-  A row across the card's bottom holds the links: its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
-  its Blog line always links to the newest post, and its Projects line links to the
-  project listed first on the Projects page (lowest `order`):
+  A row across the card's bottom holds the links: Resume, Photography, Projects and Blog (the
+  Photography link replaces that header link on this page):
   1. Osprey on its branch in the background (no caption).
   2. "Electronics technician": the microscope slides in, the AUV cruises across.
   3. "Marine scientist": the fish and the jellyfish.

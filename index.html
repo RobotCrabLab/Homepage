@@ -52,12 +52,12 @@ body_class: home
       </div>
       <p class="dive-note" aria-hidden="true">Not valid for actual boating.</p>
     </div>
-    <dl class="dive-fields">
-      <div><dt>Resume</dt><dd><a href="{{ '/resume/' | relative_url }}">Click Here</a></dd></div>
-      <div><dt>Hobbies</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
-      {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt>Projects</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
-      {% assign latest = site.posts | first %}{% if latest %}<div><dt>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
-    </dl>
+    <nav class="dive-fields" aria-label="Pages">
+      <a href="{{ '/resume/' | relative_url }}">Resume</a>
+      <a href="{{ '/photography/' | relative_url }}">Photography</a>
+      <a href="{{ '/projects/' | relative_url }}">Projects</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+    </nav>
     <div class="dive-rail" aria-hidden="true"></div>
     </div>
   </div>
