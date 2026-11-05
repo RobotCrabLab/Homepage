@@ -550,8 +550,9 @@ img { max-width: 100%; height: auto; }
     width: min(100vw - 2 * var(--gutter), 54rem); height: var(--sheet-h); margin: 0 auto; overflow-y: auto;
     background: var(--paper); color: var(--ink);
     border: 4px solid #14303F; border-radius: 0.5rem; outline: none;
-    scrollbar-width: thin; scrollbar-color: #14303F transparent;
+    scrollbar-width: none;   /* still scrolls; the bar is just hidden */
   }
+  .sheet::-webkit-scrollbar { display: none; }
   .sheet-paper { display: flex; flex-direction: column; position: relative; min-height: 100%; padding-left: 4rem; box-sizing: border-box; }
   .sheet-paper::before {
     content: ""; position: absolute; left: 1rem; top: 0; bottom: 0; width: 1.3rem;
@@ -573,9 +574,16 @@ img { max-width: 100%; height: auto; }
   .sheet-back:hover { background: #D9442B; color: #FFFFFF; }
   .sheet-back:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
   .sheet-body {
-    display: block; flex: 1; min-width: 0; padding: 1rem 1.75rem 1.5rem 0;
+    display: block; flex: 1; min-width: 0; padding: 1rem 1.75rem 3rem 0;
     background: repeating-linear-gradient(transparent 0 1.7em, #D7E4E8 1.7em calc(1.7em + 1.5px), transparent calc(1.7em + 1.5px) 1.8em);
   }
+  /* A soft fade at the paper's bottom edge, so there's a hint of more below. The extra
+     padding above means it never covers the last line once you reach the end. */
+  .sheet-body::after {
+    content: ""; display: block; position: sticky; bottom: 0; z-index: 1; height: 2.5rem; margin: 0 -1.75rem -3rem 0;
+    background: linear-gradient(transparent, var(--paper)); pointer-events: none;
+  }
+  .sheet-album .sheet-body::after { display: none; }
   .sheet-body .wrap, .sheet-body .wrap-wide { max-width: none; width: auto; margin: 0; padding: 0; }
   .sheet-body h1 { margin-top: 0; font-size: var(--step-3); color: var(--ink); }
   .sheet-body > *:first-child { margin-top: 0; padding-top: 0; }
@@ -593,8 +601,6 @@ img { max-width: 100%; height: auto; }
     -webkit-mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
     mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
   }
-  .sheet-album { scrollbar-width: none; }   /* still scrolls; the bar is just hidden */
-  .sheet-album::-webkit-scrollbar { display: none; }
   .sheet-album .sheet-paper { padding: 0 0.75rem; }
   .sheet-album .sheet-paper::before, .sheet-album .sheet-paper::after, .sheet-album .sheet-org, .sheet-album .sheet-kind { display: none; }
   .sheet-album .sheet-head { z-index: 2; align-self: flex-start; padding: 0.65rem 0 0; border: 0; background: none; }

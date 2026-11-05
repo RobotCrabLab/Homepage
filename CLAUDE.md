@@ -43,7 +43,7 @@ one.
 - `osprey.svg`: an osprey with a breadboard chest, gripping a breadboard fish on a dead
   branch. Its head nods.
 - `crab-walker.svg`: a breadboard crab that walks into the footer, blowing bubbles.
-- `dock.svg`: a wooden working pier with rope, a cleat, a tire and a ladder, at the water
+- `dock.svg`: a wooden working pier with rope, a cleat, a life ring and a ladder, at the water
   line behind the boater ID (computers only).
 - `microscope.svg`: a gray rework microscope with a ring light over a green circuit
   board in a holder.
@@ -101,7 +101,7 @@ one.
   water, then the new one slides up from the bottom. Phones load pages normally.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper scrolls inside its edges, with holes, margin and rules scrolling along and 2.5 holes
-  in view. Its wrappers are `display: contents` on phones and in print.
+  in view. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. Its wrappers are `display: contents` on phones and in print.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
 - Open ideas, **not approved yet**: merging Blog + Projects into "Posts", replacing the
