@@ -11,13 +11,26 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   {% feed_meta %}
+  <script src="{{ '/assets/js/spa.js' | relative_url }}"></script>
 </head>
 <body class="{{ page.body_class | default: 'page' }}">
   {% include kelp.html %}
+  {% include dock.svg %}
+  <div class="home-water" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   {% include header.html %}
   <main id="main">
-    {{ content }}
+    {% if page.body_class == 'home' %}{{ content }}{% else %}
+    {% assign kind = 'Notice' %}
+    {% if page.url contains '/resume' %}{% assign kind = 'Crew record' %}{% endif %}
+    {% if page.url contains '/blog' %}{% assign kind = "Ship's log" %}{% endif %}
+    {% if page.url contains '/projects' %}{% assign kind = 'Work orders' %}{% endif %}
+    {% if page.url contains '/photography' %}{% assign kind = 'Photo album' %}{% endif %}
+    <div class="sheet"><div class="sheet-paper">
+      <div class="sheet-head"><a class="sheet-back" href="{{ '/' | relative_url }}">&lsaquo; Boater ID</a><span class="sheet-org" aria-hidden="true">Breadboard Bay</span><span class="sheet-kind" aria-hidden="true">{{ kind }}</span></div>
+      <div class="sheet-body">{{ content }}</div>
+    </div></div>
+    {% endif %}
   </main>
   {% include footer.html %}
 </body>
