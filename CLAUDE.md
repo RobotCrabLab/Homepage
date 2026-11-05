@@ -101,6 +101,8 @@ one.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper scrolls inside its edges, with holes, margin and rules scrolling along and 2.5 holes
   in view. Its wrappers are `display: contents` on phones and in print.
+- **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
+  is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
 - Open ideas, **not approved yet**: merging Blog + Projects into "Posts", replacing the
   placeholder email (`you@example.com`), removing the hello-world post, a résumé
   summary, a custom domain.

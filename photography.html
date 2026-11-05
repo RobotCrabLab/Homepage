@@ -21,7 +21,7 @@ layout: default
           <img src="{{ small }}"
                srcset="{{ small }} 900w, {{ large }} 2000w"
                sizes="{% if photo.wide %}(min-width: 66rem) 62rem, 100vw{% else %}(min-width: 66rem) 31rem, (min-width: 40rem) 50vw, 100vw{% endif %}"
-               width="{{ photo.width }}" height="{{ photo.height }}"
+               width="{{ photo.width }}" height="{{ photo.height }}" style="--r: {{ photo.width }} / {{ photo.height }}"
                alt="{{ photo.alt | escape }}" loading="{% if forloop.index > 2 %}lazy{% else %}eager{% endif %}">
         </a>
         <figcaption>
