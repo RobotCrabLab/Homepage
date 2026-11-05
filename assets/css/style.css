@@ -1082,26 +1082,27 @@ img { max-width: 100%; height: auto; }
   .page-moving main { clip-path: none; }
 
   .portrait {
-    --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.6); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
-    aspect-ratio: 1 / 1.6; column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
-    grid-template-rows: none;
+    --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
+    aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto auto auto auto auto auto;
     grid-template-areas: "head head" "photo label" "photo name" "photo summary" "cap summary" "nav nav" "l1 l2" "l3 l3" "l4 l4" "rail rail";
   }
   .dive-info, .dive-fields { display: contents; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
   .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
-  .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
-  .scene-nav { grid-area: nav; margin-top: calc(var(--u) * 0.6); gap: calc(var(--u) * 0.45); }
-  .scene-button { font-size: calc(var(--u) * 0.98); padding: calc(var(--u) * 0.32) calc(var(--u) * 0.7); gap: calc(var(--u) * 0.5); }
+  .dive-summary p { font-size: calc(var(--u) * 1); line-height: 1.38; }
+  .scene-nav { grid-area: nav; margin-top: calc(var(--u) * 0.8); gap: calc(var(--u) * 0.6); }
+  .scene-button { font-size: calc(var(--u) * 1.05); padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8); gap: calc(var(--u) * 0.5); }
   .scene-button::after { content: none; }
-  .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.45); }
+  .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.7); }
+  .dive-fields > div:nth-child(-n+2) { margin-top: calc(var(--u) * 1.6); }
   .dive-fields > div:nth-child(1) { grid-area: l1; }
   .dive-fields > div:nth-child(2) { grid-area: l2; }
   .dive-fields > div:nth-child(3) { grid-area: l3; }
   .dive-fields > div:nth-child(4) { grid-area: l4; }
-  .dive-rail { margin-top: calc(var(--u) * 0.3); }
-  .portrait .portrait-card { aspect-ratio: 21 / 25.8; min-height: calc(var(--photo) * 25.8 / 21); }
+  .dive-rail { margin-top: calc(var(--u) * 0.7); }
+  .portrait .portrait-card { aspect-ratio: auto; min-height: calc(var(--photo) * 25.8 / 21); }
   .portrait .portrait-me, .portrait .card-scope { bottom: -13cqw; }
   .portrait > .scene-caption { margin-top: calc(var(--u) * 0.15); font-size: calc(var(--u) * 0.9); }
 
@@ -1116,4 +1117,14 @@ img { max-width: 100%; height: auto; }
   /* Titles are small enough that "An interesting" fits on one line */
   .sheet:not(.sheet-album) .sheet-body h1, .sheet-album h1 { font-size: min(9.6vw, 3rem); }
   .sheet:not(.sheet-album) .sheet-body h1 { top: calc(21px - 0.33em); }   /* keeps a smaller title on its rule */
+}
+/* Short phones: tighter, so everything still fits on one screen */
+@media screen and (max-width: 40rem) and (max-height: 740px) {
+  .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.75); }
+  .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
+  .scene-nav { margin-top: calc(var(--u) * 0.5); gap: calc(var(--u) * 0.45); }
+  .scene-button { font-size: calc(var(--u) * 0.98); padding-block: calc(var(--u) * 0.32); }
+  .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
+  .dive-fields > div:nth-child(-n+2) { margin-top: calc(var(--u) * 1); }
+  .dive-rail { margin-top: calc(var(--u) * 0.4); }
 }
