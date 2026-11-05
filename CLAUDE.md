@@ -84,6 +84,8 @@ one.
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
   the screen: photo at the left (no caption, about as tall as the summary) with the skill summary beside it, then the buttons, then the links. Only
   the buttons switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+- **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
+  boater ID fills the screen in three columns: photo, name and summary, then buttons and links. Sheets fill the height.
 - A script sizes the osprey to fit between "I'm Chris." and the top of the head.
 - **Safari (Chris uses an iPhone):** the watercolor wash is an SVG with filters, and
   Safari redraws patches of it with a visible box. Animate with CSS transforms or SVG

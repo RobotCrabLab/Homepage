@@ -1131,3 +1131,38 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(-n+2) { margin-top: calc(var(--u) * 1); }
   .dive-rail { margin-top: calc(var(--u) * 0.4); }
 }
+
+/* Phones turned sideways (and any very short window): all water like the upright phone
+   layout, with the boater ID filling the screen in three columns: photo, name and summary,
+   then buttons and links. Long link titles are cut off with dots. */
+@media screen and (min-width: 40.01rem) and (max-height: 500px) {
+  body { --sheet-h: calc(100svh - 1.5rem); background: linear-gradient(to bottom, var(--sea-top), var(--sea-bottom)) no-repeat, var(--sea-bottom); }
+  body.home { position: fixed; inset: 0; overflow: hidden; }
+  .home-dock, .home-water, .site-footer { display: none; }
+  body main { padding-top: 0.75rem; }
+  .page-moving main { clip-path: none; }
+  .scenes .wrap { max-width: none; padding-inline: max(0.75rem, env(safe-area-inset-left)); }
+  .portrait {
+    --card-w: calc(100vw - 2 * max(0.75rem, env(safe-area-inset-left))); --u: min(100vw / 55, 100svh / 28); --photo: calc(var(--u) * 15);
+    width: var(--card-w); height: calc(100svh - 1.5rem); aspect-ratio: auto;
+    grid-template-columns: var(--photo) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links" "rail rail rail";
+    column-gap: calc(var(--u) * 1.4);
+    padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2) calc(var(--u) * 0.5);
+  }
+  .portrait .portrait-card { aspect-ratio: auto; height: auto; align-self: stretch; }
+  .portrait > .scene-caption { display: none; }
+  .dive-info { display: contents; }
+  .dive-label { grid-area: label; }
+  .dive-name { grid-area: name; font-size: calc(var(--u) * 2.3); }
+  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
+  .dive-summary p { line-height: 1.34; }
+  .dive-head { margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--u) * 0.4); }
+  .scene-nav { grid-area: nav; margin: 0; align-self: start; }
+  .scene-button { padding-block: calc(var(--u) * 0.42); }
+  .dive-fields { grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 0.4) calc(var(--u) * 0.8); margin: calc(var(--u) * 0.5) 0 0; }
+  .dive-fields > div:nth-child(3), .dive-fields > div:nth-child(4) { grid-column: 1 / -1; }
+  .dive-fields > div:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .dive-rail { margin-top: calc(var(--u) * 0.4); }
+}
