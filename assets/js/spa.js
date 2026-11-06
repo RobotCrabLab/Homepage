@@ -134,7 +134,7 @@
     go(location.href, false, e.state && e.state.y);
   });
 
-  // Pictures come in any height, so round each one's box up to whole ruled lines (30px),
+  // Pictures come in any height, so round each one's box up to whole ruled lines (--line),
   // which keeps the words after it sitting on the rules.
   function snapPictures() {
     document.querySelectorAll('.sheet:not(.sheet-album) .sheet-body :is(img, svg)').forEach(function (pic) {
@@ -143,7 +143,8 @@
       box.style[side] = '';
       // Layout height, not the on-screen box, which an animated mascot's tilt would change
       var h = box === pic ? parseFloat(getComputedStyle(pic).height) : box.getBoundingClientRect().height;
-      var extra = (30 - h % 30) % 30;
+      var line = parseFloat(getComputedStyle(pic.closest('.sheet-body')).getPropertyValue('--line')) || 24;
+      var extra = (line - h % line) % line;
       box.style[side] = parseFloat(getComputedStyle(box)[side]) + extra + 'px';
     });
   }
