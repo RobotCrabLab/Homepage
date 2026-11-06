@@ -55,7 +55,7 @@ def layout_chain(name, content, ctx):
 def defaults(kind):
     return {"posts": "post", "projects": "project"}.get(kind, "page")
 
-site = {**cfg, "data": {}}
+site = {**cfg, "data": {}, "time": __import__("datetime").datetime.now()}   # like Jekyll's site.time
 for f in os.listdir(os.path.join(SRC, "_data")):
     site["data"][f.rsplit(".", 1)[0]] = yaml.safe_load(open(os.path.join(SRC, "_data", f)))
 
