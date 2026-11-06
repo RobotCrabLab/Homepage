@@ -1186,3 +1186,12 @@ img { max-width: 100%; height: auto; }
   .sheet-paper { padding-left: 1.75rem; }
   .sheet-paper::before, .sheet-paper::after { display: none; }
 }
+/* Phones, upright or sideways: the paper only moves up and down. Code wraps instead of
+   scrolling sideways, since a sideways swipe no longer does anything. */
+@media screen and (max-width: 40rem), screen and (max-height: 500px) {
+  .sheet { overflow-x: hidden; touch-action: pan-y; overscroll-behavior-x: none; }
+  .sheet pre, .sheet pre code { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+@media screen and (max-width: 40rem) {
+  .sheet-body::after { margin-right: -0.9rem; }
+}
