@@ -100,6 +100,8 @@ one.
 - Keep edits minimal; change only what he asked. "N px" means pixels on the preview
   image he's looking at.
 - Never mention GitHub Pages anywhere on the site.
+- The stylesheet and `spa.js` are linked with `?v=` and the build time, so each publish gets a fresh address
+  and phones don't keep an old cached copy.
 - **Single page app:** `assets/js/spa.js` swaps the content of `<main>` instead of
   loading pages, so the bay never reloads, on phones too. Scripts inside `<main>` re-run on each swap, so they
   must find their elements fresh. Between pages the old one rises and fades out just under the
