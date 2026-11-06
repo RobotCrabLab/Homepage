@@ -509,10 +509,16 @@ img { max-width: 100%; height: auto; }
   .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
   [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
   /* The links run across the bottom of the card, each on one line */
-  .dive-fields { grid-area: links; display: grid; grid-template-columns: auto auto minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 1.5); margin: calc(var(--u) * 0.8) 0 0; }
-  .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35; }
-  .dive-fields a { color: var(--card-ink); text-decoration: underline; text-decoration-thickness: calc(var(--u) * 0.125); text-underline-offset: 0.15em; }
-  .dive-fields a:hover { color: var(--card-pick); }
+  .dive-fields { grid-area: links; display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: space-between; gap: calc(var(--u) * 1); margin: calc(var(--u) * 0.8) 0 0; }
+  /* Each link has an icon at its left; the logbook page and camera are drawn larger */
+  .dive-fields > div { --icon: calc(var(--u) * 2.4); position: relative; min-width: 0; min-height: calc(var(--u) * 2.4); padding-left: calc(var(--icon) + var(--u) * 0.4); }
+  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 3.1); }
+  .link-icon { position: absolute; left: 0; top: 50%; width: var(--icon); height: var(--icon); margin-top: calc(var(--icon) / -2); overflow: visible; }
+  .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 0.92); line-height: 1.35; }
+  /* No underlines: the icon and label are part of the link, and all of it turns red on hover */
+  .dive-fields a { color: var(--card-ink); text-decoration: none; }
+  .dive-fields a::after { content: ""; position: absolute; inset: 0; }
+  .dive-fields > div:hover a, .dive-fields > div:hover dt { color: var(--card-pick); }
   /* The newest post's title can be any length, so a long one is cut off with dots */
   .dive-fields dd { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
   .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
@@ -1088,7 +1094,10 @@ img { max-width: 100%; height: auto; }
     grid-template-rows: auto auto auto auto minmax(0, 1fr) auto minmax(0, 1fr) auto auto auto minmax(0, 0.5fr) auto;
     grid-template-areas: "head head" "photo label" "photo name" "photo summary" ". ." "nav nav" ". ." "l1 l2" "l3 l3" "l4 l4" ". ." "rail rail";
   }
-  .dive-info, .dive-fields { display: contents; }
+  .dive-info { display: contents; }
+  .dive-fields { grid-area: l1-start / l1-start / l4-end / l2-end; grid-template-columns: auto auto; justify-content: space-between; gap: 0 calc(var(--u) * 1); margin: 0; }
+  .dive-fields dd { font-size: calc(var(--u) * 1.0625); }
+  .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
   .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
@@ -1098,10 +1107,6 @@ img { max-width: 100%; height: auto; }
   .scene-button::after { content: none; }
   .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.7); }
   .dive-fields > div:nth-child(-n+2) { margin-top: calc(var(--u) * 1.6); }
-  .dive-fields > div:nth-child(1) { grid-area: l1; }
-  .dive-fields > div:nth-child(2) { grid-area: l2; }
-  .dive-fields > div:nth-child(3) { grid-area: l3; }
-  .dive-fields > div:nth-child(4) { grid-area: l4; }
   .dive-rail { margin-top: calc(var(--u) * 0.7); }
   /* The photo is about as tall as the summary text beside it */
   .portrait .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; }
@@ -1161,8 +1166,18 @@ img { max-width: 100%; height: auto; }
   .dive-head { margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--u) * 0.4); }
   .scene-nav { grid-area: nav; margin: 0; align-self: start; }
   .scene-button { padding-block: calc(var(--u) * 0.42); }
-  .dive-fields { grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 0.4) calc(var(--u) * 0.8); margin: calc(var(--u) * 0.5) 0 0; }
+  .dive-fields { grid-template-columns: auto auto; gap: calc(var(--u) * 0.25) calc(var(--u) * 0.8); margin: calc(var(--u) * 0.5) 0 0; }
+  .dive-fields dd { font-size: calc(var(--u) * 1); }
+  .dive-fields > div { --icon: calc(var(--u) * 2.1); }
+  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.7); }
   .dive-fields > div:nth-child(3), .dive-fields > div:nth-child(4) { grid-column: 1 / -1; }
   .dive-fields > div:nth-child(2) { grid-column: 2; grid-row: 1; }
   .dive-rail { margin-top: calc(var(--u) * 0.4); }
+}
+/* The narrowest sideways phones: tighter links, so only the long titles get cut off */
+@media screen and (min-width: 40.01rem) and (max-width: 45rem) and (max-height: 500px) {
+  .dive-fields { column-gap: calc(var(--u) * 0.5); }
+  .dive-fields dd { font-size: calc(var(--u) * 0.88); }
+  .dive-fields > div { --icon: calc(var(--u) * 1.8); padding-left: calc(var(--icon) + var(--u) * 0.3); }
+  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.2); }
 }

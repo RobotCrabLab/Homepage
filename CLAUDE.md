@@ -73,7 +73,7 @@ one.
   computers, except for screen readers, and the page fits one screen with no scrolling.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
   The photo is shorter on computers and the osprey's branch is snapped off there.
-  A row across the card's bottom holds the links: its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
+  A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
   its Blog line always links to the newest post, and its Projects line links to the
   project listed first on the Projects page (lowest `order`):
   1. Osprey on its branch in the background (no caption).
