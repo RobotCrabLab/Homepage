@@ -1090,12 +1090,16 @@ img { max-width: 100%; height: auto; }
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
     aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
-    /* Spare height goes into the gaps around the buttons, so the card still fills the screen */
-    grid-template-rows: auto auto auto auto minmax(0, 1fr) auto minmax(0, 1fr) auto auto auto minmax(0, 0.5fr) auto;
-    grid-template-areas: "head head" "photo label" "photo name" "photo summary" ". ." "nav nav" ". ." "l1 l2" "l3 l3" "l4 l4" ". ." "rail rail";
+    /* The buttons sit right under the top section; the links take all the spare height */
+    grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links" "rail rail";
   }
   .dive-info { display: contents; }
-  .dive-fields { grid-area: l1-start / l1-start / l4-end / l2-end; grid-template-columns: auto auto; justify-content: space-between; gap: 0 calc(var(--u) * 1); margin: 0; }
+  .dive-fields { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto auto; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: calc(var(--u) * 0.7) 0 0; min-height: 0; }
+  /* Resume and Photography are big icons, each half the card's width where the height allows */
+  .dive-fields > div:has(.link-icon-big) { display: flex; flex-direction: column; align-items: center; padding-left: 0; min-height: 0; margin-top: 0; text-align: center; }
+  .dive-fields > div:has(.link-icon-big) dt { flex: 1 1 0; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .dive-fields .link-icon-big { position: static; flex: 1 1 0; min-height: 0; width: 100%; height: auto; margin: 0; }
   .dive-fields dd { font-size: calc(var(--u) * 1.0625); }
   .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-label { grid-area: label; }
@@ -1106,7 +1110,6 @@ img { max-width: 100%; height: auto; }
   .scene-button { font-size: calc(var(--u) * 1.05); padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8); gap: calc(var(--u) * 0.5); }
   .scene-button::after { content: none; }
   .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.7); }
-  .dive-fields > div:nth-child(-n+2) { margin-top: calc(var(--u) * 1.6); }
   .dive-rail { margin-top: calc(var(--u) * 0.7); }
   /* The photo is about as tall as the summary text beside it */
   .portrait .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; }
@@ -1133,7 +1136,6 @@ img { max-width: 100%; height: auto; }
   .scene-nav { margin-top: calc(var(--u) * 0.5); gap: calc(var(--u) * 0.45); }
   .scene-button { font-size: calc(var(--u) * 0.98); padding-block: calc(var(--u) * 0.32); }
   .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
-  .dive-fields > div:nth-child(-n+2) { margin-top: calc(var(--u) * 1); }
   .dive-rail { margin-top: calc(var(--u) * 0.4); }
 }
 
@@ -1194,4 +1196,18 @@ img { max-width: 100%; height: auto; }
 }
 @media screen and (max-width: 40rem) {
   .sheet-body::after { margin-right: -0.9rem; }
+}
+/* Phones, upright or sideways: the Resume and Photography icons are the links, with one
+   short label each ("Click Here" and "Hobbies" stay on computers only) */
+@media screen and (max-width: 40rem), screen and (max-height: 500px) {
+  .dive-fields > div:nth-child(1) dt, .dive-fields > div:nth-child(2) dd {
+    font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35;
+    letter-spacing: normal; text-transform: none; color: var(--card-ink);
+  }
+  .dive-fields > div:nth-child(1) dd { font-size: 0; line-height: 0; }
+  .dive-fields > div:nth-child(2) dt { font-size: 0; line-height: 0; }
+}
+/* Sideways phones: the short labels sit centered beside their icons */
+@media screen and (min-width: 40.01rem) and (max-height: 500px) {
+  .dive-fields > div:nth-child(-n+2) { display: flex; align-items: center; min-height: var(--icon); }
 }
