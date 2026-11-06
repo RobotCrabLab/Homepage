@@ -71,7 +71,7 @@ one.
   (cream sky, a filled wave drifting back and forth 15% down the page, water deepening to
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
-  Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
+  Above the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
   The photo is shorter on computers and the osprey's branch is snapped off there.
   A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
   its Blog line always links to the newest post, and its Projects line links to the
@@ -82,11 +82,11 @@ one.
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
-  the screen: photo at the left (no caption, about as tall as the summary) with the skill summary beside it, then the buttons, then the links. On phones (upright and sideways) the Resume and Photography
+  the screen: photo at the left (no caption) with the skill buttons beside it, then the skill summary across the card, then the links. On phones (upright and sideways) the Resume and Photography
   icons are the links, with one short label each; upright they're each about half the card's width. Only
   the buttons switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
-  boater ID fills the screen in three columns: photo, name and summary, then buttons and links. Sheets fill the height.
+  boater ID fills the screen in three columns: photo, name and buttons, then summary and links. Sheets fill the height.
 - A script sizes the osprey to fit between "I'm Chris." and the top of the head.
 - **Safari (Chris uses an iPhone):** the watercolor wash is an SVG with filters, and
   Safari redraws patches of it with a visible box. Animate with CSS transforms or SVG
