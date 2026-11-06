@@ -475,7 +475,7 @@ img { max-width: 100%; height: auto; }
     border-bottom: calc(var(--u) * 0.125) solid var(--card-ink);
     font-family: var(--display); font-weight: 700; font-size: calc(var(--u) * 3); line-height: 1.1;
   }
-  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 1) 0 0; }
+  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 0.7) 0 0; }
   .scene-button {
     display: flex; align-items: center; gap: calc(var(--u) * 0.7); width: 100%;
     padding: calc(var(--u) * 0.5) calc(var(--u) * 0.9);
@@ -505,8 +505,7 @@ img { max-width: 100%; height: auto; }
   .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
   /* A short summary of the chosen skill, from the resume. All three share one spot, so
      the card doesn't shift when the scene changes. */
-  .dive-summary { display: grid; margin-top: calc(var(--u) * 1); order: 1; }
-  .scene-nav { order: 2; }
+  .dive-summary { display: grid; margin-top: calc(var(--u) * 1); }
   .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
   [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
   /* The links run across the bottom of the card, each on one line */
@@ -1076,7 +1075,7 @@ img { max-width: 100%; height: auto; }
     aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
     /* The buttons sit right under the top section; the links take all the spare height */
     grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
-    grid-template-areas: "head head" "photo label" "photo name" "photo nav" "summary summary" "links links" "rail rail";
+    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links" "rail rail";
   }
   .dive-info { display: contents; }
   .dive-fields { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto auto; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: calc(var(--u) * 0.7) 0 0; min-height: 0; }
@@ -1088,9 +1087,9 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
-  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 1); min-width: 0; }
+  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
   .dive-summary p { font-size: calc(var(--u) * 1); line-height: 1.38; }
-  .scene-nav { grid-area: nav; align-self: start; margin-top: calc(var(--u) * 0.6); gap: calc(var(--u) * 0.6); }
+  .scene-nav { grid-area: nav; margin-top: calc(var(--u) * 0.8); gap: calc(var(--u) * 0.6); }
   .scene-button { font-size: calc(var(--u) * 1.05); padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8); gap: calc(var(--u) * 0.5); }
   .scene-button::after { content: none; }
   .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.7); }
@@ -1139,7 +1138,7 @@ img { max-width: 100%; height: auto; }
     width: var(--card-w); height: calc(100svh - 1.5rem); aspect-ratio: auto;
     grid-template-columns: var(--photo) minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
-    grid-template-areas: "head head head" "photo label summary" "photo name summary" "photo nav summary" "photo nav links" "rail rail rail";
+    grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links" "rail rail rail";
     column-gap: calc(var(--u) * 1.4);
     padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2) calc(var(--u) * 0.5);
   }
@@ -1148,10 +1147,10 @@ img { max-width: 100%; height: auto; }
   .dive-info { display: contents; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.3); }
-  .dive-summary { grid-area: summary; margin-top: 0; min-width: 0; }
+  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
   .dive-summary p { line-height: 1.34; }
   .dive-head { margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--u) * 0.4); }
-  .scene-nav { grid-area: nav; margin: calc(var(--u) * 0.6) 0 0; align-self: start; }
+  .scene-nav { grid-area: nav; margin: 0; align-self: start; }
   .scene-button { padding-block: calc(var(--u) * 0.42); }
   .dive-fields { grid-template-columns: auto auto; gap: calc(var(--u) * 0.25) calc(var(--u) * 0.8); margin: calc(var(--u) * 0.5) 0 0; }
   .dive-fields dd { font-size: calc(var(--u) * 1); }
