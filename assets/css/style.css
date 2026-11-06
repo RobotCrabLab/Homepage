@@ -557,7 +557,7 @@ img { max-width: 100%; height: auto; }
     --hole: #BCDDE3;
   }
   .sheet {
-    --paper: #FBF6E6; --ink: #14303F; --muted: #4E6169; --link: #B83B25; --rule: #C3CBCF; --tide: #E9E5D5; --shell: #D9442B;
+    --paper: #FEFDFA; --ink: #14303F; --muted: #4E6169; --link: #B83B25; --rule: #C3CBCF; --tide: #EEEEEA; --shell: #D9442B;
     display: block; position: relative; z-index: 3; box-sizing: border-box;
     width: min(100vw - 2 * var(--gutter), 54rem); height: var(--sheet-h); margin: 0 auto; overflow-y: auto;
     background: var(--paper); color: var(--ink);
@@ -1113,9 +1113,9 @@ img { max-width: 100%; height: auto; }
   .portrait .portrait-me, .portrait .card-scope { bottom: -13cqw; }
   .portrait > .scene-caption { display: none; }
 
-  .sheet-paper { padding-left: 2.6rem; }
-  .sheet-paper::before { left: 0.4rem; width: 1.2rem; background-size: 1.2rem var(--hole-gap); }
-  .sheet-paper::after { left: 2.05rem; }
+  /* No holes or margin line on phones, so the words get the full width */
+  .sheet-paper { padding-left: 0.9rem; }
+  .sheet-paper::before, .sheet-paper::after { display: none; }
   .sheet-org { display: none; }
   .sheet-head { padding-right: 0.9rem; }
   .sheet:not(.sheet-album) .sheet-body { padding-right: 0.9rem; }
@@ -1180,4 +1180,9 @@ img { max-width: 100%; height: auto; }
   .dive-fields dd { font-size: calc(var(--u) * 0.88); }
   .dive-fields > div { --icon: calc(var(--u) * 1.8); padding-left: calc(var(--icon) + var(--u) * 0.3); }
   .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.2); }
+}
+/* Sideways phones: no holes or margin line either */
+@media screen and (min-width: 40.01rem) and (max-height: 500px) {
+  .sheet-paper { padding-left: 1.75rem; }
+  .sheet-paper::before, .sheet-paper::after { display: none; }
 }

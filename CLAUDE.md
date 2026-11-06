@@ -104,8 +104,8 @@ one.
   must find their elements fresh. Between pages the old one rises and fades out just under the
   water, then the new one slides up from the bottom.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
-  bay; the paper scrolls inside its edges, with holes, margin and rules scrolling along and 2.5 holes
-  in view. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. Its wrappers are `display: contents` in print.
+  bay; the paper is near-white and scrolls inside its edges, with holes, margin and rules scrolling along and 2.5 holes
+  in view (phones, upright or sideways, have no holes or margin line). Its button says Home. Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. Its wrappers are `display: contents` in print.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
 - Open ideas, **not approved yet**: merging Blog + Projects into "Posts", replacing the
