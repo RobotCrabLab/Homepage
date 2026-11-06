@@ -453,7 +453,7 @@ img { max-width: 100%; height: auto; }
   /* The photo is cut shorter from the bottom, so he and the microscope sit lower in it */
   .portrait .portrait-me, .portrait .card-scope { bottom: -14cqw; }
   .portrait .card-fish.card-auv { bottom: 66.5cqw; }
-  .portrait > .scene-caption { grid-area: cap; margin-top: calc(var(--u) * 0.3); color: var(--card-ink); font-size: calc(var(--u) * 1.0625); line-height: 1.3; }
+  .portrait > .scene-caption { display: none; }
   /* Header, with the rails running under it like the edge of a real board */
   .dive-head {
     grid-area: head; display: flex; justify-content: space-between; align-items: baseline;

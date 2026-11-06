@@ -76,10 +76,10 @@ one.
   A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
   its Blog line always links to the newest post, and its Projects line links to the
   project listed first on the Projects page (lowest `order`):
-  1. Osprey on its branch in the background (no caption).
-  2. "Electronics technician": the microscope slides in, the AUV cruises across.
-  3. "Marine scientist": the fish and the jellyfish.
-- Captions roll like a ticker: up when moving forward, down when going back.
+  1. Osprey on its branch in the background.
+  2. The microscope slides in, the AUV cruises across.
+  3. The fish and the jellyfish.
+- No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
   the screen: photo at the left (no caption, about as tall as the summary) with the skill summary beside it, then the buttons, then the links. Only
