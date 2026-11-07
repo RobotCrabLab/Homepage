@@ -3,7 +3,7 @@
 
 summary: >-
   I work hands-on developing advanced scientific instruments designed for
-  cutting edge ocean exploration and analysis. From prototyping to field-ready
+  cutting-edge ocean exploration and analysis. From prototyping to field-ready
   systems I bring precision, reliability and curiosity to every project. I'm
   passionate about bridging technology and environmental science to support
   discovery in our oceans.
@@ -17,11 +17,12 @@ experience:
     place: Moss Landing, CA
     dates: Jan 2026 – present
     points:
-      - Build a wide variety of electronic circuits from schematics using wiring, connectors, and PCBs.
-      - Low-amperage DC wire termination, crimping, and connectors.
+      - Build a wide variety of electronics systems from schematics including wiring harnesses and PCBs.
+      - Wire crimping and termination including high-speed/high-amperage connections.
       - Manufacture full ocean depth underwater cables.
-      - PCB soldering with through-hole and SMD parts, including microscope-assisted hand soldering, reflow oven, and hot air rework.
-      - Service and repair electronic test equipment, and help manage laboratory inventory and equipment.
+      - PCB soldering through-hole and SMT parts including microscope-assisted rework.
+      - Diagnose, service and repair electronic equipment.
+      - Manage laboratory inventory and tooling.
 
   - role: Electronics Technician
     org: Monterey Bay Aquarium Research Institute (MBARI)
