@@ -2,10 +2,10 @@
 # Add another job by copying a whole "- role:" block.
 
 summary: >-
-  I work hands-on with the development of advanced scientific instruments
-  tailored for ocean exploration and analysis. From prototyping to field-ready
-  systems, I bring precision, reliability, and curiosity to every project.
-  Passionate about bridging technology and environmental science to support
+  I work hands-on developing advanced scientific instruments designed for
+  cutting edge ocean exploration and analysis. From prototyping to field-ready
+  systems I bring precision, reliability and curiosity to every project. I'm
+  passionate about bridging technology and environmental science to support
   discovery in our oceans.
 
 # Optional: link to a PDF copy. Put the file in assets/ and set the path, or leave empty.
