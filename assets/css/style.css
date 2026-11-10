@@ -263,8 +263,8 @@ img { max-width: 100%; height: auto; }
   --photo: calc(var(--u) * 21);
   display: grid;
   grid-template-columns: var(--photo) minmax(0, 1fr);
-  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
-  grid-template-areas: "head head" "photo info" ". info" "links links" "rail rail";
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  grid-template-areas: "head head" "photo info" ". info" "links links";
   column-gap: calc(var(--u) * 2); justify-items: stretch;
   width: var(--card-w); aspect-ratio: 1.6;
   padding: calc(var(--u) * 0.9) calc(var(--u) * 1.5) calc(var(--u) * 1);
@@ -272,15 +272,15 @@ img { max-width: 100%; height: auto; }
   border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
 }
 
-/* A breadboard power rail runs under the header and along the bottom edge: a red + line,
-   two rows of holes in groups of five, and a blue - line, with + and - printed at both
-   ends. The element itself shows the signs; its ::after (header) or ::before (bottom
-   edge) draws the lines and holes between them. Sized in --u, so it scales with the card. */
+/* A breadboard power rail runs under the header: a red + line, two rows of holes in
+   groups of five, and a blue - line, with + and - printed at both ends. The header
+   itself shows the signs; its ::after draws the lines and holes between them. Sized in
+   --u, so it scales with the card. */
 .portrait {
   --rail-h: calc(var(--u) * 1.4); --rail-end: calc(var(--u) * 0.64);
   --rail-signs: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6.4 14'%3E%3Cpath d='M1.4 1.5H5M3.2 -0.3V3.3' stroke='%23D9442B' stroke-width='1'/%3E%3Cpath d='M1.4 12.5H5' stroke='%232F6FB5' stroke-width='1'/%3E%3C/svg%3E") left bottom / var(--rail-end) var(--rail-h) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6.4 14'%3E%3Cpath d='M1.4 1.5H5M3.2 -0.3V3.3' stroke='%23D9442B' stroke-width='1'/%3E%3Cpath d='M1.4 12.5H5' stroke='%232F6FB5' stroke-width='1'/%3E%3C/svg%3E") right bottom / var(--rail-end) var(--rail-h) no-repeat;
 }
-.dive-head::after, .dive-rail::before {
+.dive-head::after {
   content: ""; position: absolute; left: calc(var(--rail-end) + var(--u) * 0.06); right: calc(var(--rail-end) + var(--u) * 0.06); bottom: 0; height: var(--rail-h);
   background:
     linear-gradient(#D9442B, #D9442B) 0 calc(var(--u) * 0.1) / 100% calc(var(--u) * 0.1) no-repeat,
@@ -363,8 +363,6 @@ img { max-width: 100%; height: auto; }
 .dive-fields > div:hover a, .dive-fields > div:hover dt { color: var(--card-pick); }
 .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
 
-/* The bottom edge: another power rail (drawn with the header's, above) */
-.dive-rail { grid-area: rail; position: relative; height: var(--rail-h); margin-top: calc(var(--u) * 0.6); background: var(--rail-signs); }
 
 /* ------------------------------------------------------------
    6. Home: the photo's scenes and creatures
@@ -888,8 +886,8 @@ img { max-width: 100%; height: auto; }
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
     aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
     /* The buttons sit right under the top section; the links take all the spare height */
-    grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
-    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links" "rail rail";
+    grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
+    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links";
   }
   /* The photo is about as tall as the summary text beside it */
   .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; margin-top: 0.5rem; }
@@ -931,7 +929,7 @@ img { max-width: 100%; height: auto; }
   .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
   .scene-nav { margin-top: calc(var(--u) * 0.5); gap: calc(var(--u) * 0.45); }
   .scene-button { font-size: calc(var(--u) * 0.98); padding-block: calc(var(--u) * 0.32); }
-  .dive-fields > div, .dive-rail { margin-top: calc(var(--u) * 0.4); }   /* (the two big icons keep no gap) */
+  .dive-fields > div { margin-top: calc(var(--u) * 0.4); }   /* (the two big icons keep no gap) */
 }
 
 /* ------------------------------------------------------------
@@ -950,8 +948,8 @@ img { max-width: 100%; height: auto; }
     --card-w: calc(100vw - 2 * max(0.75rem, env(safe-area-inset-left))); --u: min(100vw / 55, 100svh / 28); --photo: calc(var(--u) * 15);
     height: calc(100svh - 1.5rem); aspect-ratio: auto;
     grid-template-columns: var(--photo) minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
-    grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links" "rail rail rail";
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links";
     column-gap: calc(var(--u) * 1.4);
     padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2) calc(var(--u) * 0.5);
   }
@@ -971,7 +969,6 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(2) { grid-column: 2; grid-row: 1; }
   .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-fields dd { font-size: calc(var(--u) * 1); }
-  .dive-rail { margin-top: calc(var(--u) * 0.4); }
 
   /* The paper has no rail here either */
   .sheet-paper { padding-left: 0; }

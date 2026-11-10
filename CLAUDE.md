@@ -76,7 +76,7 @@ one.
   computers, except for screen readers, and the page fits one screen with no scrolling.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
   A breadboard power rail (red + line, two rows of holes in groups of five, blue − line, + and −
-  at both ends) runs under the card's header and along its bottom edge, on every layout.
+  at both ends) runs under the card's header (not along its bottom), on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
   A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography,
   its Blog line always links to the newest post, and its Projects line links to the
