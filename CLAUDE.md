@@ -75,6 +75,8 @@ one.
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
+  A breadboard power rail (red + line, two rows of holes in groups of five, blue − line, + and −
+  at both ends) runs under the card's header and along its bottom edge, on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
   A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography,
   its Blog line always links to the newest post, and its Projects line links to the
@@ -122,8 +124,10 @@ one.
   water, then the new one slides up from the bottom.
 - The site as it was before the November 2026 clean-up is on branch `backup/before-cleanup-2026-11-09`.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
-  bay; the paper is near-white, set in the device's own font (San Francisco on Apple devices) with no ruled lines, and scrolls inside its edges, with holes and margin scrolling along and 2.5 holes
-  in view (phones, upright or sideways, have no holes or margin line). Its button says Home. Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. On phones the paper only moves up and down (no sideways scrolling; code wraps). Its wrappers are `display: contents` in print.
+  bay; the paper is near-white, set in the device's own font (San Francisco on Apple devices) with no ruled lines, and scrolls inside its edges. A breadboard power rail runs down its left margin:
+  its + and − stay at the top beside the header, and the holes scroll with the words (phones, upright or
+  sideways, have no rail). Its Home button is a tactile push button. On the résumé, section headings sit on a
+  row of holes and the bullets are square holes (screen only). Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. On phones the paper only moves up and down (no sideways scrolling; code wraps). Its wrappers are `display: contents` in print.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
 - Open ideas, **not approved yet**: merging Blog + Projects into "Posts", replacing the

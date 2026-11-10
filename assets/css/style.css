@@ -272,12 +272,27 @@ img { max-width: 100%; height: auto; }
   border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
 }
 
-/* Header, with the rails running under it like the edge of a real board */
+/* A breadboard power rail runs under the header and along the bottom edge: a red + line,
+   two rows of holes in groups of five, and a blue - line, with + and - printed at both
+   ends. The element itself shows the signs; its ::after (header) or ::before (bottom
+   edge) draws the lines and holes between them. Sized in --u, so it scales with the card. */
+.portrait {
+  --rail-h: calc(var(--u) * 1.4); --rail-end: calc(var(--u) * 0.64);
+  --rail-signs: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6.4 14'%3E%3Cpath d='M1.4 1.5H5M3.2 -0.3V3.3' stroke='%23D9442B' stroke-width='1'/%3E%3Cpath d='M1.4 12.5H5' stroke='%232F6FB5' stroke-width='1'/%3E%3C/svg%3E") left bottom / var(--rail-end) var(--rail-h) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6.4 14'%3E%3Cpath d='M1.4 1.5H5M3.2 -0.3V3.3' stroke='%23D9442B' stroke-width='1'/%3E%3Cpath d='M1.4 12.5H5' stroke='%232F6FB5' stroke-width='1'/%3E%3C/svg%3E") right bottom / var(--rail-end) var(--rail-h) no-repeat;
+}
+.dive-head::after, .dive-rail::before {
+  content: ""; position: absolute; left: calc(var(--rail-end) + var(--u) * 0.06); right: calc(var(--rail-end) + var(--u) * 0.06); bottom: 0; height: var(--rail-h);
+  background:
+    linear-gradient(#D9442B, #D9442B) 0 calc(var(--u) * 0.1) / 100% calc(var(--u) * 0.1) no-repeat,
+    linear-gradient(#2F6FB5, #2F6FB5) 0 calc(var(--u) * 1.2) / 100% calc(var(--u) * 0.1) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='4' cy='5' r='1.1'/%3E%3Ccircle cx='4' cy='9' r='1.1'/%3E%3Ccircle cx='8' cy='5' r='1.1'/%3E%3Ccircle cx='8' cy='9' r='1.1'/%3E%3Ccircle cx='12' cy='5' r='1.1'/%3E%3Ccircle cx='12' cy='9' r='1.1'/%3E%3Ccircle cx='16' cy='5' r='1.1'/%3E%3Ccircle cx='16' cy='9' r='1.1'/%3E%3Ccircle cx='20' cy='5' r='1.1'/%3E%3Ccircle cx='20' cy='9' r='1.1'/%3E%3C/g%3E%3C/svg%3E") center / calc(var(--u) * 2.4) var(--rail-h) round no-repeat;
+}
+
+/* Header, with a power rail under it */
 .dive-head {
-  grid-area: head; display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: calc(var(--u) * 0.8); padding-bottom: calc(var(--u) * 0.55);
-  border-bottom: calc(var(--u) * 0.19) solid #D9442B;
-  box-shadow: 0 calc(var(--u) * 0.19) 0 var(--card-bg), 0 calc(var(--u) * 0.38) 0 #2F6FB5;
+  grid-area: head; position: relative; display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--rail-h) + var(--u) * 0.45);
+  background: var(--rail-signs);
   font-family: var(--display); font-weight: 700;
 }
 .dive-org { font-size: calc(var(--u) * 1.75); line-height: 1.1; }
@@ -348,11 +363,8 @@ img { max-width: 100%; height: auto; }
 .dive-fields > div:hover a, .dive-fields > div:hover dt { color: var(--card-pick); }
 .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
 
-/* The bottom edge: a strip of breadboard holes */
-.dive-rail {
-  grid-area: rail; height: calc(var(--u) * 0.6); margin-top: calc(var(--u) * 0.7);
-  background: radial-gradient(circle, #14303F 0 calc(var(--u) * 0.14), transparent calc(var(--u) * 0.16)) left center / calc(var(--u) * 0.75) calc(var(--u) * 0.6) repeat-x;
-}
+/* The bottom edge: another power rail (drawn with the header's, above) */
+.dive-rail { grid-area: rail; position: relative; height: var(--rail-h); margin-top: calc(var(--u) * 0.6); background: var(--rail-signs); }
 
 /* ------------------------------------------------------------
    6. Home: the photo's scenes and creatures
@@ -537,19 +549,15 @@ img { max-width: 100%; height: auto; }
 
 /* ------------------------------------------------------------
    7. Sheets
-   Every page but the home page is a sheet torn from a logbook, floating in the bay. The
-   paper scrolls inside its own edges, so the bay stays put, and its holes and margin line
-   are part of the paper, so they scroll with the words. Two and a half holes show at a
-   time. The paper keeps its own colors in light and dark mode. In print the sheet's
+   Every page but the home page is a sheet of paper floating in the bay. The paper scrolls
+   inside its own edges, so the bay stays put. A breadboard power rail runs down its left
+   margin: its + and - stay at the top with the header, and its holes are part of the
+   paper, so they scroll with the words. The paper keeps its own colors in light and dark mode. In print the sheet's
    wrappers do nothing at all.
    ------------------------------------------------------------ */
 .sheet, .sheet-paper, .sheet-body { display: contents; }
 .sheet-head { display: none; }
 @media screen {
-  body {
-    --hole-gap: calc((var(--sheet-h) - 8px) / 2.5);
-    --hole: #BCDDE3;   /* the water showing through the holes */
-  }
   .sheet {
     --paper: #FEFDFA; --ink: #14303F; --muted: #4E6169; --link: #B83B25; --rule: #C3CBCF; --tide: #EEEEEA; --shell: #D9442B;
     display: block; position: relative; z-index: 3;
@@ -561,10 +569,9 @@ img { max-width: 100%; height: auto; }
   .sheet::-webkit-scrollbar { display: none; }
   .sheet-paper { display: flex; flex-direction: column; position: relative; min-height: 100%; padding-left: 4rem; }
   .sheet-paper::before {
-    content: ""; position: absolute; left: 1rem; top: 0; bottom: 0; width: 1.3rem;
-    background: radial-gradient(circle, var(--hole) 0 0.48rem, #14303F 0.5rem 0.65rem, transparent 0.67rem) top center / 1.3rem var(--hole-gap) repeat-y;
+    content: ""; position: absolute; left: 1.05rem; top: 0; bottom: 0; width: 1.45rem;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 24'%3E%3Cpath d='M1 0V24' stroke='%23D9442B' stroke-width='0.9'/%3E%3Cpath d='M13 0V24' stroke='%232F6FB5' stroke-width='0.9'/%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='5' cy='2' r='1.1'/%3E%3Ccircle cx='9' cy='2' r='1.1'/%3E%3Ccircle cx='5' cy='6' r='1.1'/%3E%3Ccircle cx='9' cy='6' r='1.1'/%3E%3Ccircle cx='5' cy='10' r='1.1'/%3E%3Ccircle cx='9' cy='10' r='1.1'/%3E%3Ccircle cx='5' cy='14' r='1.1'/%3E%3Ccircle cx='9' cy='14' r='1.1'/%3E%3Ccircle cx='5' cy='18' r='1.1'/%3E%3Ccircle cx='9' cy='18' r='1.1'/%3E%3C/g%3E%3C/svg%3E") top center / 1.45rem auto repeat-y;
   }
-  .sheet-paper::after { content: ""; position: absolute; left: 3.1rem; top: 0; bottom: 0; border-left: 2px solid #D9442B; opacity: 0.7; }
 
   /* The strip across the top stays put while the paper scrolls: a Home button, the bay's
      name and the kind of page */
@@ -573,14 +580,27 @@ img { max-width: 100%; height: auto; }
     padding: 0.8rem 1.75rem 0.55rem 0; border-bottom: 3px solid #14303F; background: var(--paper);
     font-family: var(--display); font-weight: 700;
   }
+  /* The rail's + and -, on a patch of paper covering the rail beside the header, so the
+     holes slide out from under it as the paper scrolls */
+  .sheet-head::before {
+    content: ""; position: absolute; top: 0; bottom: -3px; left: -4rem; width: 4rem;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 0 20 8'%3E%3Cpath d='M-2 4H4M1 1V7' stroke='%23D9442B' stroke-width='1.6'/%3E%3Cpath d='M10 4H16' stroke='%232F6FB5' stroke-width='1.6'/%3E%3C/svg%3E") 0.74rem center / 2.07rem 0.83rem no-repeat, var(--paper);
+  }
   .sheet-org { font-size: var(--step-1); line-height: 1.1; }
   .sheet-kind { margin-left: auto; font-family: var(--body); font-weight: 600; font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; }
+  /* Home is a tactile push button: a red cap in a grey ring */
   .sheet-back {
-    flex: none; padding: 0.25rem 0.7rem; background: #FFFFFF; color: #14303F; text-decoration: none;
-    border: 3px solid #14303F; border-radius: 0.7rem; box-shadow: 0 3px 0 #14303F;
+    flex: none; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.25rem 0.7rem 0.25rem 0.4rem;
+    background: #FFFFFF; color: #14303F; text-decoration: none;
+    border: 3px solid #14303F; border-radius: 0.3rem; box-shadow: 0 3px 0 #14303F;
     font-family: var(--display); font-weight: 600; font-size: 0.95rem; line-height: 1.2;
   }
+  .sheet-back::before {
+    content: ""; flex: none; width: 1.05rem; height: 1.05rem; border-radius: 50%;
+    background: #D9442B; border: 3px solid #14303F; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #A7B2B8;
+  }
   .sheet-back:hover { background: #D9442B; color: #FFFFFF; }
+  .sheet-back:hover::before { background: #FFFFFF; }
   .sheet-back:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
 
   .sheet-body { display: block; flex: 1; min-width: 0; padding: 0 1.75rem 3rem 0; }
@@ -606,9 +626,6 @@ img { max-width: 100%; height: auto; }
   .sheet:not(.sheet-album) .sheet-body h1 { font-size: 2.5rem; }
   .sheet:not(.sheet-album) .sheet-body h2 { font-size: 1.375rem; }
   .sheet:not(.sheet-album) .sheet-body h3, .sheet:not(.sheet-album) .sheet-body .p-title, .sheet:not(.sheet-album) .sheet-body .post-list a { font-size: 1.125rem; }
-}
-@media (prefers-color-scheme: dark) {
-  body { --hole: #3F7183; }
 }
 
 /* ------------------------------------------------------------
@@ -731,6 +748,14 @@ img { max-width: 100%; height: auto; }
 .where { margin: 0.2rem 0 0; color: var(--muted); }
 .what ul { margin: 0.75rem 0 0; padding-left: 1.1rem; list-style: disc; }
 .what li + li { margin-top: 0.35rem; }
+/* On screen, the section headings sit on a row of breadboard holes, and the bullets are
+   square holes */
+@media screen {
+  .resume h2 { border-bottom: 0; padding-bottom: 0.85rem; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 4'%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='4' cy='2' r='1.1'/%3E%3Ccircle cx='8' cy='2' r='1.1'/%3E%3Ccircle cx='12' cy='2' r='1.1'/%3E%3Ccircle cx='16' cy='2' r='1.1'/%3E%3Ccircle cx='20' cy='2' r='1.1'/%3E%3C/g%3E%3C/svg%3E") left bottom / 1.86rem 0.31rem round no-repeat; }
+  .what ul { list-style: none; padding-left: 1.2rem; }
+  .what li { position: relative; }
+  .what li::before { content: ""; position: absolute; left: -1.05rem; top: 0.55em; width: 0.42rem; height: 0.42rem; border-radius: 0.09rem; background: currentColor; }
+}
 .what p:not(.where) { margin: 0.5rem 0 0; }
 .skills { margin: 0; }
 .skills div {
@@ -781,7 +806,7 @@ img { max-width: 100%; height: auto; }
     mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
   }
   .sheet-album .sheet-paper { padding: 0 0.75rem; }
-  .sheet-album .sheet-paper::before, .sheet-album .sheet-paper::after, .sheet-album .sheet-org, .sheet-album .sheet-kind, .sheet-album .sheet-body::after { display: none; }
+  .sheet-album .sheet-paper::before, .sheet-album .sheet-head::before, .sheet-album .sheet-org, .sheet-album .sheet-kind, .sheet-album .sheet-body::after { display: none; }
   .sheet-album .sheet-head { align-self: flex-start; padding: 0.65rem 0 0; border: 0; background: none; }
   .sheet-album .sheet-body { margin-top: -2.5rem; padding: 0 0 2.5rem; }
   .sheet-album .page-head { margin-bottom: 1.25rem; text-align: center; }
@@ -887,9 +912,9 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-fields dd { font-size: calc(var(--u) * 1.0625); }
 
-  /* The paper has no holes or margin line, and the words are inset the same on both sides */
+  /* The paper has no rail, and the words are inset the same on both sides */
   .sheet-paper { padding-left: 0; }
-  .sheet-paper::before, .sheet-paper::after, .sheet-org { display: none; }
+  .sheet-paper::before, .sheet-head::before, .sheet-org { display: none; }
   .sheet-head { padding-right: 0.9rem; }
   .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 0.9rem; }
   .sheet:not(.sheet-album) .sheet-body { padding-right: 0.9rem; }
@@ -931,7 +956,7 @@ img { max-width: 100%; height: auto; }
     padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2) calc(var(--u) * 0.5);
   }
   .portrait-card { aspect-ratio: auto; align-self: stretch; }
-  .dive-head { margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--u) * 0.4); }
+  .dive-head { margin-bottom: calc(var(--u) * 0.5); padding-bottom: calc(var(--rail-h) + var(--u) * 0.35); }
   .dive-info { display: contents; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.3); }
@@ -948,9 +973,9 @@ img { max-width: 100%; height: auto; }
   .dive-fields dd { font-size: calc(var(--u) * 1); }
   .dive-rail { margin-top: calc(var(--u) * 0.4); }
 
-  /* The paper has no holes or margin line here either */
+  /* The paper has no rail here either */
   .sheet-paper { padding-left: 0; }
-  .sheet-paper::before, .sheet-paper::after { display: none; }
+  .sheet-paper::before, .sheet-head::before { display: none; }
   .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 1.75rem; }
   .sheet-body::after { margin-left: -1.75rem; }
 }
