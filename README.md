@@ -15,6 +15,7 @@ Every change committed to `main` rebuilds the site automatically within a minute
 | Projects                      | one file per project in `_projects/` |
 | Blog posts                    | one file per post in `_posts/`     |
 | Colors and fonts              | `assets/css/style.css` (top of file) |
+| Animations and page changes   | `assets/js/site.js`                |
 | Images                        | upload to `assets/images/`         |
 
 ## Add a project

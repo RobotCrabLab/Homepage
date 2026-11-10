@@ -3,6 +3,9 @@ title: Photography
 permalink: /photography/
 layout: default
 ---
+<!-- Each photo is shown as an instant print about half the window's height, so "sizes"
+     below tells the browser how wide that is and it fetches the small copy unless the
+     screen really needs the large one. Selecting a photo opens the large one (site.js). -->
 <section class="prose-page">
   <header class="wrap page-head">
     <h1>Photography</h1>
@@ -20,9 +23,9 @@ layout: default
         <a class="shot-link" href="{{ large }}" data-title="{{ photo.title }}" data-note="{{ photo.note }}">
           <img src="{{ small }}"
                srcset="{{ small }} 900w, {{ large }} 2000w"
-               sizes="{% if photo.wide %}(min-width: 66rem) 62rem, 100vw{% else %}(min-width: 66rem) 31rem, (min-width: 40rem) 50vw, 100vw{% endif %}"
+               sizes="(max-width: 40rem) calc(100vw - 6rem), (max-height: 500px) calc((100vh - 1.5rem) * {{ photo.width }} / {{ photo.height }} / 2), calc((85vh - 11rem) * {{ photo.width }} / {{ photo.height }} / 2)"
                width="{{ photo.width }}" height="{{ photo.height }}" style="--r: {{ photo.width }} / {{ photo.height }}"
-               alt="{{ photo.alt | escape }}" loading="{% if forloop.index > 2 %}lazy{% else %}eager{% endif %}">
+               alt="{{ photo.alt | escape }}" loading="{% if forloop.index > 2 %}lazy{% else %}eager{% endif %}" decoding="async">
         </a>
         <figcaption>
           <span class="shot-title">{{ photo.title }}</span>
@@ -40,35 +43,3 @@ layout: default
   <img class="viewer-img" alt="">
   <p class="viewer-caption"></p>
 </dialog>
-
-<script>
-  (function () {
-    var dlg = document.querySelector('.viewer');
-    if (!dlg || typeof dlg.showModal !== 'function') return;
-    var img = dlg.querySelector('.viewer-img');
-    var cap = dlg.querySelector('.viewer-caption');
-    document.querySelectorAll('.shot-link').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        var thumb = a.querySelector('img');
-        img.src = a.href;
-        img.alt = thumb.alt;
-        cap.textContent = a.dataset.title + (a.dataset.note ? ', ' + a.dataset.note.toLowerCase() : '');
-        dlg.showModal();
-      });
-    });
-    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-    dlg.addEventListener('close', function () { img.removeAttribute('src'); });
-  })();
-  // Arriving from a home page tile (e.g. /photography/#burrowing-owl): bring
-  // that photo to the middle of the screen. (Tab moves on from there too.)
-  (function () {
-    var id = decodeURIComponent(location.hash.slice(1));
-    var shot = id && document.getElementById(id);
-    if (!shot) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    requestAnimationFrame(function () {
-      shot.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
-    });
-  })();
-</script>

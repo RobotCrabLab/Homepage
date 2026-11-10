@@ -1,24 +1,20 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>document.documentElement.classList.replace('no-js','js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% seo %}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,0..100,0..1&family=Work+Sans:ital,wght@0,400..700;1,400..700&display=swap">
+  <link rel="preload" href="{{ '/assets/fonts/fraunces.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/work-sans.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   {% feed_meta %}
-  <script src="{{ '/assets/js/spa.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+  <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </head>
 <body class="{{ page.body_class | default: 'page' }}">
-  {% include kelp.html %}
   {% include dock.svg %}
   <div class="home-water" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
-  {% include header.html %}
   <main id="main">
     {% if page.body_class == 'home' %}{{ content }}{% else %}
     {% assign kind = 'Notice' %}

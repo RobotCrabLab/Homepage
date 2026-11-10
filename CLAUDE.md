@@ -41,7 +41,8 @@ one.
 - `mascot.svg`: the jellyfish mascot, a red breadboard bell with tentacles; two of them
   are jumper wires plugged into the bottom row. Swims up at about 40 degrees.
 - `osprey.svg`: an osprey with a breadboard chest, gripping a breadboard fish on a dead
-  branch. Its head nods.
+  branch. Its head nods (the head is a second drawing laid over the bird, so it can turn
+  without the rest being redrawn).
 - `crab-walker.svg`: a breadboard crab that walks into the footer, blowing bubbles.
 - `dock.svg`: a wooden working pier with rope, a cleat, a life ring and a ladder, at the water
   line behind the boater ID (computers only).
@@ -50,7 +51,8 @@ one.
 - `assets/images/scientist.svg`: Chris's character (brown hair and beard, brown work
   shirt, screwdriver and sample bottle in the pocket).
 - `assets/images/breadboard-bay-sign.svg`: the logo, two wooden plank signs reading
-  BREADBOARD / BAY. Also `kelp.html` (faint background kelp) and the watercolor washes.
+  BREADBOARD / BAY (not shown anywhere on the site at the moment). Also the watercolor
+  washes behind the photo.
 
 ## Visual style
 - Simple one-line illustrations: thick navy `#14303F` outlines, flat colors, round
@@ -58,8 +60,9 @@ one.
 - Palette (top of `assets/css/style.css`): ink `#14303F`, red `#D9442B`, page grey
   `#E5E7E9`; dark mode page `#0F2029` with light ink `#E3ECEA` and red `#FF6E52`.
   Osprey browns `#6B4A35`, branch `#A89A8C`, metal gray `#A7B2B8`, yellow `#F2B33D`.
-- Fonts: Fraunces (display) and Work Sans (body).
-- Light and dark mode both matter; check both. The theme button shows the current mode.
+- Fonts: Fraunces (display) and Work Sans (body), served from `assets/fonts/`.
+- Light and dark mode both matter; check both. Dark mode follows the device's setting;
+  there is no switch on the site.
 - **For new art, show a mockup (or a few options) before building the final version.**
 
 ## Home page (`index.html`)
@@ -67,13 +70,13 @@ one.
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
   scale with it, sized in `--u`), and buttons on the card switch the scenes (Electronics:
   scene 2; Water chemistry: scene 3; Project lead: scene 1). Only the card, "Built by Chris" and the crab
-  show on this page at those widths (no header, kelp or footer links), over a pastel bay
+  show on this page at those widths (the site has no header or footer links), over a pastel bay
   (cream sky, a filled wave drifting back and forth 15% down the page, water deepening to
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
   The photo is shorter on computers and the osprey's branch is snapped off there.
-  A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography, replacing that header link on this page,
+  A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography,
   its Blog line always links to the newest post, and its Projects line links to the
   project listed first on the Projects page (lowest `order`):
   1. Osprey on its branch in the background.
@@ -87,10 +90,14 @@ one.
   the buttons switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: photo, name and summary, then buttons and links. Sheets fill the height.
-- A script sizes the osprey to fit between "I'm Chris." and the top of the head.
+- A script sizes the osprey to fit between the top of the photo and the top of the head.
+- Only the scene on show is animated. `data-scene` on the section fades the scenes;
+  `data-live` lists the scenes still moving (the one on show, plus the one fading out),
+  and the rest are paused so they cost nothing.
 - **Safari (Chris uses an iPhone):** the watercolor wash is an SVG with filters, and
-  Safari redraws patches of it with a visible box. Animate with CSS transforms or SVG
-  `animateTransform`, and keep animated art on its own layer (`will-change`) over the wash.
+  Safari redraws patches of it with a visible box. Animate with CSS transforms on a whole
+  element (not on a shape inside a drawing), and keep animated art on its own layer
+  (`will-change`) over the wash. The osprey's nod works this way.
 
 ## Working with Chris
 - Preview every change with screenshots (phone, computer, phone in dark mode), then
@@ -100,12 +107,20 @@ one.
 - Keep edits minimal; change only what he asked. "N px" means pixels on the preview
   image he's looking at.
 - Never mention GitHub Pages anywhere on the site.
-- The stylesheet and `spa.js` are linked with `?v=` and the build time, so each publish gets a fresh address
+- The stylesheet and `site.js` are linked with `?v=` and the build time, so each publish gets a fresh address
   and phones don't keep an old cached copy.
-- **Single page app:** `assets/js/spa.js` swaps the content of `<main>` instead of
-  loading pages, so the bay never reloads, on phones too. Scripts inside `<main>` re-run on each swap, so they
-  must find their elements fresh. Between pages the old one rises and fades out just under the
+- **Where the code lives:** all styles are in `assets/css/style.css`, in numbered sections
+  listed at its top (the bay, the card, the scenes, the paper, each page, phones, print).
+  All scripts are in `assets/js/site.js`, in four sections: Home, Photos, Pages, Crab.
+  Pages hold no scripts of their own. The home page, the shell around every page and the footer are
+  `index.html`, `_layouts/default.html` and `_includes/footer.html`.
+- **Single page app:** the Pages section of `site.js` swaps the content of `<main>` instead of
+  loading pages, so the bay never reloads, on phones too. After each swap it calls `setUp()`,
+  which runs the Home and Photos sections again for the new content, so anything a page
+  needs set up belongs there. A page is fetched as soon as a pointer or finger lands on
+  its link. Between pages the old one rises and fades out just under the
   water, then the new one slides up from the bottom.
+- The site as it was before the November 2026 clean-up is on branch `backup/before-cleanup-2026-11-09`.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper is near-white, set in the device's own font (San Francisco on Apple devices) with no ruled lines, and scrolls inside its edges, with holes and margin scrolling along and 2.5 holes
   in view (phones, upright or sideways, have no holes or margin line). Its button says Home. Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. On phones the paper only moves up and down (no sideways scrolling; code wraps). Its wrappers are `display: contents` in print.

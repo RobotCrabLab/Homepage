@@ -1,6 +1,46 @@
+/* ============================================================
+   Breadboard Bay
+
+    1. Fonts, colors and sizes
+    2. Base
+    3. The bay: sky, water, pier, "Built by Chris" and the crab
+    4. Changing pages
+    5. Home: the boater ID card
+    6. Home: the photo's scenes and creatures
+    7. Sheets: the logbook paper every other page sits on
+    8. Words on a page: headings, lists, posts and projects
+    9. Resume
+   10. Photography
+   11. Page not found
+   12. Phones, upright
+   13. Phones, sideways
+   14. Print
+
+   Dark mode follows the device's setting. Each dark change sits right under the thing
+   it changes, in a "prefers-color-scheme: dark" block.
+   Anything marked "@media screen" is the bay and its paper; printed pages skip all of
+   that and come out as plain documents.
+   ============================================================ */
+
 /* ------------------------------------------------------------
-   Tokens
+   1. Fonts, colors and sizes
    ------------------------------------------------------------ */
+@font-face {
+  font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/fraunces.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Work Sans"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/work-sans.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Work Sans"; font-style: italic; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/work-sans-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --paper: #E5E7E9;        /* light grey page background */
   --ink: #14303F;
@@ -10,7 +50,6 @@
   --shell-ink: #FFFFFF;
   --tide: #D5DBDE;         /* quiet panels, a step darker than the page */
   --rule: #C3CBCF;
-  --kelp: #D6DCDF;         /* background kelp, barely there against the page */
 
   --display: "Fraunces", Georgia, "Times New Roman", serif;
   --body: "Work Sans", "Helvetica Neue", Arial, sans-serif;
@@ -22,14 +61,11 @@
   --step-1: 1.3125rem;
   --step-2: 1.75rem;
   --step-3: clamp(2.25rem, 5vw, 3rem);
-  --step-4: clamp(3rem, 10vw, 5.75rem);
 
   color-scheme: light;
 }
-
-/* Dark theme: follows the device setting unless the footer switch picks one */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root {
     --paper: #0F2029;
     --ink: #E3ECEA;
     --muted: #93A7AE;
@@ -38,25 +74,12 @@
     --shell-ink: #0F2029;
     --tide: #17323E;
     --rule: #2A4653;
-    --kelp: #142C37;
     color-scheme: dark;
   }
 }
-:root[data-theme="dark"] {
-  --paper: #0F2029;
-  --ink: #E3ECEA;
-  --muted: #93A7AE;
-  --shell: #FF6E52;
-  --link: #FF6E52;
-  --shell-ink: #0F2029;
-  --tide: #17323E;
-  --rule: #2A4653;
-  --kelp: #142C37;
-  color-scheme: dark;
-}
 
 /* ------------------------------------------------------------
-   Base
+   2. Base
    ------------------------------------------------------------ */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -76,23 +99,7 @@ body {
 }
 
 main { flex: 1; }
-
-/* A single kelp plant fixed behind the page, rising from the bottom right.
-   The drawing is a transparent mask, so it takes whatever --kelp color the theme sets. */
-.kelp-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.kelp {
-  position: absolute; bottom: 0; right: 0.5rem;
-  height: min(94vh, 62rem); aspect-ratio: 830 / 1748;
-  background-color: var(--kelp);
-  -webkit-mask: url("../images/kelp.png") no-repeat center bottom / contain;
-          mask: url("../images/kelp.png") no-repeat center bottom / contain;
-  transform-origin: 30% 100%; animation: kelp-sway 11s ease-in-out infinite alternate;
-}
-@keyframes kelp-sway { from { transform: rotate(-1.2deg); } to { transform: rotate(1.2deg); } }
-@media (max-width: 40rem) {
-  .kelp { height: 72vh; right: -3.5rem; opacity: 0.8; }
-}
-@media (prefers-reduced-motion: reduce) { .kelp { animation: none; } }
+main:focus { outline: none; }
 
 h1, h2, h3 {
   font-family: var(--display);
@@ -123,138 +130,81 @@ img { max-width: 100%; height: auto; }
 }
 .skip:focus { left: 0.5rem; }
 
-/* ------------------------------------------------------------
-   The mascot: a deep-sea breadboard jelly
-   Same colors in light and dark mode; only the tentacles invert.
-   ------------------------------------------------------------ */
-.mascot {
-  --jelly-line: #14303F;
-  --jelly-red: #D9442B;
-  --tentacle-color: #14303F;
-  --tentacle-wire: #FFFFFF;
-  color: var(--jelly-line);
-  overflow: visible;
+.button {
+  display: inline-block;
+  background: var(--link); color: var(--shell-ink);
+  font-family: var(--display); font-weight: 600; font-size: var(--step-0);
+  text-decoration: none; padding: 0.65rem 1.15rem; border-radius: 999px;
 }
+.button:hover { filter: brightness(0.94); }
+.text-link { font-family: var(--display); font-weight: 600; color: var(--ink); }
+
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--muted); margin: 0.75rem 0 0; max-width: 34em; }
+
+/* ------------------------------------------------------------
+   3. The bay
+   Every page stands alone in a pastel bay: a cream sky, a soft wave at the water line
+   15% of the way down, and water that deepens toward the bottom. The pier stands at the
+   water line, and the page's card or paper floats just under it, in front of the pilings.
+   ------------------------------------------------------------ */
+.home-dock, .home-water { display: none; }   /* print */
+@media screen {
+  body {
+    --sea-sky: #FBF3E4; --sea-top: #D6EBE6; --sea-bottom: #9CC3CF;
+    --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%23D6EBE6'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%235E8FA0' stroke-width='2.5'/%3E%3C/svg%3E");
+    /* The boater ID is as wide as fits the window, the pier a little wider, and the paper
+       on other pages as tall as the card */
+    --card-w: min(100vw - 2 * var(--gutter), 60rem, (85svh - 11rem) * 1.6);
+    --dock-w: min(100vw - 2 * var(--gutter), 64rem, var(--card-w) * 1.087);
+    --sheet-h: calc(85svh - 11rem);
+    background:
+      linear-gradient(to bottom, var(--sea-sky) 0 calc(15svh + 10px), var(--sea-top) calc(15svh + 10px), var(--sea-bottom) 100svh) no-repeat,
+      var(--sea-bottom);
+  }
+  main { display: flex; flex-direction: column; padding-top: calc(15svh + 1rem); }
+
+  /* The water's surface: a filled wave drifting slowly back and forth, half a wave each
+     way. It covers the ends of the pier's columns; the ladder stands in front of it. */
+  .home-water {
+    display: block; position: absolute; z-index: 1; left: 0; right: 0; top: calc(15svh - 5px);
+    height: 16px; overflow: hidden; pointer-events: none;
+  }
+  .home-water::before {
+    content: ""; position: absolute; inset: 0 -48px; background: var(--sea-wave) 0 0 / 48px 16px repeat-x;
+    will-change: transform; animation: water-drift 5s ease-in-out infinite alternate;
+  }
+  .home-dock {
+    display: block; position: absolute; z-index: 0; left: calc(50% - var(--dock-w) / 2);
+    top: calc(15svh - var(--dock-w) * 135 / 1024); width: var(--dock-w); height: auto; overflow: visible;
+  }
+  .home-dock-front { z-index: 2; }
+}
+@keyframes water-drift { from { transform: translateX(-24px); } to { transform: translateX(24px); } }
+@media (prefers-reduced-motion: reduce) { .home-water::before { animation: none; } }
+/* At dusk in dark mode, so the pier's navy outlines still show */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
-}
-:root[data-theme="dark"] .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
-.mascot-fill { fill: var(--jelly-red); stroke: var(--jelly-line); stroke-width: 3; stroke-linejoin: round; }
-.board-holes, .mascot-pupil { fill: var(--jelly-line); }
-.mascot-eye { fill: #FFFFFF; stroke: var(--jelly-line); stroke-width: 2; }
-.mascot-mouth { fill: none; stroke: var(--jelly-line); stroke-width: 1.6; stroke-linecap: round; }
-.tentacle { fill: none; stroke: var(--tentacle-color); stroke-width: 2; stroke-linecap: round; }
-.tentacle-outline { fill: none; stroke: var(--tentacle-wire); stroke-width: 3.4; stroke-linecap: round; }
-.tentacle-wire-edge { fill: none; stroke: var(--tentacle-color); stroke-width: 3.4; stroke-linecap: round; }
-.tentacle-wire { fill: none; stroke: var(--tentacle-wire); stroke-width: 2; stroke-linecap: round; }
-
-/* ------------------------------------------------------------
-   Header and footer
-   ------------------------------------------------------------ */
-.site-header { padding-block: 1.25rem; }
-.header-inner {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 0.75rem 1.5rem;
-}
-.wordmark {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  color: var(--ink); text-decoration: none;
-  font-family: var(--display); font-weight: 700; font-size: var(--step-1);
-  font-variation-settings: "SOFT" 50;
-}
-.mascot-mark { width: 7rem; height: auto; display: block; }
-/* The logo: the Breadboard Bay sign, with a small jelly in front of its
-   lower-right corner, its bell just overlapping the bottom of the sign.
-   --logo scales the whole thing (smaller on phones). */
-.logo { --logo: 1; position: relative; display: block; padding-right: calc(0.25rem * var(--logo)); }
-.logo-sign { display: block; height: calc(5rem * var(--logo)); width: auto; }
-.nav-home { display: none; }
-@media (max-width: 40rem) { .logo { --logo: 0.78; } }
-
-/* The header jelly drifts and its tentacles sway. */
-.mascot-mark { animation: drift 6.4s ease-in-out infinite; }
-.mascot-mark .jelly-tentacles {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-  animation: sway 6.4s ease-in-out infinite;
-}
-@keyframes drift {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
-}
-@keyframes sway {
-  0%, 100% { transform: skewX(0deg); }
-  25%      { transform: skewX(7deg); }
-  75%      { transform: skewX(-7deg); }
-}
-/* Two tentacles also wiggle on their own, each at its own pace:
-   the free one second from the left (a) and the dark plugged wire (b) */
-.mascot-mark .tentacle-a,
-.mascot-mark .tentacle-b {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-}
-.mascot-mark .tentacle-a { animation: wiggle 6.3s ease-in-out infinite; }
-.mascot-mark .tentacle-b { animation: wiggle 12.9s ease-in-out -4.2s infinite reverse; }
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg) skewX(0deg); }
-  30%      { transform: rotate(6deg) skewX(-6deg); }
-  70%      { transform: rotate(-5deg) skewX(8deg); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mascot-mark, .mascot-mark .jelly-tentacles,
-  .mascot-mark .tentacle-a, .mascot-mark .tentacle-b { animation: none; }
-}
-
-.site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
-.site-nav a {
-  font-family: var(--display); font-size: var(--step-0); font-weight: 500;
-  color: var(--ink); text-decoration: none; padding-block: 0.25rem;
-  border-bottom: 2px solid transparent;
-}
-.site-nav a:hover { border-bottom-color: var(--rule); }
-.site-nav a[aria-current="page"] { border-bottom-color: var(--shell); }
-
-/* Phones: the logo becomes the menu button, and Home moves into the menu */
-.menu-toggle {
-  display: none;
-  background: none; border: 0; padding: 0; margin: 0;
-  color: inherit; cursor: pointer; border-radius: 0.75rem;
-}
-@media (max-width: 40rem) {
-  .header-inner { justify-content: flex-start; align-items: center; column-gap: 0.75rem; }
-  .menu-toggle { display: block; }
-  .js .wordmark { display: none; }
-  .no-js .menu-toggle { display: none; }
-  .js .site-nav.is-open .nav-home { display: block; }
-  .js .site-nav { display: none; }
-  .js .site-nav.is-open {
-    display: flex; flex-direction: column; gap: 0; width: 100%;
-    margin-top: 0.5rem; border-top: 2px solid var(--ink);
+  body {
+    --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062;
+    --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E");
   }
-  .js .site-nav.is-open a {
-    font-size: var(--step-1); padding-block: 0.75rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .js .site-nav.is-open a[aria-current="page"] { color: var(--link); border-bottom-color: var(--rule); }
-  .menu-toggle[aria-expanded="true"] .mascot-mark { animation-duration: 2.4s; }
-  .menu-toggle[aria-expanded="true"] .jelly-tentacles { animation-duration: 2.4s; }
 }
 
+/* "Built by Chris" and the crab, in the same column as the pier */
+.site-footer { position: relative; z-index: 3; padding-block: 2rem 1rem; overflow-x: clip; }
+.site-footer .wrap { max-width: calc(64rem + 2 * var(--gutter)); }
+.built-by { margin-block: 0; font-size: var(--step--1); }
 
-.site-footer { margin-top: 5rem; padding-block: 2rem 1rem; border-top: 1px solid var(--rule); overflow-x: clip; }
-
-/* The breadboard crab walks in along the bottom of the page */
-.crab-track { margin-top: 1.75rem; }
+/* The breadboard crab walks in along the bottom of the page (site.js sets the classes) */
+.crab-track { position: relative; margin-top: 1.75rem; --bubble: #14303F; }
 .crab-walker {
   --crab-line: #14303F;
   --crab-limb: #14303F;
   display: block; width: 4.5rem; height: auto; overflow: visible;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .crab-walker { --crab-limb: #E3ECEA; }
+  .crab-track { --bubble: #E3ECEA; }
+  .crab-walker { --crab-limb: #E3ECEA; }
 }
-:root[data-theme="dark"] .crab-walker { --crab-limb: #E3ECEA; }
 .crab-limbs { fill: none; stroke: var(--crab-limb); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 .crab-board { fill: #D9442B; stroke: var(--crab-line); stroke-width: 3; }
 .crab-divider { stroke: var(--crab-line); stroke-width: 1.2; opacity: 0.45; }
@@ -271,12 +221,7 @@ img { max-width: 100%; height: auto; }
 @keyframes crab-step-a { 50% { transform: rotate(12deg); } }
 @keyframes crab-step-b { 50% { transform: rotate(-12deg); } }
 @keyframes crab-pinch { 50% { transform: scaleX(0.55); } }
-/* Bubbles spawn over the crab as it walks in and rise straight up from that spot */
-.crab-track { position: relative; --bubble: #14303F; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .crab-track { --bubble: #E3ECEA; }
-}
-:root[data-theme="dark"] .crab-track { --bubble: #E3ECEA; }
+/* Bubbles appear over the crab as it walks in and rise straight up from that spot */
 .crab-bubble {
   position: absolute; pointer-events: none; overflow: visible;
   fill: none; stroke: var(--bubble); stroke-width: 1.6; stroke-linecap: round;
@@ -288,289 +233,341 @@ img { max-width: 100%; height: auto; }
   75%  { opacity: 0.8; }
   100% { opacity: 0; transform: translateY(-48px); }
 }
-.footer-inner {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem;
-  font-size: var(--step--1); color: var(--muted);
-}
-.footer-inner p { margin: 0; }
-.links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
-.links a { color: var(--ink); }
-.theme-toggle {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  font: inherit; color: var(--ink); background: none; cursor: pointer;
-  border: 1px solid var(--rule); border-radius: 999px; padding: 0.15rem 0.7rem;
-}
-/* Filled like a button: a solid ink-colored pill with paper-colored text */
-.theme-toggle { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 600; }
-.theme-toggle:hover { background: var(--shell); border-color: var(--shell); color: #FFFFFF; }
-.theme-toggle svg { width: 1rem; height: 1rem; }
-/* The switch shows the current mode: a sun with "Light mode", a moon with "Dark mode" */
-.theme-toggle .icon-moon { display: none; }
-.is-dark .theme-toggle .icon-moon { display: block; }
-.is-dark .theme-toggle .icon-sun { display: none; }
 
 /* ------------------------------------------------------------
-   Buttons and small pieces
+   4. Changing pages
+   While one page leaves and the next arrives (site.js), nothing shows above the water's
+   surface and the window can't scroll. The new page rises behind "Built by Chris" and
+   the crab.
    ------------------------------------------------------------ */
-.button {
-  display: inline-block;
-  background: var(--link); color: var(--shell-ink);
-  font-family: var(--display); font-weight: 600; font-size: var(--step-0);
-  text-decoration: none; padding: 0.65rem 1.15rem; border-radius: 999px;
-}
-.button:hover { filter: brightness(0.94); }
-.text-link { font-family: var(--display); font-weight: 600; color: var(--ink); }
-
-.lede { font-size: var(--step-1); line-height: 1.5; color: var(--muted); margin: 0.75rem 0 0; max-width: 34em; }
-
-/* ------------------------------------------------------------
-   Home
-   ------------------------------------------------------------ */
-.hero { overflow-x: clip; padding-block: clamp(0.75rem, 2.5vw, 1.75rem) clamp(2rem, 5vw, 3rem); }
-.hero h1 {
-  font-size: var(--step-4);
-  font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin: 0;
-}
-.hero .lede { font-size: clamp(1.25rem, 2.6vw, 1.5rem); margin-top: 1.25rem; }
-/* The home page is a wider landing page: the intro text takes one half,
-   and a framed portrait card takes the other. */
-.home .wrap { max-width: calc(64rem + 2 * var(--gutter)); }
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
-.hero-text .lede { margin-bottom: 0; }
-
-/* The frame clips everything inside it, so the fish only show within it */
-.portrait-card {
-  position: relative; margin: 0; width: min(100%, 27rem); justify-self: center;
-  aspect-ratio: 3 / 4; overflow: hidden;
-  border: 4px solid #14303F; border-radius: 1.5rem; isolation: isolate;
-}
-.portrait-wash { position: absolute; inset: 0; background: #EAF4F8 url("../images/watercolor-blue.svg") center / cover no-repeat; }
-/* Safari redraws the watercolor (an SVG with blur and grain filters) slightly
-   differently when it repaints just a patch of it, which showed up as a box around
-   the osprey's nodding head. Giving the wash and the osprey their own layers means
-   the head's movement never makes Safari repaint the wash underneath. */
-.portrait-wash, .card-osprey { will-change: transform; }
-/* A big portrait bust: he fills most of the frame, cropped at the bottom edge */
-.portrait-me { position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; }
-
-/* Scenes on the home page: "I'm Chris." with the portrait card right under it.
-   Buttons switch the scenes, and the card animates to each one. */
-.scene-stage { padding-block: 0.5rem 1rem; }
-.scenes .hero-grid { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 0; }
-.scenes h1 { text-align: center; margin-bottom: 1.25rem; }
-.portrait { display: grid; justify-items: center; width: 100%; }
-/* the card shrinks on short screens so the heading, card and caption all fit */
-.portrait .portrait-card { width: min(100%, 27rem, calc((100svh - 23rem) * 0.75)); }
-
-/* One button per scene, on the boater ID card. Phones swipe instead, so they don't get these. */
-.scene-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 1rem; }
-.scene-button {
-  padding: 0.7rem 1.2rem; border: 3px solid var(--ink); border-radius: 999px;
-  background: var(--paper); color: var(--ink); cursor: pointer;
-  font-family: var(--display); font-weight: 700; font-size: var(--step-0); line-height: 1.2;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-.scene-button:hover { background: var(--shell); border-color: var(--shell); color: #FFFFFF; }
-.scene-button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-/* The pier only shows beside the boater ID */
-.home-dock, .home-water { display: none; }
-@keyframes water-drift { from { transform: translateX(-24px); } to { transform: translateX(24px); } }
-/* Computers: the first button says hello, so the heading is kept for screen readers only */
-@media screen {
-  .home .scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
-  /* Every page stands alone in the bay: only its card or sheet, "Built by Chris" and the
-     crab show. These are for screens only, so printed pages stay plain. */
-  body .site-header, body .kelp-bg, body .site-footer .links, .portrait-card .card-theme { display: none; }
-  body .site-footer { border-top: 0; }
-  /* A pastel bay: a cream sky, a soft wave at the water line 15% down the page, and water
-     that deepens toward the bottom. The card sits just under the water line, in front of
-     the pier's pilings; the pier is as wide as the footer's column when the window allows. */
-  body {
-    --sea-sky: #FBF3E4; --sea-top: #D6EBE6; --sea-bottom: #9CC3CF;
-    --card-w: min(100vw - 2 * var(--gutter), 60rem, (85svh - 11rem) * 1.6);
-    --dock-w: min(100vw - 2 * var(--gutter), 64rem, var(--card-w) * 1.087);
-    --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%23D6EBE6'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%235E8FA0' stroke-width='2.5'/%3E%3C/svg%3E");
-    background:
-      linear-gradient(to bottom, var(--sea-sky) 0 calc(15svh + 10px), var(--sea-top) calc(15svh + 10px), var(--sea-bottom) 100svh) no-repeat,
-      var(--sea-bottom);
-  }
-  /* The water's surface: a filled wave drifting slowly back and forth, half a wave each way.
-     It covers the ends of the pier's columns; the ladder stands in front of it. */
-  .home-water {
-    display: block; position: absolute; z-index: 1; left: 0; right: 0; top: calc(15svh - 5px);
-    height: 16px; overflow: hidden; pointer-events: none;
-  }
-  .home-water::before {
-    content: ""; position: absolute; inset: 0 -48px; background: var(--sea-wave) 0 0 / 48px 16px repeat-x;
-    will-change: transform; animation: water-drift 5s ease-in-out infinite alternate;
-  }
-  @media (prefers-reduced-motion: reduce) { .home-water::before { animation: none; } }
-  .home-dock.home-dock-front { z-index: 2; }
-  .home-dock {
-    display: block; position: absolute; z-index: 0; left: calc(50% - var(--dock-w) / 2);
-    top: calc(15svh - var(--dock-w) * 135 / 1024); width: var(--dock-w); height: auto; overflow: visible;
-  }
-  .home .scenes { position: relative; z-index: 3; padding-top: 0; }
-  .home .scene-stage { padding-top: 0; }
-  body .site-footer { position: relative; z-index: 3; }
-  body .site-footer p { color: var(--ink); }
-  body main { display: flex; flex-direction: column; padding-top: calc(15svh + 1rem); }
-  /* The card, caption and footer fit on one screen, with no spare space to scroll through */
-  .home .scenes, .home .scene-stage { padding-bottom: 0; }
-  body .site-footer { margin-top: 0; }
-}
-/* Computers: the photo and scene buttons are drawn as a Breadboard Bay boater ID, a
-   white breadboard with holes and red and blue rails. The card keeps its own colors
-   in both light and dark mode. Phones don't get any of this. */
-.dive-head, .dive-label, .dive-name, .dive-summary, .dive-fields, .dive-rail { display: none; }
-.dive-info { display: contents; }
-@media all {
-  /* A true ID card: always 1.6 times as wide as it is tall. --card-w is the largest width
-     that fits the window, and everything inside is sized in --u (1/60 of that width), so
-     the contents scale with the card like a picture does. */
-  .portrait {
-    --card-bg: #FFFFFF; --card-ink: #14303F; --card-soft: #4E6169; --card-pick: #D9442B;
-    --u: calc(var(--card-w) / 60);
-    --photo: calc(var(--u) * 21);
-    grid-template-columns: var(--photo) minmax(0, 1fr);
-    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
-    grid-template-areas: "head head" "photo info" "cap info" "links links" "rail rail";
-    column-gap: calc(var(--u) * 2); justify-items: stretch;
-    width: var(--card-w); aspect-ratio: 1.6;
-    padding: calc(var(--u) * 0.9) calc(var(--u) * 1.5) calc(var(--u) * 1);
-    box-sizing: border-box;
-    background: var(--card-bg); color: var(--card-ink);
-    border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
-  }
-  .portrait .portrait-card {
-    grid-area: photo; width: var(--photo); aspect-ratio: 21 / 25.4;
-    border-width: calc(var(--u) * 0.25); border-radius: calc(var(--u) * 1.5);
-  }
-  /* The photo is cut shorter from the bottom, so he and the microscope sit lower in it */
-  .portrait .portrait-me, .portrait .card-scope { bottom: -14cqw; }
-  .portrait .card-fish.card-auv { bottom: 66.5cqw; }
-  .portrait > .scene-caption { display: none; }
-  /* Header, with the rails running under it like the edge of a real board */
-  .dive-head {
-    grid-area: head; display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: calc(var(--u) * 0.8); padding-bottom: calc(var(--u) * 0.55);
-    border-bottom: calc(var(--u) * 0.19) solid #D9442B;
-    box-shadow: 0 calc(var(--u) * 0.19) 0 var(--card-bg), 0 calc(var(--u) * 0.38) 0 #2F6FB5;
-    font-family: var(--display); font-weight: 700;
-  }
-  .dive-org { font-size: calc(var(--u) * 1.75); line-height: 1.1; }
-  .dive-kind { font-family: var(--body); font-weight: 600; font-size: calc(var(--u) * 0.875); letter-spacing: 0.14em; text-transform: uppercase; }
-  /* Information side: the scene buttons are chunky keys printed on the card */
-  .dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
-  .dive-label, .dive-fields dt {
-    display: block; margin: 0; color: var(--card-soft);
-    font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
-  }
-  .dive-name {
-    display: block; margin: 0; padding-bottom: calc(var(--u) * 0.45);
-    border-bottom: calc(var(--u) * 0.125) solid var(--card-ink);
-    font-family: var(--display); font-weight: 700; font-size: calc(var(--u) * 3); line-height: 1.1;
-  }
-  .scene-nav { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 0.7) 0 0; }
-  .scene-button {
-    display: flex; align-items: center; gap: calc(var(--u) * 0.7); width: 100%;
-    padding: calc(var(--u) * 0.5) calc(var(--u) * 0.9);
-    border: calc(var(--u) * 0.19) solid var(--card-ink); border-radius: calc(var(--u) * 0.8);
-    background: var(--card-bg); color: var(--card-ink);
-    box-shadow: 0 calc(var(--u) * 0.25) 0 var(--card-ink); text-align: left;
-    font-size: calc(var(--u) * 1.0625); font-weight: 600;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  /* Each button starts with a breadboard hole and ends with an arrow; the current
-     scene's button is pressed in and filled, with a red wire in its hole */
-  .scene-button::before {
-    content: ""; flex: none; width: calc(var(--u) * 0.8); height: calc(var(--u) * 0.8); border-radius: 50%;
-    background: var(--card-bg); border: calc(var(--u) * 0.19) solid var(--card-ink); box-sizing: border-box;
-  }
-  .scene-button::after { content: "\203A"; margin-left: auto; font-size: 1.4em; line-height: 1; }
-  .scene-button:hover {
-    background: var(--card-pick); border-color: var(--card-ink); color: #FFFFFF;
-    transform: translateY(calc(var(--u) * -0.125)); box-shadow: 0 calc(var(--u) * 0.375) 0 var(--card-ink);
-  }
-  .scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover {
-    background: var(--card-ink); border-color: var(--card-ink); color: var(--card-bg);
-    box-shadow: none; transform: translateY(calc(var(--u) * 0.25)); cursor: default;
-  }
-  .scene-button[aria-pressed="true"]::before { background: var(--card-pick); border-color: var(--card-bg); }
-  .scene-button[aria-pressed="true"]::after { content: none; }
-  .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
-  /* A short summary of the chosen skill, from the resume. All three share one spot, so
-     the card doesn't shift when the scene changes. */
-  .dive-summary { display: grid; margin-top: calc(var(--u) * 1); }
-  .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
-  [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
-  /* The links run across the bottom of the card, each on one line */
-  .dive-fields { grid-area: links; display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: space-between; gap: calc(var(--u) * 1); margin: calc(var(--u) * 0.8) 0 0; }
-  /* Each link has an icon at its left; the logbook page and camera are drawn larger */
-  .dive-fields > div { --icon: calc(var(--u) * 2.4); position: relative; min-width: 0; min-height: calc(var(--u) * 2.4); padding-left: calc(var(--icon) + var(--u) * 0.4); }
-  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 3.1); }
-  .link-icon { position: absolute; left: 0; top: 50%; width: var(--icon); height: var(--icon); margin-top: calc(var(--icon) / -2); overflow: visible; }
-  .dive-fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 0.92); line-height: 1.35; }
-  /* No underlines: the icon and label are part of the link, and all of it turns red on hover */
-  .dive-fields a { color: var(--card-ink); text-decoration: none; }
-  .dive-fields a::after { content: ""; position: absolute; inset: 0; }
-  .dive-fields > div:hover a, .dive-fields > div:hover dt { color: var(--card-pick); }
-  /* The newest post's title can be any length, so a long one is cut off with dots */
-  .dive-fields dd { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
-  .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
-  /* The bottom edge: a strip of breadboard holes */
-  .dive-rail {
-    grid-area: rail; display: block; height: calc(var(--u) * 0.6); margin-top: calc(var(--u) * 0.7);
-    background: radial-gradient(circle, #14303F 0 calc(var(--u) * 0.14), transparent calc(var(--u) * 0.16)) left center / calc(var(--u) * 0.75) calc(var(--u) * 0.6) repeat-x;
-  }
-}
-
-/* The pastel bay at dusk, so the pier's navy outlines still show */
-@media screen and (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) body { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E"); }
-}
-@media screen {
-  :root[data-theme="dark"] body { --sea-sky: #4B5A7C; --sea-top: #4F8291; --sea-bottom: #2C5062; --sea-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 5 Q12 0 24 5 T48 5 V16 H0 Z' fill='%234F8291'/%3E%3Cpath d='M-24 5 Q-12 10 0 5 Q12 0 24 5 T48 5 T72 5' fill='none' stroke='%239CC7D1' stroke-width='2.5'/%3E%3C/svg%3E"); }
-}
-
-/* While pages change (see spa.js), nothing shows above the water's surface and the window
-   can't scroll. The new page rises behind "Built by Chris" and the crab. */
 @media screen {
   .page-moving { overflow: hidden; }
   .page-moving main { position: relative; z-index: 3; clip-path: inset(calc(15svh + 6px) -100vw -100vh -100vw); }
 }
 
-/* Every other page on a computer is a sheet torn from a logbook, floating in the bay. The
-   paper scrolls inside its own edges, so the bay stays put, and the holes, margin line and
-   ruled lines are part of the paper, so they scroll with the words. Two and a half holes
-   show at a time. On phones and in print the sheet's wrappers do nothing at all. */
+/* ------------------------------------------------------------
+   5. Home: the boater ID card
+   A white breadboard with red and blue rails, always 1.6 times as wide as it is tall.
+   --card-w is the largest width that fits the window, and everything on the card is
+   sized in --u (1/60 of that width), so its contents scale with it like a picture does.
+   The card keeps its own colors in light and dark mode.
+   (Class names starting "dive-" are parts of the card; it began as a diving card.)
+   ------------------------------------------------------------ */
+.scenes { position: relative; z-index: 3; display: grid; justify-items: center; }
+/* The card shows his name, so the page's heading is for screen readers only */
+.scenes h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
+
+.portrait {
+  --card-bg: #FFFFFF; --card-ink: #14303F; --card-soft: #4E6169; --card-pick: #D9442B;
+  --u: calc(var(--card-w) / 60);
+  --photo: calc(var(--u) * 21);
+  display: grid;
+  grid-template-columns: var(--photo) minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  grid-template-areas: "head head" "photo info" ". info" "links links" "rail rail";
+  column-gap: calc(var(--u) * 2); justify-items: stretch;
+  width: var(--card-w); aspect-ratio: 1.6;
+  padding: calc(var(--u) * 0.9) calc(var(--u) * 1.5) calc(var(--u) * 1);
+  background: var(--card-bg); color: var(--card-ink);
+  border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
+}
+
+/* Header, with the rails running under it like the edge of a real board */
+.dive-head {
+  grid-area: head; display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: calc(var(--u) * 0.8); padding-bottom: calc(var(--u) * 0.55);
+  border-bottom: calc(var(--u) * 0.19) solid #D9442B;
+  box-shadow: 0 calc(var(--u) * 0.19) 0 var(--card-bg), 0 calc(var(--u) * 0.38) 0 #2F6FB5;
+  font-family: var(--display); font-weight: 700;
+}
+.dive-org { font-size: calc(var(--u) * 1.75); line-height: 1.1; }
+.dive-kind { font-family: var(--body); font-weight: 600; font-size: calc(var(--u) * 0.875); letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* Beside the photo: his name, the skill buttons, and the chosen skill's summary */
+.dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
+.dive-label, .dive-fields dt {
+  margin: 0; color: var(--card-soft);
+  font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.dive-name {
+  margin: 0; padding-bottom: calc(var(--u) * 0.45);
+  border-bottom: calc(var(--u) * 0.125) solid var(--card-ink);
+  font-family: var(--display); font-weight: 700; font-size: calc(var(--u) * 3); line-height: 1.1;
+}
+
+/* The skill buttons are chunky keys printed on the card. Each starts with a breadboard
+   hole and ends with an arrow; the chosen one is pressed in and filled, with a red wire
+   in its hole. */
+.scene-nav { display: flex; flex-direction: column; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 0.7) 0 0; }
+.scene-button {
+  display: flex; align-items: center; gap: calc(var(--u) * 0.7); width: 100%;
+  padding: calc(var(--u) * 0.5) calc(var(--u) * 0.9);
+  border: calc(var(--u) * 0.19) solid var(--card-ink); border-radius: calc(var(--u) * 0.8);
+  background: var(--card-bg); color: var(--card-ink);
+  box-shadow: 0 calc(var(--u) * 0.25) 0 var(--card-ink); text-align: left; cursor: pointer;
+  font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.2;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.scene-button::before {
+  content: ""; flex: none; width: calc(var(--u) * 0.8); height: calc(var(--u) * 0.8); border-radius: 50%;
+  background: var(--card-bg); border: calc(var(--u) * 0.19) solid var(--card-ink);
+}
+.scene-button::after { content: "\203A"; margin-left: auto; font-size: 1.4em; line-height: 1; }
+.scene-button:hover {
+  background: var(--card-pick); color: #FFFFFF;
+  transform: translateY(calc(var(--u) * -0.125)); box-shadow: 0 calc(var(--u) * 0.375) 0 var(--card-ink);
+}
+.scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover {
+  background: var(--card-ink); color: var(--card-bg);
+  box-shadow: none; transform: translateY(calc(var(--u) * 0.25)); cursor: default;
+}
+.scene-button[aria-pressed="true"]::before { background: var(--card-pick); border-color: var(--card-bg); }
+.scene-button[aria-pressed="true"]::after { content: none; }
+.scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
+
+/* A short summary of the chosen skill, from the resume. All three share one spot, so
+   the card doesn't shift when the scene changes. */
+.dive-summary { display: grid; margin-top: calc(var(--u) * 1); }
+.dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
+[data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
+
+/* The links run across the bottom of the card, each on one line with an icon at its
+   left; the logbook page and camera are drawn larger */
+.dive-fields { grid-area: links; display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: space-between; gap: calc(var(--u) * 1); margin: calc(var(--u) * 0.8) 0 0; }
+.dive-fields > div { --icon: calc(var(--u) * 2.4); position: relative; min-width: 0; min-height: calc(var(--u) * 2.4); padding-left: calc(var(--icon) + var(--u) * 0.4); }
+.dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 3.1); }
+.link-icon { position: absolute; left: 0; top: 50%; width: var(--icon); height: var(--icon); margin-top: calc(var(--icon) / -2); overflow: visible; }
+/* The newest post's title can be any length, so a long one is cut off with dots */
+.dive-fields dd {
+  margin: 0; min-width: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 0.92); line-height: 1.35;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;
+}
+/* No underlines: the icon and label are part of the link, and all of it turns red on hover */
+.dive-fields a { color: var(--card-ink); text-decoration: none; }
+.dive-fields a::after { content: ""; position: absolute; inset: 0; }
+.dive-fields > div:hover a, .dive-fields > div:hover dt { color: var(--card-pick); }
+.dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
+
+/* The bottom edge: a strip of breadboard holes */
+.dive-rail {
+  grid-area: rail; height: calc(var(--u) * 0.6); margin-top: calc(var(--u) * 0.7);
+  background: radial-gradient(circle, #14303F 0 calc(var(--u) * 0.14), transparent calc(var(--u) * 0.16)) left center / calc(var(--u) * 0.75) calc(var(--u) * 0.6) repeat-x;
+}
+
+/* ------------------------------------------------------------
+   6. Home: the photo's scenes and creatures
+   The photo frame clips everything inside it. Sizes inside are in cqw (1% of the
+   photo's width), so the scene scales with the photo.
+   ------------------------------------------------------------ */
+.portrait-card {
+  grid-area: photo; position: relative; margin: 0; width: var(--photo); aspect-ratio: 21 / 25.4;
+  overflow: hidden; isolation: isolate; container-type: inline-size;
+  border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
+}
+.portrait-wash { position: absolute; inset: 0; background: #EAF4F8 url("../images/watercolor-blue.svg") center / cover no-repeat; }
+/* In dark mode the watercolor turns deep blue */
+@media (prefers-color-scheme: dark) {
+  .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
+}
+/* Safari redraws the watercolor (an SVG with blur and grain filters) slightly
+   differently when it repaints just a patch of it, which showed up as a box around
+   the osprey's nodding head. Giving the wash, the osprey and its head their own layers
+   means nothing that moves ever makes Safari repaint the wash underneath. */
+.portrait-wash, .card-osprey, .osprey-nod { will-change: transform; }
+
+/* A big portrait bust: he fills most of the frame, cropped at the bottom edge. The
+   microscope slides in from the right, in front of him. */
+.portrait-me { position: absolute; z-index: 1; left: 12%; bottom: -14cqw; width: 78%; height: auto; }
+.card-scope {
+  position: absolute; z-index: 3; left: 12%; bottom: -14cqw; width: 78%; height: auto; overflow: visible;
+  transform: translateX(118%); transition: transform 0.9s cubic-bezier(.3, .8, .3, 1);
+}
+
+/* Scene 1: the osprey. Scene 2: the AUV and the microscope. Scene 3: the fish and
+   the jelly. data-scene on the section picks one, and the others fade out. */
+.card-osprey, .card-fish-2, .card-fish-3, .card-jelly { opacity: 0; transition: opacity 0.6s ease; }
+.card-auv { opacity: 0; transition: opacity 0.8s ease 0.2s; }
+[data-scene="1"] .card-osprey { opacity: 1; }
+[data-scene="2"] .card-auv { opacity: 1; }
+[data-scene="2"] .card-scope { transform: translateX(0); }
+[data-scene="3"] .card-fish-2, [data-scene="3"] .card-fish-3, [data-scene="3"] .card-jelly { opacity: 1; }
+/* Only the scenes listed in data-live keep moving (site.js lists the one on show, plus
+   the one fading out). The rest hold still until they're shown again. */
+.scenes:not([data-live~="1"]) .osprey-nod,
+.scenes:not([data-live~="2"]) .card-auv,
+.scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly),
+.scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly) * { animation-play-state: paused; }
+
+/* The osprey perches behind him, facing in from the right, with its branch running off
+   the photo's right edge. site.js sizes it to fit above his head; these are fallbacks.
+   Its head is a second drawing on top of the first, and nods: level, up 7 degrees, down
+   5, back to level, every 5 seconds, turning about the base of the neck. */
+.card-osprey { position: absolute; z-index: 0; right: -13%; bottom: 79cqw; width: 44%; transform: scaleX(-1); }
+.osprey-art { display: block; width: 100%; height: auto; }
+.osprey-nod { position: absolute; inset: 0; transform-origin: 50% 23.02%; }
+@media (prefers-reduced-motion: no-preference) {
+  .osprey-nod { animation: osprey-nod 5s ease-in-out infinite; }
+}
+@keyframes osprey-nod {
+  0%, 18%, 100% { transform: rotate(0deg); }
+  32%, 50%      { transform: rotate(-7deg); }
+  66%, 82%      { transform: rotate(5deg); }
+}
+
+/* The jelly swims through the back of scene 3. Each trip it enters from the left or
+   right edge about a quarter of the way up and pulses upward at about 40 degrees across
+   the photo; site.js picks the side, the exact start height and the path (--dx, --dy,
+   --tilt). Each of the eight pulses surges and then glides. */
+.card-jelly {
+  --dx: 0px; --dy: 0px; --tilt: 0deg;
+  position: absolute; z-index: 0; left: -22%; top: 70%; width: 22%;
+  transform: rotate(var(--tilt));
+}
+.card-jelly .mascot-mark { display: block; width: 100%; height: auto; transform-origin: 50% 30%; animation: jelly-squeeze 2.75s ease-in-out infinite; }
+@media (prefers-reduced-motion: no-preference) {
+  .card-jelly { animation: jelly-rise 22s cubic-bezier(.2,.7,.4,1) infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-jelly { left: 8%; top: 30%; }
+  .card-jelly .mascot-mark { animation: none; }
+}
+@keyframes jelly-rise {
+  0%    { transform: translate(0, 0) rotate(var(--tilt)); }
+  12.5% { transform: translate(calc(var(--dx) * 0.125), calc(var(--dy) * 0.125)) rotate(var(--tilt)); }
+  25%   { transform: translate(calc(var(--dx) * 0.25), calc(var(--dy) * 0.25)) rotate(var(--tilt)); }
+  37.5% { transform: translate(calc(var(--dx) * 0.375), calc(var(--dy) * 0.375)) rotate(var(--tilt)); }
+  50%   { transform: translate(calc(var(--dx) * 0.5), calc(var(--dy) * 0.5)) rotate(var(--tilt)); }
+  62.5% { transform: translate(calc(var(--dx) * 0.625), calc(var(--dy) * 0.625)) rotate(var(--tilt)); }
+  75%   { transform: translate(calc(var(--dx) * 0.75), calc(var(--dy) * 0.75)) rotate(var(--tilt)); }
+  87.5% { transform: translate(calc(var(--dx) * 0.875), calc(var(--dy) * 0.875)) rotate(var(--tilt)); }
+  100%  { transform: translate(var(--dx), var(--dy)) rotate(var(--tilt)); }
+}
+@keyframes jelly-squeeze {
+  0%, 100% { transform: scale(1, 1); }
+  12%      { transform: scale(0.9, 1.08); }
+  45%      { transform: scale(1.04, 0.96); }
+}
+
+/* The jelly drawing (also used on the "page not found" page). Same colors in light and
+   dark mode; only the tentacles invert. */
+.mascot {
+  --jelly-line: #14303F;
+  --jelly-red: #D9442B;
+  --tentacle-color: #14303F;
+  --tentacle-wire: #FFFFFF;
+  color: var(--jelly-line);
+  overflow: visible;
+}
+@media (prefers-color-scheme: dark) {
+  .mascot { --tentacle-color: #E3ECEA; --tentacle-wire: #14303F; }
+}
+.mascot-fill { fill: var(--jelly-red); stroke: var(--jelly-line); stroke-width: 3; stroke-linejoin: round; }
+.board-holes, .mascot-pupil { fill: var(--jelly-line); }
+.mascot-eye { fill: #FFFFFF; stroke: var(--jelly-line); stroke-width: 2; }
+.mascot-mouth { fill: none; stroke: var(--jelly-line); stroke-width: 1.6; stroke-linecap: round; }
+.tentacle { fill: none; stroke: var(--tentacle-color); stroke-width: 2; stroke-linecap: round; }
+.tentacle-outline { fill: none; stroke: var(--tentacle-wire); stroke-width: 3.4; stroke-linecap: round; }
+.tentacle-wire-edge { fill: none; stroke: var(--tentacle-color); stroke-width: 3.4; stroke-linecap: round; }
+.tentacle-wire { fill: none; stroke: var(--tentacle-wire); stroke-width: 2; stroke-linecap: round; }
+/* On the card its tentacles sway together, and two also wiggle on their own, each at
+   its own pace: the free one second from the left (a) and the dark plugged wire (b) */
+.mascot-mark .jelly-tentacles, .mascot-mark .tentacle-a, .mascot-mark .tentacle-b { transform-box: fill-box; transform-origin: 50% 0%; }
+.mascot-mark .jelly-tentacles { animation: sway 6.4s ease-in-out infinite; }
+.mascot-mark .tentacle-a { animation: wiggle 6.3s ease-in-out infinite; }
+.mascot-mark .tentacle-b { animation: wiggle 12.9s ease-in-out -4.2s infinite reverse; }
+@keyframes sway {
+  0%, 100% { transform: skewX(0deg); }
+  25%      { transform: skewX(7deg); }
+  75%      { transform: skewX(-7deg); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg) skewX(0deg); }
+  30%      { transform: rotate(6deg) skewX(-6deg); }
+  70%      { transform: rotate(-5deg) skewX(8deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-mark .jelly-tentacles, .mascot-mark .tentacle-a, .mascot-mark .tentacle-b { animation: none; }
+}
+
+/* Two fish and an AUV. The AUV and the lower fish swim behind him; the upper fish
+   swims in front. Where they sit when nothing moves: */
+.card-fish { position: absolute; display: block; z-index: 0; --rise: 0cqw; --tilt: 0deg; --lead: 0cqw; }
+.card-auv    { left: 4%; bottom: 66.5cqw; width: 90%; }   /* a fixed lane just above his head */
+.card-fish-2 { left: -2%; top: 64%; width: 44%; z-index: 2; }
+.card-fish-3 { left: 76%; top: 80%; width: 34%; }
+.fish-body, .auv-body { display: block; width: 100%; height: auto; overflow: visible; }
+/* Swimming: each starts just off the right edge and crosses to just past the left edge,
+   wiggling and wagging its tail as it goes. The nearer (bigger) fish moves a little
+   faster. --rise and --tilt are 0 for a level swim; site.js sets them when a fish swims
+   in at an angle. */
+@media (prefers-reduced-motion: no-preference) {
+  .card-fish { left: calc(100% + var(--lead)); animation: fish-cross linear infinite; }
+  /* The AUV starts and ends further out so its headlight beam slides in and out with it */
+  .card-auv { --lead: 16cqw; animation-duration: 16s; }
+  .card-fish-2 { animation-duration: 10.4s; }
+  .card-fish-3 { animation-duration: 13s; }
+  .fish-body { animation: fish-wiggle 0.9s ease-in-out infinite alternate; transform-origin: 40% 50%; }
+  .card-fish-2 .fish-body { animation-duration: 0.75s; }
+  .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 0.45s ease-in-out infinite alternate; }
+}
+@keyframes fish-cross {
+  from { transform: translate(0, 0) rotate(var(--tilt)); }
+  to   { transform: translate(calc(-100cqw - 100% - var(--lead)), var(--rise)) rotate(var(--tilt)); }
+}
+@keyframes fish-wiggle { from { transform: rotate(-3deg) translateY(-3%); } to { transform: rotate(3deg) translateY(3%); } }
+@keyframes fish-wag { from { transform: scaleX(1) skewY(6deg); } to { transform: scaleX(0.8) skewY(-6deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
+}
+
+/* Breadboard fish: same colors in light and dark mode, like the jelly */
+.bb-fish-fill { fill: #D9442B; stroke: #14303F; stroke-width: 3; stroke-linejoin: round; }
+.bb-fish-line { fill: #14303F; stroke: #14303F; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }  /* solid fins */
+.bb-fish-divider { stroke: #14303F; stroke-width: 1.2; opacity: 0.45; }
+.bb-fish-ink { fill: #14303F; }
+.bb-fish-wire { fill: none; stroke: #14303F; stroke-width: 1.9; stroke-linecap: round; }
+.bb-fish-eye { fill: #FFFFFF; stroke: #14303F; stroke-width: 2.5; }
+.bb-fish-mouth { fill: none; stroke: #14303F; stroke-width: 2; stroke-linecap: round; }
+/* In dark mode the AUV's nose becomes a headlight, lighting the water ahead of it */
+.auv-beam { display: none; }
+@media (prefers-color-scheme: dark) {
+  .auv-beam { display: inline; }
+  .auv-nose { fill: #FFF3C4; }
+}
+
+/* ------------------------------------------------------------
+   7. Sheets
+   Every page but the home page is a sheet torn from a logbook, floating in the bay. The
+   paper scrolls inside its own edges, so the bay stays put, and its holes and margin line
+   are part of the paper, so they scroll with the words. Two and a half holes show at a
+   time. The paper keeps its own colors in light and dark mode. In print the sheet's
+   wrappers do nothing at all.
+   ------------------------------------------------------------ */
 .sheet, .sheet-paper, .sheet-body { display: contents; }
 .sheet-head { display: none; }
 @media screen {
   body {
-    --sheet-h: calc(85svh - 11rem);
     --hole-gap: calc((var(--sheet-h) - 8px) / 2.5);
-    --hole: #BCDDE3;
+    --hole: #BCDDE3;   /* the water showing through the holes */
   }
   .sheet {
     --paper: #FEFDFA; --ink: #14303F; --muted: #4E6169; --link: #B83B25; --rule: #C3CBCF; --tide: #EEEEEA; --shell: #D9442B;
-    display: block; position: relative; z-index: 3; box-sizing: border-box;
+    display: block; position: relative; z-index: 3;
     width: min(100vw - 2 * var(--gutter), 54rem); height: var(--sheet-h); margin: 0 auto; overflow-y: auto;
     background: var(--paper); color: var(--ink);
     border: 4px solid #14303F; border-radius: 0.5rem; outline: none;
     scrollbar-width: none;   /* still scrolls; the bar is just hidden */
   }
   .sheet::-webkit-scrollbar { display: none; }
-  .sheet-paper { display: flex; flex-direction: column; position: relative; min-height: 100%; padding-left: 4rem; box-sizing: border-box; }
+  .sheet-paper { display: flex; flex-direction: column; position: relative; min-height: 100%; padding-left: 4rem; }
   .sheet-paper::before {
     content: ""; position: absolute; left: 1rem; top: 0; bottom: 0; width: 1.3rem;
     background: radial-gradient(circle, var(--hole) 0 0.48rem, #14303F 0.5rem 0.65rem, transparent 0.67rem) top center / 1.3rem var(--hole-gap) repeat-y;
   }
   .sheet-paper::after { content: ""; position: absolute; left: 3.1rem; top: 0; bottom: 0; border-left: 2px solid #D9442B; opacity: 0.7; }
+
+  /* The strip across the top stays put while the paper scrolls: a Home button, the bay's
+     name and the kind of page */
   .sheet-head {
     flex: none; position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 1rem;
     padding: 0.8rem 1.75rem 0.55rem 0; border-bottom: 3px solid #14303F; background: var(--paper);
@@ -585,6 +582,7 @@ img { max-width: 100%; height: auto; }
   }
   .sheet-back:hover { background: #D9442B; color: #FFFFFF; }
   .sheet-back:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
+
   .sheet-body { display: block; flex: 1; min-width: 0; padding: 0 1.75rem 3rem 0; }
   /* A soft fade at the paper's bottom edge, so there's a hint of more below. The extra
      padding above means it never covers the last line once you reach the end. */
@@ -592,61 +590,12 @@ img { max-width: 100%; height: auto; }
     content: ""; display: block; position: sticky; bottom: 0; z-index: 1; height: 2.5rem; margin: 0 -1.75rem -3rem 0;
     background: linear-gradient(transparent, var(--paper)); pointer-events: none;
   }
-  .sheet-album .sheet-body::after { display: none; }
-  .sheet-body .wrap, .sheet-body .wrap-wide { max-width: none; width: auto; margin: 0; padding: 0; }
+  .sheet-body .wrap { max-width: none; width: auto; margin: 0; padding: 0; }
   .sheet-body h1 { margin-top: 0; font-size: var(--step-3); color: var(--ink); }
   .sheet-body > *:first-child { margin-top: 0; padding-top: 0; }
-  body main { padding-bottom: 0; }
-  /* The same footer column as the home page, so "Built by Chris" and the crab don't jump */
-  body .site-footer .wrap { max-width: calc(64rem + 2 * var(--gutter)); }
 
-  /* Photography isn't on paper: the words sit in the water, and each photo is an instant
-     film print with the caption in its thick bottom strip. Prints are the same height, unless
-     a very wide photo needs to shrink to fit, and always show the whole photo, uncropped. */
-  .sheet-album {
-    --ink: #14303F; --muted: #2F4F5D; --print-h: calc(var(--sheet-h) * 0.5); --print-max: calc(min(100vw - 2 * var(--gutter), 64rem) - 3.1rem - 14px);
-    width: min(100vw - 2 * var(--gutter), 64rem); overflow-x: hidden; background: none; border: 0; border-radius: 0;
-    /* Prints fade into the water at the top and bottom instead of stopping at a hard edge */
-    -webkit-mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
-    mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
-  }
-  .sheet-album .sheet-paper { padding: 0 0.75rem; }
-  .sheet-album .sheet-paper::before, .sheet-album .sheet-paper::after, .sheet-album .sheet-org, .sheet-album .sheet-kind { display: none; }
-  .sheet-album .sheet-head { z-index: 2; align-self: flex-start; padding: 0.65rem 0 0; border: 0; background: none; }
-  .sheet-album .sheet-body { margin-top: -2.5rem; padding: 0 0 2.5rem; background: none; }
-  .sheet-album .page-head { margin-bottom: 1.25rem; text-align: center; }
-  .sheet-album .page-head h1 { margin-bottom: 0.25rem; }
-  .sheet-album .page-head .lede { margin: 0 auto; font-size: var(--step-0); }
-  .sheet-album .gallery { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1.75rem; margin: 0; padding: 0; }
-  .sheet-album .shot { flex: none; grid-column: auto; transform: rotate(-1deg); transition: transform 0.2s ease; }
-  .sheet-album .shot:nth-child(even) { transform: rotate(1.1deg); }
-  .sheet-album .shot:nth-child(3n) { transform: rotate(-0.5deg); }
-  .sheet-album .shot:hover, .sheet-album .shot:focus-within { transform: none; }
-  .sheet-album .shot figure {
-    box-sizing: border-box; width: min-content; padding: 0.8rem 0.8rem 0; background: #FDFBF4;
-    border: 4px solid #14303F; border-radius: 0.45rem; box-shadow: 0 4px 0 #14303F;
-  }
-  .sheet-album .shot-link { border: 3px solid #14303F; border-radius: 0.15rem; }
-  .sheet-album .shot-link img { width: min(var(--print-h) * (var(--r)), var(--print-max)); max-width: none; height: auto; }
-  .sheet-album .shot-link:hover img { transform: none; }
-  .sheet-album .shot figcaption {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem;
-    min-height: 4.75rem; margin: 0; padding: 0.55rem 0.25rem 0.75rem; box-sizing: border-box; text-align: center; color: #14303F;
-  }
-  .sheet-album .shot-title { font-size: var(--step-1); line-height: 1.2; }
-  .sheet-album .shot-note { color: #4E6169; line-height: 1.3; }
-}
-@media screen and (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .sheet-album { --ink: #E3ECEA; --muted: #C9DADE; }
-}
-@media screen {
-  :root[data-theme="dark"] .sheet-album { --ink: #E3ECEA; --muted: #C9DADE; }
-}
-@media (prefers-reduced-motion: reduce) { .sheet-album .shot { transition: none; } }
-/* The sheets are plain paper: no ruled lines behind the words, just ordinary reading spacing.
-   Text is set in the device's own font (San Francisco on iPhones and Macs); headings stay in
-   Fraunces. */
-@media screen {
+  /* Plain paper with ordinary reading spacing. The words are set in the device's own
+     font (San Francisco on iPhones and Macs); headings and titles stay in Fraunces. */
   .sheet:not(.sheet-album) .sheet-body {
     --sheet-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     padding-top: 1.5rem; font-family: var(--sheet-font); font-size: 1rem; line-height: 1.55;
@@ -658,235 +607,12 @@ img { max-width: 100%; height: auto; }
   .sheet:not(.sheet-album) .sheet-body h2 { font-size: 1.375rem; }
   .sheet:not(.sheet-album) .sheet-body h3, .sheet:not(.sheet-album) .sheet-body .p-title, .sheet:not(.sheet-album) .sheet-body .post-list a { font-size: 1.125rem; }
 }
-
-@media screen and (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) body { --hole: #3F7183; }
-}
-@media screen {
-  :root[data-theme="dark"] body { --hole: #3F7183; }
-}
-
-/* Scene 1: the osprey. Scene 2: the AUV, with the microscope sliding in from the
-   right. Scene 3: the fish and the jelly. data-scene on the section picks one. */
-.card-osprey, .card-fish-2, .card-fish-3, .card-jelly { opacity: 0; transition: opacity 0.6s ease; }
-.card-auv { opacity: 0; transition: opacity 0.8s ease 0.2s; }
-.card-scope {
-  position: absolute; left: 12%; bottom: -4.02cqw; width: 78%; height: auto; z-index: 3; overflow: visible;
-  transform: translateX(118%); transition: transform 0.9s cubic-bezier(.3, .8, .3, 1);
-}
-[data-scene="1"] .card-osprey { opacity: 1; }
-[data-scene="2"] .card-auv { opacity: 1; }
-[data-scene="2"] .card-scope { transform: translateX(0); }
-[data-scene="3"] .card-fish-2, [data-scene="3"] .card-fish-3, [data-scene="3"] .card-jelly { opacity: 1; }
-
-/* The osprey perches in the background of scene 1, facing the character from the
-   right with its branch running off the card's right edge. The home page script
-   sizes it to fit between the title and the top of the head; these are fallbacks. */
-.card-osprey { position: absolute; z-index: 0; right: -13%; bottom: 79cqw; width: 44%; transform: scaleX(-1); }
-.card-osprey svg { display: block; width: 100%; height: auto; }
-
-/* Caption under the card, swapping between scenes */
-.scene-caption {
-  display: grid; margin: 0.9rem 0 0; text-align: center;
-  font-family: var(--display); font-weight: 700; font-size: var(--step-1); color: var(--ink);
-}
-/* Captions roll like a ticker: going forward, the old one slides up and out while the
-   new one rises in from below; going back, the reverse. The caption clips its own
-   box, so the two never sit on top of each other. The script sets the classes. */
-.scene-caption { overflow: hidden; }
-.scene-caption > span { grid-area: 1 / 1; opacity: 0; }
-.scene-caption > span.is-on { opacity: 1; }
-.scene-caption > .cap-out-up   { animation: cap-out-up 0.35s ease-in both; }
-.scene-caption > .cap-out-down { animation: cap-out-down 0.35s ease-in both; }
-.scene-caption > .cap-in-up    { animation: cap-in-up 0.4s ease-out 0.1s both; }
-.scene-caption > .cap-in-down  { animation: cap-in-down 0.4s ease-out 0.1s both; }
-@keyframes cap-out-up   { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-100%); } }
-@keyframes cap-out-down { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(100%); } }
-@keyframes cap-in-up    { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
-@keyframes cap-in-down  { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .scene-caption > span { animation: none !important; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .card-scope, .card-auv, .card-fish-2, .card-fish-3 { transition: none; }
-}
-
-/* The jelly swims through the back of scene 1, behind everything else. Each trip it
-   enters from the left or right edge about 25% up from the bottom and pulses upward
-   at about 40 degrees across the card; the script picks the side, the exact start
-   height and the path (--dx, --dy, --tilt). It fades out in scene 2. */
-.card-jelly {
-  --dx: 0px; --dy: 0px; --tilt: 0deg;
-  position: absolute; z-index: 0; left: -22%; top: 70%; width: 22%;
-  transform: rotate(var(--tilt));
-}
-.card-jelly .mascot-mark { width: 100%; animation: jelly-squeeze 2.75s ease-in-out infinite; transform-origin: 50% 30%; }
-@media (prefers-reduced-motion: no-preference) {
-  .card-jelly { animation: jelly-rise 22s linear infinite; }
-}
-@media (prefers-reduced-motion: reduce) { .card-jelly { left: 8%; top: 30%; } .card-jelly .mascot-mark { animation: none; } }
-@keyframes jelly-rise {
-  0.00% { transform: translate(calc(var(--dx) * 0.000), calc(var(--dy) * 0.000)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  12.50% { transform: translate(calc(var(--dx) * 0.125), calc(var(--dy) * 0.125)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  25.00% { transform: translate(calc(var(--dx) * 0.250), calc(var(--dy) * 0.250)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  37.50% { transform: translate(calc(var(--dx) * 0.375), calc(var(--dy) * 0.375)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  50.00% { transform: translate(calc(var(--dx) * 0.500), calc(var(--dy) * 0.500)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  62.50% { transform: translate(calc(var(--dx) * 0.625), calc(var(--dy) * 0.625)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  75.00% { transform: translate(calc(var(--dx) * 0.750), calc(var(--dy) * 0.750)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  87.50% { transform: translate(calc(var(--dx) * 0.875), calc(var(--dy) * 0.875)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-  100.00% { transform: translate(calc(var(--dx) * 1.000), calc(var(--dy) * 1.000)) rotate(var(--tilt)); animation-timing-function: cubic-bezier(.2,.7,.4,1); }
-}
-@keyframes jelly-squeeze {
-  0%, 100% { transform: scale(1, 1); }
-  12%      { transform: scale(0.9, 1.08); }
-  45%      { transform: scale(1.04, 0.96); }
-}
-
-/* The in-card title (phones only): sits in the open water, behind the jelly */
-.card-title { display: none; position: absolute; z-index: 0; top: 5.2rem; left: 0.5rem; right: 0.5rem; text-align: center; }
-.card-title-name {
-  margin: 0; font-family: var(--display); font-size: var(--step-4); font-weight: 700; line-height: 1; letter-spacing: -0.02em;
-  color: var(--ink); font-variation-settings: "SOFT" 100, "WONK" 1;
-}
-.card-title .scene-caption { margin-top: 0.6rem; }
-
-/* The AUV cruises in a fixed lane just above his head (measured from the card's
-   bottom in card widths, like the character), so it never crosses the captions */
-.card-fish.card-auv { top: auto; bottom: 76.5cqw; }
-
-/* Breadboard fish: same colors in both themes, like the jelly */
-.bb-fish-fill { fill: #D9442B; stroke: #14303F; stroke-width: 3; stroke-linejoin: round; }
-.bb-fish-line { fill: #14303F; stroke: #14303F; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }  /* solid fins */
-.bb-fish-divider { stroke: #14303F; stroke-width: 1.2; opacity: 0.45; }
-.bb-fish-ink { fill: #14303F; }
-.bb-fish-wire { fill: none; stroke: #14303F; stroke-width: 1.9; stroke-linecap: round; }
-.bb-fish-eye { fill: #FFFFFF; stroke: #14303F; stroke-width: 2.5; }
-.bb-fish-mouth { fill: none; stroke: #14303F; stroke-width: 2; stroke-linecap: round; }
-
-/* Two fish and an AUV. The AUV (top) and the bottom fish swim behind the
-   character; the middle fish swims in front of him. */
-.portrait-card { container-type: inline-size; }
-.portrait-me { z-index: 1; }
-.card-fish { position: absolute; display: block; z-index: 0; }
-.card-fish-2 { z-index: 2; }
-.fish-body { display: block; width: 100%; height: auto; overflow: visible; }
-.card-auv    { left: 4%;  top: 25%; width: 90%; }   /* the breadboard AUV, cruising behind him */
-.auv-body { display: block; width: 100%; height: auto; overflow: visible; }
-/* In dark mode the AUV's nose becomes a headlight, lighting the water ahead of it */
-.auv-beam { display: none; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .auv-beam { display: inline; }
-  :root:not([data-theme="light"]) .auv-nose { fill: #FFF3C4; }
+  body { --hole: #3F7183; }
 }
-:root[data-theme="dark"] .auv-beam { display: inline; }
-:root[data-theme="dark"] .auv-nose { fill: #FFF3C4; }
-/* Light/dark switch in the card's top-right corner, in front of the swimmers.
-   It's the same pill as the footer switch; only its position differs. */
-.card-theme { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 5; font-family: var(--body); font-size: var(--step--1); }
-/* Its outline is the same thickness as the card's frame */
-.card-theme { border-width: 4px; }
-/* In dark mode the card's watercolor turns deep blue to match the theme */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
-}
-:root[data-theme="dark"] .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
-.card-fish-2 { left: -2%; top: 64%; width: 44%; }
-.card-fish-3 { left: 76%; top: 80%; width: 34%; }
-
-/* Swimming: each fish starts just off the right edge and crosses to just
-   past the left edge, wiggling and wagging its tail as it goes. The nearer
-   (bigger) fish moves a little faster. */
-@media (prefers-reduced-motion: no-preference) {
-  .card-fish { left: calc(100% + var(--lead)); animation: fish-cross linear infinite; }
-  /* The AUV starts and ends further out so its headlight beam slides in and out with it */
-  .card-fish.card-auv { --lead: 16cqw; animation-duration: 16s; }
-  .card-fish-2 { animation-duration: 10.4s; }
-  .card-fish-3 { animation-duration: 13s; }
-  .fish-body { animation: fish-wiggle 0.9s ease-in-out infinite alternate; transform-origin: 40% 50%; }
-  .card-fish-2 .fish-body { animation-duration: 0.75s; }
-  .fish-body .bb-fish-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: fish-wag 0.45s ease-in-out infinite alternate; }
-}
-/* --rise and --tilt are 0 for a level swim; the script sets them when a fish swims in at an angle */
-.card-fish { --rise: 0cqw; --tilt: 0deg; --lead: 0cqw; }
-@keyframes fish-cross {
-  from { transform: translate(0, 0) rotate(var(--tilt)); }
-  to   { transform: translate(calc(-100cqw - 100% - var(--lead)), var(--rise)) rotate(var(--tilt)); }
-}
-@keyframes fish-wiggle { from { transform: rotate(-3deg) translateY(-3%); } to { transform: rotate(3deg) translateY(3%); } }
-@keyframes fish-wag { from { transform: scaleX(1) skewY(6deg); } to { transform: scaleX(0.8) skewY(-6deg); } }
-
-/* Phones: stack the text above the card */
-@media (max-width: 40rem) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .portrait-card { width: 100%; margin-top: 0.5rem; }
-}
-.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin: 2rem 0 0; }
-
-.home-section { margin-top: clamp(2.5rem, 6vw, 4rem); }
-.section-head {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
-  border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; margin-bottom: 0.25rem;
-}
-.section-head h2 { font-size: var(--step-2); margin: 0; }
-.section-head a { font-family: var(--display); font-weight: 600; font-size: var(--step--1); color: var(--ink); white-space: nowrap; }
-
-.photo-tiles { display: grid; gap: 0.75rem; }
-.tile-row { display: flex; gap: 0.75rem; }
-.tile-row a {
-  flex: var(--shape) 1 0; aspect-ratio: var(--shape); min-width: 0;
-  display: block; border-radius: 0.6rem; overflow: hidden; background: var(--tide);
-}
-.photo-tiles img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.photo-tiles a:hover img, .photo-tiles a:focus-visible img { transform: scale(1.04); }
-.photo-tiles .actions { margin-top: 1.5rem; }
-@media (max-width: 40rem) { .photo-tiles, .tile-row { gap: 0.5rem; } }
-@media (prefers-reduced-motion: reduce) { .photo-tiles img { transition: none; } }
 
 /* ------------------------------------------------------------
-   Project and post lists
-   ------------------------------------------------------------ */
-.project-list, .post-list { list-style: none; margin: 0; padding: 0; }
-
-.project-row {
-  display: grid;
-  grid-template-columns: 3.5rem 1fr auto;
-  gap: 0.25rem 1rem;
-  align-items: baseline;
-  padding-block: 1.1rem;
-  border-bottom: 1px solid var(--rule);
-  color: inherit; text-decoration: none;
-}
-.p-year { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
-.p-body { display: flex; flex-direction: column; gap: 0.2rem; }
-.p-title {
-  font-family: var(--display); font-weight: 700; font-size: var(--step-1);
-  font-variation-settings: "SOFT" 50; line-height: 1.2;
-}
-.project-row:hover .p-title { color: var(--link); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
-.p-summary { color: var(--muted); line-height: 1.55; }
-.p-status {
-  font-family: var(--display); font-size: var(--step--1); font-weight: 500; white-space: nowrap;
-  border: 1px solid var(--rule); border-radius: 999px; padding: 0.1rem 0.6rem;
-}
-@media (max-width: 34rem) {
-  .project-row { grid-template-columns: 1fr; }
-  .p-year { order: -1; }
-  .p-status { justify-self: start; margin-top: 0.4rem; }
-}
-
-.post-list li {
-  display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.25rem 1rem; align-items: baseline;
-  padding-block: 0.85rem; border-bottom: 1px solid var(--rule);
-}
-.post-list time { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
-.post-list a { font-family: var(--display); font-weight: 600; font-size: var(--step-1); font-variation-settings: "SOFT" 50; color: var(--ink); text-decoration: none; line-height: 1.25; }
-.post-list a:hover { color: var(--link); text-decoration: underline; }
-@media (max-width: 34rem) {
-  .post-list li { grid-template-columns: 1fr; }
-}
-.feed-note { color: var(--muted); font-size: var(--step--1); margin-top: 1.5rem; }
-
-/* ------------------------------------------------------------
-   Inner pages and long-form text
+   8. Words on a page
    ------------------------------------------------------------ */
 .prose-page { padding-top: clamp(1.5rem, 5vw, 3rem); }
 .page-head { margin-bottom: 2.25rem; }
@@ -894,16 +620,6 @@ img { max-width: 100%; height: auto; }
 .crumb { margin: 0 0 0.5rem; font-family: var(--display); font-size: var(--step--1); }
 .crumb a { color: var(--muted); }
 .meta { margin: 0.75rem 0 0; color: var(--muted); font-size: var(--step--1); }
-
-.facts {
-  display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
-  margin: 1.5rem 0 0; padding-top: 1rem; border-top: 1px solid var(--rule);
-}
-.facts dt { font-family: var(--display); font-size: var(--step--1); color: var(--muted); }
-.facts dd { margin: 0; font-family: var(--display); font-weight: 600; }
-
-.hero-figure { margin: 0 0 2rem; }
-.hero-figure img { border-radius: 0.75rem; display: block; }
 
 .prose { line-height: 1.75; }
 .prose > * + * { margin-top: 1.1em; }
@@ -928,6 +644,54 @@ img { max-width: 100%; height: auto; }
 .prose img { border-radius: 0.75rem; }
 .prose hr { border: 0; border-top: 1px solid var(--rule); margin-block: 2.5em; }
 
+/* Lists of projects and posts */
+.project-list, .post-list { list-style: none; margin: 0; padding: 0; }
+.project-row {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--rule);
+  color: inherit; text-decoration: none;
+}
+.p-year { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
+.p-body { display: flex; flex-direction: column; gap: 0.2rem; }
+.p-title {
+  font-family: var(--display); font-weight: 700; font-size: var(--step-1);
+  font-variation-settings: "SOFT" 50; line-height: 1.2;
+}
+.project-row:hover .p-title { color: var(--link); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
+.p-summary { color: var(--muted); line-height: 1.55; }
+.p-status {
+  font-family: var(--display); font-size: var(--step--1); font-weight: 500; white-space: nowrap;
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.1rem 0.6rem;
+}
+.post-list li {
+  display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.25rem 1rem; align-items: baseline;
+  padding-block: 0.85rem; border-bottom: 1px solid var(--rule);
+}
+.post-list time { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
+.post-list a { font-family: var(--display); font-weight: 600; font-size: var(--step-1); font-variation-settings: "SOFT" 50; color: var(--ink); text-decoration: none; line-height: 1.25; }
+.post-list a:hover { color: var(--link); text-decoration: underline; }
+.feed-note { color: var(--muted); font-size: var(--step--1); margin-top: 1.5rem; }
+@media (max-width: 34rem) {
+  .project-row, .post-list li { grid-template-columns: 1fr; }
+  .p-year { order: -1; }
+  .p-status { justify-self: start; margin-top: 0.4rem; }
+}
+
+/* A project page: its facts and main picture */
+.facts {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
+  margin: 1.5rem 0 0; padding-top: 1rem; border-top: 1px solid var(--rule);
+}
+.facts dt { font-family: var(--display); font-size: var(--step--1); color: var(--muted); }
+.facts dd { margin: 0; font-family: var(--display); font-weight: 600; }
+.hero-figure { margin: 0 0 2rem; }
+.hero-figure img { border-radius: 0.75rem; display: block; }
+
+/* A post: older and newer links, and a card linking to a podcast episode */
 .post-nav {
   display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
   margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
@@ -949,7 +713,7 @@ img { max-width: 100%; height: auto; }
 .episode-note { color: var(--muted); font-size: var(--step--1); line-height: 1.5; }
 
 /* ------------------------------------------------------------
-   Resume
+   9. Resume
    ------------------------------------------------------------ */
 .resume-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin: 1.5rem 0 0; }
 .resume section { margin-top: 2.75rem; }
@@ -968,9 +732,6 @@ img { max-width: 100%; height: auto; }
 .what ul { margin: 0.75rem 0 0; padding-left: 1.1rem; list-style: disc; }
 .what li + li { margin-top: 0.35rem; }
 .what p:not(.where) { margin: 0.5rem 0 0; }
-@media (max-width: 34rem) {
-  .timeline > li { grid-template-columns: 1fr; }
-}
 .skills { margin: 0; }
 .skills div {
   display: grid; grid-template-columns: 9rem 1fr; gap: 0.25rem 1.5rem;
@@ -979,52 +740,86 @@ img { max-width: 100%; height: auto; }
 .skills dt { font-family: var(--display); font-weight: 600; }
 .skills dd { margin: 0; }
 .certs dt { white-space: nowrap; }
+.cert-issuer { display: block; white-space: normal; font-weight: 400; font-size: var(--step--1); color: var(--muted); line-height: 1.4; margin-top: 0.2rem; }
 .pubs { list-style: none; margin: 1rem 0 0; padding: 0; }
 .pubs li + li { margin-top: 1.25rem; }
 .pub-cite { margin: 0; }
 .pub-cite strong { font-weight: 600; color: var(--ink); }
 .pub-note { margin: 0.4rem 0 0; color: var(--muted); font-size: var(--step--1); }
-.cert-issuer { display: block; white-space: normal; font-weight: 400; font-size: var(--step--1); color: var(--muted); line-height: 1.4; margin-top: 0.2rem; }
 @media (max-width: 34rem) {
-  .skills div { grid-template-columns: 1fr; }
+  .timeline > li, .skills div { grid-template-columns: 1fr; }
 }
 
 /* ------------------------------------------------------------
-   Photography
+   10. Photography
+   The page isn't on paper: the words sit in the water, and each photo is an instant
+   film print with its caption in the thick bottom strip. Prints are all the same height
+   (half the paper's), unless a very wide photo has to shrink to fit, and always show the
+   whole photo, uncropped. Selecting one opens it full size in the viewer (site.js).
    ------------------------------------------------------------ */
-.wrap-wide { max-width: calc(64rem + 2 * var(--gutter)); }
-
-.gallery {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem, 3vw, 2.25rem) 1.25rem;
-}
-@media (min-width: 40rem) {
-  .gallery { grid-template-columns: 1fr 1fr; }
-  .shot-wide { grid-column: 1 / -1; }
-}
-.shot figure { margin: 0; }
+.gallery { list-style: none; margin: 0; padding: 0; }
 .shot { scroll-margin-block: 6rem; }
-/* The photo you came to see gets a short glowing ring when you land on it */
+.shot figure { margin: 0; }
+.shot-link { display: block; overflow: hidden; background: var(--tide); }
+.shot-link img { display: block; width: 100%; height: auto; }
+.shot-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "SOFT" 50; }
+.shot-note { color: var(--muted); font-size: var(--step--1); }
+/* A photo reached by its own link (photography/#burrowing-owl) gets a short glowing ring */
 .shot:target .shot-link { animation: shot-focus 2.2s ease-out 0.4s both; }
 @keyframes shot-focus {
   0%   { box-shadow: 0 0 0 0 var(--shell); }
   20%  { box-shadow: 0 0 0 5px var(--shell); }
   100% { box-shadow: 0 0 0 0 transparent; }
 }
-.shot-link { display: block; border-radius: 0.75rem; overflow: hidden; background: var(--tide); }
-.shot-link img { display: block; width: 100%; height: auto; transition: transform 0.4s ease; }
-.shot-link:hover img { transform: scale(1.015); }
-.shot figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.75rem; margin-top: 0.7rem; }
-.shot-title { font-family: var(--display); font-weight: 700; font-size: var(--step-1); font-variation-settings: "SOFT" 50; }
-.shot-note { color: var(--muted); font-size: var(--step--1); }
 
+@media screen {
+  .sheet-album {
+    --ink: #14303F; --muted: #2F4F5D; --print-h: calc(var(--sheet-h) * 0.5); --print-max: calc(min(100vw - 2 * var(--gutter), 64rem) - 3.1rem - 14px);
+    width: min(100vw - 2 * var(--gutter), 64rem); overflow-x: hidden; background: none; border: 0; border-radius: 0;
+    /* Prints fade into the water at the top and bottom instead of stopping at a hard edge */
+    -webkit-mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
+    mask-image: linear-gradient(transparent, #000 0.6rem, #000 calc(100% - 1.75rem), transparent);
+  }
+  .sheet-album .sheet-paper { padding: 0 0.75rem; }
+  .sheet-album .sheet-paper::before, .sheet-album .sheet-paper::after, .sheet-album .sheet-org, .sheet-album .sheet-kind, .sheet-album .sheet-body::after { display: none; }
+  .sheet-album .sheet-head { align-self: flex-start; padding: 0.65rem 0 0; border: 0; background: none; }
+  .sheet-album .sheet-body { margin-top: -2.5rem; padding: 0 0 2.5rem; }
+  .sheet-album .page-head { margin-bottom: 1.25rem; text-align: center; }
+  .sheet-album .page-head h1 { margin-bottom: 0.25rem; }
+  .sheet-album .page-head .lede { margin: 0 auto; font-size: var(--step-0); }
+
+  .gallery { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1.75rem; }
+  .shot { flex: none; transform: rotate(-1deg); transition: transform 0.2s ease; }
+  .shot:nth-child(even) { transform: rotate(1.1deg); }
+  .shot:nth-child(3n) { transform: rotate(-0.5deg); }
+  .shot:hover, .shot:focus-within { transform: none; }
+  .shot figure {
+    width: min-content; padding: 0.8rem 0.8rem 0; background: #FDFBF4;
+    border: 4px solid #14303F; border-radius: 0.45rem; box-shadow: 0 4px 0 #14303F;
+  }
+  .shot-link { border: 3px solid #14303F; border-radius: 0.15rem; }
+  .shot-link img { width: min(var(--print-h) * (var(--r)), var(--print-max)); max-width: none; }
+  .shot figcaption {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem;
+    min-height: 4.75rem; margin: 0; padding: 0.55rem 0.25rem 0.75rem; text-align: center; color: #14303F;
+  }
+  .shot-title { line-height: 1.2; }
+  .shot-note { color: #4E6169; line-height: 1.3; }
+}
+@media (prefers-color-scheme: dark) {
+  .sheet-album { --ink: #E3ECEA; --muted: #C9DADE; }
+}
+
+/* The viewer: the chosen photo, full size, over a dark backdrop. --w and --r are the
+   large photo's width and shape (set by site.js), so the frame is the right size from
+   the start, while the large copy is still arriving. */
 .viewer {
   border: 0; padding: 0; background: transparent; color: #E9EFEE;
   max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh;
 }
 .viewer[open] { display: grid; place-items: center; align-content: center; gap: 0.75rem; }
 .viewer::backdrop { background: rgb(8 20 26 / 0.92); }
-.viewer-img { max-width: min(94vw, 2000px); max-height: 84vh; width: auto; height: auto; border-radius: 0.5rem; }
+.viewer-img { width: min(94vw, var(--w, 2000px), 2000px, 84vh * (var(--r, 1.5))); max-width: none; height: auto; aspect-ratio: var(--r, 1.5); border-radius: 0.5rem; }
 .viewer-caption { margin: 0; font-family: var(--display); font-size: var(--step-0); padding-inline: 1rem; text-align: center; }
 .viewer form { position: fixed; top: 1rem; right: 1rem; margin: 0; }
 .viewer-close {
@@ -1034,12 +829,13 @@ img { max-width: 100%; height: auto; }
 .viewer[open] .viewer-img { animation: viewer-in 0.25s ease-out; }
 @keyframes viewer-in { from { opacity: 0; transform: scale(0.97); } }
 @media (prefers-reduced-motion: reduce) {
-  .viewer[open] .viewer-img, .shot-link img { animation: none; transition: none; }
+  .shot { transition: none; }
+  .viewer[open] .viewer-img { animation: none; }
   .shot:target .shot-link { animation: none; outline: 3px solid var(--shell); outline-offset: 3px; }
 }
 
 /* ------------------------------------------------------------
-   404
+   11. Page not found
    ------------------------------------------------------------ */
 .not-found { padding-top: clamp(3rem, 10vw, 6rem); }
 .mascot-lost { width: 5.5rem; height: auto; transform: rotate(-12deg); margin-bottom: 1rem; }
@@ -1047,27 +843,20 @@ img { max-width: 100%; height: auto; }
 .not-found .lede + p { margin-top: 1.75rem; }
 
 /* ------------------------------------------------------------
-   Print: the resume prints cleanly
+   12. Phones, upright (up to 40rem wide)
+   The same bay, card, paper and page changes as computers, but all water: no sky, pier,
+   wave or footer. The boater ID stands upright and fills the screen: the photo at the
+   left with the skill summary beside it, then the buttons, then the links.
    ------------------------------------------------------------ */
-@media print {
-  .site-header, .site-footer, .resume-actions, .skip { display: none; }
-  body { background: #fff; color: #000; font-size: 11pt; }
-  .kelp-bg { display: none; }
-  a { color: inherit; }
-}
-
-/* Phones use the same bay, card, sheets and page swaps as computers, with these changes:
-   all water with no pier, the card at the top of the screen, and the boater ID stood
-   upright (still 1.6) with the photo at the left. Swipes step through the scenes too. */
 @media screen and (max-width: 40rem) {
+  html { min-height: 100svh; }   /* the water still fills the screen when the page itself can't scroll */
   body {
     --sheet-h: calc(100svh - 1.5rem);
     background: linear-gradient(to bottom, var(--sea-top), var(--sea-bottom)) no-repeat, var(--sea-bottom);
   }
-  html { min-height: 100svh; }   /* the water still fills the screen when the page itself can't scroll */
   body.home { position: fixed; inset: 0; overflow: hidden; }
   .home-dock, .home-water, .site-footer { display: none; }
-  body main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
+  main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
   .portrait {
@@ -1077,36 +866,34 @@ img { max-width: 100%; height: auto; }
     grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
     grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links" "rail rail";
   }
+  /* The photo is about as tall as the summary text beside it */
+  .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; margin-top: 0.5rem; }
+  .portrait-me, .card-scope { bottom: -13cqw; }
   .dive-info { display: contents; }
-  .dive-fields { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto auto; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: calc(var(--u) * 0.7) 0 0; min-height: 0; }
-  /* Resume and Photography are big icons, each half the card's width where the height allows */
-  .dive-fields > div:has(.link-icon-big) { display: flex; flex-direction: column; align-items: center; padding-left: 0; min-height: 0; margin-top: 0; text-align: center; }
-  .dive-fields > div:has(.link-icon-big) dt { flex: 1 1 0; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
-  .dive-fields .link-icon-big { position: static; flex: 1 1 0; min-height: 0; width: 100%; height: auto; margin: 0; }
-  .dive-fields dd { font-size: calc(var(--u) * 1.0625); }
-  .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
   .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
-  .dive-summary p { font-size: calc(var(--u) * 1); line-height: 1.38; }
+  .dive-summary p { line-height: 1.38; }
   .scene-nav { grid-area: nav; margin-top: calc(var(--u) * 0.8); gap: calc(var(--u) * 0.6); }
   .scene-button { font-size: calc(var(--u) * 1.05); padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8); gap: calc(var(--u) * 0.5); }
   .scene-button::after { content: none; }
-  .dive-fields > div { min-width: 0; margin-top: calc(var(--u) * 0.7); }
-  .dive-rail { margin-top: calc(var(--u) * 0.7); }
-  /* The photo is about as tall as the summary text beside it */
-  .portrait .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; }
-  .portrait .portrait-me, .portrait .card-scope { bottom: -13cqw; }
-  .portrait > .scene-caption { display: none; }
+  /* Resume and Photography are big icons, each half the card's width where the height
+     allows; the other two links run the full width under them */
+  .dive-fields { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto auto; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: calc(var(--u) * 0.7) 0 0; min-height: 0; }
+  .dive-fields > div { margin-top: calc(var(--u) * 0.7); }
+  .dive-fields > div:has(.link-icon-big) { display: flex; flex-direction: column; align-items: center; padding-left: 0; min-height: 0; margin-top: 0; text-align: center; }
+  .dive-fields > div:has(.link-icon-big) dt { flex: 1 1 0; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .dive-fields .link-icon-big { position: static; flex: 1 1 0; min-height: 0; width: 100%; height: auto; margin: 0; }
+  .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
+  .dive-fields dd { font-size: calc(var(--u) * 1.0625); }
 
-  /* No holes or margin line on phones: the paper's rules run edge to edge, and the words
-     are inset the same on both sides */
+  /* The paper has no holes or margin line, and the words are inset the same on both sides */
   .sheet-paper { padding-left: 0; }
-  .sheet-paper::before, .sheet-paper::after { display: none; }
-  .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 0.9rem; }
-  .sheet-org { display: none; }
+  .sheet-paper::before, .sheet-paper::after, .sheet-org { display: none; }
   .sheet-head { padding-right: 0.9rem; }
+  .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 0.9rem; }
   .sheet:not(.sheet-album) .sheet-body { padding-right: 0.9rem; }
+  .sheet-body::after { margin-inline: -0.9rem; }
   .sheet-album .sheet-head { padding-top: 0.4rem; }
   .sheet-album .sheet-body { margin-top: 0; }
   /* Titles are small enough that "An interesting" fits on one line */
@@ -1115,50 +902,57 @@ img { max-width: 100%; height: auto; }
 /* Short phones: tighter, so everything still fits on one screen */
 @media screen and (max-width: 40rem) and (max-height: 740px) {
   .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.75); }
+  .portrait-card { height: calc(var(--u) * 15.9); }
   .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
-  .portrait .portrait-card { height: calc(var(--u) * 15.9); }
   .scene-nav { margin-top: calc(var(--u) * 0.5); gap: calc(var(--u) * 0.45); }
   .scene-button { font-size: calc(var(--u) * 0.98); padding-block: calc(var(--u) * 0.32); }
-  .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
-  .dive-rail { margin-top: calc(var(--u) * 0.4); }
+  .dive-fields > div, .dive-rail { margin-top: calc(var(--u) * 0.4); }   /* (the two big icons keep no gap) */
 }
 
-/* Phones turned sideways (and any very short window): all water like the upright phone
-   layout, with the boater ID filling the screen in three columns: photo, name and summary,
-   then buttons and links. Long link titles are cut off with dots. */
+/* ------------------------------------------------------------
+   13. Phones, sideways (wider than 40rem, under 500px tall), and any very short window
+   All water, like upright phones. The boater ID fills the screen in three columns:
+   photo, name and summary, then buttons and links.
+   ------------------------------------------------------------ */
 @media screen and (min-width: 40.01rem) and (max-height: 500px) {
   body { --sheet-h: calc(100svh - 1.5rem); background: linear-gradient(to bottom, var(--sea-top), var(--sea-bottom)) no-repeat, var(--sea-bottom); }
   body.home { position: fixed; inset: 0; overflow: hidden; }
   .home-dock, .home-water, .site-footer { display: none; }
-  body main { padding-top: 0.75rem; }
+  main { padding-top: 0.75rem; }
   .page-moving main { clip-path: none; }
-  .scenes .wrap { max-width: none; padding-inline: max(0.75rem, env(safe-area-inset-left)); }
+
   .portrait {
     --card-w: calc(100vw - 2 * max(0.75rem, env(safe-area-inset-left))); --u: min(100vw / 55, 100svh / 28); --photo: calc(var(--u) * 15);
-    width: var(--card-w); height: calc(100svh - 1.5rem); aspect-ratio: auto;
+    height: calc(100svh - 1.5rem); aspect-ratio: auto;
     grid-template-columns: var(--photo) minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
     grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links" "rail rail rail";
     column-gap: calc(var(--u) * 1.4);
     padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2) calc(var(--u) * 0.5);
   }
-  .portrait .portrait-card { aspect-ratio: auto; height: auto; align-self: stretch; }
-  .portrait > .scene-caption { display: none; }
+  .portrait-card { aspect-ratio: auto; align-self: stretch; }
+  .dive-head { margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--u) * 0.4); }
   .dive-info { display: contents; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.3); }
   .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
   .dive-summary p { line-height: 1.34; }
-  .dive-head { margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--u) * 0.4); }
   .scene-nav { grid-area: nav; margin: 0; align-self: start; }
   .scene-button { padding-block: calc(var(--u) * 0.42); }
+  /* Resume and Photography side by side, with their short labels centered beside the icons */
   .dive-fields { grid-template-columns: auto auto; gap: calc(var(--u) * 0.25) calc(var(--u) * 0.8); margin: calc(var(--u) * 0.5) 0 0; }
-  .dive-fields dd { font-size: calc(var(--u) * 1); }
   .dive-fields > div { --icon: calc(var(--u) * 2.1); }
-  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.7); }
-  .dive-fields > div:nth-child(3), .dive-fields > div:nth-child(4) { grid-column: 1 / -1; }
+  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.7); display: flex; align-items: center; min-height: var(--icon); }
   .dive-fields > div:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
+  .dive-fields dd { font-size: calc(var(--u) * 1); }
   .dive-rail { margin-top: calc(var(--u) * 0.4); }
+
+  /* The paper has no holes or margin line here either */
+  .sheet-paper { padding-left: 0; }
+  .sheet-paper::before, .sheet-paper::after { display: none; }
+  .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 1.75rem; }
+  .sheet-body::after { margin-left: -1.75rem; }
 }
 /* The narrowest sideways phones: tighter links, so only the long titles get cut off */
 @media screen and (min-width: 40.01rem) and (max-width: 45rem) and (max-height: 500px) {
@@ -1167,33 +961,32 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div { --icon: calc(var(--u) * 1.8); padding-left: calc(var(--icon) + var(--u) * 0.3); }
   .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.2); }
 }
-/* Sideways phones: no holes or margin line either */
-@media screen and (min-width: 40.01rem) and (max-height: 500px) {
-  .sheet-paper { padding-left: 0; }
-  .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 1.75rem; }
-  .sheet-body::after { margin-left: -1.75rem; }
-  .sheet-paper::before, .sheet-paper::after { display: none; }
-}
-/* Phones, upright or sideways: the paper only moves up and down. Code wraps instead of
-   scrolling sideways, since a sideways swipe no longer does anything. */
+
+/* Phones, upright or sideways */
 @media screen and (max-width: 40rem), screen and (max-height: 500px) {
+  /* The paper only moves up and down. Code wraps instead of scrolling sideways, since a
+     sideways swipe no longer does anything. */
   .sheet { overflow-x: hidden; touch-action: pan-y; overscroll-behavior-x: none; }
   .sheet pre, .sheet pre code { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
-}
-@media screen and (max-width: 40rem) {
-  .sheet-body::after { margin-inline: -0.9rem; }
-}
-/* Phones, upright or sideways: the Resume and Photography icons are the links, with one
-   short label each ("Click Here" and "Hobbies" stay on computers only) */
-@media screen and (max-width: 40rem), screen and (max-height: 500px) {
+  /* The Resume and Photography icons are the links, with one short label each ("Click
+     Here" and "Hobbies" stay on computers only) */
   .dive-fields > div:nth-child(1) dt, .dive-fields > div:nth-child(2) dd {
     font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35;
     letter-spacing: normal; text-transform: none; color: var(--card-ink);
   }
-  .dive-fields > div:nth-child(1) dd { font-size: 0; line-height: 0; }
-  .dive-fields > div:nth-child(2) dt { font-size: 0; line-height: 0; }
+  .dive-fields > div:nth-child(1) dd, .dive-fields > div:nth-child(2) dt { font-size: 0; line-height: 0; }
 }
-/* Sideways phones: the short labels sit centered beside their icons */
-@media screen and (min-width: 40.01rem) and (max-height: 500px) {
-  .dive-fields > div:nth-child(-n+2) { display: flex; align-items: center; min-height: var(--icon); }
+
+/* ------------------------------------------------------------
+   14. Print: plain pages, so the resume prints cleanly
+   ------------------------------------------------------------ */
+@media print {
+  .site-footer, .resume-actions, .skip { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  a { color: inherit; }
+  .wrap-wide { max-width: calc(64rem + 2 * var(--gutter)); }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.25rem) 1.25rem; }
+  .shot-wide { grid-column: 1 / -1; }
+  .shot-link { border-radius: 0.75rem; }
+  .shot figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.75rem; margin-top: 0.7rem; }
 }
