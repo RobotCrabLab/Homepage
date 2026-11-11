@@ -74,6 +74,7 @@ one.
   (cream sky, a filled wave drifting back and forth 15% down the page, water deepening to
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
+  The skill buttons are only as long as the longest label ("Water chemistry"), all three the same length.
   Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
   The card's header is a navy band across its top edge (like a state-issued card), with "Breadboard Bay" in
   large white letters and "Boater ID" in yellow. A breadboard power rail (red + line, two rows of holes in groups

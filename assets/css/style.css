@@ -322,6 +322,8 @@ img { max-width: 100%; height: auto; }
    hole and ends with an arrow; the chosen one is pressed in and filled, with a red wire
    in its hole. */
 .scene-nav { display: flex; flex-direction: column; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 0.7) 0 0; }
+/* The buttons are only as long as the longest label needs, all three the same length */
+.scene-nav { align-self: flex-start; justify-self: start; width: max-content; max-width: 100%; }
 .scene-button {
   display: flex; align-items: center; gap: calc(var(--u) * 0.7); width: 100%;
   padding: calc(var(--u) * 0.5) calc(var(--u) * 0.9);
