@@ -260,14 +260,15 @@ img { max-width: 100%; height: auto; }
 .portrait {
   --card-bg: #FFFFFF; --card-ink: #14303F; --card-soft: #4E6169; --card-pick: #D9442B;
   --u: calc(var(--card-w) / 60);
-  --photo: calc(var(--u) * 21);
+  --photo: calc(var(--u) * 20);
   display: grid;
   grid-template-columns: var(--photo) minmax(0, 1fr);
   grid-template-rows: auto auto minmax(0, 1fr) auto;
   grid-template-areas: "head head" "photo info" ". info" "links links";
   column-gap: calc(var(--u) * 2); justify-items: stretch;
   width: var(--card-w); aspect-ratio: 1.6;
-  padding: calc(var(--u) * 0.9) calc(var(--u) * 1.5) calc(var(--u) * 1);
+  --pad-t: calc(var(--u) * 0.9); --pad-x: calc(var(--u) * 1.5);   /* the header band reaches out over these to the card's edges */
+  padding: var(--pad-t) var(--pad-x) calc(var(--u) * 1);
   background: var(--card-bg); color: var(--card-ink);
   border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
 }
@@ -288,15 +289,22 @@ img { max-width: 100%; height: auto; }
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='4' cy='5' r='1.1'/%3E%3Ccircle cx='4' cy='9' r='1.1'/%3E%3Ccircle cx='8' cy='5' r='1.1'/%3E%3Ccircle cx='8' cy='9' r='1.1'/%3E%3Ccircle cx='12' cy='5' r='1.1'/%3E%3Ccircle cx='12' cy='9' r='1.1'/%3E%3Ccircle cx='16' cy='5' r='1.1'/%3E%3Ccircle cx='16' cy='9' r='1.1'/%3E%3Ccircle cx='20' cy='5' r='1.1'/%3E%3Ccircle cx='20' cy='9' r='1.1'/%3E%3C/g%3E%3C/svg%3E") center / calc(var(--u) * 2.4) var(--rail-h) round no-repeat;
 }
 
-/* Header, with a power rail under it */
+/* Header: a navy band across the top of the card, like a state-issued card, with the
+   power rail under it. The band (::before) reaches up and out to the card's edges. */
 .dive-head {
-  grid-area: head; position: relative; display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: calc(var(--u) * 0.6); padding-bottom: calc(var(--rail-h) + var(--u) * 0.45);
+  --band-gap: calc(var(--u) * 0.7);   /* white between the band and the rail */
+  grid-area: head; position: relative; isolation: isolate; display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--u) * 1);
+  margin-bottom: calc(var(--u) * 0.6); padding: calc(var(--u) * 0.45) 0 calc(var(--rail-h) + var(--band-gap) + var(--u) * 1.05);
   background: var(--rail-signs);
-  font-family: var(--display); font-weight: 700;
+  font-family: var(--display); font-weight: 700; color: #FFFFFF;
 }
-.dive-org { font-size: calc(var(--u) * 1.75); line-height: 1.1; }
-.dive-kind { font-family: var(--body); font-weight: 600; font-size: calc(var(--u) * 0.875); letter-spacing: 0.14em; text-transform: uppercase; }
+.dive-head::before {
+  content: ""; position: absolute; z-index: -1;
+  top: calc(var(--pad-t) * -1); left: calc(var(--pad-x) * -1); right: calc(var(--pad-x) * -1); bottom: calc(var(--rail-h) + var(--band-gap));
+  background: #14303F; border-radius: calc(var(--u) * 1.25) calc(var(--u) * 1.25) 0 0;
+}
+.dive-org { font-size: calc(var(--u) * 2.6); line-height: 1.1; white-space: nowrap; }
+.dive-kind { flex: none; color: #F2B33D; font-family: var(--body); font-weight: 700; font-size: calc(var(--u) * 1.25); letter-spacing: 0.14em; text-transform: uppercase; }
 
 /* Beside the photo: his name, the skill buttons, and the chosen skill's summary */
 .dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
@@ -884,7 +892,7 @@ img { max-width: 100%; height: auto; }
 
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
-    aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1) calc(var(--u) * 0.7);
+    aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1); padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.7);
     /* The buttons sit right under the top section; the links take all the spare height */
     grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
     grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links";
@@ -894,6 +902,8 @@ img { max-width: 100%; height: auto; }
   .portrait-me, .card-scope { bottom: -13cqw; }
   .dive-info { display: contents; }
   .dive-label { grid-area: label; }
+  .dive-org { font-size: calc(var(--u) * 2.05); }
+  .dive-kind { font-size: calc(var(--u) * 0.92); }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
   .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
   .dive-summary p { line-height: 1.38; }
@@ -951,10 +961,11 @@ img { max-width: 100%; height: auto; }
     grid-template-rows: auto auto auto minmax(0, 1fr) auto;
     grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links";
     column-gap: calc(var(--u) * 1.4);
-    padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2) calc(var(--u) * 0.5);
+    --pad-t: calc(var(--u) * 0.6); --pad-x: calc(var(--u) * 1.2);
+    padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.5);
   }
   .portrait-card { aspect-ratio: auto; align-self: stretch; }
-  .dive-head { margin-bottom: calc(var(--u) * 0.5); padding-bottom: calc(var(--rail-h) + var(--u) * 0.35); }
+  .dive-head { --band-gap: calc(var(--u) * 0.5); margin-bottom: calc(var(--u) * 0.5); padding-bottom: calc(var(--rail-h) + var(--band-gap) + var(--u) * 0.8); }
   .dive-info { display: contents; }
   .dive-label { grid-area: label; }
   .dive-name { grid-area: name; font-size: calc(var(--u) * 2.3); }
