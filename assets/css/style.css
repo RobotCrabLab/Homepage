@@ -596,19 +596,14 @@ img { max-width: 100%; height: auto; }
   }
   .sheet-org { font-size: var(--step-1); line-height: 1.1; }
   .sheet-kind { margin-left: auto; font-family: var(--body); font-weight: 600; font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; }
-  /* Home is a tactile push button: a red cap in a grey ring */
+  /* Home is a square-cornered key */
   .sheet-back {
-    flex: none; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.25rem 0.7rem 0.25rem 0.4rem;
+    flex: none; display: inline-flex; align-items: center; padding: 0.25rem 0.7rem;
     background: #FFFFFF; color: #14303F; text-decoration: none;
     border: 3px solid #14303F; border-radius: 0.3rem; box-shadow: 0 3px 0 #14303F;
     font-family: var(--display); font-weight: 600; font-size: 0.95rem; line-height: 1.2;
   }
-  .sheet-back::before {
-    content: ""; flex: none; width: 1.05rem; height: 1.05rem; border-radius: 50%;
-    background: #D9442B; border: 3px solid #14303F; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #A7B2B8;
-  }
   .sheet-back:hover { background: #D9442B; color: #FFFFFF; }
-  .sheet-back:hover::before { background: #FFFFFF; }
   .sheet-back:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
 
   .sheet-body { display: block; flex: 1; min-width: 0; padding: 0 1.75rem 3rem 0; }

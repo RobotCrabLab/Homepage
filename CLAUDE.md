@@ -128,7 +128,7 @@ one.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper is near-white, set in the device's own font (San Francisco on Apple devices) with no ruled lines, and scrolls inside its edges. A breadboard power rail runs down its left margin:
   its + and − stay at the top beside the header, and the holes scroll with the words (phones, upright or
-  sideways, have no rail). Its Home button is a tactile push button. On the résumé, section headings sit on a
+  sideways, have no rail). Its Home button is a plain square-cornered key (no LED). On the résumé, section headings sit on a
   row of holes and the bullets are square holes (screen only). Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. On phones the paper only moves up and down (no sideways scrolling; code wraps). Its wrappers are `display: contents` in print.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
