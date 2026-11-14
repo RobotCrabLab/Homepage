@@ -592,6 +592,8 @@ img { max-width: 100%; height: auto; }
   }
   .sheet-back:hover { background: #D9442B; color: #FFFFFF; }
   .sheet-back:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
+  /* On a single post or project, a second key beside Home leads back to the full list */
+  .sheet-head .sheet-up { margin-left: -0.4rem; }
 
   .sheet-body { display: block; flex: 1; min-width: 0; padding: 0 1.75rem 3rem 0; }
   /* A soft fade at the paper's bottom edge, so there's a hint of more below. The extra

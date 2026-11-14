@@ -23,7 +23,10 @@
     {% if page.url contains '/projects' %}{% assign kind = 'Work orders' %}{% endif %}
     {% if page.url contains '/photography' %}{% assign kind = 'Photo album' %}{% endif %}
     <div class="sheet{% if page.url contains '/photography' %} sheet-album{% endif %}"><div class="sheet-paper">
-      <div class="sheet-head"><a class="sheet-back" href="{{ '/' | relative_url }}">Home</a><span class="sheet-org" aria-hidden="true">Breadboard Bay</span><span class="sheet-kind" aria-hidden="true">{{ kind }}</span></div>
+      {% assign up = nil %}
+      {% if page.url contains '/blog/' and page.url != '/blog/' %}{% assign up = 'Blog' %}{% assign up_url = '/blog/' %}{% endif %}
+      {% if page.url contains '/projects/' and page.url != '/projects/' %}{% assign up = 'Projects' %}{% assign up_url = '/projects/' %}{% endif %}
+      <div class="sheet-head"><a class="sheet-back" href="{{ '/' | relative_url }}">Home</a>{% if up %}<a class="sheet-back sheet-up" href="{{ up_url | relative_url }}">{{ up }}</a>{% endif %}<span class="sheet-org" aria-hidden="true">Breadboard Bay</span><span class="sheet-kind" aria-hidden="true">{{ kind }}</span></div>
       <div class="sheet-body">{{ content }}</div>
     </div></div>
     {% endif %}
