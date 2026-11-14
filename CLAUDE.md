@@ -87,6 +87,7 @@ one.
   large white letters and "Boater ID" in yellow. A breadboard power rail (red + line, two rows of holes in groups
   of five, blue − line, + and − at both ends) runs under the band (not along the card's bottom), on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
+  The link labels read "Resume:", "Hobbies:", "Projects:", "Blog:" and the signature's "Signature:" (with colons).
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side),
   its Blog line always links to the newest post, and its Projects line links to the
   project listed first on the Projects page (lowest `order`):
