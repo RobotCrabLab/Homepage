@@ -409,6 +409,12 @@ img { max-width: 100%; height: auto; }
 .scenes:not([data-live~="2"]) .card-auv,
 .scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly),
 .scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly) * { animation-play-state: paused; }
+/* The school of five small fish that darts across each time Water chemistry comes up
+   (site.js adds them, starting just off the right edge, and removes them once across).
+   They swim in front of him and fade out with the rest of the scene if it changes. */
+.card-school { position: absolute; inset: 0; z-index: 2; pointer-events: none; transition: opacity 0.6s ease; }
+.card-school svg { position: absolute; left: 100%; height: auto; overflow: visible; }
+.scenes:not([data-scene="3"]) .card-school { opacity: 0; }
 
 /* The osprey perches behind him, facing in from the right, with its branch running off
    the photo's right edge. site.js sizes it to fit above his head; these are fallbacks.

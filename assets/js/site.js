@@ -46,6 +46,7 @@
       clearTimeout(resting);
       resting = setTimeout(function () { section.dataset.live = to; }, 1100);
       buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
+      if (to === '3') school();
     }
 
     // On its own, the card steps to the next skill every 6 seconds, in the order they're
@@ -72,6 +73,40 @@
     portrait.addEventListener('focusout', function (e) { if (!portrait.contains(e.relatedTarget)) hold(false); });
     wait();
     cleanUp.push(function () { clearTimeout(resting); clearTimeout(stepping); });
+
+    // Each time Water chemistry comes up, a school of five small fish darts across the
+    // photo, right to left, a little apart from one another, then they're gone. The
+    // card opens on Water chemistry, so they swim by just after the page arrives too.
+    let schooling = null;
+    function school() {
+      if (calm.matches || schooling) return;
+      const model = card.querySelector('.card-fish-2 svg');
+      const group = document.createElement('span');
+      group.className = 'card-school';
+      group.setAttribute('aria-hidden', 'true');
+      card.appendChild(group);
+      const W = card.clientWidth, H = card.clientHeight;
+      // [height down the photo, size as a share of its width, delay in ms]
+      const fish = [[0.14, 0.15, 0], [0.24, 0.12, 160], [0.08, 0.11, 320], [0.31, 0.14, 420], [0.19, 0.10, 600]];
+      const swims = fish.map(function (f) {
+        const one = model.cloneNode(true);
+        const w = W * f[1] * (0.9 + Math.random() * 0.2);
+        one.style.width = w.toFixed(1) + 'px';
+        one.style.top = (H * f[0] + (Math.random() * 2 - 1) * H * 0.03).toFixed(1) + 'px';
+        group.appendChild(one);
+        const rise = (Math.random() * 2 - 1) * H * 0.06;   // each drifts a little up or down on the way
+        return one.animate([
+          { transform: 'translate(0, 0)' },
+          { transform: 'translate(' + (-(W + w * 2)).toFixed(1) + 'px, ' + rise.toFixed(1) + 'px)' }
+        ], { duration: 2300 + Math.random() * 500, delay: f[2] + Math.random() * 120, easing: 'cubic-bezier(.35,.1,.45,1)' }).finished;
+      });
+      schooling = group;
+      Promise.all(swims).catch(function () {}).then(function () { group.remove(); schooling = null; });
+    }
+    if (section.dataset.scene === '3') {
+      const first = setTimeout(school, 500);
+      cleanUp.push(function () { clearTimeout(first); });
+    }
 
     // The osprey perches in the open water above the character's head, as large as fits
     // there, with its branch running off the photo's right edge.

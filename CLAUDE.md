@@ -93,7 +93,8 @@ one.
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background.
   2. The microscope slides in, the AUV cruises across.
-  3. The fish and the jellyfish.
+  3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school
+     of five small breadboard fish darts across the photo right to left in about 2.5 seconds (`school()` in site.js).
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
