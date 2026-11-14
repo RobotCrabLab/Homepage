@@ -249,7 +249,9 @@ img { max-width: 100%; height: auto; }
 
 /* ------------------------------------------------------------
    5. Home: the boater ID card
-   A white breadboard with red and blue rails, always 1.6 times as wide as it is tall.
+   A white card, always 1.6 times as wide as it is tall, laid out like a printed ID: a
+   navy band with a breadboard power rail under it, the photo, and fields, each a small
+   grey label over a bold capital value. No icons.
    --card-w is the largest width that fits the window, and everything on the card is
    sized in --u (1/60 of that width), so its contents scale with it like a picture does.
    The card keeps its own colors in light and dark mode.
@@ -262,11 +264,12 @@ img { max-width: 100%; height: auto; }
 .portrait {
   --card-bg: #FFFFFF; --card-ink: #14303F; --card-soft: #4E6169; --card-pick: #D9442B;
   --u: calc(var(--card-w) / 60);
-  --photo: calc(var(--u) * 20);
+  --photo: calc(var(--u) * 23);
   display: grid;
-  grid-template-columns: var(--photo) minmax(0, 1fr);
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  grid-template-areas: "head head" "photo info" ". info" "links links";
+  /* Under the band, laid out like a printed ID: the photo at the left, fields beside it */
+  grid-template-columns: var(--photo) minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr);
+  grid-template-areas: "head head head" "photo label no" "photo name name" "photo nav nav" "photo summary summary" "photo links links" "photo sig sig";
   column-gap: calc(var(--u) * 2); justify-items: stretch;
   width: var(--card-w); aspect-ratio: 1.6;
   --pad-t: calc(var(--u) * 0.9); --pad-x: calc(var(--u) * 1.5);   /* the header band reaches out over these to the card's edges */
@@ -308,74 +311,58 @@ img { max-width: 100%; height: auto; }
 .dive-org { font-size: calc(var(--u) * 2.6); line-height: 1.1; white-space: nowrap; }
 .dive-kind { flex: none; color: #F2B33D; font-family: var(--body); font-weight: 700; font-size: calc(var(--u) * 1.25); letter-spacing: 0.14em; text-transform: uppercase; }
 
-/* Beside the photo: his name, the skill buttons, and the chosen skill's summary */
-.dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
-/* The card number, "Skills" label and signature show on upright phones only */
-.dive-no, .skills-label, .dive-sig { display: none; }
+/* The fields: name and card number, the skills, the chosen skill's summary, the links
+   and a signature */
+.dive-info { display: contents; }
 .dive-label, .dive-fields dt {
   margin: 0; color: var(--card-soft);
   font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
 }
+.dive-info > .dive-label { grid-area: label; align-self: end; }
+.dive-no { grid-area: no; align-self: end; margin: 0; font: 700 calc(var(--u) * 1.15)/1.3 var(--body); letter-spacing: 0.08em; }
+.dive-no span { font-weight: 600; font-size: 0.75em; letter-spacing: 0.1em; color: var(--card-soft); }
 .dive-name {
-  margin: 0; padding-bottom: calc(var(--u) * 0.45);
-  border-bottom: calc(var(--u) * 0.125) solid var(--card-ink);
-  font-family: var(--display); font-weight: 700; font-size: calc(var(--u) * 3); line-height: 1.1;
+  grid-area: name; margin: 0;
+  font-family: var(--body); font-weight: 800; font-size: calc(var(--u) * 3); line-height: 1.05; letter-spacing: 0.01em; text-transform: uppercase;
 }
 
-/* The skill buttons are chunky keys printed on the card. Each starts with a breadboard
-   hole and ends with an arrow; the chosen one is pressed in and filled, with a red wire
-   in its hole. */
-.scene-nav { display: flex; flex-direction: column; gap: calc(var(--u) * 0.55); margin: calc(var(--u) * 0.7) 0 0; }
-/* The buttons are only as long as the longest label needs, all three the same length */
-.scene-nav { align-self: flex-start; justify-self: start; width: max-content; max-width: 100%; }
+/* The skills are plain capital words; the chosen one is dark with a red underline */
+.scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 1.6); margin-top: calc(var(--u) * 0.9); }
+.skills-label { grid-column: 1 / -1; margin-bottom: calc(var(--u) * 0.1); }
 .scene-button {
-  display: flex; align-items: center; gap: calc(var(--u) * 0.7); width: 100%;
-  padding: calc(var(--u) * 0.5) calc(var(--u) * 0.9);
-  border: calc(var(--u) * 0.19) solid var(--card-ink); border-radius: calc(var(--u) * 0.8);
-  background: var(--card-bg); color: var(--card-ink);
-  box-shadow: 0 calc(var(--u) * 0.25) 0 var(--card-ink); text-align: left; cursor: pointer;
-  font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.2;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  display: block; padding: 0 0 calc(var(--u) * 0.14); border: 0; border-bottom: calc(var(--u) * 0.22) solid transparent;
+  background: none; color: #A1AEB4; text-align: left; cursor: pointer;
+  font: 700 calc(var(--u) * 1.1)/1.15 var(--body); letter-spacing: 0.02em; text-transform: uppercase;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
-.scene-button::before {
-  content: ""; flex: none; width: calc(var(--u) * 0.8); height: calc(var(--u) * 0.8); border-radius: 50%;
-  background: var(--card-bg); border: calc(var(--u) * 0.19) solid var(--card-ink);
-}
-.scene-button::after { content: "\203A"; margin-left: auto; font-size: 1.4em; line-height: 1; }
-.scene-button:hover {
-  background: var(--card-pick); color: #FFFFFF;
-  transform: translateY(calc(var(--u) * -0.125)); box-shadow: 0 calc(var(--u) * 0.375) 0 var(--card-ink);
-}
-.scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover {
-  background: var(--card-ink); color: var(--card-bg);
-  box-shadow: none; transform: translateY(calc(var(--u) * 0.25)); cursor: default;
-}
-.scene-button[aria-pressed="true"]::before { background: var(--card-pick); border-color: var(--card-bg); }
-.scene-button[aria-pressed="true"]::after { content: none; }
+.scene-button:hover { color: var(--card-ink); }
+.scene-button[aria-pressed="true"] { color: var(--card-ink); border-bottom-color: var(--card-pick); cursor: default; }
 .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
 
 /* A short summary of the chosen skill, from the resume. All three share one spot, so
    the card doesn't shift when the scene changes. */
-.dive-summary { display: grid; margin-top: calc(var(--u) * 1); }
-.dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 1); line-height: 1.5; }
+.dive-summary { grid-area: summary; display: grid; margin-top: calc(var(--u) * 0.8); min-width: 0; }
+.dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 0.95); line-height: 1.45; }
 [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
 
-/* The links run across the bottom of the card, each on one line with an icon at its
-   left; the logbook page and camera are drawn larger */
-.dive-fields { grid-area: links; display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: space-between; gap: calc(var(--u) * 1); margin: calc(var(--u) * 0.8) 0 0; }
-.dive-fields > div { --icon: calc(var(--u) * 2.4); position: relative; min-width: 0; min-height: calc(var(--u) * 2.4); padding-left: calc(var(--icon) + var(--u) * 0.4); }
-.dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 3.1); }
-.link-icon { position: absolute; left: 0; top: 50%; width: var(--icon); height: var(--icon); margin-top: calc(var(--icon) / -2); overflow: visible; }
+/* The links are fields too, with red values: Resume and Hobbies side by side, then
+   Projects and the newest post across the full width */
+.dive-fields { grid-area: links; display: grid; grid-template-columns: 1fr 1fr; gap: 0 calc(var(--u) * 1.5); margin: 0; min-width: 0; }
+.dive-fields > div { position: relative; min-width: 0; margin-top: calc(var(--u) * 0.75); }
+.dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
 /* The newest post's title can be any length, so a long one is cut off with dots */
 .dive-fields dd {
-  margin: 0; min-width: 0; font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 0.92); line-height: 1.35;
+  margin: 0; min-width: 0; font: 700 calc(var(--u) * 1.05)/1.3 var(--body); letter-spacing: 0.02em; text-transform: uppercase;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;
 }
-/* No underlines: the icon and label are part of the link, and all of it turns red on hover */
-.dive-fields a { color: var(--card-ink); text-decoration: none; }
+.dive-fields a { color: #B83B25; text-decoration: none; }
 .dive-fields a::after { content: ""; position: absolute; inset: 0; }
-.dive-fields > div:hover a, .dive-fields > div:hover dt { color: var(--card-pick); }
+.dive-fields > div:hover a { color: var(--card-ink); }
 .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
+
+.dive-sig { grid-area: sig; align-self: end; }
+.dive-sig .dive-label { margin-top: calc(var(--u) * 0.6); }
+.dive-sig-name { margin: calc(var(--u) * 0.1) 0 0; font: 400 calc(var(--u) * 3)/1.1 "Signature", cursive; color: var(--card-ink); transform: rotate(-4deg); transform-origin: left center; }
 
 
 /* ------------------------------------------------------------
@@ -891,10 +878,9 @@ img { max-width: 100%; height: auto; }
   main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
-  /* Laid out like a printed ID: the navy band and rail, a big photo across the card taking
-     all the height that's left, then fields, each a small grey label over a bold capital
-     value: name and card number, skills, the summary, the links, and a signature. No
-     icons. The photo's scenes are sized by its height here (cqh), since it's wider than tall. */
+  /* The photo runs across the card and takes all the height that's left, with the
+     fields under it. Its scenes are sized by its height here (cqh), since it's wider
+     than tall. */
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26);
     --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1.15);
@@ -909,38 +895,18 @@ img { max-width: 100%; height: auto; }
   .portrait-card { width: auto; height: auto; aspect-ratio: auto; min-height: 0; align-self: stretch; margin-top: calc(var(--u) * 0.2); container-type: size; }
   .portrait-me, .card-scope { left: calc(50cqw - 33cqh); width: 66cqh; bottom: -10cqh; }
   .card-scope { transform: translateX(100cqw); }
-  .dive-info { display: contents; }
-  .dive-label { margin-top: calc(var(--u) * 0.75); font-size: calc(var(--u) * 0.68); }
-  .dive-info > .dive-label { grid-area: label; }
-  .dive-no { display: block; grid-area: no; align-self: end; margin: 0; font: 700 calc(var(--u) * 1)/1.3 var(--body); letter-spacing: 0.08em; }
-  .dive-no span { font-weight: 600; font-size: 0.75em; letter-spacing: 0.1em; color: var(--card-soft); }
-  .dive-name {
-    grid-area: name; border: 0; padding: 0;
-    font-family: var(--body); font-weight: 800; font-size: calc(var(--u) * 2.15); line-height: 1.05; letter-spacing: 0.01em; text-transform: uppercase;
-  }
-  /* The skills are plain capital words: the chosen one dark with a red underline */
-  .scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 1.3); margin: 0; width: auto; max-width: none; }
-  .skills-label { display: block; grid-column: 1 / -1; margin-bottom: calc(var(--u) * 0.1); }
-  .scene-button, .scene-button:hover, .scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover {
-    display: block; width: auto; padding: 0 0 calc(var(--u) * 0.12); border: 0; border-bottom: calc(var(--u) * 0.2) solid transparent; border-radius: 0;
-    background: none; box-shadow: none; transform: none; color: #A1AEB4; text-align: left;
-    font: 700 calc(var(--u) * 0.98)/1.15 var(--body); letter-spacing: 0.02em; text-transform: uppercase;
-  }
-  .scene-button::before, .scene-button::after, .scene-button[aria-pressed="true"]::after { content: none; }
-  .scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover { color: var(--card-ink); border-bottom-color: var(--card-pick); }
-  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.55); min-width: 0; }
+  .dive-label, .dive-fields dt { font-size: calc(var(--u) * 0.68); }
+  .dive-info > .dive-label { margin-top: calc(var(--u) * 0.75); }
+  .dive-no { font-size: calc(var(--u) * 1); }
+  .dive-name { font-size: calc(var(--u) * 2.15); }
+  .scene-nav { gap: calc(var(--u) * 0.15) calc(var(--u) * 1.3); margin-top: calc(var(--u) * 0.75); }
+  .scene-button { font-size: calc(var(--u) * 0.98); padding-bottom: calc(var(--u) * 0.12); border-bottom-width: calc(var(--u) * 0.2); }
+  .dive-summary { margin-top: calc(var(--u) * 0.55); }
   .dive-summary p { font-size: calc(var(--u) * 0.9); line-height: 1.38; }
-  /* The links are fields too; their values are red, so they read as links */
-  .dive-fields { grid-template-columns: 1fr 1fr; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: 0; }
-  .dive-fields > div, .dive-fields > div:has(.link-icon-big) { padding: 0; min-height: 0; margin-top: calc(var(--u) * 0.6); }
-  .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
-  .dive-fields .link-icon { display: none; }
-  .dive-fields dt { font-size: calc(var(--u) * 0.68); }
-  .dive-fields dd { font: 700 calc(var(--u) * 0.95)/1.3 var(--body); letter-spacing: 0.02em; text-transform: uppercase; }
-  .dive-fields a { color: #B83B25; }
-  .dive-sig { display: block; grid-area: sig; }
-  .dive-sig .dive-label { margin-top: calc(var(--u) * 0.6); }
-  .dive-sig-name { margin: calc(var(--u) * 0.1) 0 0; font: 400 calc(var(--u) * 2.6)/1.1 "Signature", cursive; color: var(--card-ink); transform: rotate(-4deg); transform-origin: left center; }
+  .dive-fields { gap: 0 calc(var(--u) * 1); }
+  .dive-fields > div { margin-top: calc(var(--u) * 0.6); }
+  .dive-fields dd { font-size: calc(var(--u) * 0.95); }
+  .dive-sig-name { font-size: calc(var(--u) * 2.6); }
 
   /* The paper has no rail, and the words are inset the same on both sides */
   .sheet-paper { padding-left: 0; }
@@ -957,17 +923,16 @@ img { max-width: 100%; height: auto; }
 /* Short phones: tighter, so everything still fits on one screen */
 @media screen and (max-width: 40rem) and (max-height: 740px) {
   .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.75); }
-  .dive-label { margin-top: calc(var(--u) * 0.5); }
+  .dive-info > .dive-label, .scene-nav { margin-top: calc(var(--u) * 0.5); }
   .dive-summary p { font-size: calc(var(--u) * 0.84); line-height: 1.32; }
-  .dive-fields > div, .dive-fields > div:has(.link-icon-big) { margin-top: calc(var(--u) * 0.4); }
+  .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
   .dive-sig .dive-label { margin-top: calc(var(--u) * 0.4); }
   .dive-sig-name { font-size: calc(var(--u) * 2.2); }
 }
 
 /* ------------------------------------------------------------
    13. Phones, sideways (wider than 40rem, under 500px tall), and any very short window
-   All water, like upright phones. The boater ID fills the screen in three columns:
-   photo, name and summary, then buttons and links.
+   All water, like upright phones. The boater ID fills the screen in three columns.
    ------------------------------------------------------------ */
 @media screen and (min-width: 40.01rem) and (max-height: 500px) {
   body { --sheet-h: calc(100svh - 1.5rem); background: linear-gradient(to bottom, var(--sea-top), var(--sea-bottom)) no-repeat, var(--sea-bottom); }
@@ -976,39 +941,29 @@ img { max-width: 100%; height: auto; }
   main { padding-top: 0.75rem; }
   .page-moving main { clip-path: none; }
 
+  /* Three columns: the photo; name, skills and summary; card number, links and signature */
   .portrait {
     --card-w: calc(100vw - 2 * max(0.75rem, env(safe-area-inset-left))); --u: min(100vw / 55, 100svh / 28); --photo: calc(var(--u) * 15);
     height: calc(100svh - 1.5rem); aspect-ratio: auto;
-    grid-template-columns: var(--photo) minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
-    grid-template-areas: "head head head" "photo label nav" "photo name nav" "photo summary nav" "photo summary links";
-    column-gap: calc(var(--u) * 1.4);
+    grid-template-columns: var(--photo) minmax(0, 1.45fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "head head head" "photo label no" "photo name links" "photo nav links" "photo summary links" "photo summary sig";
+    column-gap: calc(var(--u) * 1.6);
     --pad-t: calc(var(--u) * 0.6); --pad-x: calc(var(--u) * 1.2);
     padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.5);
   }
-  .portrait-card { aspect-ratio: auto; align-self: stretch; }
+  .portrait-card { aspect-ratio: auto; height: auto; align-self: stretch; }
   .dive-head { --band-gap: calc(var(--u) * 0.5); margin-bottom: calc(var(--u) * 0.5); padding-bottom: calc(var(--rail-h) + var(--band-gap) + var(--u) * 0.8); }
-  .dive-info { display: contents; }
-  .dive-label { grid-area: label; }
-  .dive-name { grid-area: name; font-size: calc(var(--u) * 2.3); }
-  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
-  .dive-summary p { line-height: 1.34; }
-  .scene-nav { grid-area: nav; margin: 0; align-self: start; }
-  .scene-button { padding-block: calc(var(--u) * 0.42); }
-  /* Resume and Photography side by side, with their short labels centered beside the icons */
-  .dive-fields { grid-template-columns: auto auto; gap: calc(var(--u) * 0.25) calc(var(--u) * 0.8); margin: calc(var(--u) * 0.5) 0 0; }
-  .dive-fields > div { --icon: calc(var(--u) * 2.1); }
-  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.7); display: flex; align-items: center; min-height: var(--icon); }
-  .dive-fields > div:nth-child(2) { grid-column: 2; grid-row: 1; }
-  .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
-  .dive-fields dd { font-size: calc(var(--u) * 1); }
-  /* The Resume and Photography icons are the links, with one short label each ("Click
-     Here" and "Hobbies" stay on computers only) */
-  .dive-fields > div:nth-child(1) dt, .dive-fields > div:nth-child(2) dd {
-    font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35;
-    letter-spacing: normal; text-transform: none; color: var(--card-ink);
-  }
-  .dive-fields > div:nth-child(1) dd, .dive-fields > div:nth-child(2) dt { font-size: 0; line-height: 0; }
+  .dive-no { justify-self: start; }
+  .dive-name { font-size: calc(var(--u) * 2.4); }
+  .scene-nav { margin-top: calc(var(--u) * 0.7); column-gap: calc(var(--u) * 0.9); }
+  .scene-button { font-size: calc(var(--u) * 0.92); }
+  .dive-summary { align-self: start; margin-top: calc(var(--u) * 0.6); }
+  .dive-summary p { line-height: 1.38; }
+  .dive-fields { grid-template-columns: 1fr; align-self: start; }
+  .dive-fields > div { margin-top: calc(var(--u) * 0.55); }
+  .dive-fields dd { font-size: calc(var(--u) * 0.95); }
+  .dive-sig-name { font-size: calc(var(--u) * 2.6); }
 
   /* The paper has no rail here either */
   .sheet-paper { padding-left: 0; }
@@ -1016,14 +971,6 @@ img { max-width: 100%; height: auto; }
   .sheet:not(.sheet-album) .sheet-head, .sheet:not(.sheet-album) .sheet-body { padding-left: 1.75rem; }
   .sheet-body::after { margin-left: -1.75rem; }
 }
-/* The narrowest sideways phones: tighter links, so only the long titles get cut off */
-@media screen and (min-width: 40.01rem) and (max-width: 45rem) and (max-height: 500px) {
-  .dive-fields { column-gap: calc(var(--u) * 0.5); }
-  .dive-fields dd { font-size: calc(var(--u) * 0.88); }
-  .dive-fields > div { --icon: calc(var(--u) * 1.8); padding-left: calc(var(--icon) + var(--u) * 0.3); }
-  .dive-fields > div:has(.link-icon-big) { --icon: calc(var(--u) * 2.2); }
-}
-
 /* Phones, upright or sideways */
 @media screen and (max-width: 40rem), screen and (max-height: 500px) {
   /* The paper only moves up and down. Code wraps instead of scrolling sideways, since a
