@@ -4,8 +4,9 @@ body_class: home
 ---
 <!-- The boater ID card. Its photo has three scenes, one per skill button: 1 the osprey
      (project lead), 2 the microscope and AUV (electronics), 3 the fish and jelly (water
-     chemistry). style.css draws and animates them; site.js switches between them. -->
-<section class="scenes" data-scene="1" data-live="1">
+     chemistry). The card opens on Water chemistry and site.js steps through the skills
+     every 6 seconds until a visitor picks one. style.css draws and animates the scenes. -->
+<section class="scenes" data-scene="3" data-live="3">
   <h1>I'm {{ site.author }}.</h1>
   <div class="portrait">
     <div class="dive-head" aria-hidden="true"><span class="dive-org">Breadboard Bay</span><span class="dive-kind">Boater ID</span></div>
@@ -27,8 +28,8 @@ body_class: home
       <nav class="scene-nav" aria-label="Scenes">
         <p class="dive-label skills-label" aria-hidden="true">Skills</p>
         <button class="scene-button" type="button" data-go="2" aria-pressed="false">Electronics</button>
-        <button class="scene-button" type="button" data-go="3" aria-pressed="false">Water chemistry</button>
-        <button class="scene-button" type="button" data-go="1" aria-pressed="true">Project lead</button>
+        <button class="scene-button" type="button" data-go="3" aria-pressed="true">Water chemistry</button>
+        <button class="scene-button" type="button" data-go="1" aria-pressed="false">Project lead</button>
       </nav>
       <div class="dive-summary">
         <p class="summary-2">Microscope assisted assembly and rework of SMT PCBs. Instrumentation wiring, crimped terminations and full ocean depth underwater cable manufacturing.</p>

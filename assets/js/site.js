@@ -33,23 +33,46 @@
     if (!section) return;
     const card = section.querySelector('.portrait-card');
 
-    // The buttons pick the scene. data-scene fades the scenes in and out (style.css);
+    // The skills pick the scene. data-scene fades the scenes in and out (style.css);
     // data-live lists the scenes still moving, so the two hidden ones can rest. The scene
     // being left stays live until it has faded away.
-    const buttons = section.querySelectorAll('.scene-button');
+    const buttons = Array.from(section.querySelectorAll('.scene-button'));
     let resting;
+    function pick(button) {
+      const from = section.dataset.scene, to = button.dataset.go;
+      if (to === from) return;
+      section.dataset.scene = to;
+      section.dataset.live = from + ' ' + to;
+      clearTimeout(resting);
+      resting = setTimeout(function () { section.dataset.live = to; }, 1100);
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
+    }
+
+    // On its own, the card steps to the next skill every 6 seconds, in the order they're
+    // listed (it opens on Water chemistry). It waits while the pointer is over the card
+    // or a key has focus in it, and stops for good once a visitor picks a skill. With
+    // reduced motion it stays put.
+    const STEP = 6000;
+    const portrait = section.querySelector('.portrait');
+    let rotating = !calm.matches, held = false, stepping;
+    function step() {
+      const i = buttons.findIndex(function (b) { return b.dataset.go === section.dataset.scene; });
+      pick(buttons[(i + 1) % buttons.length]);
+    }
+    function wait() {
+      clearTimeout(stepping);
+      if (rotating && !held) stepping = setTimeout(function () { step(); wait(); }, STEP);
+    }
+    function hold(on) { held = on; wait(); }
     buttons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        const from = section.dataset.scene, to = button.dataset.go;
-        if (to === from) return;
-        section.dataset.scene = to;
-        section.dataset.live = from + ' ' + to;
-        clearTimeout(resting);
-        resting = setTimeout(function () { section.dataset.live = to; }, 1100);
-        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
-      });
+      button.addEventListener('click', function () { rotating = false; clearTimeout(stepping); pick(button); });
     });
-    cleanUp.push(function () { clearTimeout(resting); });
+    portrait.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold(true); });
+    portrait.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hold(false); });
+    portrait.addEventListener('focusin', function () { hold(true); });
+    portrait.addEventListener('focusout', function (e) { if (!portrait.contains(e.relatedTarget)) hold(false); });
+    wait();
+    cleanUp.push(function () { clearTimeout(resting); clearTimeout(stepping); });
 
     // The osprey perches in the open water above the character's head, as large as fits
     // there, with its branch running off the photo's right edge.
