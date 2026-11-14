@@ -52,8 +52,8 @@ one.
   shirt, screwdriver and sample bottle in the pocket).
 - `assets/images/breadboard-bay-sign.svg`: the logo, two wooden plank signs reading
   BREADBOARD / BAY (not shown anywhere on the site at the moment).
-- Behind the character in the home card's photo: one solid blue, cornflower `#B5CFF2` (light) and royal blue
-  `#4F70BC` (dark). It leans toward violet so it never reads as see-through to the green-teal ocean.
+- Behind the character in the home card's photo: one solid color, the bottom of the ocean gradient
+  (`--sea-bottom`: `#9CC3CF` light, `#2C5062` dark).
 
 ## Visual style
 - Simple one-line illustrations: thick navy `#14303F` outlines, flat colors, round
