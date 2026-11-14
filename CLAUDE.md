@@ -145,5 +145,5 @@ one.
   forward to `/posts/`. A project needs a `date:` to take its place in the list. Both are labelled
   "Ship's log" on the paper.
 - Open ideas, **not approved yet**: replacing the
-  placeholder email (`you@example.com`), removing the hello-world post, a résumé
+  placeholder email (`you@example.com`), a résumé
   summary, a custom domain.
