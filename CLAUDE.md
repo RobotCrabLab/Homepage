@@ -71,8 +71,9 @@ one.
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
   scale with it, sized in `--u`), and the skills on the card switch the scenes (Electronics:
   scene 2; Water chemistry: scene 3; Project lead: scene 1). The card opens on Water chemistry and steps to the next
-  skill every 6 seconds (in listed order); it waits while the mouse is over the card or a key has focus in it, stops
-  for good once a visitor picks a skill, and doesn't rotate with reduced motion. Only the card, "Built by Chris" and the crab
+  skill every 6 seconds (in listed order). Picking a skill shows it for a full 6 seconds, then the rotation carries
+  on from there. It waits only while someone is tabbing through the card with the keyboard, and doesn't rotate with
+  reduced motion. Only the card, "Built by Chris" and the crab
   show on this page at those widths (the site has no header or footer links), over a pastel bay
   (cream sky, a filled wave drifting back and forth 15% down the page, water deepening to
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on

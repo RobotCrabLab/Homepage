@@ -49,12 +49,13 @@
     }
 
     // On its own, the card steps to the next skill every 6 seconds, in the order they're
-    // listed (it opens on Water chemistry). It waits while the pointer is over the card
-    // or a key has focus in it, and stops for good once a visitor picks a skill. With
-    // reduced motion it stays put.
+    // listed (it opens on Water chemistry). Picking a skill shows it for a full 6 seconds
+    // before the rotation carries on from there. It waits while someone is tabbing
+    // through the card with the keyboard. With reduced motion it stays put.
     const STEP = 6000;
     const portrait = section.querySelector('.portrait');
-    let rotating = !calm.matches, held = false, stepping;
+    const rotating = !calm.matches;
+    let held = false, stepping;
     function step() {
       const i = buttons.findIndex(function (b) { return b.dataset.go === section.dataset.scene; });
       pick(buttons[(i + 1) % buttons.length]);
@@ -65,11 +66,9 @@
     }
     function hold(on) { held = on; wait(); }
     buttons.forEach(function (button) {
-      button.addEventListener('click', function () { rotating = false; clearTimeout(stepping); pick(button); });
+      button.addEventListener('click', function () { pick(button); wait(); });
     });
-    portrait.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold(true); });
-    portrait.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hold(false); });
-    portrait.addEventListener('focusin', function () { hold(true); });
+    portrait.addEventListener('focusin', function (e) { if (e.target.matches(':focus-visible')) hold(true); });
     portrait.addEventListener('focusout', function (e) { if (!portrait.contains(e.relatedTarget)) hold(false); });
     wait();
     cleanUp.push(function () { clearTimeout(resting); clearTimeout(stepping); });
