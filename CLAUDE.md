@@ -68,19 +68,23 @@ one.
 ## Home page (`index.html`)
 - One portrait card with three scenes (`data-scene` 1–3). On computers it
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
-  scale with it, sized in `--u`), and buttons on the card switch the scenes (Electronics:
+  scale with it, sized in `--u`), and the skills on the card switch the scenes (Electronics:
   scene 2; Water chemistry: scene 3; Project lead: scene 1). Only the card, "Built by Chris" and the crab
   show on this page at those widths (the site has no header or footer links), over a pastel bay
   (cream sky, a filled wave drifting back and forth 15% down the page, water deepening to
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
-  The skill buttons are only as long as the longest label ("Water chemistry"), all three the same length.
-  Under the buttons, a short summary of the chosen skill (from the résumé) changes with the scene.
+  On every layout the card is laid out like a printed ID: under the band, the photo and fields on plain white,
+  each a small grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001"; SKILLS as three plain
+  capital words (the chosen one dark with a red underline, the others grey); under them a short summary of the
+  chosen skill (from the résumé), which changes with the scene; the links as fields with red values and no icons;
+  and a SIGNATURE in a handwriting font (Mrs Saint Delafield, `assets/fonts/signature.woff2`). No background
+  pattern, no ghost photo. On computers the photo is at the left with the fields beside it.
   The card's header is a navy band across its top edge (like a state-issued card), with "Breadboard Bay" in
   large white letters and "Boater ID" in yellow. A breadboard power rail (red + line, two rows of holes in groups
   of five, blue − line, + and − at both ends) runs under the band (not along the card's bottom), on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
-  A row across the card's bottom holds the links, each with an icon and no underline (logbook page and camera drawn larger): its Resume line links to the résumé, its Hobbies line links to Photography,
+  The link fields: Resume links to the résumé, Hobbies to Photography (both side by side),
   its Blog line always links to the newest post, and its Projects line links to the
   project listed first on the Projects page (lowest `order`):
   1. Osprey on its branch in the background.
@@ -88,17 +92,12 @@ one.
   3. The fish and the jellyfish.
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
-  with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright, fills
-  the screen, and is laid out like a printed ID card: the navy band and rail, then a big photo across the card
-  taking all the spare height (its scenes sized by its height, in `cqh`), then fields on plain white, each a small
-  grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001" at the right; SKILLS as three plain
-  capital words (the chosen one dark with a red underline, the others grey); the summary; the links as fields
-  with red values and no icons (Resume and Hobbies side by side, Projects and Latest blog under them); and a
-  SIGNATURE in a handwriting font (Mrs Saint Delafield, `assets/fonts/signature.woff2`). The card number, Skills
-  label and signature exist on upright phones only. No background pattern, no ghost photo. On sideways phones the
-  Resume and Photography icons are the links, with one short label each. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+  with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
+  the screen: the band and rail, then a big photo across the card taking all the spare height (its scenes sized
+  by its height, in `cqh`), then the same fields stacked under it. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
-  boater ID fills the screen in three columns: photo, name and summary, then buttons and links. Sheets fill the height.
+  boater ID fills the screen in three columns: the photo; name, skills and summary; card number, links and
+  signature. Sheets fill the height.
 - A script sizes the osprey to fit between the top of the photo and the top of the head.
 - Only the scene on show is animated. `data-scene` on the section fades the scenes;
   `data-live` lists the scenes still moving (the one on show, plus the one fading out),
