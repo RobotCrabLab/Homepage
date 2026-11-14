@@ -359,7 +359,7 @@ img { max-width: 100%; height: auto; }
 .dive-fields a::after { content: ""; position: absolute; inset: 0; }
 .dive-fields > div:hover a { color: var(--card-ink); }
 /* Each of the four posts is its own link, one per line */
-.dive-posts dd { line-height: 1.22; }
+.dive-posts dd { line-height: 1.22; text-transform: none; letter-spacing: 0; }   /* post titles as written, not in capitals */
 .dive-posts a::after { content: none; }
 .dive-fields > .dive-posts:hover a { color: #B83B25; }
 .dive-fields > .dive-posts a:hover { color: var(--card-ink); }

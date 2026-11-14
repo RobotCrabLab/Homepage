@@ -89,7 +89,7 @@ one.
   The photo is shorter on computers and the osprey's branch is snapped off there.
   The link labels read "Resume:", "Hobbies:", "Posts:" and the signature's "Signature:" (with colons).
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
-  the four newest posts and projects, newest first, each its own link. The three scenes:
+  the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish.
