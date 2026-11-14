@@ -1,5 +1,19 @@
 ---
-title: Projects
-intro: Things I've built, broken, and rebuilt. Each one has a page with the details.
+# Projects is now part of Posts. This page forwards old links there.
+layout: null
+sitemap: false
 ---
-{% include project-list.html %}
+{% assign to = '/posts/' | relative_url %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Moved: Posts</title>
+  <link rel="canonical" href="{{ to | prepend: site.url }}">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url={{ to }}">
+</head>
+<body>
+  <p>Projects is now part of <a href="{{ to }}">Posts</a>.</p>
+</body>
+</html>

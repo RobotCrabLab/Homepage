@@ -40,8 +40,7 @@ body_class: home
     <dl class="dive-fields">
       <div><dt>Resume:</dt><dd><a href="{{ '/resume/' | relative_url }}" aria-label="Resume">Click Here</a></dd></div>
       <div><dt>Hobbies:</dt><dd><a href="{{ '/photography/' | relative_url }}">Photography</a></dd></div>
-      {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt>Projects:</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
-      {% assign latest = site.posts | first %}{% if latest %}<div><dt>Blog:</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
+      {% assign recent = site.posts | concat: site.projects | sort: "date" | reverse %}<div class="dive-posts"><dt>Posts:</dt>{% for p in recent limit: 4 %}<dd><a href="{{ p.url | relative_url }}">{{ p.title }}</a></dd>{% endfor %}</div>
     </dl>
     <div class="dive-sig" aria-hidden="true"><p class="dive-label">Signature:</p><p class="dive-sig-name">{{ site.author }}</p></div>
   </div>

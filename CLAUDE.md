@@ -87,10 +87,9 @@ one.
   large white letters and "Boater ID" in yellow. A breadboard power rail (red + line, two rows of holes in groups
   of five, blue − line, + and − at both ends) runs under the band (not along the card's bottom), on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
-  The link labels read "Resume:", "Hobbies:", "Projects:", "Blog:" and the signature's "Signature:" (with colons).
-  The link fields: Resume links to the résumé, Hobbies to Photography (both side by side),
-  its Blog line always links to the newest post, and its Projects line links to the
-  project listed first on the Projects page (lowest `order`):
+  The link labels read "Resume:", "Hobbies:", "Posts:" and the signature's "Signature:" (with colons).
+  The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
+  the four newest posts and projects, newest first, each its own link. The three scenes:
   1. Osprey on its branch in the background.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish.
@@ -136,10 +135,15 @@ one.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper is near-white, set in the device's own font (San Francisco on Apple devices) with no ruled lines, and scrolls inside its edges. A breadboard power rail runs down its left margin:
   its + and − stay at the top beside the header, and the holes scroll with the words (phones, upright or
-  sideways, have no rail). Its Home button is a plain square-cornered key (no LED). On a single blog post or project, a matching "Blog" or "Projects" key beside it links back to that list. On the résumé, section headings sit on a
+  sideways, have no rail). Its Home button is a plain square-cornered key (no LED). On a single post or project, a matching "Posts" key beside it links back to the Posts list. On the résumé, section headings sit on a
   row of holes and the bullets are square holes (screen only). Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. On phones the paper only moves up and down (no sideways scrolling; code wraps). Its wrappers are `display: contents` in print.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
-- Open ideas, **not approved yet**: merging Blog + Projects into "Posts", replacing the
+- **Posts:** blog posts and projects are one category, "Posts". `/posts/` lists both, newest first
+  (projects show their status). They're still two collections with their own addresses (`/blog/YYYY/MM/…`
+  from `_posts/`, `/projects/…` from `_projects/`), so old links keep working; `/blog/` and `/projects/`
+  forward to `/posts/`. A project needs a `date:` to take its place in the list. Both are labelled
+  "Ship's log" on the paper.
+- Open ideas, **not approved yet**: replacing the
   placeholder email (`you@example.com`), removing the hello-world post, a résumé
   summary, a custom domain.

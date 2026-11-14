@@ -75,6 +75,8 @@ projects = []
 for f in sorted(os.listdir(os.path.join(SRC, "_projects"))):
     fm, body = read(os.path.join(SRC, "_projects", f))
     fm.update(url=f"/projects/{f.rsplit('.',1)[0]}/", _body=body, _md=True, _kind="projects")
+    if isinstance(fm.get("date"), datetime.date) and not isinstance(fm["date"], datetime.datetime):
+        fm["date"] = datetime.datetime.combine(fm["date"], datetime.time())   # like Jekyll, a date is a time
     projects.append(fm)
 site["posts"], site["projects"] = posts, projects
 

@@ -327,7 +327,7 @@ img { max-width: 100%; height: auto; }
 }
 
 /* The skills are plain capital words; the chosen one is dark with a red underline */
-.scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 1.6); margin-top: calc(var(--u) * 0.9); }
+.scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 1.6); margin-top: calc(var(--u) * 0.75); }
 .skills-label { grid-column: 1 / -1; margin-bottom: calc(var(--u) * 0.1); }
 .scene-button {
   display: block; padding: 0 0 calc(var(--u) * 0.14); border: 0; border-bottom: calc(var(--u) * 0.22) solid transparent;
@@ -341,14 +341,14 @@ img { max-width: 100%; height: auto; }
 
 /* A short summary of the chosen skill, from the resume. All three share one spot, so
    the card doesn't shift when the scene changes. */
-.dive-summary { grid-area: summary; display: grid; margin-top: calc(var(--u) * 0.8); min-width: 0; }
+.dive-summary { grid-area: summary; display: grid; margin-top: calc(var(--u) * 0.6); min-width: 0; }
 .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 0.95); line-height: 1.45; }
 [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
 
 /* The links are fields too, with red values: Resume and Hobbies side by side, then
-   Projects and the newest post across the full width */
+   Posts across the full width, listing the four newest posts and projects */
 .dive-fields { grid-area: links; display: grid; grid-template-columns: 1fr 1fr; gap: 0 calc(var(--u) * 1.5); margin: 0; min-width: 0; }
-.dive-fields > div { position: relative; min-width: 0; margin-top: calc(var(--u) * 0.75); }
+.dive-fields > div { position: relative; min-width: 0; margin-top: calc(var(--u) * 0.6); }
 .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
 /* The newest post's title can be any length, so a long one is cut off with dots */
 .dive-fields dd {
@@ -358,6 +358,11 @@ img { max-width: 100%; height: auto; }
 .dive-fields a { color: #B83B25; text-decoration: none; }
 .dive-fields a::after { content: ""; position: absolute; inset: 0; }
 .dive-fields > div:hover a { color: var(--card-ink); }
+/* Each of the four posts is its own link, one per line */
+.dive-posts dd { line-height: 1.22; }
+.dive-posts a::after { content: none; }
+.dive-fields > .dive-posts:hover a { color: #B83B25; }
+.dive-fields > .dive-posts a:hover { color: var(--card-ink); }
 .dive-fields a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
 
 .dive-sig { grid-area: sig; align-self: end; }
@@ -683,6 +688,7 @@ img { max-width: 100%; height: auto; }
 .post-list time { font-family: var(--display); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
 .post-list a { font-family: var(--display); font-weight: 600; font-size: var(--step-1); font-variation-settings: "SOFT" 50; color: var(--ink); text-decoration: none; line-height: 1.25; }
 .post-list a:hover { color: var(--link); text-decoration: underline; }
+.post-line .p-status { margin-left: 0.4rem; vertical-align: 0.15em; }
 .feed-note { color: var(--muted); font-size: var(--step--1); margin-top: 1.5rem; }
 @media (max-width: 34rem) {
   .project-row, .post-list li { grid-template-columns: 1fr; }

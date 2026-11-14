@@ -1,9 +1,14 @@
+{% comment %}
+  Every post and project in one list, newest first. Projects show their status.
+  include.count limits how many.
+{% endcomment %}
 {% assign max = include.count | default: 1000 %}
+{% assign entries = site.posts | concat: site.projects | sort: "date" | reverse %}
 <ul class="post-list">
-  {% for post in site.posts limit: max %}
+  {% for post in entries limit: max %}
   <li>
     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <span class="post-line"><a href="{{ post.url | relative_url }}">{{ post.title }}</a>{% if post.status %} <span class="p-status">{{ post.status }}</span>{% endif %}</span>
   </li>
   {% endfor %}
 </ul>

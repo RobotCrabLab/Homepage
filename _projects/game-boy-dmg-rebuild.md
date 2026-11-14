@@ -1,4 +1,5 @@
 ---
+date: 2026-11-02 12:00:00
 title: Rebuilding an original Game Boy
 summary: Bringing a 1989 Game Boy (DMG-01) up to date with a backlit IPS screen and a new speaker, while keeping the original processor and board.
 year: 2026

@@ -1,4 +1,5 @@
 ---
+date: 2026-11-02
 title: Working in Marine Science
 summary: More than a decade of field sampling, boat work, and lab time studying California's coastal waters.
 status: Ongoing

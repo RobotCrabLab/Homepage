@@ -14,6 +14,7 @@ Every change committed to `main` rebuilds the site automatically within a minute
 | Photography page              | `_data/photos.yml` (photos in `assets/images/photography/`) |
 | Projects                      | one file per project in `_projects/` |
 | Blog posts                    | one file per post in `_posts/`     |
+| (both appear together on the Posts page, newest first, and the four newest on the home card) | |
 | Colors and fonts              | `assets/css/style.css` (top of file) |
 | Animations and page changes   | `assets/js/site.js`                |
 | Images                        | upload to `assets/images/`         |
@@ -24,6 +25,7 @@ Create a file in `_projects/`, for example `_projects/my-project.md`:
 
 ```
 ---
+date: 2026-11-20          # where it sits among the posts
 title: My project
 summary: One sentence about what it is.
 year: 2026
@@ -31,8 +33,6 @@ status: Finished          # or In progress, Paused…
 tools: [Python, Arduino]
 link: https://github.com/RobotCrabLab/my-project   # optional
 image: /assets/images/my-project.jpg                # optional
-featured: true            # show it on the home page
-order: 1                  # lower numbers come first
 ---
 
 Write about the project here in Markdown.

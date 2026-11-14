@@ -1,6 +1,19 @@
 ---
-title: Blog
-intro: Notes on projects in progress, things I learned the hard way, and the occasional tangent.
+# The blog is now part of Posts. This page forwards old links there.
+layout: null
+sitemap: false
 ---
-{% include post-list.html %}
-<p class="feed-note">Follow along with the <a href="{{ '/feed.xml' | relative_url }}">RSS feed</a>.</p>
+{% assign to = '/posts/' | relative_url %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Moved: Posts</title>
+  <link rel="canonical" href="{{ to | prepend: site.url }}">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url={{ to }}">
+</head>
+<body>
+  <p>The blog is now part of <a href="{{ to }}">Posts</a>.</p>
+</body>
+</html>
