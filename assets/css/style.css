@@ -375,16 +375,15 @@ img { max-width: 100%; height: auto; }
   overflow: hidden; isolation: isolate; container-type: inline-size;
   border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
 }
-.portrait-wash { position: absolute; inset: 0; background: #EAF4F8 url("../images/watercolor-blue.svg") center / cover no-repeat; }
-/* In dark mode the watercolor turns deep blue */
+/* Behind him, one solid color, kept apart from the ocean's blues: butter yellow, and a
+   dusky purple in dark mode */
+.portrait-wash { position: absolute; inset: 0; background: #F5E6B8; }
 @media (prefers-color-scheme: dark) {
-  .portrait-wash { background-color: #163240; background-image: url("../images/watercolor-blue-dark.svg"); }
+  .portrait-wash { background: #5E5480; }
 }
-/* Safari redraws the watercolor (an SVG with blur and grain filters) slightly
-   differently when it repaints just a patch of it, which showed up as a box around
-   the osprey's nodding head. Giving the wash, the osprey and its head their own layers
-   means nothing that moves ever makes Safari repaint the wash underneath. */
-.portrait-wash, .card-osprey, .osprey-nod { will-change: transform; }
+/* The osprey and its nodding head get their own layers, so the nod never makes the
+   browser repaint the rest of the photo */
+.card-osprey, .osprey-nod { will-change: transform; }
 
 /* A big portrait bust: he fills most of the frame, cropped at the bottom edge. The
    microscope slides in from the right, in front of him. */

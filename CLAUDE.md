@@ -51,8 +51,9 @@ one.
 - `assets/images/scientist.svg`: Chris's character (brown hair and beard, brown work
   shirt, screwdriver and sample bottle in the pocket).
 - `assets/images/breadboard-bay-sign.svg`: the logo, two wooden plank signs reading
-  BREADBOARD / BAY (not shown anywhere on the site at the moment). Also the watercolor
-  washes behind the photo.
+  BREADBOARD / BAY (not shown anywhere on the site at the moment).
+- Behind the character in the home card's photo: one solid color, butter yellow `#F5E6B8` (light) and dusky
+  purple `#5E5480` (dark), deliberately not an ocean blue.
 
 ## Visual style
 - Simple one-line illustrations: thick navy `#14303F` outlines, flat colors, round
@@ -104,10 +105,10 @@ one.
 - Only the scene on show is animated. `data-scene` on the section fades the scenes;
   `data-live` lists the scenes still moving (the one on show, plus the one fading out),
   and the rest are paused so they cost nothing.
-- **Safari (Chris uses an iPhone):** the watercolor wash is an SVG with filters, and
-  Safari redraws patches of it with a visible box. Animate with CSS transforms on a whole
-  element (not on a shape inside a drawing), and keep animated art on its own layer
-  (`will-change`) over the wash. The osprey's nod works this way.
+- **Safari (Chris uses an iPhone):** animate with CSS transforms on a whole element (not on a
+  shape inside a drawing), and keep animated art on its own layer (`will-change`). The osprey's
+  nod works this way. (The photo used to have a watercolor wash with SVG filters that Safari
+  repainted in visible boxes; it's a solid color now.)
 
 ## Working with Chris
 - Preview every change with screenshots (phone, computer, phone in dark mode), then
