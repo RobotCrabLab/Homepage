@@ -375,11 +375,11 @@ img { max-width: 100%; height: auto; }
   overflow: hidden; isolation: isolate; container-type: inline-size;
   border: calc(var(--u) * 0.25) solid #14303F; border-radius: calc(var(--u) * 1.5);
 }
-/* Behind him, one solid color, kept apart from the ocean's blues: butter yellow, and a
-   dusky purple in dark mode */
-.portrait-wash { position: absolute; inset: 0; background: #F5E6B8; }
+/* Behind him, one solid blue: a cornflower blue that leans toward violet, so it never
+   looks like a window onto the green-teal ocean around the card. Royal blue in dark mode. */
+.portrait-wash { position: absolute; inset: 0; background: #8DB3E8; }
 @media (prefers-color-scheme: dark) {
-  .portrait-wash { background: #5E5480; }
+  .portrait-wash { background: #3D5FA8; }
 }
 /* The osprey and its nodding head get their own layers, so the nod never makes the
    browser repaint the rest of the photo */
