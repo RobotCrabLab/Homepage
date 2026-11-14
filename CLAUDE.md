@@ -88,10 +88,15 @@ one.
   3. The fish and the jellyfish.
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
-  with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
-  the screen: photo at the left (no caption, about as tall as the summary) with the skill summary beside it, then the buttons, then the links. On phones (upright and sideways) the Resume and Photography
-  icons are the links, with one short label each; upright they're each about half the card's width. Only
-  the buttons switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+  with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright, fills
+  the screen, and is laid out like a printed ID card: the navy band and rail, then a big photo across the card
+  taking all the spare height (its scenes sized by its height, in `cqh`), then fields on plain white, each a small
+  grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001" at the right; SKILLS as three plain
+  capital words (the chosen one dark with a red underline, the others grey); the summary; the links as fields
+  with red values and no icons (Resume and Hobbies side by side, Projects and Latest blog under them); and a
+  SIGNATURE in a handwriting font (Mrs Saint Delafield, `assets/fonts/signature.woff2`). The card number, Skills
+  label and signature exist on upright phones only. No background pattern, no ghost photo. On sideways phones the
+  Resume and Photography icons are the links, with one short label each. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: photo, name and summary, then buttons and links. Sheets fill the height.
 - A script sizes the osprey to fit between the top of the photo and the top of the head.

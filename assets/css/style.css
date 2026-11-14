@@ -35,6 +35,8 @@
   src: url("../fonts/work-sans.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/* Mrs Saint Delafield, for the signature on the phone card (license in assets/fonts) */
+@font-face { font-family: "Signature"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/signature.woff2") format("woff2"); }
 @font-face {
   font-family: "Work Sans"; font-style: italic; font-weight: 100 900; font-display: swap;
   src: url("../fonts/work-sans-italic.woff2") format("woff2");
@@ -308,6 +310,8 @@ img { max-width: 100%; height: auto; }
 
 /* Beside the photo: his name, the skill buttons, and the chosen skill's summary */
 .dive-info { grid-area: info; display: flex; flex-direction: column; min-width: 0; min-height: 0; padding-block: calc(var(--u) * 0.25); }
+/* The card number, "Skills" label and signature show on upright phones only */
+.dive-no, .skills-label, .dive-sig { display: none; }
 .dive-label, .dive-fields dt {
   margin: 0; color: var(--card-soft);
   font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
@@ -873,8 +877,8 @@ img { max-width: 100%; height: auto; }
 /* ------------------------------------------------------------
    12. Phones, upright (up to 40rem wide)
    The same bay, card, paper and page changes as computers, but all water: no sky, pier,
-   wave or footer. The boater ID stands upright and fills the screen: the photo at the
-   left with the skill summary beside it, then the buttons, then the links.
+   wave or footer. The boater ID stands upright and fills the screen, laid out like a
+   printed ID card (below).
    ------------------------------------------------------------ */
 @media screen and (max-width: 40rem) {
   html { min-height: 100svh; }   /* the water still fills the screen when the page itself can't scroll */
@@ -887,35 +891,56 @@ img { max-width: 100%; height: auto; }
   main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
+  /* Laid out like a printed ID: the navy band and rail, a big photo across the card taking
+     all the height that's left, then fields, each a small grey label over a bold capital
+     value: name and card number, skills, the summary, the links, and a signature. No
+     icons. The photo's scenes are sized by its height here (cqh), since it's wider than tall. */
   .portrait {
-    --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26); --photo: calc(var(--u) * 13.5);
-    aspect-ratio: auto; min-height: calc(100svh - 1.5rem); column-gap: calc(var(--u) * 1); --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1); padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.7);
-    /* The buttons sit right under the top section; the links take all the spare height */
-    grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
-    grid-template-areas: "head head" "photo label" "photo name" "photo summary" "nav nav" "links links";
+    --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26);
+    --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1.15);
+    aspect-ratio: auto; height: calc(100svh - 1.5rem); padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.8);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto auto auto auto auto auto;
+    grid-template-areas: "head head" "photo photo" "label no" "name name" "nav nav" "summary summary" "links links" "sig sig";
+    column-gap: calc(var(--u) * 1);
   }
-  /* The photo is about as tall as the summary text beside it */
-  .portrait-card { aspect-ratio: auto; height: calc(var(--u) * 19.3); align-self: start; margin-top: 0.5rem; }
-  .portrait-me, .card-scope { bottom: -13cqw; }
-  .dive-info { display: contents; }
-  .dive-label { grid-area: label; }
   .dive-org { font-size: calc(var(--u) * 2.05); }
-  .dive-kind { font-size: calc(var(--u) * 0.92); }
-  .dive-name { grid-area: name; font-size: calc(var(--u) * 2.6); }
-  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.5); min-width: 0; }
-  .dive-summary p { line-height: 1.38; }
-  .scene-nav { grid-area: nav; margin-top: calc(var(--u) * 0.8); gap: calc(var(--u) * 0.6); }
-  .scene-button { font-size: calc(var(--u) * 1.05); padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8); gap: calc(var(--u) * 0.5); }
-  .scene-button::after { content: none; }
-  /* Resume and Photography are big icons, each half the card's width where the height
-     allows; the other two links run the full width under them */
-  .dive-fields { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto auto; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: calc(var(--u) * 0.7) 0 0; min-height: 0; }
-  .dive-fields > div { margin-top: calc(var(--u) * 0.7); }
-  .dive-fields > div:has(.link-icon-big) { display: flex; flex-direction: column; align-items: center; padding-left: 0; min-height: 0; margin-top: 0; text-align: center; }
-  .dive-fields > div:has(.link-icon-big) dt { flex: 1 1 0; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
-  .dive-fields .link-icon-big { position: static; flex: 1 1 0; min-height: 0; width: 100%; height: auto; margin: 0; }
+  .dive-kind { font-size: calc(var(--u) * 0.92); letter-spacing: 0.1em; }
+  .portrait-card { width: auto; height: auto; aspect-ratio: auto; min-height: 0; align-self: stretch; margin-top: calc(var(--u) * 0.2); container-type: size; }
+  .portrait-me, .card-scope { left: calc(50cqw - 33cqh); width: 66cqh; bottom: -10cqh; }
+  .card-scope { transform: translateX(100cqw); }
+  .dive-info { display: contents; }
+  .dive-label { margin-top: calc(var(--u) * 0.75); font-size: calc(var(--u) * 0.68); }
+  .dive-info > .dive-label { grid-area: label; }
+  .dive-no { display: block; grid-area: no; align-self: end; margin: 0; font: 700 calc(var(--u) * 1)/1.3 var(--body); letter-spacing: 0.08em; }
+  .dive-no span { font-weight: 600; font-size: 0.75em; letter-spacing: 0.1em; color: var(--card-soft); }
+  .dive-name {
+    grid-area: name; border: 0; padding: 0;
+    font-family: var(--body); font-weight: 800; font-size: calc(var(--u) * 2.15); line-height: 1.05; letter-spacing: 0.01em; text-transform: uppercase;
+  }
+  /* The skills are plain capital words: the chosen one dark with a red underline */
+  .scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 1.3); margin: 0; width: auto; max-width: none; }
+  .skills-label { display: block; grid-column: 1 / -1; margin-bottom: calc(var(--u) * 0.1); }
+  .scene-button, .scene-button:hover, .scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover {
+    display: block; width: auto; padding: 0 0 calc(var(--u) * 0.12); border: 0; border-bottom: calc(var(--u) * 0.2) solid transparent; border-radius: 0;
+    background: none; box-shadow: none; transform: none; color: #A1AEB4; text-align: left;
+    font: 700 calc(var(--u) * 0.98)/1.15 var(--body); letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .scene-button::before, .scene-button::after, .scene-button[aria-pressed="true"]::after { content: none; }
+  .scene-button[aria-pressed="true"], .scene-button[aria-pressed="true"]:hover { color: var(--card-ink); border-bottom-color: var(--card-pick); }
+  .dive-summary { grid-area: summary; margin-top: calc(var(--u) * 0.55); min-width: 0; }
+  .dive-summary p { font-size: calc(var(--u) * 0.9); line-height: 1.38; }
+  /* The links are fields too; their values are red, so they read as links */
+  .dive-fields { grid-template-columns: 1fr 1fr; justify-content: stretch; gap: 0 calc(var(--u) * 1); margin: 0; }
+  .dive-fields > div, .dive-fields > div:has(.link-icon-big) { padding: 0; min-height: 0; margin-top: calc(var(--u) * 0.6); }
   .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
-  .dive-fields dd { font-size: calc(var(--u) * 1.0625); }
+  .dive-fields .link-icon { display: none; }
+  .dive-fields dt { font-size: calc(var(--u) * 0.68); }
+  .dive-fields dd { font: 700 calc(var(--u) * 0.95)/1.3 var(--body); letter-spacing: 0.02em; text-transform: uppercase; }
+  .dive-fields a { color: #B83B25; }
+  .dive-sig { display: block; grid-area: sig; }
+  .dive-sig .dive-label { margin-top: calc(var(--u) * 0.6); }
+  .dive-sig-name { margin: calc(var(--u) * 0.1) 0 0; font: 400 calc(var(--u) * 2.6)/1.1 "Signature", cursive; color: var(--card-ink); transform: rotate(-4deg); transform-origin: left center; }
 
   /* The paper has no rail, and the words are inset the same on both sides */
   .sheet-paper { padding-left: 0; }
@@ -932,11 +957,11 @@ img { max-width: 100%; height: auto; }
 /* Short phones: tighter, so everything still fits on one screen */
 @media screen and (max-width: 40rem) and (max-height: 740px) {
   .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.75); }
-  .portrait-card { height: calc(var(--u) * 15.9); }
-  .dive-summary p { font-size: calc(var(--u) * 0.86); line-height: 1.32; }
-  .scene-nav { margin-top: calc(var(--u) * 0.5); gap: calc(var(--u) * 0.45); }
-  .scene-button { font-size: calc(var(--u) * 0.98); padding-block: calc(var(--u) * 0.32); }
-  .dive-fields > div { margin-top: calc(var(--u) * 0.4); }   /* (the two big icons keep no gap) */
+  .dive-label { margin-top: calc(var(--u) * 0.5); }
+  .dive-summary p { font-size: calc(var(--u) * 0.84); line-height: 1.32; }
+  .dive-fields > div, .dive-fields > div:has(.link-icon-big) { margin-top: calc(var(--u) * 0.4); }
+  .dive-sig .dive-label { margin-top: calc(var(--u) * 0.4); }
+  .dive-sig-name { font-size: calc(var(--u) * 2.2); }
 }
 
 /* ------------------------------------------------------------
@@ -977,6 +1002,13 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(2) { grid-column: 2; grid-row: 1; }
   .dive-fields > div:nth-child(n+3) { grid-column: 1 / -1; }
   .dive-fields dd { font-size: calc(var(--u) * 1); }
+  /* The Resume and Photography icons are the links, with one short label each ("Click
+     Here" and "Hobbies" stay on computers only) */
+  .dive-fields > div:nth-child(1) dt, .dive-fields > div:nth-child(2) dd {
+    font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35;
+    letter-spacing: normal; text-transform: none; color: var(--card-ink);
+  }
+  .dive-fields > div:nth-child(1) dd, .dive-fields > div:nth-child(2) dt { font-size: 0; line-height: 0; }
 
   /* The paper has no rail here either */
   .sheet-paper { padding-left: 0; }
@@ -998,13 +1030,6 @@ img { max-width: 100%; height: auto; }
      sideways swipe no longer does anything. */
   .sheet { overflow-x: hidden; touch-action: pan-y; overscroll-behavior-x: none; }
   .sheet pre, .sheet pre code { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
-  /* The Resume and Photography icons are the links, with one short label each ("Click
-     Here" and "Hobbies" stay on computers only) */
-  .dive-fields > div:nth-child(1) dt, .dive-fields > div:nth-child(2) dd {
-    font-family: var(--display); font-weight: 600; font-size: calc(var(--u) * 1.0625); line-height: 1.35;
-    letter-spacing: normal; text-transform: none; color: var(--card-ink);
-  }
-  .dive-fields > div:nth-child(1) dd, .dive-fields > div:nth-child(2) dt { font-size: 0; line-height: 0; }
 }
 
 /* ------------------------------------------------------------

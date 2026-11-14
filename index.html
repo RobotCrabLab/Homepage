@@ -22,8 +22,10 @@ body_class: home
     </figure>
     <div class="dive-info">
       <p class="dive-label" aria-hidden="true">Boater name</p>
+      <p class="dive-no" aria-hidden="true"><span>No.</span> BBB 001</p>
       <p class="dive-name" aria-hidden="true">{{ site.author }}</p>
       <nav class="scene-nav" aria-label="Scenes">
+        <p class="dive-label skills-label" aria-hidden="true">Skills</p>
         <button class="scene-button" type="button" data-go="2" aria-pressed="false">Electronics</button>
         <button class="scene-button" type="button" data-go="3" aria-pressed="false">Water chemistry</button>
         <button class="scene-button" type="button" data-go="1" aria-pressed="true">Project lead</button>
@@ -40,5 +42,6 @@ body_class: home
       {% assign top_project = site.projects | sort: "order" | first %}{% if top_project %}<div><dt><svg class="link-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="12.5" y="2.5" width="7" height="9" rx="1.5" fill="#A7B2B8" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 15 C7 15 3.5 20 6.5 28.5 L10.5 27.5 C9.5 23 10.5 20 15.5 18.5 Z" fill="#A7B2B8" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M18 15 C25 15 28.5 20 25.5 28.5 L21.5 27.5 C22.5 23 21.5 20 16.5 18.5 Z" fill="#A7B2B8" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="16" cy="14" r="4.3" fill="#F2B33D" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="16" cy="14" r="1.2" fill="#14303F"/></svg>Projects</dt><dd><a href="{{ top_project.url | relative_url }}">{{ top_project.title }}</a></dd></div>{% endif %}
       {% assign latest = site.posts | first %}{% if latest %}<div><dt><svg class="link-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M5 27 L7 20 L21 6 L26 11 L12 25 Z" fill="#F2B33D" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M18.5 8.5 L21 6 L26 11 L23.5 13.5 Z" fill="#D9442B" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M5 27 L7 20 L12 25 Z" fill="#FBF6E6" stroke="#14303F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M5.2 26.8 L6 24 L8 26 Z" fill="#14303F"/></svg>Latest blog</dt><dd><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></dd></div>{% endif %}
     </dl>
+    <div class="dive-sig" aria-hidden="true"><p class="dive-label">Signature</p><p class="dive-sig-name">{{ site.author }}</p></div>
   </div>
 </section>
