@@ -74,9 +74,11 @@
     wait();
     cleanUp.push(function () { clearTimeout(resting); clearTimeout(stepping); });
 
-    // Each time Water chemistry comes up, a school of five small fish darts across the
-    // photo, right to left, a little apart from one another, then they're gone. The
-    // card opens on Water chemistry, so they swim by just after the page arrives too.
+    // Each time Water chemistry comes up, a loose school of five small fish swims across
+    // the photo, right to left, then they're gone. The card opens on Water chemistry, so
+    // they swim by just after the page arrives too. Each fish is a copy of the big fish
+    // inside its own holder: the holder crosses the photo while the fish inside wiggles
+    // and wags its tail, as the big ones do.
     let schooling = null;
     function school() {
       if (calm.matches || schooling) return;
@@ -86,19 +88,25 @@
       group.setAttribute('aria-hidden', 'true');
       card.appendChild(group);
       const W = card.clientWidth, H = card.clientHeight;
-      // [height down the photo, size as a share of its width, delay in ms]
-      const fish = [[0.14, 0.15, 0], [0.24, 0.12, 160], [0.08, 0.11, 320], [0.31, 0.14, 420], [0.19, 0.10, 600]];
+      // The whole school drifts the same way up or down, so it moves as one
+      const drift = (Math.random() * 2 - 1) * H * 0.05;
+      // [height down the photo, size as a share of its width, how far behind the leader in ms]
+      const fish = [[0.12, 0.14, 0], [0.30, 0.11, 450], [0.04, 0.10, 800], [0.42, 0.13, 600], [0.21, 0.12, 1150]];
       const swims = fish.map(function (f) {
+        const holder = document.createElement('span');
+        holder.className = 'school-fish';
         const one = model.cloneNode(true);
+        one.style.animationDelay = (-Math.random()).toFixed(2) + 's';   // not all wiggling in step
+        holder.appendChild(one);
         const w = W * f[1] * (0.9 + Math.random() * 0.2);
-        one.style.width = w.toFixed(1) + 'px';
-        one.style.top = (H * f[0] + (Math.random() * 2 - 1) * H * 0.03).toFixed(1) + 'px';
-        group.appendChild(one);
-        const rise = (Math.random() * 2 - 1) * H * 0.06;   // each drifts a little up or down on the way
-        return one.animate([
+        holder.style.width = w.toFixed(1) + 'px';
+        holder.style.top = (H * f[0] + (Math.random() * 2 - 1) * H * 0.03).toFixed(1) + 'px';
+        group.appendChild(holder);
+        const rise = drift + (Math.random() * 2 - 1) * H * 0.015;
+        return holder.animate([
           { transform: 'translate(0, 0)' },
           { transform: 'translate(' + (-(W + w * 2)).toFixed(1) + 'px, ' + rise.toFixed(1) + 'px)' }
-        ], { duration: 2300 + Math.random() * 500, delay: f[2] + Math.random() * 120, easing: 'cubic-bezier(.35,.1,.45,1)' }).finished;
+        ], { duration: 4500 + Math.random() * 300, delay: f[2] + Math.random() * 100, easing: 'cubic-bezier(.3,.1,.5,1)' }).finished;
       });
       schooling = group;
       Promise.all(swims).catch(function () {}).then(function () { group.remove(); schooling = null; });

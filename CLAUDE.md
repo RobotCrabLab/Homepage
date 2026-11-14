@@ -94,12 +94,14 @@ one.
   1. Osprey on its branch in the background.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school
-     of five small breadboard fish darts across the photo right to left in about 2.5 seconds (`school()` in site.js).
+     of five small breadboard fish swims across the photo right to left in about 4.5 seconds, loosely spread out
+     but drifting together, each wiggling and wagging its tail like the big fish (`school()` in site.js).
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
-  the screen: the band and rail, then a big photo across the card taking all the spare height (its scenes sized
-  by its height, in `cqh`), then the same fields stacked under it. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+  the screen: the band and rail, then the photo upright (portrait, like computers) at the left with BOATER NAME,
+  No., Resume and Hobbies beside it, then the skills, summary and Posts across the full width, and the signature
+  at the bottom of the card. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: the photo; name, skills and summary; card number, links and
   signature. Sheets fill the height.

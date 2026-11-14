@@ -413,7 +413,8 @@ img { max-width: 100%; height: auto; }
    (site.js adds them, starting just off the right edge, and removes them once across).
    They swim in front of him and fade out with the rest of the scene if it changes. */
 .card-school { position: absolute; inset: 0; z-index: 2; pointer-events: none; transition: opacity 0.6s ease; }
-.card-school svg { position: absolute; left: 100%; height: auto; overflow: visible; }
+.card-school .school-fish { position: absolute; left: 100%; }
+.card-school svg { display: block; width: 100%; height: auto; overflow: visible; }
 .scenes:not([data-scene="3"]) .card-school { opacity: 0; }
 
 /* The osprey perches behind him, facing in from the right, with its branch running off
@@ -875,7 +876,7 @@ img { max-width: 100%; height: auto; }
    12. Phones, upright (up to 40rem wide)
    The same bay, card, paper and page changes as computers, but all water: no sky, pier,
    wave or footer. The boater ID stands upright and fills the screen, laid out like a
-   printed ID card (below).
+   printed ID card, with the photo upright at the left (below).
    ------------------------------------------------------------ */
 @media screen and (max-width: 40rem) {
   html { min-height: 100svh; }   /* the water still fills the screen when the page itself can't scroll */
@@ -888,32 +889,35 @@ img { max-width: 100%; height: auto; }
   main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
-  /* The photo runs across the card and takes all the height that's left, with the
-     fields under it. Its scenes are sized by its height here (cqh), since it's wider
-     than tall. */
+  /* The photo stands upright at the left, with the name, card number, Resume and Hobbies
+     beside it; the skills, summary and posts run the full width under it, and the
+     signature sits at the bottom of the card. Any spare height is shared between the
+     photo (which grows taller) and the space above the signature. */
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26);
-    --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1.15);
+    --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1.15); --photo: calc(var(--u) * 13.6);
     aspect-ratio: auto; height: calc(100svh - 1.5rem); padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.8);
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto minmax(0, 1fr) auto auto auto auto auto auto;
-    grid-template-areas: "head head" "photo photo" "label no" "name name" "nav nav" "summary summary" "links links" "sig sig";
+    grid-template-columns: var(--photo) minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr) auto auto auto minmax(0, 1fr);
+    grid-template-areas: "head head" "photo label" "photo name" "photo no" "photo resume" "photo hobbies" "photo ." "nav nav" "summary summary" "posts posts" "sig sig";
     column-gap: calc(var(--u) * 1);
   }
   .dive-org { font-size: calc(var(--u) * 2.05); }
   .dive-kind { font-size: calc(var(--u) * 0.92); letter-spacing: 0.1em; }
-  .portrait-card { width: auto; height: auto; aspect-ratio: auto; min-height: 0; align-self: stretch; margin-top: calc(var(--u) * 0.2); container-type: size; }
-  .portrait-me, .card-scope { left: calc(50cqw - 33cqh); width: 66cqh; bottom: -10cqh; }
-  .card-scope { transform: translateX(100cqw); }
+  .portrait-card { aspect-ratio: auto; height: auto; align-self: stretch; min-height: calc(var(--photo) * 1.12); }
   .dive-label, .dive-fields dt { font-size: calc(var(--u) * 0.68); }
-  .dive-info > .dive-label { margin-top: calc(var(--u) * 0.75); }
-  .dive-no { font-size: calc(var(--u) * 1); }
+  .dive-info > .dive-label { align-self: start; }
+  .dive-no { justify-self: start; align-self: start; margin-top: calc(var(--u) * 0.25); font-size: calc(var(--u) * 1); }
+  .dive-fields { display: contents; }
+  .dive-fields > div:nth-child(1) { grid-area: resume; }
+  .dive-fields > div:nth-child(2) { grid-area: hobbies; }
+  .dive-fields > .dive-posts { grid-area: posts; }
+  .dive-sig { align-self: end; }
   .dive-name { font-size: calc(var(--u) * 2.15); }
   .scene-nav { gap: calc(var(--u) * 0.15) calc(var(--u) * 1.3); margin-top: calc(var(--u) * 0.75); }
   .scene-button { font-size: calc(var(--u) * 0.98); padding-bottom: calc(var(--u) * 0.12); border-bottom-width: calc(var(--u) * 0.2); }
   .dive-summary { margin-top: calc(var(--u) * 0.55); }
   .dive-summary p { font-size: calc(var(--u) * 0.9); line-height: 1.38; }
-  .dive-fields { gap: 0 calc(var(--u) * 1); }
   .dive-fields > div { margin-top: calc(var(--u) * 0.6); }
   .dive-fields dd { font-size: calc(var(--u) * 0.95); }
   .dive-sig-name { font-size: calc(var(--u) * 2.6); }
