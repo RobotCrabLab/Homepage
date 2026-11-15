@@ -109,7 +109,7 @@ one.
   at the left with BOATER NAME, No., Resume, Hobbies and SKILLS beside it (the three skills stacked; on phones the
   chosen one has a thin red box around it instead of the underline), then the summary (a little larger) right under
   the photo, then Posts a little under it (the summary is always as tall as the longest one, so Posts never moves),
-  with bigger titles, listing as many posts as fit above the signature (the home page lists up to 12; `fitPosts()`
+  with bigger titles spread evenly down the space, listing as many posts as fit above the signature (the home page lists up to 12; `fitPosts()`
   in site.js hides the ones that don't fit; everywhere else shows the four newest). Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: the photo; name, skills and summary; card number, links and
