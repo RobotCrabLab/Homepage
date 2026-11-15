@@ -71,7 +71,7 @@ one.
 - One portrait card with three scenes (`data-scene` 1–3). On computers it
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
   scale with it, sized in `--u`), and the skills on the card switch the scenes (Electronics:
-  scene 2; Science: scene 3; Project lead: scene 1). The card opens on Science and steps to the next
+  scene 2; Science: scene 3; Leadership: scene 1). The card opens on Science and steps to the next
   skill every 8 seconds (in listed order). Picking a skill shows it for a full 8 seconds, then the rotation carries
   on from there. It waits only while someone is tabbing through the card with the keyboard, and doesn't rotate with
   reduced motion. Only the card, "Built by Chris" and the crab
@@ -108,8 +108,9 @@ one.
   the screen: the band and rail, then the photo upright (portrait, about 1.66 times as tall as wide on most phones)
   at the left with BOATER NAME, No., Resume, Hobbies and SKILLS beside it (the three skills stacked; on phones the
   chosen one has a thin red box around it instead of the underline), then the summary (a little larger) right under
-  the photo, then Posts and the signature, with the spare height split evenly into the gap above Posts and the gap
-  above the signature. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+  the photo, then Posts a little under it (the summary is always as tall as the longest one, so Posts never moves),
+  with bigger titles, listing as many posts as fit above the signature (the home page lists up to 12; `fitPosts()`
+  in site.js hides the ones that don't fit; everywhere else shows the four newest). Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: the photo; name, skills and summary; card number, links and
   signature. Sheets fill the height.

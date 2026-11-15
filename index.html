@@ -3,7 +3,7 @@ layout: default
 body_class: home
 ---
 <!-- The boater ID card. Its photo has three scenes, one per skill button: 1 the osprey
-     (project lead), 2 the microscope and AUV (electronics), 3 the fish and jelly (science). The card opens on Science and site.js steps through the skills
+     (leadership), 2 the microscope and AUV (electronics), 3 the fish and jelly (science). The card opens on Science and site.js steps through the skills
      every 8 seconds; picking one shows it for a full 8. style.css draws and animates the scenes. -->
 <section class="scenes" data-scene="3" data-live="3">
   <h1>I'm {{ site.author }}.</h1>
@@ -29,7 +29,7 @@ body_class: home
         <p class="dive-label skills-label" aria-hidden="true">Skills</p>
         <button class="scene-button" type="button" data-go="2" aria-pressed="false">Electronics</button>
         <button class="scene-button" type="button" data-go="3" aria-pressed="true">Science</button>
-        <button class="scene-button" type="button" data-go="1" aria-pressed="false">Project lead</button>
+        <button class="scene-button" type="button" data-go="1" aria-pressed="false">Leadership</button>
       </nav>
       <div class="dive-summary">
         <p class="summary-2">Microscope assisted assembly and rework of SMT PCBs. Instrumentation wiring, crimped terminations and full ocean depth underwater cable manufacturing.</p>
@@ -40,7 +40,7 @@ body_class: home
     <dl class="dive-fields">
       <div><dt>Resume:</dt><dd><a href="{{ '/resume' | relative_url }}" aria-label="Resume">Click Here</a></dd></div>
       <div><dt>Hobbies:</dt><dd><a href="{{ '/photography' | relative_url }}">Photography</a></dd></div>
-      {% assign recent = site.posts | concat: site.projects | sort: "date" | reverse %}<div class="dive-posts"><dt>Posts:</dt>{% for p in recent limit: 4 %}<dd><a href="{{ p.url | relative_url }}">{{ p.title }}</a></dd>{% endfor %}</div>
+      {% assign recent = site.posts | concat: site.projects | sort: "date" | reverse %}<div class="dive-posts"><dt>Posts:</dt>{% for p in recent limit: 12 %}<dd><a href="{{ p.url | relative_url }}">{{ p.title }}</a></dd>{% endfor %}</div>
     </dl>
     <div class="dive-sig" aria-hidden="true"><p class="dive-label">Signature:</p><p class="dive-sig-name">{{ site.author }}</p></div>
   </div>

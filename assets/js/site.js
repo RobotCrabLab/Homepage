@@ -136,7 +136,7 @@
     }
     perch();
 
-    // Each time Project lead comes up, the osprey dives for its fish. The branch starts
+    // Each time Leadership comes up, the osprey dives for its fish. The branch starts
     // empty; the bird glides off to the left, dives behind him, splashes into the water,
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
@@ -222,6 +222,20 @@
     }
     if (section.dataset.scene === '1') dive();
     cleanUp.push(function () { trip.forEach(clearTimeout); diving.forEach(function (a) { a.cancel(); }); });
+
+    // On upright phones Posts fills the space above the signature: list as many posts as
+    // fit there, newest first, and hide the rest (style.css shows four everywhere else)
+    const posts = section.querySelector('.dive-posts');
+    function fitPosts() {
+      const titles = posts.querySelectorAll('dd');
+      titles.forEach(function (t) { t.hidden = false; });
+      for (let i = titles.length - 1; i > 0 && posts.scrollHeight > posts.clientHeight + 1; i--) titles[i].hidden = true;
+    }
+    fitPosts();
+    document.fonts.ready.then(fitPosts);
+    const fitter = new ResizeObserver(fitPosts);
+    fitter.observe(posts);
+    cleanUp.push(function () { fitter.disconnect(); });
 
     const watcher = new ResizeObserver(perch);
     watcher.observe(card);
