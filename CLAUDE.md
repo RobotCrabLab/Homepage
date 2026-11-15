@@ -93,10 +93,10 @@ one.
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
-     (`dive()` in site.js, about 4.7 seconds, none with reduced motion): the branch starts empty, the bird glides
+     (`dive()` in site.js, about 5.5 seconds, none with reduced motion): the branch starts empty, the bird glides
      off left, dives behind him with talons out, splashes into the water and flies back to the branch carrying
-     the fish. Its path rises and dips like real flight, and while flapping it bobs with each wingbeat
-     (`fly-bob` in style.css). The flying bird is `_includes/osprey-dive.svg` (glide, dive and carry poses, drawn facing right,
+     the fish. Its path is one smooth curve, and while flapping it rides a slow, gentle wave (about
+     1.1 seconds per rise and fall). The flying bird is `_includes/osprey-dive.svg` (glide, dive and carry poses, drawn facing right,
      plus the splash), all behind the character.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school

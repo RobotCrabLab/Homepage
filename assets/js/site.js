@@ -141,7 +141,7 @@
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
     const splash = card.querySelector('.card-splash');
-    const LEAVE = 700, FLIGHT = 4000;   // ms on the branch first, then the trip there and back
+    const LEAVE = 500, FLIGHT = 5000;   // ms on the branch first, then the trip there and back
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout);
@@ -166,22 +166,42 @@
       flyer.style.width = splash.style.width = w.toFixed(1) + 'px';
       const h = w * 126 / 136;
       const home = [b.left - c.left - card.clientLeft, b.bottom - c.top - card.clientTop - h];
-      // [x, y, turn in degrees, when (share of the trip), how it eases into the next spot]
-      function at(x, y, r, o, ease) { return { offset: o, easing: ease, transform: 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) rotate(' + r + 'deg)' }; }
-      const path = [
-        at(home[0], home[1], 0, 0, 'ease-out'),
-        at(home[0] - W * 0.10, home[1] - H * 0.05, -4, 0.07, 'ease-in-out'),   // lifts off the branch
-        at(W * 0.30, H * 0.07, -10, 0.14, 'ease-in-out'),  // dips, then climbs a little
-        at(W * 0.20, H * 0.03, -2, 0.21, 'ease-in'),       // hangs a moment, spotting the fish
-        at(-W * 0.02, H * 0.30, -48, 0.36, 'ease-in'),     // folds its wings and dives
-        at(W * 0.02, H * 0.40, -48, 0.46, 'linear'),       // hits the water
-        at(W * 0.0, H * 0.42, -18, 0.56, 'ease-out'),      // heaves up out of the water with the fish
-        at(W * 0.12, H * 0.20, -22, 0.66, 'ease-in-out'),  // climbing hard, sagging under the weight
-        at(W * 0.22, H * 0.16, -6, 0.74, 'ease-in-out'),
-        at(W * 0.36, H * 0.00, -16, 0.86, 'ease-in-out'),
-        at(home[0] + W * 0.02, home[1] - H * 0.04, 8, 0.94, 'ease-out'),       // flares to land
-        at(home[0], home[1], 0, 1, 'linear')               // back on the branch
+      // The spots it passes through: [when (share of the trip), x, y, turn in degrees]. A smooth
+      // curve runs through them, and while it flaps the bird rides a gentle wave on top.
+      const spots = [
+        [0, home[0], home[1], 0],
+        [0.10, home[0] - W * 0.10, home[1] - H * 0.05, -4],   // lifts off the branch
+        [0.22, W * 0.20, H * 0.04, -6],                       // spots the fish
+        [0.36, -W * 0.02, H * 0.30, -48],                     // folds its wings and dives
+        [0.46, W * 0.02, H * 0.40, -48],                      // hits the water
+        [0.56, 0, H * 0.42, -18],                             // comes up with the fish
+        [0.72, W * 0.16, H * 0.16, -16],
+        [0.88, W * 0.36, 0, -10],
+        [0.96, home[0] + W * 0.02, home[1] - H * 0.03, 6],    // flares to land
+        [1, home[0], home[1], 0]                              // back on the branch
       ];
+      function slope(k, n) {
+        if (k === 0 || k === spots.length - 1) return 0;
+        return (spots[k + 1][n] - spots[k - 1][n]) / (spots[k + 1][0] - spots[k - 1][0]);
+      }
+      function where(t) {
+        let k = 0;
+        while (k < spots.length - 2 && t > spots[k + 1][0]) k++;
+        const a = spots[k], b = spots[k + 1], d = b[0] - a[0], u = (t - a[0]) / d;
+        const h1 = 2 * u * u * u - 3 * u * u + 1, h2 = u * u * u - 2 * u * u + u, h3 = -2 * u * u * u + 3 * u * u, h4 = u * u * u - u * u;
+        return [1, 2, 3].map(function (n) { return h1 * a[n] + h2 * d * slope(k, n) + h3 * b[n] + h4 * d * slope(k + 1, n); });
+      }
+      // How much it's flapping: none while it dives and swims up, easing in and out
+      function flapping(t) {
+        const ramp = function (x) { return Math.max(0, Math.min(1, x)); };
+        return ramp((0.24 - t) / 0.06) * ramp(t / 0.06) + ramp((t - 0.56) / 0.06) * ramp((0.98 - t) / 0.06);
+      }
+      const BEAT = 1100;   // ms per rise and fall of the wave
+      const path = [];
+      for (let i = 0; i <= 100; i++) {
+        const t = i / 100, p = where(t), f = flapping(t), phase = 2 * Math.PI * t * FLIGHT / BEAT;
+        path.push({ transform: 'translate(' + p[0].toFixed(1) + 'px, ' + (p[1] + Math.sin(phase) * H * 0.022 * f).toFixed(1) + 'px) rotate(' + (p[2] + Math.cos(phase) * 3 * f).toFixed(1) + 'deg)' });
+      }
       const fly = flyer.animate(path, { duration: FLIGHT, delay: LEAVE, fill: 'both' });
       splash.style.transform = 'translate(' + (-W * 0.04).toFixed(1) + 'px, ' + (H * 0.49).toFixed(1) + 'px)';
       const hit = LEAVE + FLIGHT * 0.44;
