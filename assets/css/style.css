@@ -319,6 +319,7 @@ img { max-width: 100%; height: auto; }
   font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
 }
 .dive-info > .dive-label { grid-area: label; align-self: end; }
+.dive-fields dt, .skills-label { color: var(--card-ink); }   /* Resume, Hobbies, Skills and Posts are as dark as the name */
 .dive-no { grid-area: no; align-self: end; margin: 0; font: 700 calc(var(--u) * 1.15)/1.3 var(--body); letter-spacing: 0.08em; }
 .dive-no span { font-weight: 600; font-size: 0.75em; letter-spacing: 0.1em; color: var(--card-soft); }
 .dive-name {
