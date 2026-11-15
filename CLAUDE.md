@@ -80,7 +80,7 @@ one.
   the bottom) with the pier: its columns end under the wave and its ladder is in front of it. The page heading is hidden on
   computers, except for screen readers, and the page fits one screen with no scrolling.
   On every layout the card is laid out like a printed ID: under the band, the photo and fields on plain white,
-  each a small grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001"; SKILLS as three plain
+  each a small grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001"; SKILLS: as three plain
   capital words (the chosen one dark with a red underline, the others grey); under them a short summary of the
   chosen skill (from the résumé), which changes with the scene; the links as fields with red values and no icons;
   and a SIGNATURE in a handwriting font (Mrs Saint Delafield, `assets/fonts/signature.woff2`). No background
@@ -89,7 +89,7 @@ one.
   large white letters and "Boater ID" in yellow. A breadboard power rail (red + line, two rows of holes in groups
   of five, blue − line, + and − at both ends) runs under the band (not along the card's bottom), on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
-  The link labels read "Resume:", "Hobbies:", "Posts:" and the signature's "Signature:" (with colons).
+  The labels read "Skills:", "Resume:", "Hobbies:", "Posts:" and the signature's "Signature:" (with colons).
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
@@ -104,10 +104,10 @@ one.
      but drifting together, each wiggling and wagging its tail like the big fish (`school()` in site.js).
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
-  with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
-  the screen: the band and rail, then the photo upright (portrait, like computers) at the left with BOATER NAME,
-  No., Resume and Hobbies beside it, then the skills, summary and Posts across the full width, and the signature
-  at the bottom of the card. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
+  with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright, only as
+  tall as what's on it (water shows below on tall phones): the band and rail, then the photo upright (portrait, like
+  computers; never stretched or reshaped) at the left with BOATER NAME, No., Resume, Hobbies and SKILLS: (the three
+  skills stacked) beside it, then the summary, Posts and the signature across the full width. Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: the photo; name, skills and summary; card number, links and
   signature. Sheets fill the height.

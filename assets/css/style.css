@@ -907,22 +907,22 @@ img { max-width: 100%; height: auto; }
   main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
-  /* The photo stands upright at the left, with the name, card number, Resume and Hobbies
-     beside it; the skills, summary and posts run the full width under it, and the
-     signature sits at the bottom of the card. Any spare height is shared between the
-     photo (which grows taller) and the space above the signature. */
+  /* The photo stands upright at the left (always the same shape), with the name, card
+     number, Resume, Hobbies and the skills beside it; the summary, posts and signature run
+     the full width under it. The card is only as tall as what's on it, so on a tall phone
+     the water shows below it. */
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26);
     --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1.15); --photo: calc(var(--u) * 13.6);
-    aspect-ratio: auto; height: calc(100svh - 1.5rem); padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.8);
+    aspect-ratio: auto; height: auto; padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.8);
     grid-template-columns: var(--photo) minmax(0, 1fr);
-    grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr) auto auto auto minmax(0, 1fr);
-    grid-template-areas: "head head" "photo label" "photo name" "photo no" "photo resume" "photo hobbies" "photo ." "nav nav" "summary summary" "posts posts" "sig sig";
+    grid-template-rows: auto auto auto auto auto auto auto 1fr auto auto auto;
+    grid-template-areas: "head head" "photo label" "photo name" "photo no" "photo resume" "photo hobbies" "photo nav" "photo ." "summary summary" "posts posts" "sig sig";
     column-gap: calc(var(--u) * 1);
   }
   .dive-org { font-size: calc(var(--u) * 2.05); }
   .dive-kind { font-size: calc(var(--u) * 0.92); letter-spacing: 0.1em; }
-  .portrait-card { aspect-ratio: auto; height: auto; align-self: stretch; min-height: calc(var(--photo) * 1.12); }
+  .portrait-card { aspect-ratio: auto; align-self: start; height: calc(var(--photo) * 1.12); }
   .dive-label, .dive-fields dt { font-size: calc(var(--u) * 0.68); }
   .dive-info > .dive-label { align-self: start; }
   .dive-no { justify-self: start; align-self: start; margin-top: calc(var(--u) * 0.25); font-size: calc(var(--u) * 1); }
@@ -930,11 +930,12 @@ img { max-width: 100%; height: auto; }
   .dive-fields > div:nth-child(1) { grid-area: resume; }
   .dive-fields > div:nth-child(2) { grid-area: hobbies; }
   .dive-fields > .dive-posts { grid-area: posts; }
-  .dive-sig { align-self: end; }
+  .dive-sig { align-self: end; margin-top: calc(var(--u) * 0.9); }
   .dive-name { font-size: calc(var(--u) * 2.15); }
-  .scene-nav { gap: calc(var(--u) * 0.15) calc(var(--u) * 1.3); margin-top: calc(var(--u) * 0.75); }
+  .scene-nav { grid-template-columns: auto; justify-items: start; align-self: start; row-gap: calc(var(--u) * 0.3); margin-top: calc(var(--u) * 0.6); }
+  .skills-label { margin-bottom: 0; }
   .scene-button { font-size: calc(var(--u) * 0.98); padding-bottom: calc(var(--u) * 0.12); border-bottom-width: calc(var(--u) * 0.2); }
-  .dive-summary { margin-top: calc(var(--u) * 0.55); }
+  .dive-summary { margin-top: calc(var(--u) * 0.9); }
   .dive-summary p { font-size: calc(var(--u) * 0.9); line-height: 1.38; }
   .dive-fields > div { margin-top: calc(var(--u) * 0.6); }
   .dive-fields dd { font-size: calc(var(--u) * 0.95); }
