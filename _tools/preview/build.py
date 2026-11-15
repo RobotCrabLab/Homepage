@@ -64,7 +64,8 @@ posts = []
 for f in sorted(os.listdir(os.path.join(SRC, "_posts"))):
     fm, body = read(os.path.join(SRC, "_posts", f))
     y, mo, d, slug = f[:4], f[5:7], f[8:10], f[11:].rsplit(".", 1)[0]
-    fm.update(date=datetime.datetime(int(y), int(mo), int(d)), url=f"/blog/{y}/{mo}/{slug}/",
+    url = cfg["permalink"].replace(":year", y).replace(":month", mo).replace(":title", slug)
+    fm.update(date=datetime.datetime(int(y), int(mo), int(d)), url=url, collection="posts",
               tags=fm.get("tags", []), _body=body, _md=f.endswith(".md"), _kind="posts")
     posts.append(fm)
 posts.sort(key=lambda p: p["date"], reverse=True)
@@ -74,7 +75,7 @@ for i, p in enumerate(posts):
 projects = []
 for f in sorted(os.listdir(os.path.join(SRC, "_projects"))):
     fm, body = read(os.path.join(SRC, "_projects", f))
-    fm.update(url=f"/projects/{f.rsplit('.',1)[0]}/", _body=body, _md=True, _kind="projects")
+    fm.update(url=cfg["collections"]["projects"]["permalink"].replace(":name", f.rsplit('.',1)[0]), collection="projects", _body=body, _md=True, _kind="projects")
     if isinstance(fm.get("date"), datetime.date) and not isinstance(fm["date"], datetime.datetime):
         fm["date"] = datetime.datetime.combine(fm["date"], datetime.time())   # like Jekyll, a date is a time
     projects.append(fm)
@@ -87,7 +88,8 @@ def emit(page):
     html = layout_chain(page.get("layout") or defaults(page["_kind"]), content, ctx)
     url = page["url"]
     dest = os.path.join(OUT, BASE.strip("/"), url.strip("/"))
-    if not url.endswith(".html"): dest = os.path.join(dest, "index.html")
+    if url.endswith("/"): dest = os.path.join(dest, "index.html")       # /posts/ → posts/index.html
+    elif not url.endswith(".html"): dest += ".html"                      # /resume → resume.html, like Jekyll
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     open(dest, "w").write(html)
 
@@ -101,8 +103,10 @@ for root, dirs, files in os.walk(SRC):
         fm, body = read(path) if f.endswith((".html", ".md")) else (None, None)
         if fm is None:
             dest = os.path.join(OUT, BASE.strip("/"), rel); os.makedirs(os.path.dirname(dest), exist_ok=True); shutil.copy(path, dest); continue
-        url = fm.get("permalink") or "/" + re.sub(r"(index)?\.(html|md)$", "", rel).replace("\\", "/")
-        if url != "/" and not url.endswith((".html", "/")): url += "/"
+        url = fm.get("permalink")
+        if not url:
+            url = "/" + re.sub(r"(index)?\.(html|md)$", "", rel).replace("\\", "/")
+            if url != "/" and not url.endswith("/"): url += "/"
         fm.update(url=url, _body=body, _md=f.endswith(".md"), _kind="pages")
         emit(fm)
 print("built", len(posts), "posts", len(projects), "projects")

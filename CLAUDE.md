@@ -141,6 +141,11 @@ one.
   needs set up belongs there. A page is fetched as soon as a pointer or finger lands on
   its link. Between pages the old one rises and fades out just under the
   water, then the new one slides up from the bottom.
+- **Short addresses:** `/resume`, `/photography`, `/posts/` (the list) and `/posts/<name>`. Jekyll writes
+  `resume.html` and so on, and the host serves them without `.html`. Old addresses (`/resume/`,
+  `/blog/YYYY/MM/<name>/`, `/projects/<name>/`) hit the 404 page, and site.js forwards them to the new
+  ones; `/blog/` and `/projects/` forward to `/posts/`. Don't give a page a folder with the same name
+  as a `.html` page (no `resume/` beside `resume.html`). The preview server serves addresses the same way.
 - The site as it was before the November 2026 clean-up is on branch `backup/before-cleanup-2026-11-09`.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
   bay; the paper is near-white, set in the device's own font (San Francisco on Apple devices) with no ruled lines, and scrolls inside its edges. A breadboard power rail runs down its left margin:
@@ -150,9 +155,8 @@ one.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.
 - **Posts:** blog posts and projects are one category, "Posts". `/posts/` lists both, newest first
-  (projects show their status). They're still two collections with their own addresses (`/blog/YYYY/MM/…`
-  from `_posts/`, `/projects/…` from `_projects/`), so old links keep working; `/blog/` and `/projects/`
-  forward to `/posts/`. A project needs a `date:` to take its place in the list. Both are labelled
+  (projects show their status). They're still two collections (`_posts/` and `_projects/`), but both live at
+  `/posts/<name>`, with no trailing slash and no date folders. A project needs a `date:` to take its place in the list. Both are labelled
   "Ship's log" on the paper.
 - Open ideas, **not approved yet**: replacing the
   placeholder email (`you@example.com`), a résumé

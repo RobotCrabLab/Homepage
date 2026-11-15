@@ -20,13 +20,13 @@ baseurl: ""
 # Build settings — you shouldn't need to touch these.
 # ---------------------------------------------------------------
 markdown: kramdown
-permalink: /blog/:year/:month/:title/
+permalink: /posts/:title
 timezone: America/Los_Angeles
 
 collections:
   projects:
     output: true
-    permalink: /projects/:name/
+    permalink: /posts/:name
 
 defaults:
   - scope: { path: "", type: posts }

@@ -319,6 +319,15 @@
      the bay, pier and crab carry on undisturbed. Every page is still a real page at a real
      address, and anything unexpected just loads the page the ordinary way.
      ------------------------------------------------------------ */
+  // Old addresses (from before November 2026, like /resume/ or /blog/2026/10/a-post/) land
+  // on the "page not found" page, which forwards them to where that page lives now
+  if (main.querySelector('.not-found')) {
+    const old = location.pathname.slice(base.length - 1);
+    const now = old.replace(/^\/(?:blog\/\d{4}\/\d{2}|projects|posts)\/([^/]+)\/$/, '/posts/$1')
+                   .replace(/^\/(resume|photography)\/$/, '/$1');
+    if (now !== old) location.replace(base.slice(0, -1) + now + location.hash);
+  }
+
   let path = location.pathname;
   let latest = 0;                // only the most recent click gets to show its page
   let leaving = null, arriving = null;

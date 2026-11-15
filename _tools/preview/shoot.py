@@ -19,6 +19,14 @@ subprocess.run([sys.executable, os.path.join(HERE, "build.py"), REPO, site], che
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a): pass
+    def translate_path(self, path):   # like the live host: /resume serves resume.html
+        p = super().translate_path(path)
+        return p + ".html" if not os.path.exists(p) and os.path.exists(p + ".html") else p
+    def send_error(self, code, *a, **k):   # and a missing page gets 404.html
+        if code == 404 and os.path.exists(os.path.join(self.directory, "404.html")):
+            body = open(os.path.join(self.directory, "404.html"), "rb").read()
+            self.send_response(404); self.send_header("Content-Type", "text/html"); self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
+        else: super().send_error(code, *a, **k)
 srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=site))
 port = srv.server_address[1]; threading.Thread(target=srv.serve_forever, daemon=True).start()
 

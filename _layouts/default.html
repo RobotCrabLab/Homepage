@@ -18,12 +18,12 @@
   <main id="main">
     {% if page.body_class == 'home' %}{{ content }}{% else %}
     {% assign kind = 'Notice' %}
-    {% if page.url contains '/resume' %}{% assign kind = 'Crew record' %}{% endif %}
-    {% if page.url contains '/blog' or page.url contains '/projects' or page.url contains '/posts' %}{% assign kind = "Ship's log" %}{% endif %}
-    {% if page.url contains '/photography' %}{% assign kind = 'Photo album' %}{% endif %}
-    <div class="sheet{% if page.url contains '/photography' %} sheet-album{% endif %}"><div class="sheet-paper">
+    {% if page.url == '/resume' %}{% assign kind = 'Crew record' %}{% endif %}
+    {% if page.collection == 'posts' or page.collection == 'projects' or page.url == '/posts/' %}{% assign kind = "Ship's log" %}{% endif %}
+    {% if page.url == '/photography' %}{% assign kind = 'Photo album' %}{% endif %}
+    <div class="sheet{% if page.url == '/photography' %} sheet-album{% endif %}"><div class="sheet-paper">
       {% assign up = nil %}
-      {% if page.url contains '/blog/' or page.url contains '/projects/' %}{% assign up = 'Posts' %}{% assign up_url = '/posts/' %}{% endif %}
+      {% if page.collection == 'posts' or page.collection == 'projects' %}{% assign up = 'Posts' %}{% assign up_url = '/posts/' %}{% endif %}
       <div class="sheet-head"><a class="sheet-back" href="{{ '/' | relative_url }}">Home</a>{% if up %}<a class="sheet-back sheet-up" href="{{ up_url | relative_url }}">{{ up }}</a>{% endif %}<span class="sheet-org" aria-hidden="true">Breadboard Bay</span><span class="sheet-kind" aria-hidden="true">{{ kind }}</span></div>
       <div class="sheet-body">{{ content }}</div>
     </div></div>
