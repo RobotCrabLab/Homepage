@@ -409,7 +409,7 @@ img { max-width: 100%; height: auto; }
 .scenes:not([data-live~="2"]) .card-auv,
 .scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly),
 .scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly) * { animation-play-state: paused; }
-/* The school of five small fish that darts across each time Water chemistry comes up
+/* The school of five small fish that darts across each time Science comes up
    (site.js adds them, starting just off the right edge, and removes them once across).
    They swim in front of him and fade out with the rest of the scene if it changes. */
 .card-school { position: absolute; inset: 0; z-index: 2; pointer-events: none; transition: opacity 0.6s ease; }
@@ -907,17 +907,17 @@ img { max-width: 100%; height: auto; }
   main { padding-top: max(0.75rem, env(safe-area-inset-top)); }
   .page-moving main { clip-path: none; }
 
-  /* The photo stands upright at the left, with the name, card number, Resume and Hobbies
-     beside it; the skills, summary and posts run the full width under it, and the
-     signature sits at the bottom of the card. Any spare height is shared between the
-     photo (which grows taller) and the space above the signature. */
+  /* The photo stands upright at the left, with the name, card number, Resume, Hobbies and
+     the three skills (stacked, the chosen one boxed in red) beside it; the summary runs the
+     full width right under it. The spare height is shared between the photo (which grows
+     taller) and the two even gaps around the posts, above the signature. */
   .portrait {
     --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 2.02); --u: calc(var(--card-w) / 26);
     --pad-t: calc(var(--u) * 0.8); --pad-x: calc(var(--u) * 1.15); --photo: calc(var(--u) * 13.6);
     aspect-ratio: auto; height: calc(100svh - 1.5rem); padding: var(--pad-t) var(--pad-x) calc(var(--u) * 0.8);
     grid-template-columns: var(--photo) minmax(0, 1fr);
-    grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr) auto auto auto minmax(0, 1fr);
-    grid-template-areas: "head head" "photo label" "photo name" "photo no" "photo resume" "photo hobbies" "photo ." "nav nav" "summary summary" "posts posts" "sig sig";
+    grid-template-rows: auto auto auto auto auto auto auto minmax(0, 0.9fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto;
+    grid-template-areas: "head head" "photo label" "photo name" "photo no" "photo resume" "photo hobbies" "photo nav" "photo ." "summary summary" ". ." "posts posts" ". ." "sig sig";
     column-gap: calc(var(--u) * 1);
   }
   .dive-org { font-size: calc(var(--u) * 2.05); }
@@ -932,10 +932,13 @@ img { max-width: 100%; height: auto; }
   .dive-fields > .dive-posts { grid-area: posts; }
   .dive-sig { align-self: end; }
   .dive-name { font-size: calc(var(--u) * 2.15); }
-  .scene-nav { gap: calc(var(--u) * 0.15) calc(var(--u) * 1.3); margin-top: calc(var(--u) * 0.75); }
-  .scene-button { font-size: calc(var(--u) * 0.98); padding-bottom: calc(var(--u) * 0.12); border-bottom-width: calc(var(--u) * 0.2); }
-  .dive-summary { margin-top: calc(var(--u) * 0.55); }
-  .dive-summary p { font-size: calc(var(--u) * 0.9); line-height: 1.38; }
+  .scene-nav { grid-template-columns: auto; justify-items: start; align-self: start; row-gap: calc(var(--u) * 0.3); margin-top: calc(var(--u) * 0.6); }
+  .skills-label { margin-bottom: 0; }
+  .scene-button { font-size: calc(var(--u) * 0.98); padding: calc(var(--u) * 0.2) calc(var(--u) * 0.4); margin-left: calc(var(--u) * -0.4 - 2px); border: 2px solid transparent; border-radius: calc(var(--u) * 0.3); }
+  .scene-button[aria-pressed="true"] { border-color: var(--card-pick); }
+  .dive-summary { margin-top: calc(var(--u) * 0.9); }
+  .dive-fields > .dive-posts { margin-top: 0; }   /* the gaps around the posts come from the grid, so they match */
+  .dive-summary p { font-size: calc(var(--u) * 1.02); line-height: 1.4; }
   .dive-fields > div { margin-top: calc(var(--u) * 0.6); }
   .dive-fields dd { font-size: calc(var(--u) * 0.95); }
   .dive-sig-name { font-size: calc(var(--u) * 2.6); }
@@ -956,7 +959,7 @@ img { max-width: 100%; height: auto; }
 @media screen and (max-width: 40rem) and (max-height: 740px) {
   .portrait { --card-w: min(100vw - 2 * var(--gutter), (100svh - 1.5rem) / 1.75); }
   .dive-info > .dive-label, .scene-nav { margin-top: calc(var(--u) * 0.5); }
-  .dive-summary p { font-size: calc(var(--u) * 0.84); line-height: 1.32; }
+  .dive-summary p { font-size: calc(var(--u) * 0.96); line-height: 1.34; }
   .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
   .dive-sig .dive-label { margin-top: calc(var(--u) * 0.4); }
   .dive-sig-name { font-size: calc(var(--u) * 2.2); }

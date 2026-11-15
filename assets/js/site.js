@@ -51,7 +51,7 @@
     }
 
     // On its own, the card steps to the next skill every 8 seconds, in the order they're
-    // listed (it opens on Water chemistry). Picking a skill shows it for a full 8 seconds
+    // listed (it opens on Science). Picking a skill shows it for a full 8 seconds
     // before the rotation carries on from there. It waits while someone is tabbing
     // through the card with the keyboard. With reduced motion it stays put.
     const STEP = 8000;
@@ -75,8 +75,8 @@
     wait();
     cleanUp.push(function () { clearTimeout(resting); clearTimeout(stepping); });
 
-    // Each time Water chemistry comes up, a loose school of five small fish swims across
-    // the photo, right to left, then they're gone. The card opens on Water chemistry, so
+    // Each time Science comes up, a loose school of five small fish swims across
+    // the photo, right to left, then they're gone. The card opens on Science, so
     // they swim by just after the page arrives too. Each fish is a copy of the big fish
     // inside its own holder: the holder crosses the photo while the fish inside wiggles
     // and wags its tail, as the big ones do.
