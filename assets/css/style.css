@@ -413,8 +413,8 @@ img { max-width: 100%; height: auto; }
 .scenes:not([data-live~="3"]) :is(.card-fish-2, .card-fish-3, .card-jelly) * { animation-play-state: paused; }
 /* The school of five small fish that darts across each time Science comes up
    (site.js adds them, starting just off the right edge, and removes them once across).
-   They swim in front of him and fade out with the rest of the scene if it changes. */
-.card-school { position: absolute; inset: 0; z-index: 2; pointer-events: none; transition: opacity 0.6s ease; }
+   They swim behind him and fade out with the rest of the scene if it changes. */
+.card-school { position: absolute; inset: 0; z-index: 0; pointer-events: none; transition: opacity 0.6s ease; }
 .card-school .school-fish { position: absolute; left: 100%; }
 .card-school svg { display: block; width: 100%; height: auto; overflow: visible; }
 .scenes:not([data-scene="3"]) .card-school { opacity: 0; }

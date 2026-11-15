@@ -107,7 +107,7 @@ one.
      plus the splash), all behind the character.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school
-     of five small breadboard fish swims across the photo right to left in about 4.5 seconds, loosely spread out
+     of five small breadboard fish swims across the photo behind him, right to left in about 4.5 seconds, loosely spread out
      but drifting together, each wiggling and wagging its tail like the big fish (`school()` in site.js).
 - No caption shows under the photo on any layout.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water

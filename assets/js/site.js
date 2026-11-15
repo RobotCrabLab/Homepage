@@ -87,7 +87,7 @@
       const group = document.createElement('span');
       group.className = 'card-school';
       group.setAttribute('aria-hidden', 'true');
-      card.appendChild(group);
+      card.insertBefore(group, card.querySelector('.portrait-me'));   // behind him
       const W = card.clientWidth, H = card.clientHeight;
       // The whole school drifts the same way up or down, so it moves as one
       const drift = (Math.random() * 2 - 1) * H * 0.05;
