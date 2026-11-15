@@ -50,11 +50,11 @@
       if (to === '1') dive(); else if (from === '1') settle();
     }
 
-    // On its own, the card steps to the next skill every 8 seconds, in the order they're
-    // listed (it opens on Science). Picking a skill shows it for a full 8 seconds
+    // On its own, the card steps to the next skill every 10 seconds, in the order they're
+    // listed (it opens on Science). Picking a skill shows it for a full 10 seconds
     // before the rotation carries on from there. It waits while someone is tabbing
     // through the card with the keyboard. With reduced motion it stays put.
-    const STEP = 8000;
+    const STEP = 10000;
     const portrait = section.querySelector('.portrait');
     const rotating = !calm.matches;
     let held = false, stepping;
