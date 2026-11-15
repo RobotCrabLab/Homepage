@@ -532,7 +532,7 @@ img { max-width: 100%; height: auto; }
    swims in front. Where they sit when nothing moves: */
 .card-fish { position: absolute; display: block; z-index: 0; --rise: 0cqw; --tilt: 0deg; --lead: 0cqw; }
 .card-auv    { left: 4%; bottom: 66.5cqw; width: 90%; }   /* a fixed lane just above his head */
-.card-fish-2 { left: -2%; top: 64%; width: 44%; z-index: 2; }
+.card-fish-2 { left: -2%; top: 34%; width: 44%; z-index: 2; }
 .card-fish-3 { left: 76%; top: 80%; width: 34%; }
 .fish-body, .auv-body { display: block; width: 100%; height: auto; overflow: visible; }
 /* Swimming: each starts just off the right edge and crosses to just past the left edge,
