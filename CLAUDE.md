@@ -44,6 +44,9 @@ one.
   branch. Its head nods (the head is a second drawing laid over the bird, so it can turn
   without the rest being redrawn).
 - `osprey-dive.svg`: the same osprey in flight (gliding, diving, carrying the fish) and its splash.
+- `breadboard-drawing.svg`: a stylized engineering drawing of a half-size (400-point) breadboard (top view,
+  front view, an enlarged detail of one five-hole strip, real dimensions in mm, a title block "Breadboard Bay,
+  DWG NO. BBB-001, drawn: Chris"), in the "Welcome to Breadboard Bay" post. Uses the text color.
 - `crab-walker.svg`: a breadboard crab that walks into the footer, blowing bubbles.
 - `dock.svg`: a wooden working pier with rope, a cleat, a life ring and a ladder, at the water
   line behind the boater ID (computers only).
