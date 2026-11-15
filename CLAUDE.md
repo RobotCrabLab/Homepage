@@ -43,6 +43,7 @@ one.
 - `osprey.svg`: an osprey with a breadboard chest, gripping a breadboard fish on a dead
   branch. Its head nods (the head is a second drawing laid over the bird, so it can turn
   without the rest being redrawn).
+- `osprey-dive.svg`: the same osprey in flight (gliding, diving, carrying the fish) and its splash.
 - `crab-walker.svg`: a breadboard crab that walks into the footer, blowing bubbles.
 - `dock.svg`: a wooden working pier with rope, a cleat, a life ring and a ladder, at the water
   line behind the boater ID (computers only).
@@ -91,7 +92,11 @@ one.
   The link labels read "Resume:", "Hobbies:", "Posts:" and the signature's "Signature:" (with colons).
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
-  1. Osprey on its branch in the background.
+  1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
+     (`dive()` in site.js, about 4.7 seconds, none with reduced motion): the branch starts empty, the bird glides
+     off left, dives behind him with talons out, splashes into the water and flies back to the branch carrying
+     the fish. The flying bird is `_includes/osprey-dive.svg` (glide, dive and carry poses, drawn facing right,
+     plus the splash), all behind the character.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school
      of five small breadboard fish swims across the photo right to left in about 4.5 seconds, loosely spread out

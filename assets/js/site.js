@@ -47,6 +47,7 @@
       resting = setTimeout(function () { section.dataset.live = to; }, 1100);
       buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
       if (to === '3') school();
+      if (to === '1') dive(); else if (from === '1') settle();
     }
 
     // On its own, the card steps to the next skill every 6 seconds, in the order they're
@@ -134,6 +135,69 @@
       bird.style.right = (-0.07 * w).toFixed(1) + 'px';   // the branch's broken stub sits just inside the frame
     }
     perch();
+
+    // Each time Project lead comes up, the osprey dives for its fish. The branch starts
+    // empty; the bird glides off to the left, dives behind him, splashes into the water,
+    // and flies back up to the branch with the fish. Positions are shares of the photo.
+    const flyer = card.querySelector('.card-dive');
+    const splash = card.querySelector('.card-splash');
+    const LEAVE = 700, FLIGHT = 4000;   // ms on the branch first, then the trip there and back
+    let diving = [], trip = [];
+    function settle() {   // back on the branch with the fish, once the scene has faded
+      trip.forEach(clearTimeout);
+      trip = [setTimeout(function () {
+        diving.forEach(function (a) { a.cancel(); });
+        bird.classList.remove('away', 'empty');
+        flyer.dataset.pose = '';
+        splash.classList.remove('on');
+      }, 700)];
+    }
+    function dive() {
+      if (calm.matches) return;
+      trip.forEach(clearTimeout);
+      diving.forEach(function (a) { a.cancel(); });
+      bird.classList.add('empty');
+      bird.classList.remove('away');
+      flyer.dataset.pose = '';
+      splash.classList.remove('on');
+      const W = card.clientWidth, H = card.clientHeight;
+      const c = card.getBoundingClientRect(), b = bird.getBoundingClientRect();
+      const w = b.width;
+      flyer.style.width = splash.style.width = w.toFixed(1) + 'px';
+      const h = w * 126 / 136;
+      const home = [b.left - c.left - card.clientLeft, b.bottom - c.top - card.clientTop - h];
+      // [x, y, turn in degrees, when (share of the trip), how it eases into the next spot]
+      function at(x, y, r, o, ease) { return { offset: o, easing: ease, transform: 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) rotate(' + r + 'deg)' }; }
+      const path = [
+        at(home[0], home[1], 0, 0, 'ease-in'),
+        at(W * 0.24, H * 0.06, -8, 0.2, 'linear'),         // glides off to the left
+        at(-W * 0.02, H * 0.30, -48, 0.38, 'ease-in'),     // folds its wings and dives
+        at(W * 0.02, H * 0.40, -48, 0.48, 'linear'),       // hits the water
+        at(W * 0.0, H * 0.42, -14, 0.56, 'ease-out'),      // comes up with the fish
+        at(W * 0.34, H * 0.02, -14, 0.8, 'ease-in-out'),
+        at(home[0], home[1], 0, 1, 'linear')               // back on the branch
+      ];
+      const fly = flyer.animate(path, { duration: FLIGHT, delay: LEAVE, fill: 'both' });
+      splash.style.transform = 'translate(' + (-W * 0.04).toFixed(1) + 'px, ' + (H * 0.49).toFixed(1) + 'px)';
+      const hit = LEAVE + FLIGHT * 0.46;
+      const burst = splash.animate([
+        { transform: splash.style.transform + ' scale(0.3, 0.1)', opacity: 1 },
+        { transform: splash.style.transform + ' scale(1, 1)', opacity: 1, offset: 0.35 },
+        { transform: splash.style.transform + ' scale(1.05, 0.9)', opacity: 0 }
+      ], { duration: 1100, delay: hit, easing: 'ease-out', fill: 'backwards' });
+      diving = [fly, burst];
+      function later(ms, f) { trip.push(setTimeout(f, ms)); }
+      later(LEAVE, function () { bird.classList.add('away'); flyer.dataset.pose = 'glide'; });
+      later(LEAVE + FLIGHT * 0.30, function () { flyer.dataset.pose = 'dive'; });
+      later(hit, function () { splash.classList.add('on'); });
+      later(LEAVE + FLIGHT * 0.48, function () { flyer.dataset.pose = ''; });   // under the water
+      later(LEAVE + FLIGHT * 0.56, function () { flyer.dataset.pose = 'carry'; });
+      later(hit + 1100, function () { splash.classList.remove('on'); });
+      later(LEAVE + FLIGHT, function () { flyer.dataset.pose = ''; bird.classList.remove('away', 'empty'); });
+    }
+    if (section.dataset.scene === '1') dive();
+    cleanUp.push(function () { trip.forEach(clearTimeout); diving.forEach(function (a) { a.cancel(); }); });
+
     const watcher = new ResizeObserver(perch);
     watcher.observe(card);
     cleanUp.push(function () { watcher.disconnect(); });
