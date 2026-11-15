@@ -209,7 +209,7 @@
         { transform: splash.style.transform + ' scale(0.3, 0.1)', opacity: 1 },
         { transform: splash.style.transform + ' scale(1, 1)', opacity: 1, offset: 0.35 },
         { transform: splash.style.transform + ' scale(1.05, 0.9)', opacity: 0 }
-      ], { duration: 1100, delay: hit, easing: 'ease-out', fill: 'backwards' });
+      ], { duration: 1100, delay: hit, easing: 'ease-out', fill: 'both' });   // stays faded out once done
       diving = [fly, burst];
       function later(ms, f) { trip.push(setTimeout(f, ms)); }
       later(LEAVE, function () { bird.classList.add('away'); flyer.dataset.pose = 'glide'; });
