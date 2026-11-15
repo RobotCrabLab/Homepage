@@ -72,7 +72,7 @@ one.
   sits on a white breadboard "boater ID" card, always 1.6 times as wide as tall (its contents
   scale with it, sized in `--u`), and the skills on the card switch the scenes (Electronics:
   scene 2; Water chemistry: scene 3; Project lead: scene 1). The card opens on Water chemistry and steps to the next
-  skill every 6 seconds (in listed order). Picking a skill shows it for a full 6 seconds, then the rotation carries
+  skill every 8 seconds (in listed order). Picking a skill shows it for a full 8 seconds, then the rotation carries
   on from there. It waits only while someone is tabbing through the card with the keyboard, and doesn't rotate with
   reduced motion. Only the card, "Built by Chris" and the crab
   show on this page at those widths (the site has no header or footer links), over a pastel bay
