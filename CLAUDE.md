@@ -142,9 +142,8 @@ one.
   its link. Between pages the old one rises and fades out just under the
   water, then the new one slides up from the bottom.
 - **Short addresses:** `/resume`, `/photography`, `/posts/` (the list) and `/posts/<name>`. Jekyll writes
-  `resume.html` and so on, and the host serves them without `.html`. Old addresses (`/resume/`,
-  `/blog/YYYY/MM/<name>/`, `/projects/<name>/`) hit the 404 page, and site.js forwards them to the new
-  ones; `/blog/` and `/projects/` forward to `/posts/`. Don't give a page a folder with the same name
+  `resume.html` and so on, and the host serves them without `.html`. Old addresses (`/resume/`, `/blog/…`,
+  `/projects/…`) aren't forwarded; they show the 404 page. Don't give a page a folder with the same name
   as a `.html` page (no `resume/` beside `resume.html`). The preview server serves addresses the same way.
 - The site as it was before the November 2026 clean-up is on branch `backup/before-cleanup-2026-11-09`.
 - **Other pages on computers:** a logbook sheet (`.sheet`, in `_layouts/default.html`) in the same
