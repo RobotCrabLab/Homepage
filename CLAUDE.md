@@ -1,7 +1,7 @@
 # Breadboard Bay: notes for Claude
 
 Chris's personal site: portfolio, projects, blog, résumé and bird photography. Jekyll,
-live at robotcrablab.github.io/Homepage, published automatically from `main`.
+live at breadboardbay.com (domain from Namecheap; `CNAME` file, `baseurl: ""`), published automatically from `main`.
 Chris is an electronics technician in ocean research who also photographs birds.
 The site should feel like him: professional but quirky, hand-made, a little playful.
 
@@ -156,4 +156,4 @@ one.
   "Ship's log" on the paper.
 - Open ideas, **not approved yet**: replacing the
   placeholder email (`you@example.com`), a résumé
-  summary, a custom domain.
+  summary.

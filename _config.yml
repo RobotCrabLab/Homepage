@@ -11,10 +11,10 @@ github_username: RobotCrabLab
 linkedin_username: ""
 mastodon_url: ""
 
-# The site lives at https://robotcrablab.github.io/Homepage/
-# If you rename the repo to robotcrablab.github.io, set baseurl to "".
-url: "https://robotcrablab.github.io"
-baseurl: "/Homepage"
+# The site lives at https://breadboardbay.com/ (the domain is set in the CNAME file and
+# in the repository's settings; the old robotcrablab.github.io/Homepage address forwards here)
+url: "https://breadboardbay.com"
+baseurl: ""
 
 # ---------------------------------------------------------------
 # Build settings — you shouldn't need to touch these.

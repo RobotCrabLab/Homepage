@@ -4,7 +4,7 @@ screenshots on a phone, a computer and a phone in dark mode.
 Setup (once per machine):
   pip install python-liquid pyyaml markdown playwright --break-system-packages
 Usage (from the repo root):
-  python3 _tools/preview/shoot.py OUT_DIR [/Homepage/ /Homepage/projects/ ...]
+  python3 _tools/preview/shoot.py OUT_DIR [/ /posts/ ...]
 """
 import os, shutil, subprocess, sys, tempfile, threading, http.server, functools
 from playwright.sync_api import sync_playwright
@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 out = os.path.abspath(sys.argv[1]); os.makedirs(out, exist_ok=True)
-pages = sys.argv[2:] or ["/Homepage/"]
+pages = sys.argv[2:] or ["/"]
 
 site = tempfile.mkdtemp()
 subprocess.run([sys.executable, os.path.join(HERE, "build.py"), REPO, site], check=True, capture_output=True)

@@ -1,6 +1,6 @@
 # Homepage
 
-Breadboard Bay: my personal site, with portfolio, resume, photography and blog. It's built with Jekyll and published by GitHub Pages at **https://robotcrablab.github.io/Homepage/**.
+Breadboard Bay: my personal site, with portfolio, resume, photography and blog. It's built with Jekyll and published by GitHub Pages at **https://breadboardbay.com/**.
 
 Every change committed to `main` rebuilds the site automatically within a minute or two. You can watch the build in the **Actions** tab.
 
@@ -67,6 +67,6 @@ The post text goes here.
 
 Posts dated in the future won't appear until that date.
 
-## Rename to a shorter address
+## Custom domain
 
-To serve the site at `https://robotcrablab.github.io/` instead, rename the repository to `robotcrablab.github.io` and set `baseurl: ""` in `_config.yml`.
+The site is served at `breadboardbay.com` (registered at Namecheap). Namecheap's Advanced DNS has four A records for `@` (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a CNAME for `www` pointing to `robotcrablab.github.io`. The `CNAME` file in this repo holds the domain, and `_config.yml` has `baseurl: ""`.
