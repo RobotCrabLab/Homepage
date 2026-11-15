@@ -35,6 +35,11 @@ defaults:
     values: { layout: project }
   - scope: { path: "" }
     values: { layout: page }
+  # The picture shown when a link to any page is shared (in iMessage and the like): Chris's
+  # character on a see-through background. A page can set its own `image:` to override it.
+  - scope: { path: "" }
+    values:
+      image: { path: /assets/images/share.png, width: 1200, height: 630, alt: "Chris's character, a cartoon man with a brown beard and work shirt" }
 
 plugins:
   - jekyll-feed

@@ -53,6 +53,8 @@ one.
   shirt, screwdriver and sample bottle in the pocket).
 - `assets/images/breadboard-bay-sign.svg`: the logo, two wooden plank signs reading
   BREADBOARD / BAY (not shown anywhere on the site at the moment).
+- `assets/images/share.png`: the link preview picture (1200 × 630, the character alone on a see-through
+  background), set for every page in `_config.yml`. Rebuild it from `scientist.svg` if the character changes.
 - Behind the character in the home card's photo: one solid color, the bottom of the ocean gradient
   (`--sea-bottom`: `#9CC3CF` light, `#2C5062` dark).
 
