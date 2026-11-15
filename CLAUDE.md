@@ -95,7 +95,8 @@ one.
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
      (`dive()` in site.js, about 4.7 seconds, none with reduced motion): the branch starts empty, the bird glides
      off left, dives behind him with talons out, splashes into the water and flies back to the branch carrying
-     the fish. The flying bird is `_includes/osprey-dive.svg` (glide, dive and carry poses, drawn facing right,
+     the fish. Its path rises and dips like real flight, and while flapping it bobs with each wingbeat
+     (`fly-bob` in style.css). The flying bird is `_includes/osprey-dive.svg` (glide, dive and carry poses, drawn facing right,
      plus the splash), all behind the character.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school

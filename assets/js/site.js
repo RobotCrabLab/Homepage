@@ -169,17 +169,22 @@
       // [x, y, turn in degrees, when (share of the trip), how it eases into the next spot]
       function at(x, y, r, o, ease) { return { offset: o, easing: ease, transform: 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) rotate(' + r + 'deg)' }; }
       const path = [
-        at(home[0], home[1], 0, 0, 'ease-in'),
-        at(W * 0.24, H * 0.06, -8, 0.2, 'linear'),         // glides off to the left
-        at(-W * 0.02, H * 0.30, -48, 0.38, 'ease-in'),     // folds its wings and dives
-        at(W * 0.02, H * 0.40, -48, 0.48, 'linear'),       // hits the water
-        at(W * 0.0, H * 0.42, -14, 0.56, 'ease-out'),      // comes up with the fish
-        at(W * 0.34, H * 0.02, -14, 0.8, 'ease-in-out'),
+        at(home[0], home[1], 0, 0, 'ease-out'),
+        at(home[0] - W * 0.10, home[1] - H * 0.05, -4, 0.07, 'ease-in-out'),   // lifts off the branch
+        at(W * 0.30, H * 0.07, -10, 0.14, 'ease-in-out'),  // dips, then climbs a little
+        at(W * 0.20, H * 0.03, -2, 0.21, 'ease-in'),       // hangs a moment, spotting the fish
+        at(-W * 0.02, H * 0.30, -48, 0.36, 'ease-in'),     // folds its wings and dives
+        at(W * 0.02, H * 0.40, -48, 0.46, 'linear'),       // hits the water
+        at(W * 0.0, H * 0.42, -18, 0.56, 'ease-out'),      // heaves up out of the water with the fish
+        at(W * 0.12, H * 0.20, -22, 0.66, 'ease-in-out'),  // climbing hard, sagging under the weight
+        at(W * 0.22, H * 0.16, -6, 0.74, 'ease-in-out'),
+        at(W * 0.36, H * 0.00, -16, 0.86, 'ease-in-out'),
+        at(home[0] + W * 0.02, home[1] - H * 0.04, 8, 0.94, 'ease-out'),       // flares to land
         at(home[0], home[1], 0, 1, 'linear')               // back on the branch
       ];
       const fly = flyer.animate(path, { duration: FLIGHT, delay: LEAVE, fill: 'both' });
       splash.style.transform = 'translate(' + (-W * 0.04).toFixed(1) + 'px, ' + (H * 0.49).toFixed(1) + 'px)';
-      const hit = LEAVE + FLIGHT * 0.46;
+      const hit = LEAVE + FLIGHT * 0.44;
       const burst = splash.animate([
         { transform: splash.style.transform + ' scale(0.3, 0.1)', opacity: 1 },
         { transform: splash.style.transform + ' scale(1, 1)', opacity: 1, offset: 0.35 },
@@ -188,9 +193,9 @@
       diving = [fly, burst];
       function later(ms, f) { trip.push(setTimeout(f, ms)); }
       later(LEAVE, function () { bird.classList.add('away'); flyer.dataset.pose = 'glide'; });
-      later(LEAVE + FLIGHT * 0.30, function () { flyer.dataset.pose = 'dive'; });
+      later(LEAVE + FLIGHT * 0.25, function () { flyer.dataset.pose = 'dive'; });
       later(hit, function () { splash.classList.add('on'); });
-      later(LEAVE + FLIGHT * 0.48, function () { flyer.dataset.pose = ''; });   // under the water
+      later(LEAVE + FLIGHT * 0.46, function () { flyer.dataset.pose = ''; });   // under the water
       later(LEAVE + FLIGHT * 0.56, function () { flyer.dataset.pose = 'carry'; });
       later(hit + 1100, function () { splash.classList.remove('on'); });
       later(LEAVE + FLIGHT, function () { flyer.dataset.pose = ''; bird.classList.remove('away', 'empty'); });

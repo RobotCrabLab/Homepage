@@ -443,6 +443,13 @@ img { max-width: 100%; height: auto; }
 .card-dive { aspect-ratio: 136 / 126; }
 .card-splash { transform-origin: 50% 85%; }
 .card-dive svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+/* While it flaps along (not in the dive), the bird bobs up and down with each wingbeat */
+.fly-bob { position: absolute; inset: 0; }
+.card-dive:is([data-pose="glide"], [data-pose="carry"]) .fly-bob { animation: fly-bob 0.42s ease-in-out infinite alternate; }
+@keyframes fly-bob {
+  from { transform: translateY(-7%) rotate(-3deg); }
+  to   { transform: translateY(7%) rotate(2deg); }
+}
 .card-dive .fly-glide, .card-dive .fly-dive { transform: scaleX(-1); }
 .card-dive:not([data-pose="glide"]) .fly-glide,
 .card-dive:not([data-pose="dive"]) .fly-dive,
