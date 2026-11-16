@@ -141,7 +141,7 @@
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
     const splash = card.querySelector('.card-splash');
-    const LEAVE = 500, FLIGHT = 5000;   // ms on the branch first, then the trip there and back
+    const LEAVE = 500, FLIGHT = 5000, TURN = 650, FADE = 250;   // ms   // ms on the branch first, then the trip there and back
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout);
@@ -218,7 +218,23 @@
       later(LEAVE + FLIGHT * 0.46, function () { flyer.dataset.pose = ''; });   // under the water
       later(LEAVE + FLIGHT * 0.56, function () { flyer.dataset.pose = 'carry'; });
       later(hit + 1100, function () { splash.classList.remove('on'); });
-      later(LEAVE + FLIGHT, function () { flyer.dataset.pose = ''; bird.classList.remove('away', 'empty'); });
+      // Landed: it hops round to face the other way (the carrying pose flips through edge-on),
+      // then the perched bird with its fish takes over underneath as the flyer fades away
+      later(LEAVE + FLIGHT, function () {
+        const carry = flyer.querySelector('.fly-carry');
+        const turn = carry.animate([
+          { transform: 'translate(0, 0) scaleX(1)' },
+          { transform: 'translate(15%, -5%) scaleX(0.15)', offset: 0.5 },
+          { transform: 'translate(30%, 0) scaleX(-1)' }   // lines its head up with the perched bird's
+        ], { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
+        diving.push(turn);
+        later(TURN, function () {
+          bird.classList.remove('away', 'empty');
+          const fade = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE, easing: 'ease-out', fill: 'forwards' });
+          diving.push(fade);
+          fade.onfinish = function () { flyer.dataset.pose = ''; turn.cancel(); fade.cancel(); };
+        });
+      });
     }
     if (section.dataset.scene === '1') dive();
     cleanUp.push(function () { trip.forEach(clearTimeout); diving.forEach(function (a) { a.cancel(); }); });
