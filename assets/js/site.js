@@ -141,7 +141,7 @@
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
     const splash = card.querySelector('.card-splash');
-    const LEAVE = 500, FLIGHT = 5000, TURN = 650, FADE = 250;   // ms   // ms on the branch first, then the trip there and back
+    const LEAVE = 500, FLIGHT = 5000, TURN = 500, FADE = 250;   // ms   // ms on the branch first, then the trip there and back
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout);
@@ -166,6 +166,8 @@
       flyer.style.width = splash.style.width = w.toFixed(1) + 'px';
       const h = w * 126 / 136;
       const home = [b.left - c.left - card.clientLeft, b.bottom - c.top - card.clientTop - h];
+      // where it lands: once it has turned to face left, this puts its body right where the perched bird's is
+      const land = [home[0] + w * 0.2, home[1] - h * 0.12];
       // The spots it passes through: [when (share of the trip), x, y, turn in degrees]. A smooth
       // curve runs through them, and while it flaps the bird rides a gentle wave on top.
       const spots = [
@@ -177,8 +179,8 @@
         [0.56, 0, H * 0.42, -18],                             // comes up with the fish
         [0.72, W * 0.16, H * 0.16, -16],
         [0.88, W * 0.36, 0, -10],
-        [0.96, home[0] + W * 0.02, home[1] - H * 0.03, 6],    // flares to land
-        [1, home[0], home[1], 0]                              // back on the branch
+        [0.96, land[0] + W * 0.02, land[1] - H * 0.03, 6],       // flares to land
+        [1, land[0], land[1], 0]                                 // back on the branch
       ];
       function slope(k, n) {
         if (k === 0 || k === spots.length - 1) return 0;
@@ -218,17 +220,15 @@
       later(LEAVE + FLIGHT * 0.46, function () { flyer.dataset.pose = ''; });   // under the water
       later(LEAVE + FLIGHT * 0.56, function () { flyer.dataset.pose = 'carry'; });
       later(hit + 1100, function () { splash.classList.remove('on'); });
-      // Landed: it hops round to face the other way (the carrying pose flips through edge-on),
-      // then the perched bird with its fish takes over underneath as the flyer fades away
-      later(LEAVE + FLIGHT, function () {
-        const carry = flyer.querySelector('.fly-carry');
-        const turn = carry.animate([
-          { transform: 'translate(0, 0) scaleX(1)' },
-          { transform: 'translate(15%, -5%) scaleX(0.15)', offset: 0.5 },
-          { transform: 'translate(30%, 0) scaleX(-1)' }   // lines its head up with the perched bird's
-        ], { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
+      // Just before it lands it turns round in the air to face left, flipping on the middle of its
+      // body (style.css sets the turning point); once down, the perched bird with its fish takes
+      // over underneath as the flyer fades away
+      later(LEAVE + FLIGHT * 0.9, function () {
+        const turn = flyer.querySelector('.fly-carry').animate(
+          [{ transform: 'scaleX(1)' }, { transform: 'scaleX(-1)' }],
+          { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
         diving.push(turn);
-        later(TURN, function () {
+        later(FLIGHT * 0.1, function () {
           bird.classList.remove('away', 'empty');
           const fade = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE, easing: 'ease-out', fill: 'forwards' });
           diving.push(fade);
