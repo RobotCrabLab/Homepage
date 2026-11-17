@@ -146,17 +146,23 @@
     // the head rides on top and the bird grows to the perched drawing's size about its feet.
     // The legs are redrawn from the hips to the talons each frame, so they never come apart.
     const rig = flyer.querySelector('.fly-settle');
+    const HX = 21, HY = -12;   // where the head ends up, nudged to sit exactly on the perched bird's head
     let standing = 0;
     function stand(e) {
-      const ang = -66 * e, rad = ang * Math.PI / 180, cos = Math.cos(rad), sin = Math.sin(rad);
+      const ang = -86 * e, rad = ang * Math.PI / 180, cos = Math.cos(rad), sin = Math.sin(rad);
       const rot = function (x, y) { return [68 + (x - 68) * cos - (y - 88) * sin, 88 + (x - 68) * sin + (y - 88) * cos]; };
       const h1 = rot(62, 86), h2 = rot(74, 86);
-      const tx = 70 - (h1[0] + h2[0]) / 2, ty = 86 - (h1[1] + h2[1]) / 2, hd = rot(100, 56);
+      const tx = 70 - (h1[0] + h2[0]) / 2 + 12 * e, ty = 86 - (h1[1] + h2[1]) / 2 - 10 * e, hd = rot(100, 56);   // ends standing tall, right over the perched bird's body
       const grow = 1 + 0.18 * e, f = function (n) { return n.toFixed(2); };
       rig.querySelector('.st-grow').setAttribute('transform', 'translate(70 98) scale(' + f(grow) + ') translate(-70 -98)');
       rig.querySelector('.st-body').setAttribute('transform', 'translate(' + f(tx) + ' ' + f(ty) + ') rotate(' + f(ang) + ' 68 88)');
       rig.querySelector('.st-wing').setAttribute('transform', 'rotate(' + f(-70 * (1 - e)) + ' 70 64)');
-      rig.querySelector('.st-head').setAttribute('transform', 'translate(' + f(hd[0] + tx) + ' ' + f(hd[1] + ty - 2 * e) + ') scale(0.92) translate(-74 -32)');
+      rig.querySelector('.st-head').setAttribute('transform', 'translate(' + f(hd[0] + tx + HX * e) + ' ' + f(hd[1] + ty + HY * e) + ') scale(0.92) translate(-74 -32)');
+      // the neck runs from the top front of the body to the middle of the head
+      const top = rot(88, 64), hx = hd[0] + tx + HX * e, hy = hd[1] + ty + HY * e + 1.8;
+      rig.querySelectorAll('.st-neck').forEach(function (n) {
+        n.setAttribute('x1', f(top[0] + tx)); n.setAttribute('y1', f(top[1] + ty)); n.setAttribute('x2', f(hx)); n.setAttribute('y2', f(hy));
+      });
       const legs = rig.querySelectorAll('.st-leg');
       [[h1, 64], [h2, 76], [h1, 64], [h2, 76]].forEach(function (l, i) {
         legs[i].setAttribute('d', 'M' + f(l[0][0] + tx) + ' ' + f(l[0][1] + ty) + ' L' + l[1] + ' 98');
@@ -166,8 +172,8 @@
     function pose(name) {   // show one drawing of the flying bird (or none)
       flyer.querySelectorAll('svg').forEach(function (d) { d.classList.toggle('on', d.classList.contains('fly-' + name)); });
     }
-    // ms: on the branch before it leaves, the trip there and back, the turn, then standing up
-    const LEAVE = 500, FLIGHT = 5000, TURN = 500, SETTLE = 700;
+    // ms: on the branch before it leaves, the trip there and back, the turn, standing up, the handover
+    const LEAVE = 500, FLIGHT = 5000, TURN = 500, SETTLE = 700, MELT = 300;
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout); cancelAnimationFrame(standing);
@@ -266,7 +272,12 @@
             const t = Math.min(1, (now - start) / SETTLE);
             stand(1 - (1 - t) * (1 - t));   // eases out: quick at first, slowing as it settles
             if (t < 1) standing = requestAnimationFrame(step);
-            else { pose(''); bird.classList.remove('away', 'empty'); }
+            else {   // standing where the perched bird stands: it takes over underneath as this melts away
+              bird.classList.remove('away', 'empty');
+              const melt = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: MELT, easing: 'ease-in-out', fill: 'forwards' });
+              diving.push(melt);
+              melt.onfinish = function () { pose(''); melt.cancel(); };
+            }
           })(start);
         });
       });
