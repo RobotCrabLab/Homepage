@@ -426,11 +426,12 @@ img { max-width: 100%; height: auto; }
 .card-osprey { position: absolute; z-index: 0; right: -13%; bottom: 79cqw; width: 44%; transform: scaleX(-1); }
 .osprey-art { display: block; width: 100%; height: auto; }
 .osprey-nod { position: absolute; inset: 0; transform-origin: 50% 23.02%; }
-/* The perched bird is in layers over its body (style.css shows the first, the rest lie on top);
-   as it lands, site.js tips its body, legs and head together about where its talons grip */
-.osprey-perch, .osprey-front, .osprey-holes, .osprey-head-turn { position: absolute; inset: 0; }
+/* The perched bird is in layers over its body (the first sets the size, the rest lie on top);
+   as it lands, site.js turns it round and tilts its body, legs and head up together */
+.osprey-perch, .osprey-fish, .osprey-front, .osprey-holes, .osprey-head-turn { position: absolute; inset: 0; }
 .osprey-head-turn { display: block; }
-.osprey-back, .osprey-front, .osprey-head-turn { transform-origin: 55.1% 78.6%; }
+.osprey-back, .osprey-front, .osprey-head-turn { transform-origin: 55.1% 78.6%; }   /* where the talons grip */
+.osprey-fish, .osprey-holes { transform-origin: 52.9% 87.3%; will-change: transform; }   /* the middle of the fish */
 @media (prefers-reduced-motion: no-preference) {
   .osprey-nod { animation: osprey-nod 5s ease-in-out infinite; }
 }

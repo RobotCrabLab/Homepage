@@ -1,5 +1,5 @@
-<!-- The perched osprey in layers, so the bird can tip as it lands while the branch and fish
-     stay still: its body (behind the branch), the branch and fish, its legs and talons (in
+<!-- The perched osprey in layers, so it can turn round and tilt up as it lands while the branch
+     stays still: its body (behind the branch), the branch, the fish, its legs and talons (in
      front of the fish), the fish holes the talons plug into, and its head (which nods). -->
 <svg class="osprey-art osprey-back" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
   <g class="osprey-body" transform="translate(0 -2)">
@@ -21,6 +21,8 @@
     <path d="M4 141.4 C32 139.4 60 137.8 86 136" fill="none" stroke="#7E6F62" stroke-width="1.5" stroke-linecap="round"/>
     <ellipse cx="46" cy="139.2" rx="3.4" ry="1.7" fill="none" stroke="#7E6F62" stroke-width="1.5"/>
   </g>
+</svg>
+<svg class="osprey-art osprey-fish" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
   <g class="perch-fish" transform="translate(66 124) scale(1 1)">
       <path d="M18 0 L26 -7 L25 0 L26 7 Z" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
       <rect x="-12" y="-9" width="32" height="18" rx="9" fill="#D9442B" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>

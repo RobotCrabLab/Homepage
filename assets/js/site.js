@@ -144,9 +144,9 @@
     function pose(name) {   // show one drawing of the flying bird (or none)
       flyer.querySelectorAll('svg').forEach(function (d) { d.classList.toggle('on', d.classList.contains('fly-' + name)); });
     }
-    // ms: on the branch before it leaves, the trip there and back, the turn, straightening up on
-    // the branch, and the flying drawing melting into the perched bird as it lands
-    const LEAVE = 500, FLIGHT = 5000, TURN = 500, STAND = 900, MELT = 160, TIP = 58;   // TIP: how far it leans as it lands, in degrees
+    // ms: on the branch before it leaves, the trip there and back, each half of the turn round
+    // as it lands, and tilting up into its perch
+    const LEAVE = 500, FLIGHT = 5000, HALF = 250, STAND = 700, TIP = 16;   // TIP: how far it leans forward as it lands, in degrees
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout);
@@ -227,28 +227,31 @@
       later(LEAVE + FLIGHT * 0.46, function () { pose(''); });   // under the water
       later(LEAVE + FLIGHT * 0.56, function () { pose('carry'); });
       later(hit + 1100, function () { splash.classList.remove('on'); });
-      // Just before it lands it turns round in the air to face left, flipping on the middle of its
-      // body (style.css sets the turning point). As it touches down the perched bird takes over,
-      // leaning well forward, and straightens up on its talons (with a touch of overshoot) while the
-      // flying drawing melts away. Its head, legs and wings stay fixed to its body throughout; only
-      // the whole bird turns (style.css sets the point it turns about: where its talons grip).
-      later(LEAVE + FLIGHT * 0.9, function () {
+      // As it comes in to land it turns round to face left. The carrying drawing turns till it's
+      // edge-on just as its talons touch the branch; at that instant, while it's a thin line, the
+      // perched bird and its fish take over and finish the turn, already on the branch, leaning
+      // a little forward; then the bird tilts smoothly up into its perch. Only one drawing is ever
+      // on show, and the bird's head, legs and wings stay fixed to its body throughout.
+      later(LEAVE + FLIGHT - HALF, function () {
         const turn = flyer.querySelector('.fly-carry').animate(
-          [{ transform: 'scaleX(1)' }, { transform: 'scaleX(-1)' }],
-          { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
+          [{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }],
+          { duration: HALF, easing: 'ease-in', fill: 'forwards' });
         diving.push(turn);
-        later(FLIGHT * 0.1, function () {
+        later(HALF, function () {
+          const a = HALF / (HALF + STAND);
           bird.querySelectorAll('.osprey-back, .osprey-front, .osprey-head-turn').forEach(function (layer) {
             diving.push(layer.animate([
-              { transform: 'rotate(' + TIP + 'deg)' },
-              { transform: 'rotate(-3deg)', offset: 0.78 },
-              { transform: 'rotate(0deg)' }
-            ], { duration: STAND, easing: 'cubic-bezier(0.3, 0.15, 0.3, 1)', fill: 'backwards' }));
+              { transform: 'scaleX(0) rotate(' + TIP + 'deg)', easing: 'ease-out' },
+              { transform: 'scaleX(1) rotate(' + TIP + 'deg)', offset: a, easing: 'ease-in-out' },
+              { transform: 'scaleX(1) rotate(0deg)' }
+            ], { duration: HALF + STAND, fill: 'backwards' }));
           });
+          bird.querySelectorAll('.osprey-fish, .osprey-holes').forEach(function (layer) {
+            diving.push(layer.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+              { duration: HALF, easing: 'ease-out', fill: 'backwards' }));
+          });
+          pose(''); turn.cancel();
           bird.classList.remove('away', 'empty');
-          const melt = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: MELT, easing: 'ease-out', fill: 'forwards' });
-          diving.push(melt);
-          melt.onfinish = function () { pose(''); turn.cancel(); melt.cancel(); };
         });
       });
     }

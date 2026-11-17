@@ -41,7 +41,7 @@ one.
 - `mascot.svg`: the jellyfish mascot, a red breadboard bell with tentacles; two of them
   are jumper wires plugged into the bottom row. Swims up at about 40 degrees.
 - `osprey.svg`: an osprey with a breadboard chest, gripping a breadboard fish on a dead
-  branch. Drawn in layers: body, branch and fish, legs, fish holes, and the head (which nods;
+  branch. Drawn in layers: body, branch, fish, legs, fish holes, and the head (which nods;
   it's a separate drawing so it can turn without the rest being redrawn).
 - `osprey-dive.svg`: the same osprey in flight (gliding, diving, carrying the fish) and its splash.
 - `breadboard-drawing.svg`: a stylized engineering drawing of a half-size (400-point) breadboard (top view,
@@ -100,9 +100,9 @@ one.
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
-     (`dive()` in site.js, about 6.4 seconds, none with reduced motion): the branch starts empty, the bird glides
+     (`dive()` in site.js, about 6.2 seconds, none with reduced motion): the branch starts empty, the bird glides
      off left, dives behind him with talons out, splashes into the water and flies back to the branch carrying
-     the fish, turning round on the middle of its body just before it lands (the flying pose flips through edge-on), and, as it touches down, the perched bird itself takes over leaning well forward (58°) and straightens up on its talons in 0.9 s with a touch of overshoot, while the flying drawing melts away in 0.16 s. The perched bird's head, legs and wings stay fixed to its body: `osprey.svg` is in layers (body, branch and fish, legs, fish holes, nodding head) so the body, legs and head can tip together about the talons while the branch and fish stay still. It lands exactly where it took off (fish on fish) so each dive ends the way it began. Its path is one smooth curve, and while flapping it rides a slow, gentle wave (about
+     the fish. As it comes in to land it turns round to face left: the carrying drawing turns edge-on just as its talons touch the branch, and at that instant (while it's a thin line) the perched bird and its fish take over and finish the turn, leaning 16° forward, then tilt smoothly up into the perch (0.25 s each half of the turn, 0.7 s to tilt up). Only one drawing is ever on show, with no blending, and the bird's head, legs and wings stay fixed to its body. `osprey.svg` is in layers (body, branch, fish, legs, fish holes, nodding head) so the bird and fish can turn and tilt while the branch stays still. It lands exactly where it took off (fish on fish) so each dive ends the way it began. Its path is one smooth curve, and while flapping it rides a slow, gentle wave (about
      1.1 seconds per rise and fall). The flying bird is `_includes/osprey-dive.svg` (glide, dive and carry poses, drawn facing right,
      plus the splash), all behind the character.
   2. The microscope slides in, the AUV cruises across.
