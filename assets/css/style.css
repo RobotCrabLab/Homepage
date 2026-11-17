@@ -446,10 +446,14 @@ img { max-width: 100%; height: auto; }
 .card-splash { transform-origin: 50% 85%; }
 .card-dive svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .card-dive .fly-glide, .card-dive .fly-dive { transform: scaleX(-1); }
-.card-dive .fly-carry { transform-origin: 50% 57%; }   /* the middle of its body, where it turns round before landing (the same line the gliding pose is mirrored on, so it lands exactly where it took off) */
+.card-dive :is(.fly-settle1, .fly-settle2, .fly-settle3) { transform: scaleX(-1); }   /* facing left, like the turned carrying pose */
+.card-dive :is(.fly-carry, .fly-settle1, .fly-settle2, .fly-settle3) { transform-origin: 50% 57%; }   /* the middle of its body, where it turns round before landing (the same line the gliding pose is mirrored on, so it lands exactly where it took off) */
 .card-dive:not([data-pose="glide"]) .fly-glide,
 .card-dive:not([data-pose="dive"]) .fly-dive,
 .card-dive:not([data-pose="carry"]) .fly-carry,
+.card-dive:not([data-pose="settle1"]) .fly-settle1,
+.card-dive:not([data-pose="settle2"]) .fly-settle2,
+.card-dive:not([data-pose="settle3"]) .fly-settle3,
 .card-splash:not(.on) { visibility: hidden; }
 .card-splash svg { display: block; width: 100%; height: auto; overflow: visible; }
 .scenes:not([data-scene="1"]) :is(.card-dive, .card-splash) { opacity: 0; }

@@ -141,7 +141,7 @@
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
     const splash = card.querySelector('.card-splash');
-    const LEAVE = 500, FLIGHT = 5000, TURN = 500, FADE = 250;   // ms   // ms on the branch first, then the trip there and back
+    const LEAVE = 500, FLIGHT = 5000, TURN = 500, SETTLE = 200;   // ms; SETTLE is each settling pose   // ms   // ms on the branch first, then the trip there and back
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout);
@@ -223,18 +223,18 @@
       later(LEAVE + FLIGHT * 0.56, function () { flyer.dataset.pose = 'carry'; });
       later(hit + 1100, function () { splash.classList.remove('on'); });
       // Just before it lands it turns round in the air to face left, flipping on the middle of its
-      // body (style.css sets the turning point); once down, the perched bird with its fish takes
-      // over underneath as the flyer fades away
+      // body (style.css sets the turning point); once down it settles in three steps (wings come
+      // down, it tips upright, wings folded), then the perched bird with its fish takes over
       later(LEAVE + FLIGHT * 0.9, function () {
         const turn = flyer.querySelector('.fly-carry').animate(
           [{ transform: 'scaleX(1)' }, { transform: 'scaleX(-1)' }],
           { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
         diving.push(turn);
         later(FLIGHT * 0.1, function () {
-          bird.classList.remove('away', 'empty');
-          const fade = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE, easing: 'ease-out', fill: 'forwards' });
-          diving.push(fade);
-          fade.onfinish = function () { flyer.dataset.pose = ''; turn.cancel(); fade.cancel(); };
+          ['settle1', 'settle2', 'settle3'].forEach(function (pose, i) {
+            later(i * SETTLE, function () { flyer.dataset.pose = pose; if (i === 0) turn.cancel(); });
+          });
+          later(3 * SETTLE, function () { flyer.dataset.pose = ''; bird.classList.remove('away', 'empty'); });
         });
       });
     }
