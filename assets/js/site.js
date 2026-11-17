@@ -165,9 +165,11 @@
       const w = b.width;
       flyer.style.width = splash.style.width = w.toFixed(1) + 'px';
       const h = w * 126 / 136;
-      const home = [b.left - c.left - card.clientLeft, b.bottom - c.top - card.clientTop - h];
-      // where it lands: once it has turned to face left, this puts its body right where the perched bird's is
-      const land = [home[0] + w * 0.2, home[1] - h * 0.12];
+      // its spot on the branch: where the flying drawing's fish lands on the perched bird's fish,
+      // so it takes off from, and lands back on, exactly where the perched bird is
+      const home = [b.left - c.left - card.clientLeft + w * 0.02, b.bottom - c.top - card.clientTop - h];
+      // it lands exactly where it took off, so each dive ends the way it began
+      const land = home;
       // The spots it passes through: [when (share of the trip), x, y, turn in degrees]. A smooth
       // curve runs through them, and while it flaps the bird rides a gentle wave on top.
       const spots = [
