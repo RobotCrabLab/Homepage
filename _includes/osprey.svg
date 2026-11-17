@@ -1,4 +1,7 @@
-<svg class="osprey-art" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
+<!-- The perched osprey in layers, so the bird can tip as it lands while the branch and fish
+     stay still: its body (behind the branch), the branch and fish, its legs and talons (in
+     front of the fish), the fish holes the talons plug into, and its head (which nods). -->
+<svg class="osprey-art osprey-back" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
   <g class="osprey-body" transform="translate(0 -2)">
   <path d="M52 96 L40 132 L54 130 L62 100 Z" fill="#6B4A35" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
   <path d="M58 46 C44 54 42 74 46 92 C50 104 62 108 72 104 C84 98 88 80 85 60 C83 50 76 46 70 46 Z" fill="#E3ECEA" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
@@ -7,6 +10,8 @@
   <path d="M54 50 C40 60 38 84 46 106 L54 122 C62 106 64 84 63 64 C62 55 59 51 54 50 Z" fill="#6B4A35" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
   <path d="M50 72 q5 3 10 0 M49 84 q6 3 12 0 M50 96 q5 3 10 0" fill="none" stroke="#14303F" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
   </g>
+</svg>
+<svg class="osprey-art osprey-perch" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
   <!-- A weathered, dead branch: in front of the tail and wing, behind the fish. Its top
        lines up with the top of the fish, so the osprey stands on it gripping the fish. -->
   <!-- The branch, snapped off just past the fish, with its broken stub near the frame's edge -->
@@ -22,6 +27,8 @@
       <line x1="0" y1="0" x2="17" y2="0" stroke="#14303F" stroke-width="1" opacity=".45"/><circle cx="2" cy="-4" r="1.1" fill="#14303F"/><circle cx="2" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="2" cy="1.5" r="1.1" fill="#14303F"/><circle cx="2" cy="4" r="1.1" fill="#14303F"/><circle cx="6" cy="-4" r="1.1" fill="#14303F"/><circle cx="6" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="6" cy="1.5" r="1.1" fill="#14303F"/><circle cx="6" cy="4" r="1.1" fill="#14303F"/><circle cx="10" cy="-4" r="1.1" fill="#14303F"/><circle cx="10" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="10" cy="1.5" r="1.1" fill="#14303F"/><circle cx="10" cy="4" r="1.1" fill="#14303F"/><circle cx="14" cy="-4" r="1.1" fill="#14303F"/><circle cx="14" cy="-1.5" r="1.1" fill="#14303F"/><circle cx="14" cy="1.5" r="1.1" fill="#14303F"/><circle cx="14" cy="4" r="1.1" fill="#14303F"/>
       <circle cx="-5" cy="-1" r="3" fill="#FFFFFF" stroke="#14303F" stroke-width="2"/><circle cx="-5.6" cy="-1" r="1.2" fill="#14303F"/>
     </g>
+</svg>
+<svg class="osprey-art osprey-front" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
   <!-- Legs and talons in front of the fish, drawn as one piece: all the outlines first,
        then all the gray on top. The legs stop just above where the talons fork, so
        there's no bump in the fork. The right leg comes out from behind the body.
@@ -37,8 +44,11 @@
   <path d="M66 102 L69.1 113" fill="none" stroke="#A7B2B8" stroke-width="2.6" stroke-linecap="round"/>
   <path d="M75.2 94 L77.6 113" fill="none" stroke="#A7B2B8" stroke-width="2.6" stroke-linecap="round" mask="url(#behind-body)"/>
   <path d="M69.1 113 C66.6 114.4 66.4 117.6 68 120 M69.1 113 C72.6 114.4 73.6 119.4 72 122.5 M77.6 113 C75.2 114.4 74.8 117.6 76 120 M77.6 113 C81 114.4 82 119.4 80 122.5" fill="none" stroke="#A7B2B8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<svg class="osprey-art osprey-holes" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
   <g class="perch-fish" fill="#14303F"><circle cx="68" cy="120" r="1.1"/><circle cx="72" cy="122.5" r="1.1"/><circle cx="76" cy="120" r="1.1"/><circle cx="80" cy="122.5" r="1.1"/></g>
 </svg>
+<span class="osprey-head-turn">
 <!-- The head is a second drawing laid over the first, so the page can nod it (a CSS
      animation in style.css) without redrawing the rest of the bird. -->
 <svg class="osprey-art osprey-nod" viewBox="-2 14 136 126" aria-hidden="true" focusable="false">
@@ -55,3 +65,4 @@
   <path d="M88 29 Q101 30 99 42 Q96 37 88 38 Z" fill="#14303F" stroke="#14303F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
   </g>
 </svg>
+</span>

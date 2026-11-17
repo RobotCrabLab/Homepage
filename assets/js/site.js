@@ -141,42 +141,15 @@
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
     const splash = card.querySelector('.card-splash');
-    // Settling onto the branch, e from 0 (just landed) to 1 (upright, wings folded): the body tips
-    // up about its hips and slides so the hips stay square over the feet, the wing folds down,
-    // the head rides on top and the bird grows to the perched drawing's size about its feet.
-    // The legs are redrawn from the hips to the talons each frame, so they never come apart.
-    const rig = flyer.querySelector('.fly-settle');
-    const HX = 21, HY = -12;   // where the head ends up, nudged to sit exactly on the perched bird's head
-    let standing = 0;
-    function stand(e) {
-      const ang = -86 * e, rad = ang * Math.PI / 180, cos = Math.cos(rad), sin = Math.sin(rad);
-      const rot = function (x, y) { return [68 + (x - 68) * cos - (y - 88) * sin, 88 + (x - 68) * sin + (y - 88) * cos]; };
-      const h1 = rot(62, 86), h2 = rot(74, 86);
-      const tx = 70 - (h1[0] + h2[0]) / 2 + 12 * e, ty = 86 - (h1[1] + h2[1]) / 2 - 10 * e, hd = rot(100, 56);   // ends standing tall, right over the perched bird's body
-      const grow = 1 + 0.18 * e, f = function (n) { return n.toFixed(2); };
-      rig.querySelector('.st-grow').setAttribute('transform', 'translate(70 98) scale(' + f(grow) + ') translate(-70 -98)');
-      rig.querySelector('.st-body').setAttribute('transform', 'translate(' + f(tx) + ' ' + f(ty) + ') rotate(' + f(ang) + ' 68 88)');
-      rig.querySelector('.st-wing').setAttribute('transform', 'rotate(' + f(-70 * (1 - e)) + ' 70 64)');
-      rig.querySelector('.st-head').setAttribute('transform', 'translate(' + f(hd[0] + tx + HX * e) + ' ' + f(hd[1] + ty + HY * e) + ') scale(0.92) translate(-74 -32)');
-      // the neck runs from the top front of the body to the middle of the head
-      const top = rot(88, 64), hx = hd[0] + tx + HX * e, hy = hd[1] + ty + HY * e + 1.8;
-      rig.querySelectorAll('.st-neck').forEach(function (n) {
-        n.setAttribute('x1', f(top[0] + tx)); n.setAttribute('y1', f(top[1] + ty)); n.setAttribute('x2', f(hx)); n.setAttribute('y2', f(hy));
-      });
-      const legs = rig.querySelectorAll('.st-leg');
-      [[h1, 64], [h2, 76], [h1, 64], [h2, 76]].forEach(function (l, i) {
-        legs[i].setAttribute('d', 'M' + f(l[0][0] + tx) + ' ' + f(l[0][1] + ty) + ' L' + l[1] + ' 98');
-      });
-    }
-
     function pose(name) {   // show one drawing of the flying bird (or none)
       flyer.querySelectorAll('svg').forEach(function (d) { d.classList.toggle('on', d.classList.contains('fly-' + name)); });
     }
-    // ms: on the branch before it leaves, the trip there and back, the turn, standing up, the handover
-    const LEAVE = 500, FLIGHT = 5000, TURN = 500, SETTLE = 700, MELT = 300;
+    // ms: on the branch before it leaves, the trip there and back, the turn, straightening up on
+    // the branch, and the flying drawing melting into the perched bird as it lands
+    const LEAVE = 500, FLIGHT = 5000, TURN = 500, STAND = 900, MELT = 160, TIP = 58;   // TIP: how far it leans as it lands, in degrees
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
-      trip.forEach(clearTimeout); cancelAnimationFrame(standing);
+      trip.forEach(clearTimeout);
       trip = [setTimeout(function () {
         diving.forEach(function (a) { a.cancel(); });
         bird.classList.remove('away', 'empty');
@@ -186,7 +159,7 @@
     }
     function dive() {
       if (calm.matches) return;
-      trip.forEach(clearTimeout); cancelAnimationFrame(standing);
+      trip.forEach(clearTimeout);
       diving.forEach(function (a) { a.cancel(); });
       bird.classList.add('empty');
       bird.classList.remove('away');
@@ -255,35 +228,32 @@
       later(LEAVE + FLIGHT * 0.56, function () { pose('carry'); });
       later(hit + 1100, function () { splash.classList.remove('on'); });
       // Just before it lands it turns round in the air to face left, flipping on the middle of its
-      // body (style.css sets the turning point); once down it settles through twelve frames (wings
-      // come down, it tips upright and grows to the perched bird's size, slowing as it goes), then
-      // the perched bird with its fish takes over
+      // body (style.css sets the turning point). As it touches down the perched bird takes over,
+      // leaning well forward, and straightens up on its talons (with a touch of overshoot) while the
+      // flying drawing melts away. Its head, legs and wings stay fixed to its body throughout; only
+      // the whole bird turns (style.css sets the point it turns about: where its talons grip).
       later(LEAVE + FLIGHT * 0.9, function () {
         const turn = flyer.querySelector('.fly-carry').animate(
           [{ transform: 'scaleX(1)' }, { transform: 'scaleX(-1)' }],
           { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
         diving.push(turn);
         later(FLIGHT * 0.1, function () {
-          turn.cancel();
-          pose('settle');
-          stand(0);
-          const start = performance.now();
-          (function step(now) {
-            const t = Math.min(1, (now - start) / SETTLE);
-            stand(1 - (1 - t) * (1 - t));   // eases out: quick at first, slowing as it settles
-            if (t < 1) standing = requestAnimationFrame(step);
-            else {   // standing where the perched bird stands: it takes over underneath as this melts away
-              bird.classList.remove('away', 'empty');
-              const melt = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: MELT, easing: 'ease-in-out', fill: 'forwards' });
-              diving.push(melt);
-              melt.onfinish = function () { pose(''); melt.cancel(); };
-            }
-          })(start);
+          bird.querySelectorAll('.osprey-back, .osprey-front, .osprey-head-turn').forEach(function (layer) {
+            diving.push(layer.animate([
+              { transform: 'rotate(' + TIP + 'deg)' },
+              { transform: 'rotate(-3deg)', offset: 0.78 },
+              { transform: 'rotate(0deg)' }
+            ], { duration: STAND, easing: 'cubic-bezier(0.3, 0.15, 0.3, 1)', fill: 'backwards' }));
+          });
+          bird.classList.remove('away', 'empty');
+          const melt = flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: MELT, easing: 'ease-out', fill: 'forwards' });
+          diving.push(melt);
+          melt.onfinish = function () { pose(''); turn.cancel(); melt.cancel(); };
         });
       });
     }
     if (section.dataset.scene === '1') dive();
-    cleanUp.push(function () { trip.forEach(clearTimeout); cancelAnimationFrame(standing); diving.forEach(function (a) { a.cancel(); }); });
+    cleanUp.push(function () { trip.forEach(clearTimeout); diving.forEach(function (a) { a.cancel(); }); });
 
     // On upright phones Posts fills the space above the signature: list as many posts as
     // fit there, newest first, and hide the rest (style.css shows four everywhere else)
