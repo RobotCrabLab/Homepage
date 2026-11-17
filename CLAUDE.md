@@ -102,8 +102,8 @@ one.
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
      (`dive()` in site.js, about 6.2 seconds, none with reduced motion): the branch starts empty, the bird glides
      off left, dives behind him with talons out, splashes into the water and flies back to the branch carrying
-     the fish, turning round on the middle of its body just before it lands (the flying pose flips through edge-on), and settles through twelve eased frames (wings come down, it tips upright and grows to the perched bird's size, about 0.66 s, legs always joined from hips to talons) into the perched bird, landing exactly where it took off (fish on fish) so each dive ends the way it began. Its path is one smooth curve, and while flapping it rides a slow, gentle wave (about
-     1.1 seconds per rise and fall). The flying bird is `_includes/osprey-dive.svg` (glide, dive, carry and twelve settling frames, drawn facing right,
+     the fish, turning round on the middle of its body just before it lands (the flying pose flips through edge-on), and stands up smoothly (0.7 s, eased: one settling drawing whose body, wing, head and legs `stand()` in site.js moves every screen frame; wings come down, it tips upright and grows to the perched bird's size, legs always joined from hips to talons) into the perched bird, landing exactly where it took off (fish on fish) so each dive ends the way it began. Its path is one smooth curve, and while flapping it rides a slow, gentle wave (about
+     1.1 seconds per rise and fall). The flying bird is `_includes/osprey-dive.svg` (glide, dive, carry and the settling drawing, drawn facing right,
      plus the splash), all behind the character.
   2. The microscope slides in, the AUV cruises across.
   3. The fish and the jellyfish. Each time this scene comes up (including when the page opens on it), a school
