@@ -141,14 +141,17 @@
     // and flies back up to the branch with the fish. Positions are shares of the photo.
     const flyer = card.querySelector('.card-dive');
     const splash = card.querySelector('.card-splash');
-    const LEAVE = 500, FLIGHT = 5000, TURN = 500, SETTLE = 200;   // ms; SETTLE is each settling pose   // ms   // ms on the branch first, then the trip there and back
+    function pose(name) {   // show one drawing of the flying bird (or none)
+      flyer.querySelectorAll('svg').forEach(function (d) { d.classList.toggle('on', d.classList.contains('fly-' + name)); });
+    }
+    const LEAVE = 500, FLIGHT = 5000, TURN = 500, SETTLE = 55;   // ms; SETTLE is each settling frame   // ms   // ms on the branch first, then the trip there and back
     let diving = [], trip = [];
     function settle() {   // back on the branch with the fish, once the scene has faded
       trip.forEach(clearTimeout);
       trip = [setTimeout(function () {
         diving.forEach(function (a) { a.cancel(); });
         bird.classList.remove('away', 'empty');
-        flyer.dataset.pose = '';
+        pose('');
         splash.classList.remove('on');
       }, 700)];
     }
@@ -158,7 +161,7 @@
       diving.forEach(function (a) { a.cancel(); });
       bird.classList.add('empty');
       bird.classList.remove('away');
-      flyer.dataset.pose = '';
+      pose('');
       splash.classList.remove('on');
       const W = card.clientWidth, H = card.clientHeight;
       const c = card.getBoundingClientRect(), b = bird.getBoundingClientRect();
@@ -216,25 +219,27 @@
       ], { duration: 1100, delay: hit, easing: 'ease-out', fill: 'both' });   // stays faded out once done
       diving = [fly, burst];
       function later(ms, f) { trip.push(setTimeout(f, ms)); }
-      later(LEAVE, function () { bird.classList.add('away'); flyer.dataset.pose = 'glide'; });
-      later(LEAVE + FLIGHT * 0.25, function () { flyer.dataset.pose = 'dive'; });
+      later(LEAVE, function () { bird.classList.add('away'); pose('glide'); });
+      later(LEAVE + FLIGHT * 0.25, function () { pose('dive'); });
       later(hit, function () { splash.classList.add('on'); });
-      later(LEAVE + FLIGHT * 0.46, function () { flyer.dataset.pose = ''; });   // under the water
-      later(LEAVE + FLIGHT * 0.56, function () { flyer.dataset.pose = 'carry'; });
+      later(LEAVE + FLIGHT * 0.46, function () { pose(''); });   // under the water
+      later(LEAVE + FLIGHT * 0.56, function () { pose('carry'); });
       later(hit + 1100, function () { splash.classList.remove('on'); });
       // Just before it lands it turns round in the air to face left, flipping on the middle of its
-      // body (style.css sets the turning point); once down it settles in three steps (wings come
-      // down, it tips upright, wings folded), then the perched bird with its fish takes over
+      // body (style.css sets the turning point); once down it settles through twelve frames (wings
+      // come down, it tips upright and grows to the perched bird's size, slowing as it goes), then
+      // the perched bird with its fish takes over
       later(LEAVE + FLIGHT * 0.9, function () {
         const turn = flyer.querySelector('.fly-carry').animate(
           [{ transform: 'scaleX(1)' }, { transform: 'scaleX(-1)' }],
           { duration: TURN, easing: 'ease-in-out', fill: 'forwards' });
         diving.push(turn);
         later(FLIGHT * 0.1, function () {
-          ['settle1', 'settle2', 'settle3'].forEach(function (pose, i) {
-            later(i * SETTLE, function () { flyer.dataset.pose = pose; if (i === 0) turn.cancel(); });
+          const frames = flyer.querySelectorAll('[class^="fly-settle"]');
+          frames.forEach(function (f, i) {
+            later(i * SETTLE, function () { pose('settle' + (i + 1)); if (i === 0) turn.cancel(); });
           });
-          later(3 * SETTLE, function () { flyer.dataset.pose = ''; bird.classList.remove('away', 'empty'); });
+          later(frames.length * SETTLE, function () { pose(''); bird.classList.remove('away', 'empty'); });
         });
       });
     }
