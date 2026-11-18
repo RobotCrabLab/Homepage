@@ -267,10 +267,15 @@
       const left = head.getBoundingClientRect().left + parseFloat(rail.left), width = parseFloat(rail.width);
       const step = width / Math.max(1, Math.round(width / (parseFloat(rail.height) / 1.4 * 2.4)));
       const col = summary.getBoundingClientRect();
-      const first = left + Math.ceil((col.left - left) / step - 0.1) * step;   // a group may start a hair outside: its first hole is well inside
+      // on the left it starts at the first whole hole inside the column, even part way through a group
+      const hole = step / 6, r = step * 1.1 / 24;   // holes sit at 4, 8 … 20 of every 24 units
+      let k = Math.floor((col.left - left) / hole);
+      while (left + k * hole - r < col.left || (k % 6 + 6) % 6 === 0) k++;
+      const first = left + k * hole - r;
       const last = left + Math.floor((col.right - left) / step + 0.1) * step;
       summary.style.setProperty('--hole-t', step.toFixed(3) + 'px');
       summary.style.setProperty('--hole-l', (first - col.left).toFixed(3) + 'px');
+      summary.style.setProperty('--hole-x', (((left - first) % step) - step).toFixed(3) + 'px');   // keep the pattern on the rail's grid
       summary.style.setProperty('--hole-r', (col.right - last).toFixed(3) + 'px');
     }
     alignHoles();

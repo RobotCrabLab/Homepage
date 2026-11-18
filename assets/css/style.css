@@ -345,12 +345,12 @@ img { max-width: 100%; height: auto; }
 [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
 /* Under the summary, one row of breadboard holes lined up with the power rail's holes above
    (same groups of five, same spacing, in the same columns), across the summary's own column
-   and showing only whole groups. site.js works out the rail's spacing and where the whole
+   (a part group at the left, whole groups to the right). site.js works out the rail's spacing and where the whole
    groups start and end (--hole-t, --hole-l, --hole-r). */
 .dive-summary::after {
   content: ""; grid-area: 2 / 1; height: calc(var(--u) * 0.6);
   margin: calc(var(--u) * 0.7) var(--hole-r, 0px) 0 var(--hole-l, 0px);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 6'%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='4' cy='3' r='1.1'/%3E%3Ccircle cx='8' cy='3' r='1.1'/%3E%3Ccircle cx='12' cy='3' r='1.1'/%3E%3Ccircle cx='16' cy='3' r='1.1'/%3E%3Ccircle cx='20' cy='3' r='1.1'/%3E%3C/g%3E%3C/svg%3E") 0 0 / var(--hole-t, calc(var(--u) * 2.4)) 100% repeat-x;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 6'%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='4' cy='3' r='1.1'/%3E%3Ccircle cx='8' cy='3' r='1.1'/%3E%3Ccircle cx='12' cy='3' r='1.1'/%3E%3Ccircle cx='16' cy='3' r='1.1'/%3E%3Ccircle cx='20' cy='3' r='1.1'/%3E%3C/g%3E%3C/svg%3E") var(--hole-x, 0px) 0 / var(--hole-t, calc(var(--u) * 2.4)) 100% repeat-x;
 }
 
 /* The links are fields too, with red values: Resume and Hobbies side by side, then
