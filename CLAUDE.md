@@ -100,7 +100,7 @@ one.
   The photo is shorter on computers and the osprey's branch is snapped off there.
   The labels read "Skills:", "Resume:", "Hobbies:", "Posts:" and "Email:" (with colons);
   Skills, Resume, Hobbies, Posts and Email are as dark as the name, the other labels grey.
-  The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
+  The link fields (on computers and sideways phones Posts comes first, then Resume and Hobbies): Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
      (`dive()` in site.js, about 6.2 seconds, none with reduced motion): the branch starts empty, the bird glides
