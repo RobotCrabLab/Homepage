@@ -343,6 +343,13 @@ img { max-width: 100%; height: auto; }
 .dive-summary { grid-area: summary; display: grid; margin-top: calc(var(--u) * 0.6); min-width: 0; }
 .dive-summary p { grid-area: 1 / 1; margin: 0; visibility: hidden; font-size: calc(var(--u) * 0.95); line-height: 1.45; }
 [data-scene="1"] .summary-1, [data-scene="2"] .summary-2, [data-scene="3"] .summary-3 { visibility: visible; }
+/* Under the summary, a row of breadboard holes in groups of five (like the rail's), inset a
+   little from both sides; it stays in the summary's own column, so never reaches the photo */
+.dive-summary::after {
+  content: ""; grid-area: 2 / 1; height: calc(var(--u) * 0.6); margin: calc(var(--u) * 0.7) calc(var(--u) * 0.8) 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 6'%3E%3Cg fill='%2314303F'%3E%3Ccircle cx='4' cy='3' r='1.1'/%3E%3Ccircle cx='8' cy='3' r='1.1'/%3E%3Ccircle cx='12' cy='3' r='1.1'/%3E%3Ccircle cx='16' cy='3' r='1.1'/%3E%3Ccircle cx='20' cy='3' r='1.1'/%3E%3C/g%3E%3C/svg%3E") center / calc(var(--u) * 2.4) 100%;
+  background-repeat: space no-repeat;   /* whole groups of five only, spread to fill the width */
+}
 
 /* The links are fields too, with red values: Resume and Hobbies side by side, then
    Posts across the full width, listing the four newest posts and projects */

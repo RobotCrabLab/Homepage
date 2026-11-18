@@ -88,7 +88,8 @@ one.
   On every layout the card is laid out like a printed ID: under the band, the photo and fields on plain white,
   each a small grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001"; SKILLS: as three plain
   capital words (the chosen one dark with a red underline, the others grey); under them a short summary of the
-  chosen skill (from the résumé), which changes with the scene; the links as fields with red values and no icons;
+  chosen skill (from the résumé), which changes with the scene, with a row of breadboard holes in whole groups of five
+  under it (inset from both sides, only in the summary's own column, never beside or under the photo on computers); the links as fields with red values and no icons;
   and at the bottom EMAIL: chris@BREADBOARDBAY.COM (a mailto link; "CHRIS@" small and grey, the domain in the
   links' red capitals; it replaced the handwritten signature, whose font file is still in `assets/fonts`). No background
   pattern, no ghost photo. On computers the photo is at the left with the fields beside it.
