@@ -373,7 +373,7 @@ img { max-width: 100%; height: auto; }
 .dive-email a { color: #B83B25; text-decoration: none; }
 .dive-email a:hover { color: var(--card-ink); }
 .dive-email a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
-.dive-email .at { font-size: 0.8em; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--card-soft); }
+.dive-email .at { font-size: 0.8em; font-weight: 600; letter-spacing: 0.02em; color: var(--card-soft); }   /* CHRIS@, in capitals like the rest */
 
 
 /* ------------------------------------------------------------
