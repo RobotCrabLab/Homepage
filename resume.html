@@ -9,7 +9,7 @@ layout: default
     <h1>Resume</h1>
     <p class="lede">{{ r.summary }}</p>
     <p class="resume-actions">
-      {% if r.pdf != "" %}<a class="button" href="{{ r.pdf | relative_url }}">Download PDF</a>{% endif %}
+      {% if r.pdf != "" %}<a class="button" href="{{ r.pdf | relative_url }}" download="Chris-Resume.pdf">Download PDF</a>{% endif %}
       <a class="text-link" href="mailto:{{ site.email }}">Email me</a>
     </p>
   </header>

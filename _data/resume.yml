@@ -9,7 +9,7 @@ summary: >-
   discovery in our oceans.
 
 # Optional: link to a PDF copy. Put the file in assets/ and set the path, or leave empty.
-pdf: ""
+pdf: /assets/chris-resume.pdf
 
 experience:
   - role: Electronics Technician II
