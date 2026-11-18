@@ -163,8 +163,8 @@ one.
   row of holes and the bullets are square holes (screen only). Blog posts have no "Blog" line above the title. No scrollbar shows; a soft fade at the paper's bottom edge hints at more below. On phones the paper only moves up and down (no sideways scrolling; code wraps). Its wrappers are `display: contents` in print.
 - **Résumé PDF:** `assets/chris-resume.pdf`, behind the "Download PDF" button on the résumé page (`pdf:` in
   `_data/resume.yml`). It's made from the page itself by `_tools/preview/resume_pdf.py`, word for word, on two
-  US Letter pages (a "Chris / breadboardbay.com" band at the top, then the summary and every section; no email,
-  since it's still the placeholder). Rerun the script and commit the PDF whenever `_data/resume.yml` changes;
+  US Letter pages on plain white (a band at the top with "Chris" and chris@breadboardbay.com, a mailto link with
+  "chris@" small and grey like the dates and "BREADBOARDBAY.COM" in red capitals; then the summary and every section). Rerun the script and commit the PDF whenever `_data/resume.yml` changes;
   it stops with an error if the résumé would run past two pages.
 - **Photography on computers:** no paper. The words sit in the water (`.sheet-album`) and each photo
   is an instant film print, same height and uncropped, with its caption in the thick bottom strip.

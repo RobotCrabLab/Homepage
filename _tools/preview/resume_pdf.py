@@ -21,12 +21,14 @@ CSS = """
 @page { size: Letter; margin: 0.45in 0.55in 0.45in; }
 * { box-sizing: border-box; }
 html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { background: #fff; }   /* plain white paper */
 body { margin: 0; font: 9.1pt/1.32 "Work Sans", sans-serif; color: #1d2b33; }
 a { color: inherit; text-decoration: none; }
 /* the name band across the top, like the boater ID's */
 .top { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 2.2pt solid #14303F; padding-bottom: 5pt; margin-bottom: 7pt; }
 .top h1 { font: 700 24pt/1 Fraunces, Georgia, serif; color: #14303F; margin: 0; letter-spacing: -0.01em; }
 .top .site { font: 600 8.6pt/1 "Work Sans", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: #D9442B; }
+.top .site .at { font-size: 7pt; letter-spacing: 0.02em; text-transform: none; color: #5d6b72; }   /* "chris@" small and grey, like the dates */
 .lede { margin: 0 0 9pt; font-size: 9.6pt; color: #33434b; }
 h2 { font: 700 11.5pt/1 Fraunces, Georgia, serif; color: #14303F; margin: 9pt 0 5pt; padding-bottom: 3pt; border-bottom: 0.8pt solid #c9d3d6; break-after: avoid; }
 h2::before { content: ""; display: inline-block; width: 6pt; height: 6pt; border-radius: 1.5pt; background: #D9442B; margin-right: 6pt; vertical-align: 0.5pt; }
@@ -63,7 +65,7 @@ def main():
         fonts = "file://" + os.path.join(SITE, "assets", "fonts")
         html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Chris — Resume</title>
 <style>{CSS.replace("FONTS", fonts)}</style></head><body>
-<div class="top"><h1>Chris</h1><span class="site">breadboardbay.com</span></div>
+<div class="top"><h1>Chris</h1><a class="site" href="mailto:chris@breadboardbay.com"><span class="at">chris@</span>breadboardbay.com</a></div>
 {lede}{body}</body></html>"""
         src = os.path.join(tmp, "resume-print.html")
         open(src, "w", encoding="utf-8").write(html)
