@@ -258,6 +258,26 @@
     if (section.dataset.scene === '1') dive();
     cleanUp.push(function () { trip.forEach(clearTimeout); diving.forEach(function (a) { a.cancel(); }); });
 
+    // The row of holes under the summary lines up with the power rail's holes under the band:
+    // the rail fits a whole number of groups of five across its width, so take its spacing,
+    // then start and end the row on whole groups that fall inside the summary's column.
+    const head = section.querySelector('.dive-head'), summary = section.querySelector('.dive-summary');
+    function alignHoles() {
+      const rail = getComputedStyle(head, '::after');
+      const left = head.getBoundingClientRect().left + parseFloat(rail.left), width = parseFloat(rail.width);
+      const step = width / Math.max(1, Math.round(width / (parseFloat(rail.height) / 1.4 * 2.4)));
+      const col = summary.getBoundingClientRect();
+      const first = left + Math.ceil((col.left - left) / step - 0.1) * step;   // a group may start a hair outside: its first hole is well inside
+      const last = left + Math.floor((col.right - left) / step + 0.1) * step;
+      summary.style.setProperty('--hole-t', step.toFixed(3) + 'px');
+      summary.style.setProperty('--hole-l', (first - col.left).toFixed(3) + 'px');
+      summary.style.setProperty('--hole-r', (col.right - last).toFixed(3) + 'px');
+    }
+    alignHoles();
+    const holeWatch = new ResizeObserver(alignHoles);
+    holeWatch.observe(section);
+    cleanUp.push(function () { holeWatch.disconnect(); });
+
     // On upright phones Posts fills the space above the signature: list as many posts as
     // fit there, newest first, and hide the rest (style.css shows four everywhere else)
     const posts = section.querySelector('.dive-posts');
