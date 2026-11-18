@@ -89,14 +89,15 @@ one.
   each a small grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001"; SKILLS: as three plain
   capital words (the chosen one dark with a red underline, the others grey); under them a short summary of the
   chosen skill (from the résumé), which changes with the scene; the links as fields with red values and no icons;
-  and a SIGNATURE in a handwriting font (Mrs Saint Delafield, `assets/fonts/signature.woff2`). No background
+  and at the bottom EMAIL: chris@BREADBOARDBAY.COM (a mailto link; "chris@" small and grey, the domain in the
+  links' red capitals; it replaced the handwritten signature, whose font file is still in `assets/fonts`). No background
   pattern, no ghost photo. On computers the photo is at the left with the fields beside it.
   The card's header is a navy band across its top edge (like a state-issued card), with "Breadboard Bay" in
   large white letters and "Boater ID" in yellow. A breadboard power rail (red + line, two rows of holes in groups
   of five, blue − line, + and − at both ends) runs under the band (not along the card's bottom), on every layout.
   The photo is shorter on computers and the osprey's branch is snapped off there.
-  The labels read "Skills:", "Resume:", "Hobbies:", "Posts:" and the signature's "Signature:" (with colons);
-  Skills, Resume, Hobbies and Posts are as dark as the name, the other labels grey.
+  The labels read "Skills:", "Resume:", "Hobbies:", "Posts:" and "Email:" (with colons);
+  Skills, Resume, Hobbies, Posts and Email are as dark as the name, the other labels grey.
   The link fields: Resume links to the résumé, Hobbies to Photography (both side by side), and Posts lists
   the four newest posts and projects, newest first, each its own link, with titles as written (not capitals). The three scenes:
   1. Osprey on its branch in the background. Each time this scene comes up, the osprey dives for its fish
@@ -116,7 +117,7 @@ one.
   at the left with BOATER NAME, No., Resume, Hobbies and SKILLS beside it (the three skills stacked; on phones the
   chosen one has a thin red box around it instead of the underline), then the summary (a little larger) right under
   the photo, then Posts a little under it (the summary is always as tall as the longest one, so Posts never moves),
-  with bigger titles spread evenly down the space (a little tighter, with a gap above the signature, which sits a little up from the card's bottom edge), listing as many posts as fit above the signature (the home page lists up to 12; `fitPosts()`
+  with bigger titles spread evenly down the space (a little tighter, with a gap above the email, which sits a little up from the card's bottom edge), listing as many posts as fit above the email (the home page lists up to 12; `fitPosts()`
   in site.js hides the ones that don't fit; everywhere else shows the four newest). Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.
 - **Sideways phones (over 40rem wide, under 500px tall):** all water with no pier, waves, sky or footer. The
   boater ID fills the screen in three columns: the photo; name, skills and summary; card number, links and

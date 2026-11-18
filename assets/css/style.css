@@ -35,8 +35,6 @@
   src: url("../fonts/work-sans.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* Mrs Saint Delafield, for the signature on the phone card (license in assets/fonts) */
-@font-face { font-family: "Signature"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/signature.woff2") format("woff2"); }
 @font-face {
   font-family: "Work Sans"; font-style: italic; font-weight: 100 900; font-display: swap;
   src: url("../fonts/work-sans-italic.woff2") format("woff2");
@@ -319,7 +317,7 @@ img { max-width: 100%; height: auto; }
   font-weight: 600; font-size: calc(var(--u) * 0.8); line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase;
 }
 .dive-info > .dive-label { grid-area: label; align-self: end; }
-.dive-fields dt, .skills-label { color: var(--card-ink); }   /* Resume, Hobbies, Skills and Posts are as dark as the name */
+.dive-fields dt, .skills-label, .dive-sig .dive-label { color: var(--card-ink); }   /* Resume, Hobbies, Skills, Posts and Email are as dark as the name */
 .dive-no { grid-area: no; align-self: end; margin: 0; font: 700 calc(var(--u) * 1.15)/1.3 var(--body); letter-spacing: 0.08em; }
 .dive-no span { font-weight: 600; font-size: 0.75em; letter-spacing: 0.1em; color: var(--card-soft); }
 .dive-name {
@@ -369,7 +367,13 @@ img { max-width: 100%; height: auto; }
 
 .dive-sig { grid-area: sig; align-self: end; }
 .dive-sig .dive-label { margin-top: calc(var(--u) * 0.6); }
-.dive-sig-name { margin: calc(var(--u) * 0.1) 0 0; font: 400 calc(var(--u) * 3)/1.1 "Signature", cursive; color: var(--card-ink); transform: rotate(-4deg); transform-origin: left center; }
+/* At the bottom, the email address as a field like the links: "chris@" small and grey,
+   then BREADBOARDBAY.COM in the red capitals the links use */
+.dive-email { margin: 0; font: 700 calc(var(--u) * 1.05)/1.3 var(--body); letter-spacing: 0.02em; text-transform: uppercase; }
+.dive-email a { color: #B83B25; text-decoration: none; }
+.dive-email a:hover { color: var(--card-ink); }
+.dive-email a:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 2px; }
+.dive-email .at { font-size: 0.8em; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--card-soft); }
 
 
 /* ------------------------------------------------------------
@@ -956,7 +960,7 @@ img { max-width: 100%; height: auto; }
   .dive-summary p { font-size: calc(var(--u) * 1.02); line-height: 1.4; }
   .dive-fields > div { margin-top: calc(var(--u) * 0.6); }
   .dive-fields dd { font-size: calc(var(--u) * 0.95); }
-  .dive-sig-name { font-size: calc(var(--u) * 2.6); }
+  .dive-email { font-size: calc(var(--u) * 0.95); }
 
   /* The paper has no rail, and the words are inset the same on both sides */
   .sheet-paper { padding-left: 0; }
@@ -977,7 +981,7 @@ img { max-width: 100%; height: auto; }
   .dive-summary p { font-size: calc(var(--u) * 0.96); line-height: 1.34; }
   .dive-fields > div { margin-top: calc(var(--u) * 0.4); }
   .dive-sig .dive-label { margin-top: calc(var(--u) * 0.4); }
-  .dive-sig-name { font-size: calc(var(--u) * 2.2); }
+  .dive-email { font-size: calc(var(--u) * 0.95); }
   .dive-fields > .dive-posts { padding-bottom: calc(var(--u) * 0.4); }
   .portrait:has(.dive-posts) { padding-bottom: calc(var(--u) * 1.1); }
 }
@@ -1015,7 +1019,7 @@ img { max-width: 100%; height: auto; }
   .dive-fields { grid-template-columns: 1fr; align-self: start; }
   .dive-fields > div { margin-top: calc(var(--u) * 0.55); }
   .dive-fields dd { font-size: calc(var(--u) * 0.95); }
-  .dive-sig-name { font-size: calc(var(--u) * 2.6); }
+  .dive-email { font-size: calc(var(--u) * 0.95); }
 
   /* The paper has no rail here either */
   .sheet-paper { padding-left: 0; }

@@ -42,6 +42,6 @@ body_class: home
       <div><dt>Hobbies:</dt><dd><a href="{{ '/photography' | relative_url }}">Photography</a></dd></div>
       {% assign recent = site.posts | concat: site.projects | sort: "date" | reverse %}<div class="dive-posts"><dt>Posts:</dt>{% for p in recent limit: 12 %}<dd><a href="{{ p.url | relative_url }}">{{ p.title }}</a></dd>{% endfor %}</div>
     </dl>
-    <div class="dive-sig" aria-hidden="true"><p class="dive-label">Signature:</p><p class="dive-sig-name">{{ site.author }}</p></div>
+    <div class="dive-sig"><p class="dive-label">Email:</p><p class="dive-email"><a href="mailto:chris@breadboardbay.com"><span class="at">chris@</span>breadboardbay.com</a></p></div>
   </div>
 </section>
