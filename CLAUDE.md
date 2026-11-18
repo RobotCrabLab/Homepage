@@ -87,7 +87,7 @@ one.
   computers, except for screen readers, and the page fits one screen with no scrolling.
   On every layout the card is laid out like a printed ID: under the band, the photo and fields on plain white,
   each a small grey label over a bold capital value: BOATER NAME "CHRIS" with "No. BBB 001"; SKILLS: as three plain
-  capital words (the chosen one dark with a red underline, the others grey); under them a short summary of the
+  capital words (the chosen one dark with a thin red box around it, the others grey); under them a short summary of the
   chosen skill (from the résumé), which changes with the scene, with a row of breadboard holes in whole groups of five
   under it, lined up column for column with the power rail's holes (`alignHoles()` in site.js; a part group fills the left end), across the summary's own
   column only (never beside or under the photo on computers); the links as fields with red values and no icons;
@@ -116,8 +116,7 @@ one.
 - **Phones (up to 40rem):** the same card, sheets, prints and page swaps as computers, but all water
   with no pier, waves, sky or footer, and the card at the top of the screen. The boater ID stands upright and fills
   the screen: the band and rail, then the photo upright (portrait, about 1.66 times as tall as wide on most phones)
-  at the left with BOATER NAME, No., Resume, Hobbies and SKILLS beside it (the three skills stacked; on phones the
-  chosen one has a thin red box around it instead of the underline), then the summary (a little larger) right under
+  at the left with BOATER NAME, No., Resume, Hobbies and SKILLS beside it (the three skills stacked), then the summary (a little larger) right under
   the photo, then Posts a little under it (the summary is always as tall as the longest one, so Posts never moves),
   with bigger titles spread evenly down the space (a little tighter, with a gap above the email, which sits a little up from the card's bottom edge), listing as many posts as fit above the email (the home page lists up to 12; `fitPosts()`
   in site.js hides the ones that don't fit; everywhere else shows the four newest). Only the skills switch scenes. Titles shrink so "An interesting" fits on one line. The old phone layout is on branch `backup/mobile-layout-2026-11-02`.

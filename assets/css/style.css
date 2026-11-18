@@ -325,17 +325,18 @@ img { max-width: 100%; height: auto; }
   font-family: var(--body); font-weight: 800; font-size: calc(var(--u) * 3); line-height: 1.05; letter-spacing: 0.01em; text-transform: uppercase;
 }
 
-/* The skills are plain capital words; the chosen one is dark with a red underline */
-.scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 1.6); margin-top: calc(var(--u) * 0.75); }
+/* The skills are plain capital words; the chosen one is dark with a thin red box round it */
+.scene-nav { grid-area: nav; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: calc(var(--u) * 0.15) calc(var(--u) * 0.8); margin-top: calc(var(--u) * 0.75); }
 .skills-label { grid-column: 1 / -1; margin-bottom: calc(var(--u) * 0.1); }
 .scene-button {
-  display: block; padding: 0 0 calc(var(--u) * 0.14); border: 0; border-bottom: calc(var(--u) * 0.22) solid transparent;
+  display: block; padding: calc(var(--u) * 0.2) calc(var(--u) * 0.4); border: 2px solid transparent; border-radius: calc(var(--u) * 0.3);
   background: none; color: #A1AEB4; text-align: left; cursor: pointer;
   font: 700 calc(var(--u) * 1.1)/1.15 var(--body); letter-spacing: 0.02em; text-transform: uppercase;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
+.scene-nav .scene-button:first-of-type { margin-left: calc(var(--u) * -0.4 - 2px); }   /* the first word's letters stay in line with the label */
 .scene-button:hover { color: var(--card-ink); }
-.scene-button[aria-pressed="true"] { color: var(--card-ink); border-bottom-color: var(--card-pick); cursor: default; }
+.scene-button[aria-pressed="true"] { color: var(--card-ink); border-color: var(--card-pick); cursor: default; }
 .scene-button:focus-visible { outline: 3px solid #2F6FB5; outline-offset: 3px; }
 
 /* A short summary of the chosen skill, from the resume. All three share one spot, so
